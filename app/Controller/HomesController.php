@@ -277,7 +277,7 @@ else{
       $this->layout='fun_layout';
 
        }
-	   public function partner_with_us() {
+	    public function partner_with_us() {
 
       $this->layout='fun_layout';
 
@@ -344,7 +344,7 @@ else{
        }
 
      
-          public function arrange_class() {
+          public function arrangeClass() {
                  
                $this->layout='arrange_layout';
                $user = $this->Session->read('User');
@@ -1070,7 +1070,6 @@ public function fun(){
               $res_class = $this->paginate('VendorClasse');
 
         $this->set('allclass',$res_class);
-
 
         $this->set('cat_id',$cat_id);
 
@@ -2073,7 +2072,7 @@ $this->sendMail('bookClass_status',$user['UserMaster']['email'],$booking_status_
                                 <span>Other Localities:'.$location_name.'</span>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 sr_2605_03_padding">
-                                          <a href="#" class="btn gift-this-butt" id="" onclick="show_gift_form('.$id.');">Gift This Class</a>
+                                          <a href="classes/'.$class_topic.'" class="btn gift-this-butt" id="" onclick="">Gift This Class</a>
                                         </div>
                                 </div></div>';
                                echo @$class_list;
@@ -2244,7 +2243,7 @@ $this->sendMail('bookClass_status',$user['UserMaster']['email'],$booking_status_
                                 <span>Other Localities:'.$location_name.'</span>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 sr_2605_03_padding">
-                                          <a href="#" class="btn gift-this-butt" id="" onclick="show_gift_form('.$id.');">Gift This Class</a>
+                                          <a href="'.HTTP_ROOT.'/gift/classes/'.$class_topic.'" class="btn gift-this-butt" id="" onclick="">Gift This Class</a>
                                         </div>
                                 </div></div>';
                                    }
@@ -2272,6 +2271,7 @@ $this->sendMail('bookClass_status',$user['UserMaster']['email'],$booking_status_
           //$PAYU_BASE_URL = "https://secure.payu.in";
 
           $action = '';
+
 
           $posted = array();
           if(!empty($_POST)) {
@@ -3349,7 +3349,7 @@ $str=$str.'<thead style="background-color:#00cdc6;">
 
 
                                  /* $a=$this->Ticket->find('all',array('conditions'=>array('Ticket.vendor_classe_id'=>$result['bg_vendor_classes']['id'],'Ticket.txn_id'=>$result['bg_tickets']['txn_id'])));*/
-                                    echo $b=count($a);
+                                    $b=count($a);
                                   
                                      $str=$str.'<td class="dropdown" align="center" >'.$b.' People ';
                                      if($b!='0'){
@@ -4743,8 +4743,7 @@ $this->set('ven_msg',$ven_msg);
 
       if($this->request->is('post')){
         $data=$this->data;
-        $data['UserMaster']['address']=$data['UserMaster']['address11'];
-        
+      
         //print_r($data);die;
         if(!empty($data['UserMaster']['category_id'])){
         $str='';
@@ -4753,7 +4752,6 @@ $this->set('ven_msg',$ven_msg);
         }
         $str=rtrim($str, ",");
         $data['UserMaster']['category_id']=$str;
-        
         $this->UserMaster->save($data);
                 //$this->UserMaster->save($data);
          $this->requestAction(array('controller'=>'Cpanels', 'action'=>'generateMessages'), 
@@ -4762,7 +4760,7 @@ $this->set('ven_msg',$ven_msg);
         
         }
         else{
-       
+        //print_r($data);die;
          $this->UserMaster->save($data);
                 //$this->UserMaster->save($data);
          $this->requestAction(array('controller'=>'Cpanels', 'action'=>'generateMessages'), 
@@ -5789,45 +5787,6 @@ echo json_encode($dataArray);die;
       $this->set('user_view',$user);
 
     }
-	  public function privacy(){
-
-    //  $this->checkUser();
-
-
-
-      $this->layout='index_layout';
-
-      $user=$this->Session->read('User');
-      if($this->params->pass[0] == 'learner'){
-        $page_section_name =  $this->params['pass'][0];
-           if(!empty($page_section_name)){
-              $this->set('page_section_name',$page_section_name);
-            }
-     }
-      $this->set('user_view',$user);
-
-    }
-public function contact(){
-
-    //  $this->checkUser();
-
-
-
-      $this->layout='index_layout';
-
-      $user=$this->Session->read('User');
-      if($this->params->pass[0] == 'learner'){
-        $page_section_name =  $this->params['pass'][0];
-           if(!empty($page_section_name)){
-              $this->set('page_section_name',$page_section_name);
-            }
-     }
-      $this->set('user_view',$user);
-
-    }
-
-
-    
 
 
 
@@ -7101,42 +7060,6 @@ public function generatePassword($length=8){
             //$res_class = $this->Communitie->query("select * FROM bg_communities");
             $this->set('com_img',$cum_img);
 
-             /*Recommended_Class*/
-
-            $recommended_class = $this->VendorClasse->find('all', array(
-              'conditions' => array(
-
-          //'featured_status' => 1
-
-        ),
-
-          'contain' => array(   
-
-                  'ClassType',
-
-                  'User',
-
-                  'Category',
-
-                  'Segment',
-
-                  'Community',
-
-                  'VendorClasseLevelDetail',
-
-                  'VendorClasseLocationDetail'=> array(
-
-                    'Locality'
-
-                  )),
-
-        'order' => array('VendorClasse.id DESC'),
-
-        'limit' => 12,
-
-    ));
-    $this->set('recommended_class',$recommended_class);
-
               ########## Start Show Search community #####
             if (isset($_POST["search"])){
 
@@ -8077,7 +8000,6 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                     <head><title></title></head>
 
                     <body>
-
 
                         <div style="border-radius: 6px;background-color: rgba(255,255,255,0.3);padding: 10px;width: 81%;margin-left:20px;">
 
@@ -9097,6 +9019,7 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
           if ($_FILES['data']['size'][$na] > 500000) {
             echo "Sorry, your file is too large.";
             $uploadOk = 0;
+
           }
           // Allow certain file formats
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
@@ -9763,7 +9686,6 @@ public function addLrregular(){
 
 
   $this->autoRender = false;
-
 
 
 
@@ -10527,6 +10449,7 @@ If (isset($_POST["additionalCharges"])) {
           if(isset($this->params->pass[0])){
             $this->layout='fun_layout';
           $catalog_id = base64_decode($this->params->pass[0]);
+
          
           $catalog_det = $this->VendorClasse->find('all',array(
             'joins' =>   array(
@@ -10604,6 +10527,7 @@ If (isset($_POST["additionalCharges"])) {
         }
         else{
           $this->redirect(array('controller'=>'Homes','action'=>'arrangeClass'));
+
         }  
     }
 
