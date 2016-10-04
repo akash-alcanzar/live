@@ -10783,12 +10783,187 @@ If (isset($_POST["additionalCharges"])) {
 
 
   public function catalogDetail(){
-
-          
-          if(isset($this->params->pass[0])){
+    if(isset($this->params->pass[0])){
             $this->layout='fun_layout';
           $catalog_id = base64_decode($this->params->pass[0]);
-         
+          if($this->request->is('post')){
+             $data=$this->data;
+                 /*================================Search Bar==============================================================*/
+             if(!empty($data['Request']['search'])){
+              $class_topic=$data['Request']['search'];
+              $catalog_det = $this->VendorClasse->find('all',array(
+                      'joins' =>   array(
+                                      array(
+                                          'table' => 'bg_add_catalogs',
+                                          'alias' => 'Catalog',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.id = Catalog.class_id','Catalog.status'=>1,'Catalog.catalog_group_id'=>$catalog_id,'VendorClasse.class_topic LIKE'=>'%'.$class_topic.'%'),
+                                          'order'=>array('Catalog.add_date')
+                                          ),
+                                       array(
+                                          'table' => 'bg_user_masters',
+                                          'alias' => 'UserMaster',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.user_id = UserMaster.id')
+                                          ),
+                                        array(
+                                          'table' => 'bg_class_types',
+                                          'alias' => 'classtype',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.class_type_id = classtype.id')
+                                          ),
+                                          array(
+                                          'table' => 'bg_connect_groups',
+                                          'alias' => 'ConnectGroup',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('Catalog.catalog_group_id = ConnectGroup.id','Catalog.catalog_group_id'=>$catalog_id)
+                                          )
+
+                                     
+                                        ),
+                      'conditions'=>array('VendorClasse.class_topic LIKE'=>'%'.$class_topic.'%'),
+                      'order'=>array('Catalog.modify_date'),
+                      'fields'    =>array('VendorClasse.*','Catalog.*','UserMaster.*','classtype.types','ConnectGroup.*')
+                     
+                      ));
+                  
+                    $this->set('cataloglist',$catalog_det);
+                    $this->set('catalog_id',$catalog_id);
+             }
+                  /*================================End Search Bar==========================================================*/
+                  /*=============================Filter Ascending or Descending Order====================================================*/
+             if(!empty($data['optradio'])){
+               if($data['optradio']=='1'){
+                          $catalog_det = $this->VendorClasse->find('all',array(
+                      'joins' =>   array(
+                                      array(
+                                          'table' => 'bg_add_catalogs',
+                                          'alias' => 'Catalog',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.id = Catalog.class_id','Catalog.status'=>1,'Catalog.catalog_group_id'=>$catalog_id),
+                                          'order'=>array('Catalog.add_date')
+                                          ),
+                                       array(
+                                          'table' => 'bg_user_masters',
+                                          'alias' => 'UserMaster',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.user_id = UserMaster.id')
+                                          ),
+                                        array(
+                                          'table' => 'bg_class_types',
+                                          'alias' => 'classtype',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.class_type_id = classtype.id')
+                                          ),
+                                          array(
+                                          'table' => 'bg_connect_groups',
+                                          'alias' => 'ConnectGroup',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('Catalog.catalog_group_id = ConnectGroup.id','Catalog.catalog_group_id'=>$catalog_id)
+                                          )
+
+                                     
+                                        ),
+                      'order'=>array('Catalog.modify_date'),
+                      'fields'    =>array('VendorClasse.*','Catalog.*','UserMaster.*','classtype.types','ConnectGroup.*')
+                     
+                      ));
+                   $this->set('cataloglist',$catalog_det);
+                    $this->set('catalog_id',$catalog_id);
+               }
+               else if($data['optradio']=='2'){
+                  $catalog_det = $this->VendorClasse->find('all',array(
+                      'joins' =>   array(
+                                      array(
+                                          'table' => 'bg_add_catalogs',
+                                          'alias' => 'Catalog',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.id = Catalog.class_id','Catalog.status'=>1,'Catalog.catalog_group_id'=>$catalog_id),
+                                          'order'=>array('Catalog.add_date')
+                                          ),
+                                       array(
+                                          'table' => 'bg_user_masters',
+                                          'alias' => 'UserMaster',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.user_id = UserMaster.id')
+                                          ),
+                                        array(
+                                          'table' => 'bg_class_types',
+                                          'alias' => 'classtype',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.class_type_id = classtype.id')
+                                          ),
+                                          array(
+                                          'table' => 'bg_connect_groups',
+                                          'alias' => 'ConnectGroup',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('Catalog.catalog_group_id = ConnectGroup.id','Catalog.catalog_group_id'=>$catalog_id)
+                                          )
+
+                                     
+                                        ),
+                      'order'=>array('Catalog.modify_date DESC'),
+                      'fields'    =>array('VendorClasse.*','Catalog.*','UserMaster.*','classtype.types','ConnectGroup.*')
+                     
+                      ));
+                   $this->set('cataloglist',$catalog_det);
+                    $this->set('catalog_id',$catalog_id);
+               }
+             }
+  /*==========================================================End Filter Ascending or Descending Order==============================*/
+  /*========================================================Filter According cit,Locality,class_type,Region=========================*/
+             $str='';
+             $classArray=array();
+             $res=$this->RequestCatalog->find('all',array('conditions'=>array('status'=>1)));
+            if(!empty($res)){
+              foreach($res as $result){
+              $locality=explode(",",$result['RequestCatalog']['locality']);
+              $class_type=explode(",",$result['RequestCatalog']['class_type']);
+              $region=explode(",",$result['RequestCatalog']['region']); 
+              
+              if ((in_array($data['Request']['locality'],$locality))&&(in_array($data['Request']['class_type'],$class_type))&&(in_array($data['Request']['region'],$region))&&($result['RequestCatalog']['city']==$data['Request']['city_id'])){
+                
+               $str=$str.",".$result['RequestCatalog']['class_id'];
+              }
+              }
+             $str=substr($str,1);
+             $class_ide=explode(",",$str);
+             $catalog_det = $this->VendorClasse->find('all',array(
+            'joins' =>   array(
+                            array(
+                                'table' => 'bg_add_catalogs',
+                                'alias' => 'Catalog',
+                                'type'  =>  'INNER',
+                                'conditions' => array('VendorClasse.id = Catalog.class_id','Catalog.status'=>1,'Catalog.class_id'=>$class_ide),
+                                'order'=>array('Catalog.add_date')
+                                ),
+                             array(
+                                'table' => 'bg_user_masters',
+                                'alias' => 'UserMaster',
+                                'type'  =>  'INNER',
+                                'conditions' => array('VendorClasse.user_id = UserMaster.id')
+                                ),
+                              array(
+                                'table' => 'bg_class_types',
+                                'alias' => 'classtype',
+                                'type'  =>  'INNER',
+                                'conditions' => array('VendorClasse.class_type_id = classtype.id')
+                                )
+
+                           
+                              ),
+            
+            'fields'    =>array('VendorClasse.*','Catalog.*','UserMaster.*','classtype.types')
+           
+            ));
+         if(!empty($catalog_det)){
+         $this->set('cataloglist',$catalog_det);
+          $this->set('catalog_id',$catalog_id);
+            }
+          }
+        }
+/*=====================================================End Filtering==================================================================*/
+
           $catalog_det = $this->VendorClasse->find('all',array(
             'joins' =>   array(
                             array(
@@ -10823,8 +10998,8 @@ If (isset($_POST["additionalCharges"])) {
             'fields'    =>array('VendorClasse.*','Catalog.*','UserMaster.*','classtype.types','ConnectGroup.*')
            
             ));
-         $group_image=$this->ConnectGroup->find('first',array('conditions'=>array('id'=>$catalog_id),'fields'=>array('banner_image')));
-          $this->set('banner_image',$group_image['ConnectGroup']['banner_image']);
+         $group_image=$this->ConnectGroup->find('first',array('conditions'=>array('id'=>$catalog_id),'fields'=>array('group_image')));
+          $this->set('group_image',$group_image['ConnectGroup']['group_image']);
           $this->set('cataloglist',$catalog_det);
           $this->set('catalog_id',$catalog_id);
            /*=============================================Papular catalog class===============================================*/
@@ -10860,12 +11035,30 @@ If (isset($_POST["additionalCharges"])) {
 //echo "<pre>";print_r($catalog);die;
       
       $this->set('papluar_catalog',$catalog);
-        $user=$this->Session->read('User');
-        $this->set('user_view',$user);
         }
         else{
           $this->redirect(array('controller'=>'Homes','action'=>'arrangeClass'));
-        }  
+        } 
+        $city=$this->City->find('all',array('conditions'=>array('status'=>1),'order'=>array('name ASC')));
+        $cityArray=array();
+        if(!empty($city)){
+          foreach($city as $city1){
+           $cityArray[$city1['City']['id']]=$city1['City']['name'];
+           }
+
+        }
+         $class_type=$this->ClassType->find('all');
+        $classArray=array();
+        if(!empty($class_type)){
+          foreach($class_type as $res){
+           $classArray[$res['ClassType']['types']]=$res['ClassType']['types'];
+           }
+           
+        }
+        
+
+         $this->set('class_type',$classArray); 
+        $this->set('city_name',$cityArray); 
     }
 
  public function CatalougeClassDetail(){
