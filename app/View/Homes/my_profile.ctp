@@ -1,17 +1,14 @@
-
-
 <style>
-  a:hover{
+  
+   a:hover{
      text-decoration: none;
    } 
-#upload-btn{
-cursor:pointer;
-}
+
 </style>
 <?php 
   //echo "<pre>";print_r($galleryimage);
 if($user_view['UserMaster']['user_type_id']=='1'){?>
-<?php if(!empty($user_view['UserMaster']['background_image'])){?>
+  <?php if(!empty($user_view['UserMaster']['background_image'])){?>
 <style>
 .funmp1 {
     width: 100%;
@@ -139,16 +136,6 @@ border-radius:30%;
     background-color: #00CDC6;
     padding: 10px 0px;
 }
-.numberCircle12{
-background: crimson none repeat scroll 0 0;
-border-radius: 50%;
-color: white;
-padding: 4px 6px;
-text-align: center;
-position: relative;
-left: 72%;
-top:-20px;
-}
 @media (max-width: 767px) and (min-width: 550px){
   .fa-camera-br {right: -47px;top: -12px;}
 }
@@ -156,7 +143,6 @@ top:-20px;
   
 }
 </style>
-
 <div class="col-md-10 col-sm-9 col-xs-12 ruth6542 ruth654786">
     <div class="col-md-12 col-sm-12 col-xs-12 clrdash123 ruth1">
         <div class="col-md-3 col-sm-3 col-xs-4 bar321 bar786">
@@ -168,30 +154,30 @@ top:-20px;
                 <span class="dashbrd1 grg">Settings</span>
                 <i class="fa fa-bell dshclr1" aria-hidden="true"></i>
                 <span class="dashbrd1 grg">Notification</span>
-                 <?php   
+                 <?php 
                        $profile_img=$user_view['UserMaster']['profile_image'];
                       
                        $user_type_id=$user_view['UserMaster']['user_type_id'];
-                      $user_pic1 = substr($profile_img,0,4);
-                         if($user_pic1 == 'http'){ ?>
-                           
-                       
-                          <img src="<?php echo $profile_img; ?>" class="georgeimg prflimg"> 
-
-                          <?php } 
-                               else if($profile_img!='' and $user_type_id==1) {  ?>
+                       //echo $user_type_id;
+                       //die;
+                       if($profile_img!='' and $user_type_id==1)
+                       {
+                        ?>
                          <img src="<?php echo HTTP_ROOT;?>/img/Vendor/profile/<?php echo $profile_img; ?>" class="georgeimg prflimg"> 
-
-                        <?php }elseif($profile_img!='' and $user_type_id==2){  ?>
-
+                         <?php
+                     }
+                     elseif($profile_img!='' and $user_type_id==2)
+                     {
+                        ?>
                         <img src="<?php echo HTTP_ROOT;?>/img/Buyer/profile/<?php echo $profile_img; ?>" class="georgeimg prflimg"> 
-                         <?php }elseif($profile_img!='' and $user_type_id==''){ ?>
-
+                        <?php
+                    }
+                    elseif($profile_img!='' and $user_type_id=='')
+                     {
+                        ?>
                         <img src="<?php echo $profile_img; ?>" class="georgeimg prflimg"> 
                         <?php
                     }
-                   
-
                  ?>
                 <span class="dropdown1">
                     <span class="dashbrd1 grg1"><?php echo $user_view['UserMaster']['first_name'];?></span>
@@ -207,7 +193,7 @@ top:-20px;
             </div>
         </div>
     </div> 
-          <div class="col-md-12 col-sm-12 col-xs-12 funmp1"> 
+           <div class="col-md-12 col-sm-12 col-xs-12 funmp1"> 
             <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
               <div class="row">
                 <div class="col-md-8 col-sm-8 col-xs-8 starruth">
@@ -404,7 +390,7 @@ top:-20px;
                           </div>
                           <!-- *****************section 2************* -->
                           <!-- *****************Institution************** -->
-                          <div id="section2">
+                             <div id="type_vendor">
                           <div class="col-md-12 col-sm-12 col-xs-12 detail">
                             <div class="col-md-3 col-sm-6 col-xs-4 br_name">
                               <img src="<?php echo HTTP_ROOT;?>/img/profile_img/building.png">
@@ -415,7 +401,7 @@ top:-20px;
                                 <span>Organization</span>
                               <?php }
                               else if($user_view['UserMaster']['vendor_type_id']==2){?>
-                               <span>Indivisual"</span>
+                               <span>Indivisual</span>
                              <?php }
                               else{?>
                                <span>N/A</span>
@@ -423,9 +409,24 @@ top:-20px;
                               
                             </div>
                           </div>
-                          <div class="col-md-12 col-sm-12 col-xs-12 detail">
+                           
+                          
+                         <?php if($user_view['UserMaster']['vendor_type_id']==2){?>
+                       <div class="col-md-12 col-sm-12 col-xs-12 detail">
                             <div class="col-md-3 col-sm-6 col-xs-4 br_name">
-                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/building.png">
+                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/are.png">
+                              <span>DOB:</span>
+                            </div>
+                            <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
+                              <span><?php echo !empty($user_view['UserMaster']['d_o_b'])?$user_view['UserMaster']['d_o_b']:"N/A";?></span>
+                            </div>
+                          </div>
+                         <?php }else if($user_view['UserMaster']['vendor_type_id']==2){?>
+                          
+                         
+                           <div class="col-md-12 col-sm-12 col-xs-12 detail">
+                            <div class="col-md-3 col-sm-6 col-xs-4 br_name">
+                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/are.png">
                               <span>Institution:</span>
                             </div>
                             <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
@@ -443,6 +444,7 @@ top:-20px;
                               <span><?php echo !empty($user_view['UserMaster']['official_reg_id'])?$user_view['UserMaster']['official_reg_id']:"N/A";?></span>
                             </div>
                           </div>
+                          <?php }?>
                           <!-- *****************Registration Id************** -->
                           <!-- *****************Experience Area************** -->
                           <div class="col-md-12 col-sm-12 col-xs-12 detail">
@@ -658,7 +660,7 @@ top:-20px;
                         <span>Contact No:</span>
                       </div>
                       <div class="col-md-5 col-sm-7 col-xs-8 br_name1">
-                        <?php echo $this->Form->input('mobile',array('type'=>'text','class'=>'form-control reg_input input_text','id'=>'mobile','label'=>false,'div'=>false,'placeholder'=>'Contact_number','value'=>$user_view['UserMaster']['mobile']));?>
+                        <?php echo $this->Form->input('contact_no',array('type'=>'text','class'=>'form-control reg_input input_text','id'=>'contact_no','label'=>false,'div'=>false,'placeholder'=>'Contact_number','value'=>$user_view['UserMaster']['contact_no']));?>
                       </div>
                     </div>
                     <!-- *****************contact no************** -->
@@ -671,6 +673,7 @@ top:-20px;
                       <div class="col-md-5 col-sm-7 col-xs-8 br_name1">
                         <select class="form-control reg_input input_text" name="data[UserMaster][city_id]" id="city_id" onblur="city(this.value)">
                           <option value="">Select City</option>
+                           <option selected value="1">Chennai</option>
                           <?php
                             foreach ($city as $key => $city_value){
                             $id   =$city_value['City']['id'];
@@ -799,10 +802,9 @@ top:-20px;
                         <span>Date Of Birth:</span>
                       </div>
                       <div class="col-md-5 col-sm-7 col-xs-8 br_name1">
-                        <?php echo $this->Form->input('d_o_b',array('type'=>'text','class'=>'form-control reg_input input_text','id'=>'datepicker2','label'=>false,'div'=>false,'placeholder'=>'Date Of Birth','value'=>$user_view['UserMaster']['d_o_b']));?>
+                        <?php echo $this->Form->input('d_o_b',array('type'=>'text','class'=>'form-control reg_input input_text','id'=>'datepicker','label'=>false,'div'=>false,'placeholder'=>'Date Of Birth','value'=>$user_view['UserMaster']['d_o_b']));?>
                       </div>
                     </div>
-                    
                     <!-- *****************Registration Id************** -->
                     <!-- *****************Experience Area************** -->
                     <div class="col-md-12 col-sm-12 col-xs-12 detail1">
@@ -822,7 +824,7 @@ top:-20px;
                         <span>Address:</span>
                       </div>
                       <div class="col-md-5 col-sm-7 col-xs-8 br_name1">
-                        <?php echo $this->Form->input('address',array('type'=>'textarea','class'=>'form-control reg_input input_text','id'=>'address','label'=>false,'div'=>false,'placeholder'=>' Address','value'=>$user_view['UserMaster']['address']));?>
+                        <?php echo $this->Form->input('address1',array('type'=>'textarea','class'=>'form-control reg_input input_text','id'=>'address1','label'=>false,'div'=>false,'placeholder'=>' Address','value'=>$user_view['UserMaster']['address']));?>
                       </div>
                     </div>
                     <!-- *****************Address************** -->
@@ -964,7 +966,7 @@ top:-20px;
                                             <h3 style="padding:0px; margin:0px; color:#fff;">Upload Image</h3>
                                         
                                         </div>
-                                        <?php echo $this->Form->create('AddImage', array('class' => '','enctype'=>'multipart/form-data','onSubmit'=>'return chk_frm();'))?>  
+                                        
                                         <?php //echo $this->Form->create('AddDiamond', array('class' => '', 'enctype'=>'multipart/form-data','onSubmit'=>'return chk_frm();'))?> 
                                             <div class="modal-body">                       
                                                 <div class="row">&nbsp;</div>
@@ -973,7 +975,7 @@ top:-20px;
                                                     <div class="col-md-12 col-lg-12  " >                                
                                                        <center>
                                                             <span class="btn btn-default btn-file upload-btn-file">
-                                                                Browse Your image to upload <input type="file" name="imagefiles[]" multiple id="photos" class="txtbox " accept="image/*"> 
+                                                                Browse Your image to upload <input type="file" name="imagefiles[]" multiple id="photos" class="txtbox" accept="image/*"> 
                                                             </span>
                                                         </center>
                                                         <span style="color:red; text-align:;" id="msg1"></span>            
@@ -983,9 +985,9 @@ top:-20px;
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="#" class="btn btn-default dismiss-btn" data-dismiss="modal">Close</a>
-                                                <input type="submit"  class="btn btn-primary save-image " name="save_img"  value="Submit" >                        
+                                                <input type="submit"  class="btn btn-primary save-image " name="save_img" id='upload_image'  value="Submit" >                        
                                             </div>
-                                        <?php echo $this->Form->end(); ?>   
+                                         
                                     </div>
                                 </div>
                             </div>
@@ -994,11 +996,11 @@ top:-20px;
                         <div class="col-md-12 col-sm-12 col-xs-12 vid1">
                             <div class="col-md-12 col-sm-12 col-xs-12 uploadd-btn">
                               <span>Photos</span>
-                              <span class="pull-right" id ="upload-btn" style="cursor:pointer;color:blue!importent">Add Photo</span>
+                              <span class="pull-right" id ="upload-btn" style="cursor:pointer;">Add Photo</span>
                             </div>
 
                             <!-- <center>
-                              <button type="button" id ="upload-btn" class="btn btn-success uploadd-btn" style="cursor:pointer;color:blue!importent">Upload Video</button> -->
+                              <button type="button" id ="upload-btn" class="btn btn-success uploadd-btn">Upload Video</button> -->
                             <!-- </center> -->
                             <div class="col-md-12 col-sm-12 col-xs-12">
                               <div class="col-md-12 col-sm-12 col-xs-12 march"></div>
@@ -1024,7 +1026,7 @@ top:-20px;
                                         <div class="modal-header" style="border-radius:5px 5px 0px 0px; background-color: #00CDC6;" id="shopmodal">
                                             
                                             <button type="button" class="close" data-dismiss="modal">×</button>
-                                            <h3 style="padding:0px; margin:0px; color:#fff;">Upload Video</h3>
+                                            <h3 style="padding:0px; margin:0px; color:#fff;">Upload Image</h3>
                                         
                                         </div>
                                         <?php echo $this->Form->create('AddVideo', array('class' => '','enctype'=>'multipart/form-data','onSubmit'=>'return chk_vid();'))?>  
@@ -1319,8 +1321,8 @@ top:-20px;
                                                                 <div class="col-md-10 col-sm-10 col-xs-10 sr_class_acc_text02 upclass-location"><?php echo $result['VendorClasse']['time_of_day'];?></div>
                                                               </div>
                                                             </div>
-                                                            <?php }?>
-                                                          </div>
+                                                       <?php }?>
+                                                       </div>
                                                         </div>
                                                       </div>
                                                       <div class="col-xs-12 col-sm-12 col-md-12 sr_2605_06_textLorem sr_serch_div_l_hite sr_class_acc_div padd_l_r">
@@ -1334,7 +1336,7 @@ top:-20px;
                                                           </div>
                                                       </div>
                                                       <div class="col-xs-12 col-sm-12 padd_l_r"><img src="<?php echo HTTP_ROOT;?>/img/8.jpg" class="star all-star-img"></div>
-                                                      <div class="col-xs-12 col-sm-12" style="text-align: right;padding-right:0px;"><button class="booking">Edit/Repost</button></div> 
+                                                      <div class="col-xs-12 col-sm-12" style="text-align: right;padding-right:0px;"><button class="booking" onclick="mypopup();">Edit/Repost</button></div> 
                                                     </div>
                                                 </div>        
                                               <!-- ********text************ -->
@@ -1609,7 +1611,7 @@ top:-20px;
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 padd_l_r"><img src="<?php echo HTTP_ROOT;?>/img/8.jpg" class="star all-star-img"></div>
-                                                   <!--  <a href="<?php echo HTTP_ROOT;?>/Vendor_classes/classes/<?php echo base64_encode($result['VendorClasse']['id']); ?>">   
+                                                   <!--  <a href="<?php echo HTTP_ROOT;?>/Homes/bookClass/<?php echo base64_encode($result['VendorClasse']['id']); ?>">   
                                                       <div class="col-xs-12 col-sm-12" style="text-align: right;padding-right:0px;"><button class="booking">Booking Status</button></div></a>  -->
                                                   </div>
                                               </div>        
@@ -1749,7 +1751,7 @@ top:-20px;
                                           </span>
                                         </center>  
                                       </div>  
-                                <?php } ?>
+                                <?php } ?>                                    
                                 </div><!-- tab 1 / -->
                               </div>
                             </div>
@@ -1760,23 +1762,18 @@ top:-20px;
             <!-- *************hide2*************** -->            
   </div>  
   <!-- ***************navbar******************** -->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-    
-    <!-- Load jQuery JS -->
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <!-- Load jQuery UI Main JS  -->
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    
-    <!-- Load SCRIPT.JS which will create datepicker for input field  -->
-    
-    
-    <link rel="stylesheet" href="runnable.css" />
-            
-           
+  <link  rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script>
+$(function(){
+$("#datepicker").datepicker({
+
+dateFormat: 'dd/mm/yy',
+
+});
+});
+</script>
  <script>
- 
 function ClickUpload() {
 $("#FileUpload").trigger('click');
 }
@@ -1788,11 +1785,11 @@ $(document).ready(function(){
 
   $('.upcoming_class').click(function(){
     var id=$(this).attr('id');
-    window.location.href="<?php echo HTTP_ROOT;?>/Vendor_classes/classes/"+btoa(id);
+    window.location.href="<?php echo HTTP_ROOT;?>/Homes/classDetail/"+btoa(id);
   });
   $('.past_class').click(function(){
     var id=$(this).attr('id');
-    window.location.href="<?php echo HTTP_ROOT;?>/Vendor_classes/classes/"+btoa(id);
+    window.location.href="<?php echo HTTP_ROOT;?>/Homes/classDetail/"+btoa(id);
   });
   // $('.upcoming-class-title').click(function(){
   //   var id = $(this'.upcoming_class').attr('id');
@@ -1802,7 +1799,6 @@ $(document).ready(function(){
 
     $('.uploadbox').change(function() {
            user_id=$('.customer').val();
-           
            $('.loader').show();
            var front=1;
           //alert(user_id);
@@ -1861,8 +1857,58 @@ $('.funmp1').css('background-image', 'url(' + imageUrl + ')');
 </script>
 
 <script type="text/javascript">
-  $(document).ready(function(){
 
+  $(document).ready(function(){
+    $("#editrpost").click(function() {
+  //alert('hi');
+  var  e_class_id    = $("#e_class_id").val();
+  var  e_start_date  = $("#e_start_date").val();
+  var  e_end_date    = $("#e_end_date").val();
+  
+ if(e_start_date==''){
+    $('#error_get').html('Please Choose Start Date');
+    return false;
+  }
+  else if(e_end_date==''){
+    $('#error_get').html('Please Choose End Date');
+    return false;
+  }
+  else{
+  var query = $('#registration_form22').serialize();
+        var url = '<?php echo HTTP_ROOT; ?>/Homes/Repost';
+              $.post(url, query, function (response) {
+              //alert (response);
+               if(response==1){
+                alert('Update successfully');
+                  $("#quote_btn_click").modal('hide');
+            }
+          });
+    }
+  });
+    $('#notification').on('click',function(){
+   alert('Notification Functionality Comming Soon');
+});
+     var type='<?php echo $user_view['UserMaster']['vendor_type_id'];?>';
+     if(type==1){
+      $('#vendor_indivisual_dob').hide();
+       $('#vendor_org').show();
+     }
+     if(type==2){
+        $('#vendor_indivisual_dob').show();
+        $('#vendor_org').hide();
+     }
+     $('#vendor_Type').on('change',function(){
+       var type=$(this).val();
+       if(type==1){
+        $('#vendor_indivisual_dob').hide();
+       $('#vendor_org').show();
+       }
+       else{
+       $('#vendor_indivisual_dob').show();
+       $('#vendor_org').hide();
+       }
+
+       });
       var page_sct_name = "<?php echo $page_section_name; ?>";
         
         if(page_sct_name == "video"){
@@ -1921,32 +1967,7 @@ $('.funmp1').css('background-image', 'url(' + imageUrl + ')');
 </script>
 
 <script type="text/javascript">
-
   $(document).ready(function(){
-    
-      
-   
-      $('#vendor_Type').on('change',function(){
-       var type=$(this).val();
-       if(type==1){
-        $('#vendor_indivisual_dob').hide();
-       $('#vendor_org').show();
-       }
-       else{
-       $('#vendor_indivisual_dob').show();
-       $('#vendor_org').hide();
-       }
-
-       });
-      $('#upload-btn').click(function(){
-     
-      $('#myModal').modal();
-    });
-       $('#upload-btn1').click(function(){
-      $('#myModal1').modal();
-    });
-
-     $('#upload-btn').css('color',blue);
     $('.upcomming-class').click(function(){
       $('.upcomming-divv').show();
       $('.past-tab').hide();
@@ -2039,9 +2060,15 @@ $('.funmp1').css('background-image', 'url(' + imageUrl + ')');
       // $('.lernr-class').hide();
       //$('#photo1').hide();
     });
-   
-   
-   
+    $('#upload_image').click(function(){
+     
+    });
+    $('#upload-btn').click(function(){
+      $('#myModal').modal();
+    });
+    $('#upload-btn1').click(function(){
+      $('#myModal1').modal();
+    });
     jQuery("#photos").on('change ',function(){
       var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
       if(jQuery.inArray(jQuery(this).val().split('.').pop().toLowerCase(), fileExtension) == -1){
@@ -2189,11 +2216,71 @@ var last_valid_selection = null;
                     })
         </script>
          <!-- JQuery search box -->
+         <!-- Start Edit and Repost Model Box -->
+
+                      <div class="modal fade" id="quote_btn_click">
+                        <div class="modal-dialog">
+                          <div class="modal-content col-xs-12 col-sm-12 padd_l_r">
+                            <div class="modal-header col-xs-12 col-sm-12" style="background-color:#2bcdc1;">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title cat_mod_title" >Edit/Repost</h4>
+                            </div>
+
+                            <div class="modal-body col-xs-12 col-sm-12 padd_l_r">
+                              <div id="error_get" class="error-gift"></div>
+                              
+                              <div class="col-xs-12 col-sm-12 col-md-12">
+                              <form id="registration_form22">
+                              <input type="hidden" name="class_id" id="class_id" value="<?php echo $c_id; ?>">
+                              <input type="hidden" name="catalog_id" id="catalog_id" value="<?php echo $cl_id; ?>">
+                              <center><div id="error_get" class="error-gift"></div></center> 
+                              <div class="col-xs-12 col-sm-12 col-md-12 popup_m_top_22">
+                                <input type="hidden" name="e_class_id" id="e_class_id" value="<?php echo $result['VendorClasse']['id']; ?>">
+                                              <div class="col-xs-5 col-sm-5 col-md-5 padd_l_r">
+                                                <input type="text" name="e_start_date" placeholder="Start Date" id="e_start_date" class="form-control"></div>
+                                                <div class="col-xs-2 col-sm-2 col-md-2 padd_l_r">&nbsp;&nbsp;</div>
+
+                                                <div class="col-xs-5 col-sm-5 col-md-5 padd_l_r">
+                                                <input type="text" name="e_end_date" placeholder="End Date" id="e_end_date" class="form-control"></div>
+                                              <div class="col-xs-12 col-sm-12 col-md-12 padd_l_r " id="err_22_3">&nbsp;</div>
+                                </div>
+                                          <div class="">&nbsp;</div>
+                                  <div class="col-xs-12 col-sm-12 popup_m_top_22">
+                                            <center><button id="editrpost" class="btn btn-primary" type="button" style="background-color:#2bcdc1;">Update</button></center>
+                                  </div>
+                                 </form>
+                                <div class="">&nbsp;</div>
+                              </div>
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div> 
+<!-- End Model Box -->
+
+         <script type="text/javascript">
+function mypopup(){ 
+
+$("#quote_btn_click").modal('show');
+
+}
+
+</script>
+
+<script type="text/javascript">
+$("#e_start_date").datepicker({yearRange:'1900:2030',minDate:0,changeYear: true, changeMonth: true });
+</script>
+<script type="text/javascript">
+$("#e_end_date").datepicker({yearRange:'1900:2030',minDate:0,changeYear: true, changeMonth: true });
+</script>
       <script type="text/javascript">
         $(document).ready(function() {
+
             $("#profile1").show();
+
             
         });
+
 
         /* sitaram 30.05.2016*/
               /* section 2nd photo & video code */
@@ -2354,7 +2441,7 @@ var last_valid_selection = null;
               $("#sr_class").css('background','#fff');
               $("#sr_class").css('color','#00CDC6');
           });
-          
+
             $("#photo").click(function(){
              
               $("#photo1").fadeIn();
@@ -2404,9 +2491,9 @@ var last_valid_selection = null;
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 <script>
-$('#notification').on('click',function(){
-alert('Notification Functionality Comming Soon');
-});
+  $('.booking_repost').click(function(){
+   var id=$(this).attr('id');
+     });
   $("#file-upload_4_2").on('change',function(){
         var a = $(this).val();
       
@@ -2442,16 +2529,4 @@ alert('Notification Functionality Comming Soon');
     }
   
 </script>
-<script>
- (document).ready(
-  
-  /* This is the function that will get executed after the DOM is fully loaded */
-  function () {
-    $("#datepicker2").datepicker({
-      changeMonth: true,//this option for allowing user to select month
-      changeYear: true //this option for allowing user to select from year range
-    });
-  }
 
-);
-</script>
