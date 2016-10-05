@@ -59,15 +59,15 @@
 	Router::connect('/kids-and-teens/**', array('controller' => 'vendor_classes', 'action' => 'lists'));
 	Router::connect('/home-maintenance/**', array('controller' => 'vendor_classes', 'action' => 'lists'));
 	Router::connect('/educational-and-skill-development/**', array('controller' => 'vendor_classes', 'action' => 'lists'));
-	Router::connect('/sell-express/*', array('controller' => 'homes', 'action' => 'sellExpress'));
+	Router::connect('/class_providers/*', array('controller' => 'homes', 'action' => 'sellExpress'));
 	Router::connect('/arrange-class/*', array('controller' => 'homes', 'action' => 'arrangeClass'));
 	Router::connect('/gift/*', array('controller' => 'homes', 'action' => 'gift'));
 	Router::connect('/about/*', array('controller' => 'homes', 'action' => 'about'));
 	Router::connect('/terms-and-conditions/*', array('controller' => 'homes', 'action' => 'terms'));
-	Router::connect('/how-it-works/*', array('controller' => 'homes', 'action' => 'how_it_works'));
+	Router::connect('/faq/*', array('controller' => 'homes', 'action' => 'faq'));
 	Router::connect('/privacy/*', array('controller' => 'homes', 'action' => 'privacy'));
 	Router::connect('/services/*', array('controller' => 'homes', 'action' => 'services'));
-	Router::connect('/help-center/*', array('controller' => 'homes', 'action' => 'help_center'));
+	Router::connect('/partner_with_us/*', array('controller' => 'homes', 'action' => 'partner_with_us'));
 	Router::connect('/reviews-and-testimonials/*', array('controller' => 'homes', 'action' => 'reviews_and_testimonials'));
 	Router::connect('/', array('controller' => 'homes', 'action' => 'index', 'home'));
 	
