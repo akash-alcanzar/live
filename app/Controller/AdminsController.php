@@ -5,7 +5,7 @@ class AdminsController extends AppController {
 	var $uses = array('Admin','UserMaster','City','Locality','Category','Community','UserVerfication','ClassType',
     'ClassSegment','VendorClasse','ClassRegular','ClassSchedule','VendorGalleries','TransactionHistorie',
     'ConnectGroup','RequestCatalog','CatalogAddGroup','AddCatalog','VendorMessage','FeaturedPrice',
-    'PromoteClassDetail','Ngo','GroupActivity','GroupActivityMessge','Blog','GiftCupan');
+    'PromoteClassDetail','Ngo','GroupActivity','GroupActivityMessge','Blog');
    var $components = array('Paginator');
 /*================== @ Developed By Rahul Pathak  for check Session=======================================*/
     public function checkUser(){
@@ -126,7 +126,7 @@ class AdminsController extends AppController {
        if($this->request->is('post')){
         $data=$this->data;
        
-        $link='<a  style="color:blue;" href='.HTTP_ROOT.'/Homes/catalogBook/'.base64_encode($quote_price['GetQuote']['id']).'/'.base64_encode($data['GetQuote']['price']).'>Click here For Booking Catalog Quote </a>';
+        $link='<a href='.HTTP_ROOT.'/Homes/catalogBook/'.base64_encode($quote_price['GetQuote']['id']).'/'.base64_encode($data['GetQuote']['price']).'>Click here For Booking Catalog Quote </a>';
         $msg=$data['GetQuote']['vendor_message']."<br> Admin Description -".$data['GetQuote']['admin_message']." ".$link;
         
         $dataArray['sender_id']=0;
@@ -492,8 +492,8 @@ public function editBuyer(){
     public function transactionDetail(){
      $this->checkUser();
      $this->layout="admin_layout";
-     $res=$this->TransactionHistorie->query('SELECT bg_payu_transactions.*,bg_vendor_classes.*,bg_user_masters.*,count(bg_tickets.id) as "total_ticket" from bg_payu_transactions,bg_tickets,bg_user_masters,bg_vendor_classes where bg_payu_transactions.txnid=bg_tickets.txn_id and bg_tickets.vendor_classe_id=bg_vendor_classes.id and  bg_tickets.user_id=bg_user_masters.id and bg_tickets.status="success" group by bg_payu_transactions.txnid order by bg_payu_transactions.created desc');
-    
+     $res=$this->TransactionHistorie->query('SELECT * from bg_transaction_histories,bg_user_masters,bg_vendor_classes where bg_transaction_histories.class_id=bg_vendor_classes.id and  bg_transaction_histories.user_id=bg_user_masters.id and bg_transaction_histories.payment_from_class=1 order by bg_transaction_histories.transaction_date desc');
+     //print_r($res);die;
      if(!empty($res)){
 
       $this->set('view_transaction',$res);
@@ -506,9 +506,7 @@ public function editBuyer(){
     public function cuponTracking(){
       $this->checkUser();
       $this->layout="admin_layout"; 
-     
-       $res=$this->GiftCupan->find('all',array('conditions'=>array('GiftCupan.gift_type'=>2,'GiftCupan.status'=>1)));
-       /*$res = $this->TransactionHistorie->find('all',array(
+       $res = $this->TransactionHistorie->find('all',array(
             'joins' =>   array(
                             array(
                                 'table' => 'bg_gift_cupans',
@@ -526,7 +524,7 @@ public function editBuyer(){
             
             'fields'    =>array('TransactionHistorie.*','GiftCupan.*')
            
-            ));*/
+            ));
 
        $this->set('view_cupon',$res);
       
@@ -563,7 +561,7 @@ public function editBuyer(){
             'fields'    =>array('TransactionHistorie.*','GiftCupan.*','VendorClasse.*')
            
             ));
-   
+      
        $this->set('view_cupon',$res);
       }
 
@@ -2518,31 +2516,6 @@ public function manageClass(){
      }
 
 }
-public function ClassSatatus(){
-   $this->checkUser();
-   $this->layout="admin_layout";
-   $class_id=base64_decode($this->params->pass[0]);
-   
-   $class = $this->VendorClasse->find('first',array('conditions'=>array('VendorClasse.id'=>$class_id)));
-   if(!empty($class)){
-    if($class['VendorClasse']['status']=='1'){
-    $class['VendorClasse']['status']=0;
-    $this->VendorClasse->save($class);
-     $this->requestAction(array('controller'=>'Cpanels', 'action'=>'generateMessages'),
-            array('pass'=>array('159','1')));
-    $this->redirect(array('controller'=>'Admins','action'=>'manageClass'));
-   }
-   else{
-    $class['VendorClasse']['status']=1;
-    $this->VendorClasse->save($class);
-      $this->requestAction(array('controller'=>'Cpanels', 'action'=>'generateMessages'),
-            array('pass'=>array('158','1')));
-    $this->redirect(array('controller'=>'Admins','action'=>'manageClass'));
-   }
-  }  
-    
-
-}
 public function viewClass(){
    $this->checkUser();
    $this->layout="admin_layout";
@@ -2889,7 +2862,233 @@ public function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                 break ;
 			}
 		}
+public function upload_csv_classes(){
 
+   $this->checkUser();
+   $this->layout="admin_layout";
+
+   if($this->request->is('post')){
+      $data= $this->request->data;
+      $file= $data['VendorClass']['csv_class'];
+      $ext = substr(strtolower(strrchr($file['name'], '.')), 1); //get the extension
+      $arr_ext = array('xls', 'xlsx','csv');
+      if(!in_array($ext, $arr_ext)){
+         $this->Session->setFlash('Invalid File');
+         $this->redirect(array('action'=>'upload_csv_classes'));
+      }
+
+      if (!file_exists(WWW_ROOT.'uploads/csv')) {
+          mkdir(WWW_ROOT.'uploads/csv', 0777, true);
+      }
+
+      $filename= time().$file['name'];
+      $pathfilename =  WWW_ROOT."uploads/csv/".$filename;
+      if(move_uploaded_file($file['tmp_name'], $pathfilename)){
+         if(in_array($ext, array('xls','xlsx'))){
+            require_once VENDORS .'/PHPExcel/Classes/PHPExcel.php';
+            $excelFile = $pathfilename;
+            $pathInfo = pathinfo($excelFile);
+            $type = $pathInfo['extension'] == 'xlsx' ? 'Excel2007' : 'Excel5';
+
+            $objReader = PHPExcel_IOFactory::createReader($type);
+            $objPHPExcel = $objReader->load($excelFile);
+
+            foreach($objPHPExcel->getWorksheetIterator() as $worksheet) {
+                $worksheets[] = $worksheet->toArray();
+            }
+
+            $worksheets=$worksheets[0];
+            
+
+         }else if($ext=='csv'){
+             $worksfile = fopen($pathfilename,"r"); 
+             while(!feof($worksfile)){
+                  $worksheets[]= fgetcsv($worksfile);
+             }
+             fclose($worksfile);
+         }
+         
+         //echo "<pre>";
+         //print_r($latlong);
+         //exit;
+
+         //  save data
+
+         foreach($worksheets as $sheet){
+         	 // get image upload
+             $isImage= $this->VendorGalleries->field('media_path',array('VendorGalleries.user_id'=>$sheet[0],'VendorGalleries.media_title'=>'My Image'));
+
+            if($isImage){
+               $img_upload= $isImage;
+            }else{
+               $class_topic= $sheet[3];
+               // search file in folder
+               if(file_exists(WWW_ROOT."img/Vendor/class_image")){
+               	   $isImage = scandir(WWW_ROOT."img/Vendor/class_image/".$class_topic, 1);
+	               if(is_array($isImage) && count($isImage) >0){
+	                  $img_upload= $isImage[0];
+	               }else{
+	                  $img_upload= 'defult_pic.png';
+	               }
+               }
+               
+
+
+
+            }
+
+            // get vedio upload
+            $isVideo= $this->VendorGalleries->field('media_path',array('VendorGalleries.user_id'=>$sheet[0],'VendorGalleries.media_title'=>'My Video'));
+            if($isVideo){
+               $vid_upload= $isVideo;
+            }else{
+              $vid_upload= 'default';
+            }
+
+            $data= array();
+                $data['VendorClasse']['user_id']= $sheet[0];
+                $data['VendorClasse']['category_id']= $sheet[1];
+                $data['VendorClasse']['segment_id']= $sheet[2];
+                $data['VendorClasse']['class_topic']= $sheet[3];
+                $data['VendorClasse']['class_summary']= $sheet[4];
+                $data['VendorClasse']['about_academy']= $sheet[5];
+
+                $data['VendorClasse']['about_class']= $sheet[6];
+                $data['VendorClasse']['class_timing_id']= $sheet[7];
+                $data['VendorClasse']['recurring_class_id']= $sheet[8];
+                $data['VendorClasse']['no_of_session']= $sheet[9];
+                $data['VendorClasse']['starting_month']= $sheet[10];
+                $data['VendorClasse']['end_month']= $sheet[11];
+
+                $data['VendorClasse']['day_of_week']= $sheet[12];
+                $data['VendorClasse']['time_of_day']= $sheet[13];
+                $data['VendorClasse']['class_date']= $sheet[14];
+                $data['VendorClasse']['class_duration']= $sheet[15];
+                $data['VendorClasse']['class_type_id']= $sheet[16];
+                $data['VendorClasse']['location']= $sheet[17];
+
+                $data['VendorClasse']['latitude']= $sheet[18];
+                $data['VendorClasse']['longitude']= $sheet[19];
+                $data['VendorClasse']['age_group']= $sheet[20];
+                $data['VendorClasse']['age_from']= $sheet[21];
+                $data['VendorClasse']['age_to']= $sheet[22];
+                $data['VendorClasse']['class_provider_id']= $sheet[23];
+
+                $data['VendorClasse']['community_id']= $sheet[24];
+                $data['VendorClasse']['total_ticket']= $sheet[25];
+                $data['VendorClasse']['max_ticket_available']= $sheet[26];
+                $data['VendorClasse']['price_per_head']= $sheet[27];
+                $data['VendorClasse']['class_tag']= $sheet[28];
+                $data['VendorClasse']['status']= $sheet[29];
+
+                $data['VendorClasse']['upload_ppt_name']= $sheet[30];
+                
+                // get upload video link
+                //$data['VendorClasse']['upload_video_name']= $sheet[31];
+                $data['VendorClasse']['upload_video_name']=$vid_upload;
+
+                $data['VendorClasse']['upload_tutor_picture']= $sheet[32];
+
+                //$data['VendorClasse']['upload_class_photo']= $sheet[33];
+                $data['VendorClasse']['upload_class_photo']= $img_upload;
+
+                $data['VendorClasse']['trending_status']= $sheet[34];
+                $data['VendorClasse']['featured_status']= $sheet[35];
+
+                $data['VendorClasse']['recommended_status']= $sheet[36];
+                $data['VendorClasse']['catalogue_status']= $sheet[37];
+                $data['VendorClasse']['add_date']= $sheet[38];
+                $data['VendorClasse']['modify_date']= $sheet[39];
+                $data['VendorClasse']['locality_id']= $sheet[40];
+                $data['VendorClasse']['city']= $sheet[41];
+
+                $data['VendorClasse']['region']= $sheet[42];
+                $data['VendorClasse']['view_count']= $sheet[43];
+                $data['VendorClasse']['age_category']= $sheet[44];
+                $data['VendorClasse']['group_id']= $sheet[45];
+                $data['VendorClasse']['is_type']= $sheet[46];
+                $data['VendorClasse']['class_nature']= ($sheet[47]) ? $sheet[47] : 0;
+                $data['VendorClasse']['min_ticket_available']= $sheet[48];
+                // new field LEVEL_DETAIL & LOCATION DETAIL
+                
+                //echo "<pre>";
+                //print_r($data);
+                //exit;
+
+                // check field
+               
+                if((!empty($data['VendorClasse']['user_id'])) && (!empty($data['VendorClasse']['class_summary'])) && (!empty($data['VendorClasse']['class_topic']))){
+                    
+                  //echo "<pre>";
+                  //print_r($data);
+                	//echo "hello";
+                	//exit;
+
+                   $this->VendorClasse->create();
+  	               if($this->VendorClasse->save($data)){
+  	                  // do insert in bg_vendor_classe_level_detail 
+                      $vendor_class_id=$this->VendorClasse->getLastInsertId();
+                      
+                      $level_datas= json_decode($sheet[49]);
+                      foreach($level_datas as $level_data){
+                          $lavel_arr= array();
+                          $lavel_arr['VendorClasseLevelDetail']['vendor_class_id']=$vendor_class_id;
+                          $lavel_arr['VendorClasseLevelDetail']['level_id']=$level_data->level_id;
+                          $lavel_arr['VendorClasseLevelDetail']['expert_level_id']=$level_data->expert_level_id;
+                          $lavel_arr['VendorClasseLevelDetail']['expert_level_id']=$level_data->expert_level_id;
+                          $lavel_arr['VendorClasseLevelDetail']['price']=$level_data->price;
+                          $lavel_arr['VendorClasseLevelDetail']['Description']=$level_data->Description;
+                          $this->VendorClasseLevelDetail->create();
+                          $this->VendorClasseLevelDetail->save($lavel_arr);
+                      }
+                      
+                      
+                      // insert in bg_vendor_classe_location_detail
+                      $location_datas= json_decode($sheet[50]);
+                      foreach($location_datas as $location_data){
+                         $location_arr= array();
+                         $location_arr['VendorClasseLocationDetail']['vendor_class_id']=$vendor_class_id;
+                         $location_arr['VendorClasseLocationDetail']['location']=$location_data->location;
+                         $location_arr['VendorClasseLocationDetail']['locality_id']=$location_data->locality_id;
+                         $location_arr['VendorClasseLocationDetail']['latitude']=$location_data->latitude;
+                         $location_arr['VendorClasseLocationDetail']['longitude']=$location_data->longitude;
+                         
+                         $this->VendorClasseLocationDetail->create();
+                         $this->VendorClasseLocationDetail->save($location_arr);
+
+                      }
+                      
+
+  	               }else{
+  	                  $this->Session->setFlash('Error please try again');
+  	                  $this->redirect(array('action'=>'upload_csv_classes'));
+  	               }
+
+              }else{
+              	  
+              	  
+              	  $msg[]= "Some rows could not be inserted properly";
+                  
+              }
+         
+
+
+         } // foreach end
+          
+         if(is_array($msg) && count($msg)>1){
+         	$succmsg= 'File has been uploaded sucessfully.'.count($msg).' rows could not be uploaded';
+         }else{
+         	$succmsg= 'File has been uploaded sucessfully.';
+         } 
+         
+         $this->Session->setFlash($succmsg);
+         $this->redirect(array('action'=>'upload_csv_classes'));
+          
+
+      }
+
+   }
+}
 
   /* end */
     
