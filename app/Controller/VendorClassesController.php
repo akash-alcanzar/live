@@ -2,7 +2,7 @@
 
 class VendorClassesController extends AppController {
 
-	 var $uses = array('Admin','UserMaster','City','Locality','Category','Community','UserVerfication','ClassType','ClassSegment','VendorClasse','ClassRegular','ClassLrregular','ClassSchedule','VendorGalleries','TransactionHistorie','Locality','Cookie','Ticket','PayuTransaction','VendorClasseLevelDetail','Categories','ConnectGroup','RequestCatalog','GiftCard','GiftCardSegment','Ngo','RegularRecurringClasse');
+	 var $uses = array('Admin','UserMaster','City','Locality','Category','Community','UserVerfication','ClassType','ClassSegment','VendorClasse','ClassRegular','ClassLrregular','ClassSchedule','VendorGalleries','TransactionHistorie','Locality','Cookie','Ticket','PayuTransaction','VendorClasseLevelDetail','Categories','ConnectGroup','RequestCatalog','GiftCard','GiftCardSegment','Ngo','RegularRecurringClasse','TicketBooking','TicketBookingDate');
 
 	public function slider(){
 
@@ -62,7 +62,7 @@ class VendorClassesController extends AppController {
 
 						'conditions'=>array(
 
-						"VendorClasse.class_topic Like '%$slug%'",
+						"VendorClasse.class_topic" =>$slug,
 
 					),
 
@@ -85,7 +85,6 @@ class VendorClassesController extends AppController {
 						'ClassLrregular',
 
 						'ClassRegular',
-						
 						'RegularRecurringClasse'=>array(
 							'fields'=> array( 'DISTINCT RegularRecurringClasse.class_no'),
 							'conditions' => array('RegularRecurringClasse.status' => 0)
@@ -107,7 +106,7 @@ class VendorClassesController extends AppController {
 
 				); 
 
-				//echo '<pre>'; print_r($class); die;
+			//	echo '<pre>'; print_r($class); die;
 
 				
 
@@ -233,7 +232,7 @@ class VendorClassesController extends AppController {
 
 		$user=$this->Session->read('User');
 
-		$this->layout='vendor_layout';
+		$this->layout='postclass_layout';
 
 		$this->set('user_view',$user);
 
@@ -422,6 +421,7 @@ $tot_irregular_classes = $this->ClassRegular->find('all', array('conditions' => 
 				$interval = new DateInterval('P1M');
 				$daterange = new DatePeriod($dat, $interval ,$end);	
 			}
+			
 			$i = 1;
 			$this->loadModel('RegularRecurringClasses');
 			foreach($daterange as $dat){
@@ -1098,7 +1098,7 @@ $tot_irregular_classes = $this->ClassRegular->find('all', array('conditions' => 
             {
 
 
-
+$this->log($img4_name);
             //$filename=$_FILES["fileToUpload".$i]["name"];
 
             //$titlename=$this->request->data["titlename".$i];
@@ -1220,7 +1220,7 @@ $tot_irregular_classes = $this->ClassRegular->find('all', array('conditions' => 
               //$this->UserMaster->updateAll(array('profile_image' => $newfile),array('id' => $last_des_id));
 
 
-
+$this->log($newfile);
            $this->VendorClasse->query("UPDATE bg_vendor_classes SET  upload_class_photo='".$newfile."' WHERE id='".$last_des_id."'");
 
               } else {
@@ -2063,6 +2063,7 @@ $tot_irregular_classes = $this->ClassRegular->find('all', array('conditions' => 
 		$ticket_booking_date['TicketBookingDate']['product_info'] = $_POST['productinfo'];
 		$this->TicketBookingDate->save($ticket_booking_date);
 		
+		$this->log($ticket_booking);$this->log($ticket_booking_date);
 		$tick =array();
 
 		$cookie = htmlspecialchars_decode($_POST['udf4']);
@@ -2072,7 +2073,9 @@ $tot_irregular_classes = $this->ClassRegular->find('all', array('conditions' => 
 		$this->loadModel('Ticket');
 
 		
+$this->log($tick);
 		foreach($tick as $key => $val){
+$this->log($val);
 			for($i=0;$i<$val;$i++){
 
 					$this->request->data['Ticket'][$key] = $key;
@@ -2326,10 +2329,8 @@ $this->sendMail('bookClass_status',$_POST['email'],$booking_status_mail);
 
 		if(!empty($this->request->data)){
 
-		$product_info = array();
-		$product_info['class_name'] = $class['VendorClasse']['class_topic'];
-		$product_info['bg_regular_recurring_ids'] = implode(',',$this->request->data['regular_recur_id']);
-		$product_info['bg_irregular_recurring_ids'] = implode(',',$this->request->data['irregular_recur_id']);
+					
+
 		foreach($this->request->data['level_check'] as $key => $val){
 
 			$as[$val] = $this->request->data['tic_'.$val];
@@ -2345,7 +2346,7 @@ $this->sendMail('bookClass_status',$_POST['email'],$booking_status_mail);
 			$this->set('ticket',$json);
 
 			$this->set('txnid',$txnid);
-			$this->set('prod_info',json_encode($product_info));
+
 			$this->set('class_id',$class['VendorClasse']['id']);
 
 			$this->set('user_id',$user['UserMaster']['id']);
@@ -2361,13 +2362,29 @@ $this->sendMail('bookClass_status',$_POST['email'],$booking_status_mail);
 			}	
 
 	}
+	
+	public function get_random_booking(){
+		
+			$randnum = rand(1111111111,9999999999);
+			$this->loadModel('TicketBooking');
+			$check = $this->TicketBooking->find('first',
+				array(
+					'conditions' => array(
+							'TicketBooking.booking_id' => $randnum,
+					)
+				)
+			);
+			if(!empty($check)){
+					$this->get_random_booking();
+			} else {
+					return $randnum;
+				}
+		}
 
 	public function get_randon(){
 
 			$randnum = rand(1111111111,9999999999);
-		
 			$this->loadModel('Ticket');
-			
 			$check = $this->Ticket->find('first',
 				array(
 					'conditions' => array(
@@ -2472,7 +2489,7 @@ $this->sendMail('bookClass_status',$_POST['email'],$booking_status_mail);
 				$this->set('all_class_type',$all_class_type);
 
 			}
-			public function gift(){
+public function gift(){
 				
               //$this->checkUser();
               $this->layout='fun_layout';
