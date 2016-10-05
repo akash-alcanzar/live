@@ -277,7 +277,7 @@ else{
       $this->layout='fun_layout';
 
        }
-	    public function partner_with_us() {
+	   public function partner_with_us() {
 
       $this->layout='fun_layout';
 
@@ -344,7 +344,7 @@ else{
        }
 
      
-          public function arrangeClass() {
+          public function arrange_class() {
                  
                $this->layout='arrange_layout';
                $user = $this->Session->read('User');
@@ -1070,6 +1070,7 @@ public function fun(){
               $res_class = $this->paginate('VendorClasse');
 
         $this->set('allclass',$res_class);
+
 
         $this->set('cat_id',$cat_id);
 
@@ -2072,7 +2073,7 @@ $this->sendMail('bookClass_status',$user['UserMaster']['email'],$booking_status_
                                 <span>Other Localities:'.$location_name.'</span>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 sr_2605_03_padding">
-                                          <a href="classes/'.$class_topic.'" class="btn gift-this-butt" id="" onclick="">Gift This Class</a>
+                                          <a href="#" class="btn gift-this-butt" id="" onclick="show_gift_form('.$id.');">Gift This Class</a>
                                         </div>
                                 </div></div>';
                                echo @$class_list;
@@ -2243,7 +2244,7 @@ $this->sendMail('bookClass_status',$user['UserMaster']['email'],$booking_status_
                                 <span>Other Localities:'.$location_name.'</span>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 sr_2605_03_padding">
-                                          <a href="'.HTTP_ROOT.'/gift/classes/'.$class_topic.'" class="btn gift-this-butt" id="" onclick="">Gift This Class</a>
+                                          <a href="#" class="btn gift-this-butt" id="" onclick="show_gift_form('.$id.');">Gift This Class</a>
                                         </div>
                                 </div></div>';
                                    }
@@ -2271,7 +2272,6 @@ $this->sendMail('bookClass_status',$user['UserMaster']['email'],$booking_status_
           //$PAYU_BASE_URL = "https://secure.payu.in";
 
           $action = '';
-
 
           $posted = array();
           if(!empty($_POST)) {
@@ -4743,7 +4743,8 @@ $this->set('ven_msg',$ven_msg);
 
       if($this->request->is('post')){
         $data=$this->data;
-      
+        $data['UserMaster']['address']=$data['UserMaster']['address11'];
+        
         //print_r($data);die;
         if(!empty($data['UserMaster']['category_id'])){
         $str='';
@@ -4752,6 +4753,7 @@ $this->set('ven_msg',$ven_msg);
         }
         $str=rtrim($str, ",");
         $data['UserMaster']['category_id']=$str;
+        
         $this->UserMaster->save($data);
                 //$this->UserMaster->save($data);
          $this->requestAction(array('controller'=>'Cpanels', 'action'=>'generateMessages'), 
@@ -4760,7 +4762,7 @@ $this->set('ven_msg',$ven_msg);
         
         }
         else{
-        //print_r($data);die;
+       
          $this->UserMaster->save($data);
                 //$this->UserMaster->save($data);
          $this->requestAction(array('controller'=>'Cpanels', 'action'=>'generateMessages'), 
@@ -5787,6 +5789,45 @@ echo json_encode($dataArray);die;
       $this->set('user_view',$user);
 
     }
+	  public function privacy(){
+
+    //  $this->checkUser();
+
+
+
+      $this->layout='index_layout';
+
+      $user=$this->Session->read('User');
+      if($this->params->pass[0] == 'learner'){
+        $page_section_name =  $this->params['pass'][0];
+           if(!empty($page_section_name)){
+              $this->set('page_section_name',$page_section_name);
+            }
+     }
+      $this->set('user_view',$user);
+
+    }
+public function contact(){
+
+    //  $this->checkUser();
+
+
+
+      $this->layout='index_layout';
+
+      $user=$this->Session->read('User');
+      if($this->params->pass[0] == 'learner'){
+        $page_section_name =  $this->params['pass'][0];
+           if(!empty($page_section_name)){
+              $this->set('page_section_name',$page_section_name);
+            }
+     }
+      $this->set('user_view',$user);
+
+    }
+
+
+    
 
 
 
@@ -7046,20 +7087,41 @@ public function generatePassword($length=8){
     }
      public function community(){
             //$this->checkUser();
-            $this->layout='fun_layout';
-            $user = $this->Session->read('User');
+                   ini_set('memory_limit', '1024M');  
 
-            $Categorie_data=$this->Category->find('all',array('conditions'=>array('status'=>1)));
-            $this->set('coummunity_data',$Categorie_data);
+                    $this->layout='fun_layout';
+                    $user = $this->Session->read('User');
 
-            $usermaster_data=$this->UserMaster->find('all',array('conditions'=>array('status'=>1,'user_type_id'=>1)));
-            $this->set('usermaster_data',$usermaster_data);
-            $com_id = $this->params->pass[0];
+                    $Categorie_data=$this->Category->find('all',array('conditions'=>array('status'=>1)));
+                    $this->set('coummunity_data',$Categorie_data);
 
-             $cum_img = $this->Communitie->find('first',array('conditions'=>array('Communitie.id'=>$com_id)));
-            //$res_class = $this->Communitie->query("select * FROM bg_communities");
-            $this->set('com_img',$cum_img);
+                    $usermaster_data=$this->UserMaster->find('all',array('conditions'=>array('status'=>1,'user_type_id'=>1)));
+                    $this->set('usermaster_data',$usermaster_data);
+                    $com_id = $this->params->pass[0];
 
+                     $cum_img = $this->Communitie->find('first',array('conditions'=>array('Communitie.id'=>$com_id)));
+                    //$res_class = $this->Communitie->query("select * FROM bg_communities");
+                    $this->set('com_img',$cum_img);
+
+                    /*Recommended_Class*/
+
+                    $recommended_class = $this->VendorClasse->find('all', array(
+                      'conditions' => array(//'featured_status' => 1
+                        ),
+                      'contain' => array(   
+                        'ClassType',
+                        'User',
+                        'Category',
+                        'Segment',
+                        'Community',
+                        'VendorClasseLevelDetail',
+                        'VendorClasseLocationDetail'=> array(
+                          'Locality'
+                          )),
+                      'order' => array('VendorClasse.id DESC'),
+                      'limit' => 12,
+                      ));
+                  $this->set('recommended_class',$recommended_class);
               ########## Start Show Search community #####
             if (isset($_POST["search"])){
 
@@ -7112,6 +7174,8 @@ public function generatePassword($length=8){
                                                           
                                                                   $sort_value = $_POST['optionsRadios'];
                                                                   $this->set('filter','Sort');
+                                                                  //echo $sort_value;
+                                                                  //die;
 
                                                                   if($sort_value==1)
                                                                   {
@@ -7180,12 +7244,20 @@ public function generatePassword($length=8){
                       $cat_id       = $this->params->pass[0];
                       $community_id        = $_POST['Community_id'];
                       $location            = $_POST['location'];
+
+                      //echo $location;
+                      //die;
+                      
+
                       if($location==''){ 
                         $filter_query = "bg_vendor_classes.category_id ='$community_id'";
-                      } else{ 
+                      }else if($community_id==''){
+                        $filter_query = "bg_localities.name LIKE '%$location%'";
+                      } 
+                      else{ 
                         $filter_query = "bg_vendor_classes.category_id = '$community_id'
-                                         or bg_localities.name LIKE '%$location%'"; 
-                            }
+                                         and bg_localities.name LIKE '%$location%'"; 
+                          }
                         $res_class = $this->VendorClasse->query("SELECT  
                                                                          bg_vendor_classes.id,
                                                                          bg_vendor_classes.id,
@@ -7245,8 +7317,7 @@ public function generatePassword($length=8){
                                                                bg_vendor_classes.class_summary,
                                                                bg_vendor_classes.class_timing_id,  
                                                                bg_vendor_classes.class_duration,
-                                                               bg_vendor_classes.location,
-															   bg_vendor_classes.community_id, 
+                                                               bg_vendor_classes.location, 
                                                                bg_vendor_classes.price_per_head,
                                                                bg_vendor_classes.no_of_session,
                                                                bg_vendor_classes.upload_class_photo,
@@ -7272,7 +7343,274 @@ public function generatePassword($length=8){
                                                                ON bg_vendor_classes.id  = bg_vendor_classe_location_details.vendor_class_id
                                                                LEFT JOIN bg_localities
                                                                ON bg_localities.id  = bg_vendor_classe_location_details.locality_id
-                                                              	where FIND_IN_SET($com_id,bg_vendor_classes.community_id)
+                                                               where bg_vendor_classes.community_id=$com_id 
+                                                               group by bg_vendor_classe_level_details.vendor_class_id
+                                                               ORDER BY bg_vendor_classes.id DESC
+                                                               ");
+                                                               $this->set('allclass',$com_class);
+                                                               $this->set('all_total_class',$com_class);
+                      ############# End Show All community ###############
+                    }
+  }
+     public function community_bck(){
+            //$this->checkUser();
+                   ini_set('memory_limit', '1024M');  
+
+                    $this->layout='fun_layout';
+                    $user = $this->Session->read('User');
+
+                    $Categorie_data=$this->Category->find('all',array('conditions'=>array('status'=>1)));
+                    $this->set('coummunity_data',$Categorie_data);
+
+                    $usermaster_data=$this->UserMaster->find('all',array('conditions'=>array('status'=>1,'user_type_id'=>1)));
+                    $this->set('usermaster_data',$usermaster_data);
+                    $com_id = $this->params->pass[0];
+
+                     $cum_img = $this->Communitie->find('first',array('conditions'=>array('Communitie.id'=>$com_id)));
+                    //$res_class = $this->Communitie->query("select * FROM bg_communities");
+                    $this->set('com_img',$cum_img);
+
+                    /*Recommended_Class*/
+
+                    $recommended_class = $this->VendorClasse->find('all', array(
+                      'conditions' => array(//'featured_status' => 1
+                        ),
+                      'contain' => array(   
+                        'ClassType',
+                        'User',
+                        'Category',
+                        'Segment',
+                        'Community',
+                        'VendorClasseLevelDetail',
+                        'VendorClasseLocationDetail'=> array(
+                          'Locality'
+                          )),
+                      'order' => array('VendorClasse.id DESC'),
+                      'limit' => 12,
+                      ));
+                  $this->set('recommended_class',$recommended_class);
+              ########## Start Show Search community #####
+            if (isset($_POST["search"])){
+
+                        $s_key     = $_POST['search_key'];
+                        $com_id    = $_POST['search_cat_id'];
+                        $s_key = trim($s_key);
+                        $res_class = $this->VendorClasse->query("SELECT bg_vendor_classes.id,
+                                                                         bg_vendor_classes.id,
+                                                                         bg_vendor_classes.class_topic,
+                                                                         bg_vendor_classes.class_summary,
+                                                                         bg_vendor_classes.class_timing_id,  
+                                                                         bg_vendor_classes.class_duration,
+                                                                         bg_vendor_classes.location, 
+                                                                         bg_vendor_classes.price_per_head,
+                                                                         bg_vendor_classes.no_of_session,
+                                                                         bg_vendor_classes.upload_class_photo,
+                                                                         bg_vendor_classes.status,
+                                                                         bg_class_schedules.id,
+                                                                         bg_class_schedules.session_date,
+                                                                         bg_class_schedules.session_time,
+                                                                         bg_user_masters.id,
+                                                                         bg_user_masters.first_name,
+                                                                         bg_vendor_classe_level_details.price,
+                                                                         bg_vendor_classe_location_details.id,
+                                                                         bg_vendor_classe_location_details.locality_id,
+                                                                         bg_localities.id, 
+                                                                         bg_localities.name
+                                                                         FROM bg_vendor_classes LEFT JOIN bg_class_schedules
+                                                                         ON bg_vendor_classes.id = bg_class_schedules.class_id
+                                                                         LEFT JOIN bg_user_masters
+                                                                         ON bg_user_masters.id = bg_vendor_classes.user_id
+                                                                         LEFT JOIN bg_vendor_classe_level_details
+                                                                         ON bg_vendor_classes.id = bg_vendor_classe_level_details.vendor_class_id
+                                                                         LEFT JOIN bg_vendor_classe_location_details
+                                                                         ON bg_vendor_classes.id = bg_vendor_classe_location_details.vendor_class_id
+                                                                         LEFT JOIN bg_localities
+                                                                         ON bg_localities.id = bg_vendor_classe_location_details.locality_id
+                                                                         where bg_vendor_classes.class_topic LIKE '%$s_key%'
+                                                                         AND bg_vendor_classes.community_id =$com_id  
+                                                                         ORDER BY bg_vendor_classes.id  DESC");
+                                                                         $this->set('allclass',$res_class); 
+                                                                         $this->set('all_total_class',$res_class);
+                                                                        /* echo "<pre>";
+                                                                         print_r($res_class);
+                                                                         echo "</pre>";*/
+                                                                         //die;
+                                                                        
+                    }
+                    else if(isset($_POST["Sort"])){  
+                                                          
+                                                                  $sort_value = $_POST['optionsRadios'];
+                                                                  $this->set('filter','Sort');
+                                                                  //echo $sort_value;
+                                                                  //die;
+
+                                                                  if($sort_value==1)
+                                                                  {
+                                                                    $sort_by ='bg_vendor_classe_level_details.price DESC';
+                                                                     $this->set('find_sort_val',$sort_value);
+
+                                                                  }
+                                                                  if($sort_value==2)
+                                                                  {
+                                                                    $sort_by ='bg_vendor_classe_level_details.price ASC';
+                                                                    $this->set('find_sort_val',$sort_value);
+                                                                    
+                                                                  }
+                                                                  if($sort_value==3)
+                                                                  {
+                                                                    $sort_by ='bg_vendor_classe_level_details.price DESC';
+                                                                    $this->set('find_sort_val',$sort_value);
+                                                                    
+                                                                  }
+                                                                  if($sort_value==4)
+                                                                  {
+                                                                    $sort_by ='bg_vendor_classe_level_details.price DESC';
+                                                                    $this->set('find_sort_val',$sort_value);
+                                                                    
+                                                                  }
+
+                                                                    $com_id = $this->params->pass[0];
+                                                                    $res_total_class = $this->VendorClasse->find('all',array('conditions'=>array('VendorClasse.community_id'=>$com_id)));
+                                                                    $this->set('all_total_class',$res_total_class);
+                                                                    $res_class = $this->VendorClasse->query("SELECT bg_vendor_classes.id,
+                                                                                                                             bg_vendor_classes.id,
+                                                                                                                             bg_vendor_classes.class_topic,
+                                                                                                                             bg_vendor_classes.class_summary,
+                                                                                                                             bg_vendor_classes.class_timing_id,  
+                                                                                                                             bg_vendor_classes.class_duration,
+                                                                                                                             bg_vendor_classes.location, 
+                                                                                                                             bg_vendor_classes.price_per_head,
+                                                                                                                             bg_vendor_classes.upload_class_photo,
+                                                                                                                             bg_vendor_classes.status,
+                                                                                                                             bg_class_schedules.id,
+                                                                                                                             bg_class_schedules.session_date,
+                                                                                                                             bg_class_schedules.session_time,
+                                                                                                                             bg_user_masters.id,
+                                                                                                                             bg_user_masters.first_name,
+                                                                                                                             bg_vendor_classe_level_details.price,
+                                                                                                                             bg_vendor_classe_location_details.id,
+                                                                                                                             bg_vendor_classe_location_details.vendor_class_id,
+                                                                                                                             bg_localities.id,
+                                                                                                                             bg_localities.name 
+                                                                                                                             FROM bg_vendor_classes LEFT JOIN bg_class_schedules
+                                                                                                                             ON bg_vendor_classes.id = bg_class_schedules.class_id
+                                                                                                                             LEFT JOIN bg_user_masters
+                                                                                                                             ON bg_user_masters.id = bg_vendor_classes.user_id
+                                                                                                                             LEFT JOIN bg_vendor_classe_level_details
+                                                                                                                             ON bg_vendor_classes.id = bg_vendor_classe_level_details.vendor_class_id 
+                                                                                                                             LEFT JOIN bg_vendor_classe_location_details
+                                                                                                                             ON bg_vendor_classes.id  = bg_vendor_classe_location_details.vendor_class_id
+                                                                                                                             LEFT JOIN bg_localities
+                                                                                                                             ON bg_localities.id  = bg_vendor_classe_location_details.locality_id
+                                                                                                                             where bg_vendor_classes.community_id=$com_id ORDER BY $sort_by");
+                                                                                                                             $this->set('allclass',$res_class);
+                                                                                                                             $this->set('cat_id',$com_id);
+                                                }
+                    else if(isset($_POST["Filter"])){ 
+
+                      $cat_id       = $this->params->pass[0];
+                      $community_id        = $_POST['Community_id'];
+                      $location            = $_POST['location'];
+
+                      //echo $location;
+                      //die;
+                      
+
+                      if($location==''){ 
+                        $filter_query = "bg_vendor_classes.category_id ='$community_id'";
+                      }else if($community_id==''){
+                        $filter_query = "bg_localities.name LIKE '%$location%'";
+                      } 
+                      else{ 
+                        $filter_query = "bg_vendor_classes.category_id = '$community_id'
+                                         and bg_localities.name LIKE '%$location%'"; 
+                          }
+                        $res_class = $this->VendorClasse->query("SELECT  
+                                                                         bg_vendor_classes.id,
+                                                                         bg_vendor_classes.id,
+                                                                         bg_vendor_classes.class_topic,
+                                                                         bg_vendor_classes.class_summary,
+                                                                         bg_vendor_classes.class_timing_id,  
+                                                                         bg_vendor_classes.class_duration,
+                                                                         bg_vendor_classes.location, 
+                                                                         bg_vendor_classes.price_per_head,
+                                                                         bg_vendor_classes.no_of_session,
+                                                                         bg_vendor_classes.upload_class_photo,
+                                                                         bg_vendor_classes.status,
+                                                                         bg_class_schedules.id,
+                                                                         bg_class_schedules.session_date,
+                                                                         bg_user_masters.id,
+                                                                         bg_user_masters.first_name,
+                                                                         bg_vendor_classe_level_details.price,
+                                                                         bg_vendor_classe_location_details.id,
+                                                                         bg_vendor_classe_location_details.vendor_class_id,
+                                                                         bg_localities.id,
+                                                                         bg_localities.name
+                                                                         FROM bg_vendor_classes LEFT JOIN bg_class_schedules
+                                                                         ON bg_vendor_classes.id = bg_class_schedules.class_id
+                                                                         LEFT JOIN bg_user_masters
+                                                                         ON bg_user_masters.id = bg_vendor_classes.user_id
+                                                                         INNER JOIN bg_vendor_classe_level_details
+                                                                         ON bg_vendor_classes.id = bg_vendor_classe_level_details.vendor_class_id
+                                                                         LEFT JOIN bg_vendor_classe_location_details
+                                                                         ON bg_vendor_classes.id  = bg_vendor_classe_location_details.vendor_class_id
+                                                                         LEFT JOIN bg_localities
+                                                                         ON bg_localities.id  = bg_vendor_classe_location_details.locality_id 
+                                                                         where bg_vendor_classes.community_id=$cat_id and $filter_query
+                                                                         group by bg_vendor_classe_level_details.vendor_class_id
+                                                                         ORDER BY bg_vendor_classes.id  DESC");
+                                                                         $this->set('all_total_class',$res_class);
+                                                                         $this->set('allclass',$res_class);
+                                                                         $this->set('cat_id',$cat_id);
+                                                                         $this->set('filter',$filter);
+                                                                         $this->set('date',$date);
+                                                                         $this->set('time',$time);
+                                                                         $this->set('class_type',$class_type);
+                                                                         $this->set('community_id',$community_id);
+                                                                         $this->set('class_timing_id',$class_timing_id);
+                                                                         $this->set('class_provider',$class_provider);
+                                                                         $this->set('location',$location);
+                                                                                                           
+                                                }
+                                                                       
+
+                                                
+                    else{ 
+                          #################### End Show Search community #######################
+                          #################### Start Show All community #######################
+                            $com_class = $this->VendorClasse->query("SELECT  bg_vendor_classes.id,
+                                                               bg_vendor_classes.id,
+                                                               bg_vendor_classes.class_topic,
+                                                               bg_vendor_classes.class_summary,
+                                                               bg_vendor_classes.class_timing_id,  
+                                                               bg_vendor_classes.class_duration,
+                                                               bg_vendor_classes.location, 
+                                                               bg_vendor_classes.price_per_head,
+                                                               bg_vendor_classes.no_of_session,
+                                                               bg_vendor_classes.upload_class_photo,
+                                                               bg_vendor_classes.age_group,
+                                                               bg_vendor_classes.status,
+                                                               bg_class_schedules.id,
+                                                               bg_class_schedules.session_date,
+                                                               bg_user_masters.id,
+                                                               bg_user_masters.first_name,
+                                                               bg_vendor_classe_level_details.price,
+                                                               bg_vendor_classe_location_details.id,
+                                                               bg_vendor_classe_location_details.vendor_class_id,
+                                                               bg_localities.id,
+                                                               bg_localities.name
+                                                               FROM bg_vendor_classes 
+                                                               LEFT JOIN bg_class_schedules
+                                                               ON bg_vendor_classes.id = bg_class_schedules.class_id
+                                                               LEFT JOIN bg_user_masters
+                                                               ON bg_user_masters.id = bg_vendor_classes.user_id
+                                                               LEFT JOIN bg_vendor_classe_level_details
+                                                               ON bg_vendor_classes.id = bg_vendor_classe_level_details.vendor_class_id
+                                                               LEFT JOIN bg_vendor_classe_location_details
+                                                               ON bg_vendor_classes.id  = bg_vendor_classe_location_details.vendor_class_id
+                                                               LEFT JOIN bg_localities
+                                                               ON bg_localities.id  = bg_vendor_classe_location_details.locality_id
+                                                               where bg_vendor_classes.community_id=$com_id 
                                                                group by bg_vendor_classe_level_details.vendor_class_id
                                                                ORDER BY bg_vendor_classes.id DESC
                                                                ");
@@ -8000,6 +8338,7 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                     <head><title></title></head>
 
                     <body>
+
 
                         <div style="border-radius: 6px;background-color: rgba(255,255,255,0.3);padding: 10px;width: 81%;margin-left:20px;">
 
@@ -9019,7 +9358,6 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
           if ($_FILES['data']['size'][$na] > 500000) {
             echo "Sorry, your file is too large.";
             $uploadOk = 0;
-
           }
           // Allow certain file formats
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
@@ -9686,6 +10024,7 @@ public function addLrregular(){
 
 
   $this->autoRender = false;
+
 
 
 
@@ -10444,13 +10783,187 @@ If (isset($_POST["additionalCharges"])) {
 
 
   public function catalogDetail(){
-
-          
-          if(isset($this->params->pass[0])){
+    if(isset($this->params->pass[0])){
             $this->layout='fun_layout';
           $catalog_id = base64_decode($this->params->pass[0]);
+          if($this->request->is('post')){
+             $data=$this->data;
+                 /*================================Search Bar==============================================================*/
+             if(!empty($data['Request']['search'])){
+              $class_topic=$data['Request']['search'];
+              $catalog_det = $this->VendorClasse->find('all',array(
+                      'joins' =>   array(
+                                      array(
+                                          'table' => 'bg_add_catalogs',
+                                          'alias' => 'Catalog',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.id = Catalog.class_id','Catalog.status'=>1,'Catalog.catalog_group_id'=>$catalog_id,'VendorClasse.class_topic LIKE'=>'%'.$class_topic.'%'),
+                                          'order'=>array('Catalog.add_date')
+                                          ),
+                                       array(
+                                          'table' => 'bg_user_masters',
+                                          'alias' => 'UserMaster',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.user_id = UserMaster.id')
+                                          ),
+                                        array(
+                                          'table' => 'bg_class_types',
+                                          'alias' => 'classtype',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.class_type_id = classtype.id')
+                                          ),
+                                          array(
+                                          'table' => 'bg_connect_groups',
+                                          'alias' => 'ConnectGroup',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('Catalog.catalog_group_id = ConnectGroup.id','Catalog.catalog_group_id'=>$catalog_id)
+                                          )
 
-         
+                                     
+                                        ),
+                      'conditions'=>array('VendorClasse.class_topic LIKE'=>'%'.$class_topic.'%'),
+                      'order'=>array('Catalog.modify_date'),
+                      'fields'    =>array('VendorClasse.*','Catalog.*','UserMaster.*','classtype.types','ConnectGroup.*')
+                     
+                      ));
+                  
+                    $this->set('cataloglist',$catalog_det);
+                    $this->set('catalog_id',$catalog_id);
+             }
+                  /*================================End Search Bar==========================================================*/
+                  /*=============================Filter Ascending or Descending Order====================================================*/
+             if(!empty($data['optradio'])){
+               if($data['optradio']=='1'){
+                          $catalog_det = $this->VendorClasse->find('all',array(
+                      'joins' =>   array(
+                                      array(
+                                          'table' => 'bg_add_catalogs',
+                                          'alias' => 'Catalog',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.id = Catalog.class_id','Catalog.status'=>1,'Catalog.catalog_group_id'=>$catalog_id),
+                                          'order'=>array('Catalog.add_date')
+                                          ),
+                                       array(
+                                          'table' => 'bg_user_masters',
+                                          'alias' => 'UserMaster',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.user_id = UserMaster.id')
+                                          ),
+                                        array(
+                                          'table' => 'bg_class_types',
+                                          'alias' => 'classtype',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.class_type_id = classtype.id')
+                                          ),
+                                          array(
+                                          'table' => 'bg_connect_groups',
+                                          'alias' => 'ConnectGroup',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('Catalog.catalog_group_id = ConnectGroup.id','Catalog.catalog_group_id'=>$catalog_id)
+                                          )
+
+                                     
+                                        ),
+                      'order'=>array('Catalog.modify_date'),
+                      'fields'    =>array('VendorClasse.*','Catalog.*','UserMaster.*','classtype.types','ConnectGroup.*')
+                     
+                      ));
+                   $this->set('cataloglist',$catalog_det);
+                    $this->set('catalog_id',$catalog_id);
+               }
+               else if($data['optradio']=='2'){
+                  $catalog_det = $this->VendorClasse->find('all',array(
+                      'joins' =>   array(
+                                      array(
+                                          'table' => 'bg_add_catalogs',
+                                          'alias' => 'Catalog',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.id = Catalog.class_id','Catalog.status'=>1,'Catalog.catalog_group_id'=>$catalog_id),
+                                          'order'=>array('Catalog.add_date')
+                                          ),
+                                       array(
+                                          'table' => 'bg_user_masters',
+                                          'alias' => 'UserMaster',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.user_id = UserMaster.id')
+                                          ),
+                                        array(
+                                          'table' => 'bg_class_types',
+                                          'alias' => 'classtype',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('VendorClasse.class_type_id = classtype.id')
+                                          ),
+                                          array(
+                                          'table' => 'bg_connect_groups',
+                                          'alias' => 'ConnectGroup',
+                                          'type'  =>  'INNER',
+                                          'conditions' => array('Catalog.catalog_group_id = ConnectGroup.id','Catalog.catalog_group_id'=>$catalog_id)
+                                          )
+
+                                     
+                                        ),
+                      'order'=>array('Catalog.modify_date DESC'),
+                      'fields'    =>array('VendorClasse.*','Catalog.*','UserMaster.*','classtype.types','ConnectGroup.*')
+                     
+                      ));
+                   $this->set('cataloglist',$catalog_det);
+                    $this->set('catalog_id',$catalog_id);
+               }
+             }
+  /*==========================================================End Filter Ascending or Descending Order==============================*/
+  /*========================================================Filter According cit,Locality,class_type,Region=========================*/
+             $str='';
+             $classArray=array();
+             $res=$this->RequestCatalog->find('all',array('conditions'=>array('status'=>1)));
+            if(!empty($res)){
+              foreach($res as $result){
+              $locality=explode(",",$result['RequestCatalog']['locality']);
+              $class_type=explode(",",$result['RequestCatalog']['class_type']);
+              $region=explode(",",$result['RequestCatalog']['region']); 
+              
+              if ((in_array($data['Request']['locality'],$locality))&&(in_array($data['Request']['class_type'],$class_type))&&(in_array($data['Request']['region'],$region))&&($result['RequestCatalog']['city']==$data['Request']['city_id'])){
+                
+               $str=$str.",".$result['RequestCatalog']['class_id'];
+              }
+              }
+             $str=substr($str,1);
+             $class_ide=explode(",",$str);
+             $catalog_det = $this->VendorClasse->find('all',array(
+            'joins' =>   array(
+                            array(
+                                'table' => 'bg_add_catalogs',
+                                'alias' => 'Catalog',
+                                'type'  =>  'INNER',
+                                'conditions' => array('VendorClasse.id = Catalog.class_id','Catalog.status'=>1,'Catalog.class_id'=>$class_ide),
+                                'order'=>array('Catalog.add_date')
+                                ),
+                             array(
+                                'table' => 'bg_user_masters',
+                                'alias' => 'UserMaster',
+                                'type'  =>  'INNER',
+                                'conditions' => array('VendorClasse.user_id = UserMaster.id')
+                                ),
+                              array(
+                                'table' => 'bg_class_types',
+                                'alias' => 'classtype',
+                                'type'  =>  'INNER',
+                                'conditions' => array('VendorClasse.class_type_id = classtype.id')
+                                )
+
+                           
+                              ),
+            
+            'fields'    =>array('VendorClasse.*','Catalog.*','UserMaster.*','classtype.types')
+           
+            ));
+         if(!empty($catalog_det)){
+         $this->set('cataloglist',$catalog_det);
+          $this->set('catalog_id',$catalog_id);
+            }
+          }
+        }
+/*=====================================================End Filtering==================================================================*/
+
           $catalog_det = $this->VendorClasse->find('all',array(
             'joins' =>   array(
                             array(
@@ -10485,8 +10998,8 @@ If (isset($_POST["additionalCharges"])) {
             'fields'    =>array('VendorClasse.*','Catalog.*','UserMaster.*','classtype.types','ConnectGroup.*')
            
             ));
-         $group_image=$this->ConnectGroup->find('first',array('conditions'=>array('id'=>$catalog_id),'fields'=>array('banner_image')));
-          $this->set('banner_image',$group_image['ConnectGroup']['banner_image']);
+         $group_image=$this->ConnectGroup->find('first',array('conditions'=>array('id'=>$catalog_id),'fields'=>array('group_image')));
+          $this->set('group_image',$group_image['ConnectGroup']['group_image']);
           $this->set('cataloglist',$catalog_det);
           $this->set('catalog_id',$catalog_id);
            /*=============================================Papular catalog class===============================================*/
@@ -10522,13 +11035,30 @@ If (isset($_POST["additionalCharges"])) {
 //echo "<pre>";print_r($catalog);die;
       
       $this->set('papluar_catalog',$catalog);
-        $user=$this->Session->read('User');
-        $this->set('user_view',$user);
         }
         else{
           $this->redirect(array('controller'=>'Homes','action'=>'arrangeClass'));
+        } 
+        $city=$this->City->find('all',array('conditions'=>array('status'=>1),'order'=>array('name ASC')));
+        $cityArray=array();
+        if(!empty($city)){
+          foreach($city as $city1){
+           $cityArray[$city1['City']['id']]=$city1['City']['name'];
+           }
 
-        }  
+        }
+         $class_type=$this->ClassType->find('all');
+        $classArray=array();
+        if(!empty($class_type)){
+          foreach($class_type as $res){
+           $classArray[$res['ClassType']['types']]=$res['ClassType']['types'];
+           }
+           
+        }
+        
+
+         $this->set('class_type',$classArray); 
+        $this->set('city_name',$cityArray); 
     }
 
  public function CatalougeClassDetail(){
