@@ -60,7 +60,7 @@
 	Router::connect('/home-maintenance/**', array('controller' => 'vendor_classes', 'action' => 'lists'));
 	Router::connect('/educational-and-skill-development/**', array('controller' => 'vendor_classes', 'action' => 'lists'));
 	Router::connect('/class_providers/*', array('controller' => 'homes', 'action' => 'sellExpress'));
-	Router::connect('/catalogue_for_organizers/*', array('controller' => 'homes', 'action' => 'arrangeClass'));
+	Router::connect('/catalogue_for_organizers/*', array('controller' => 'homes', 'action' => 'arrange_class'));
 	Router::connect('/gift/*', array('controller' => 'homes', 'action' => 'gift'));
 	Router::connect('/about/*', array('controller' => 'homes', 'action' => 'about'));
 	Router::connect('/terms-and-conditions/*', array('controller' => 'homes', 'action' => 'terms'));
