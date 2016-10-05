@@ -1,4 +1,5 @@
-<?php echo $user_data=$this->Session->read('User'); ?>
+<?php $user_data=$this->Session->read('User');?>
+
 <!-- Braingroom modifications --><style>
  option:hover, 
          option:focus, 
@@ -155,6 +156,7 @@ color:#1B191A;float: left;
     margin-left: 12px;
 }
 </style>
+
   <div class="col-md-10 col-sm-9 col-xs-12 ruth6542 ruth654786">
     <div class="col-md-12 col-sm-12 col-xs-12 sr_pv_padding_lr" style="background:#fff;padding-bottom:30px;">
         <div class="col-md-12 col-sm-12 col-xs-12 clrdash123 ruth1">
@@ -179,7 +181,6 @@ color:#1B191A;float: left;
 	        <!-- form code -->
 	        <div class="col-md-12 col-sm-12 col-xs-12 faq_width02 sr_pv_padding_lr01" style="margin-top: 30px; margin-bottom: 30px;">
 	        	<div class="col-md-12 col-sm-12 col-xs-12 sr_pv_padding_lr01" style="border: 1px solid rgb(194, 192, 193); background: rgb(247, 245, 246) none repeat scroll 0% 0%;" >
-
 	        		<div class="col-md-12 col-sm-12 col-xs-12 sr_pv_padding_lr01" style="margin-top: 50px; margin-bottom: -53px; ">
 	        			<!-- Start Form  -->
 	        			<!-- <form action="savepostClass" name="frm" method="post" enctype="multipart/form-data"> -->
@@ -191,8 +192,6 @@ color:#1B191A;float: left;
 			        			<div class="col-sm-12 col-xs-12">
 				                    <span class="faq_t_q01" style="color:#1B191A;">Basic Class Information</span>
 				                </div>
-                              
-
 				                <div class="col-sm-12 col-xs-12 sr_pv_padding_lr01" style="margin-top: 20px; margin-bottom: 20px;"> 
 				                	<div class="col-sm-12 col-xs-12 col-md-6"> 
 				                		<div class="col-sm-12 col-xs-12" style="margin-top: 20px;">
@@ -218,7 +217,7 @@ color:#1B191A;float: left;
 											</div>
 					                	</div>
 
-                                    <!--<div class="col-sm-12 col-xs-12" style="margin-top: 0px;">
+                                    <div class="col-sm-12 col-xs-12" style="margin-top: 0px;">
                                         <div class="form-group" style="margin-bottom: 5px;">
                                             <textarea type="text" row="5" name="about_class" class="form-control pc_texta reg_input" placeholder="About Class" id="about_class"></textarea>
                                             <div id="ab_1" class="pc_error">&nbsp;</div>
@@ -226,21 +225,35 @@ color:#1B191A;float: left;
                                     
                                             <p id="error_01" style="padding-top:20px;padding-left:10px;" class="err_css"></p>
                                         </div>
-                                    </div>-->
+                                    </div>
 					                	<div class="col-sm-12 col-xs-12" style="">
 					                		<div class="form-group br_state" style="margin-bottom: 10px;">
-					                			<input class="form-control reg_input" name="class_topic"placeholder="Class Title" type="text" id="class_topic">	
+					                			<input class="form-control reg_input" name="class_topic"placeholder="Class Topic" type="text" id="class_topic">	
 	    										<p class="err_css" id="error_mobile" style="padding-left: 10px; padding-top: 20px; margin-bottom: 5px;"></p>
 	    										<div id="s3" class="pc_error">&nbsp;</div>
 							                </div> 
 							            </div> 
 	
-                                            
+    <div class="col-sm-12 col-xs-12" style="">
+					                		<div class="form-group br_state" style="margin-bottom: 10px;">
+					                			
+                                                <select class="form-control reg_input" name="is_type" id="is_type">
+                                                <option value="">--Select Target Audience--</option>
+                                                <option value="1">B2C</option>
+                                                <option value="2">B2B</option>
+                                                </select>
+	    										<p class="err_css" id="error_mobile" style="padding-left: 10px; padding-top: 20px; margin-bottom: 5px;"></p>
+	    										<div id="is_3" class="pc_error">&nbsp;</div>
+							                </div> 
+							            </div>
+                                        
+                                        
+            
+        
 					                	<div class="col-sm-12 col-xs-12" style="">
 					                		<div class="form-group class_type" style="margin-bottom: 5px;">
 					                			
 												<select  class="form-control reg_input" name="class_type_id[]" id="class_type_id">
-													<option value="0" selected="selected">Class Type</option>
 														<?php
 								                			foreach ($all_class_type as $key => $value_class_type) {
 
@@ -277,23 +290,7 @@ color:#1B191A;float: left;
 											</div>
 					                	</div>
 <!-- Braingroom modifications 16/07/2016 -->
-
-                                        <div class="col-sm-12 col-xs-12" style="">
-					                		<div class="form-group br_state" style="margin-bottom: 10px;">
-					                			
-                                                <select class="form-control reg_input" name="is_type" id="is_type">
-                                                <option value="">--Select Target Audience--</option>
-                                                <option value="1">B2C</option>
-                                                <option value="2">B2B</option>
-                                                </select>
-	    										<p class="err_css" id="error_mobile" style="padding-left: 10px; padding-top: 20px; margin-bottom: 5px;"></p>
-	    										<div id="is_3" class="pc_error">&nbsp;</div>
-							                </div> 
-							            </div>
-
-
-
-					                	<!--<div class="col-sm-12 col-xs-12" style="margin-top: 0px;">
+					                	<div class="col-sm-12 col-xs-12" style="margin-top: 0px;">
 					                		<div class="form-group" style="margin-bottom: 5px;">
 					                			<textarea type="text" row="5" name="class_summary" class="form-control pc_texta reg_input" placeholder="Class Summary" id="class_summary"></textarea>
 					                			<div id="s4" class="pc_error">&nbsp;</div>
@@ -310,7 +307,7 @@ color:#1B191A;float: left;
 
 										        <p id="error_01" style="padding-top:20px;padding-left:10px;" class="err_css"></p>
 					                		</div>
-					                	</div>-->
+					                	</div>
                                         
                                         	
                                         <div class="col-sm-12 col-xs-12" style="margin-top: 0px;">
@@ -328,62 +325,9 @@ color:#1B191A;float: left;
 
 
 										        <p id="error_01" style="padding-top:20px;padding-left:10px;" class="err_css"></p>
-                                         
 					                		</div>
-
-
 					                	</div>
-
-
 					            	</div>
-                                     <div class="col-sm-12 col-xs-12">
-				                    <span class="faq_t_q01" style="color:#1B191A;font-size: 18px;">Class Description</span>
-				                </div>
-					            	<div class="col-sm-12 col-xs-12 sr_pv_padding_lr01" style="margin-top: 20px; margin-bottom: 20px;"> 
-					            		
-                                    <div class="col-md-6">
-                                      
-
-                                   
-										
-									   <div class="col-sm-12 col-xs-12" style="margin-top: 0px;">
-					                		<div class="form-group" style="margin-bottom: 5px;">
-					                			<textarea type="text" row="5" name="class_summary" class="form-control pc_texta reg_input" placeholder="Class Summary" id="class_summary"></textarea>
-					                			<div id="cs4" class="pc_error">&nbsp;</div>
-
-
-										        <p id="error_01" style="padding-top:20px;padding-left:10px;" class="err_css"></p>
-					                		</div>
-					                	</div>	
-										
-										<div class="col-sm-12 col-xs-12" style="margin-top: 0px;">
-                                        <div class="form-group" style="margin-bottom: 5px;">
-                                            <textarea type="text" row="5" name="about_class" class="form-control pc_texta reg_input" placeholder="About Class" id="about_class"></textarea>
-                                            <div id="ab_1" class="pc_error">&nbsp;</div>
-                                    
-                                    
-                                            <p id="error_01" style="padding-top:20px;padding-left:10px;" class="err_css"></p>
-                                        </div>
-                                    </div>
-										
-										
-                                    </div>
-                                    <div class="col-md-6">
-									
-                                     <div class="col-sm-12 col-xs-12" style="margin-top: 0px;">
-					                		<div class="form-group" style="margin-bottom: 5px;">
-					                			<textarea type="text" row="5" name="about_academy" class="form-control pc_texta reg_input" placeholder="About Academy" id="about_academy"></textarea>
-					                			<div id="ac_1" class="pc_error">&nbsp;</div>
-
-
-										        <p id="error_01" style="padding-top:20px;padding-left:10px;" class="err_css"></p>
-					                		</div>
-					                	</div>
-										
-										
-                                    </div>   
-                                        
-                                                </div>
 				                </div>
 				            </div>
 
@@ -479,7 +423,7 @@ color:#1B191A;float: left;
 					                	<!-- 2 -->
 										<div class="col-sm-12 col-xs-12 col-md-6" style="">
 					                		<div class="form-group">
-					                			<input class="form-control reg_input" name="no_of_session" placeholder="Total no. of Session in a Class" type="text" id="no_of_session" onblur="inree_class();">
+					                			<input class="form-control reg_input" name="no_of_session" placeholder="No. of Session in a Class" type="text" id="no_of_session" onblur="inree_class();">
 					                			<div id="s10" class="pc_error">&nbsp;</div>
 
 
@@ -840,7 +784,6 @@ color:#1B191A;float: left;
              
 						  <input type="text" class="form-control reg_input" id="upload_photo2" placeholder="Upload Specific Tutor Picture">
 						  <div id="s19" class="pc_error">&nbsp;</div>
-						 
 						  <span class="cal_br cal_br_s2"><img src="<?php echo HTTP_ROOT;?>/img/browse.png" id="img_click2" style="margin-top: 20px;"></span>
 						  
 							
@@ -856,12 +799,10 @@ color:#1B191A;float: left;
 					            		<div class="col-sm-12 col-xs-12 " style="">
 					                		<div class="form-group">
 						  <!-- <label for="usr"><img src="images/mobile.png" class="reg_id"></label> -->
-                			<?php echo $this->Form->input('class_image3', array('type'=>'file','label' => false,'div'=>false, 'class' => 'form-control boxesstyle video_file_control','style'=>'visibility:hidden','id'=>'file-upload3'));?>
+                			<?php echo $this->Form->input('class_image3', array('type'=>'file','label' => false,'div'=>false, 'class' => 'form-control boxesstyle','style'=>'display:none','id'=>'file-upload3'));?>
              
 						  <input type="text" class="form-control reg_input" id="upload_photo3" placeholder="Upload Sample Video">
-					<input type="hidden"  id="upload_photo3_count" value="<?php if(isset($videocount)){ echo $videocount; } ?>" />
 						 <div id="s20" class="pc_error">&nbsp;</div>
-						
 						  <span class="cal_br cal_br_s2"><img src="<?php echo HTTP_ROOT;?>/img/browse.png" id="img_click3" style="margin-top:20px;"></span>
 						   
 							
@@ -878,7 +819,6 @@ color:#1B191A;float: left;
              
 						  <input type="text" class="form-control reg_input" id="upload_photo4" placeholder="Upload Class Photo">
 						  <div id="s21" class="pc_error">&nbsp;</div>
-				<input type="hidden"  id="upload_photo_count" value="<?php if(isset($imagecount)){ echo $imagecount; } ?>" />
 						  <span class="cal_br cal_br_s2"><img src="<?php echo HTTP_ROOT;?>/img/browse.png" id="img_click4" style="margin-top: 20px;"></span>
 						   
 							
@@ -889,246 +829,6 @@ color:#1B191A;float: left;
 					            	</div>
 				                </div>
 				            </div>
-
-                           
- <div class="form-group" style="float:right;">
-												<!-- Trigger the modal with a button -->
-  <button type="button" style="visibility:hidden" class="btn btn-primary add_field_loc_button" data-toggle="modal" data-target="#classModal">Upload Image</button>
-											</div>
-  
-
-  <!-- Modal -->
-  <div class="modal fade" id="classModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="border-radius:5px 5px 0px 0px; background-color: #00CDC6;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Upload Images</h4>
-        </div>
-        <div class="modal-body">
-         
-  <ul class="nav nav-tabs">
-    <!--<li class="active"><a data-toggle="tab" href="#home">Upload From Local System</a></li>-->
-    <li class="active" ><a data-toggle="tab" href="#menu1">Select From Gallery</a></li>
-  
-  </ul>
-
-  <div class="tab-content">
-    <!--<div id="home" class="tab-pane fade in active">
-      <h3>Upload From Local System</h3>
-      <p>
-     
-
-     <?php echo $this->Form->create('AddImage', array('class' => '','enctype'=>'multipart/form-data','onSubmit'=>'return chk_frm();'))?>  
-                                       
-                                            <div class="modal-body">                       
-                                                <div class="row">&nbsp;</div>
-                                                <div class="row"> 
-                                                    <div class="col-md-1 col-lg-1  " ></div>
-                                                    <div class="col-md-12 col-lg-12  " >                                
-                                                       <center>
-                                                            <span class="btn btn-default btn-file upload-btn-file">
-                                                                Browse Your image to upload <input type="file" name="imagefiles[]" multiple id="photos" class="txtbox " accept="image/*"> 
-                                                            </span>
-                                                        </center>
-                                                        <span style="color:red; text-align:;" id="msg1"></span>            
-                                                    </div>
-                                                </div>                        
-                                                <div class="row">&nbsp;</div>  
-                                            </div>
-                                            <div class="" >
-                                               
-                                                <input type="submit"   class="btn btn-primary save-image " name="save_img"  value="Submit" >                        
-                                            </div>
-                                        <?php echo $this->Form->end(); ?>   
-      </p>
-    </div>-->
-    <div id="menu1" class="tab-pane fade in active">
-    		<p>Reached max Image count Please choose  or delete Image from gallery and upload New</p>
-      <h3>Select From Gallery</h3>
-      <p>
-	      	                     <?php
-	                             // echo '<pre>';
-	                              //print_r($gallery);
-	                              // echo '</pre>';
-
-	                              ?>
-	      <?php foreach($gallery as $value){ ?>      
-	      <?php $id = $value['VendorGalleries']['id'];
-	            $media_path = $value['VendorGalleries']['media_path'];
-
-	      ?>
-	        <div style="float:left">
-	         <input type="radio" name="classimage" value="<?php echo $media_path; ?>" />                 
-	         <img src="<?php echo HTTP_ROOT; ?>/img/Vendor/UploadImage_<?php echo $user_id  ?>/<?php echo $media_path;  ?>" width="180" height="200"   / > 
-	     </div>
-	     <?php }  ?>
-
-	     
-      </p>
-    </div>
-   
-  </div>
-
-        </div>
-        <div style="clear:both"></div>
-        <div class="modal-footer">
-
-                                       
-	        <input type="button" id="select_classimg"   class="btn btn-primary save-image " name="select_img"  value="Select" > 
-	         <input type="button" id="select_tutorimg"   class="btn btn-primary save-image " name="select_img"  value="Select" >
-	          <input type="button" id="delete_galleryimg"   class="btn btn-primary save-image " name="delete_galleryimg"  value="Delete Selected" >
-	      
-          <button type="button" class="btn btn-default dismiss-btn close-classimage" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-
-
-<!-- Model for Video   Start  -->
-
-
- <div class="form-group" style="float:right;">
-												<!-- Trigger the modal with a button -->
-  <button type="button" style="visibility:hidden" class="btn btn-primary add_field_loc_button" data-toggle="modal" data-target="#samplevideoModal">Upload Video</button>
-											</div>
-  
-
-  <!-- Modal -->
-  <div class="modal fade" id="samplevideoModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="border-radius:5px 5px 0px 0px; background-color: #00CDC6;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Upload Videos</h4>
-        </div>
-        <div class="modal-body">
-         
-  <ul class="nav nav-tabs">
-    <!--<li class="active"><a data-toggle="tab" href="#videoupload">Upload From Local System</a></li>-->
-    <li class="active"><a data-toggle="tab" href="#videogallery">Select From Gallery</a></li>
-  
-  </ul>
-
-  <div class="tab-content">
-    <!--<div id="videoupload" class="tab-pane fade in active">
-      <h3>Upload From Local System</h3>
-      <p>
-     
-
-     <?php echo $this->Form->create('AddImage', array('class' => '','enctype'=>'multipart/form-data','onSubmit'=>'return chk_frm();'))?>  
-                                        <?php //echo $this->Form->create('AddDiamond', array('class' => '', 'enctype'=>'multipart/form-data','onSubmit'=>'return chk_frm();'))?> 
-                                            <div class="modal-body">                       
-                                                <div class="row">&nbsp;</div>
-                                                <div class="row"> 
-                                                    <div class="col-md-1 col-lg-1  " ></div>
-                                                    <div class="col-md-12 col-lg-12  " >                                
-                                                       <center>
-                                                            <span class="btn btn-default btn-file upload-btn-file">
-                                                                Browse Your image to upload <input type="file" name="imagefiles[]" multiple id="photos" class="txtbox " accept="image/*"> 
-                                                            </span>
-                                                        </center>
-                                                        <span style="color:red; text-align:;" id="msg1"></span>            
-                                                    </div>
-                                                </div>                        
-                                                <div class="row">&nbsp;</div>  
-                                            </div>
-                                            <div class="" >
-                                               
-                                                <input type="submit"   class="btn btn-primary save-image " name="save_img"  value="Submit" >                        
-                                            </div>
-                                        <?php echo $this->Form->end(); ?>   
-      </p>
-    </div>-->
-    <div id="videogallery" class="tab-pane fade in active">
-    	<p>Reached max Video count Please choose  or delete Video from gallery and upload New</p>
-      <h3>Select From Gallery</h3>
-      <p>
-       
-      	<?php
-                              //echo '<pre>';
-                              //print_r($videoGallery);
-                               //echo '</pre>';
-
-
-                              ?>
-      <?php foreach($videoGallery as $value){ ?>      
-      <?php $id = $value['VendorGalleries']['id'];
-            $media_path = $value['VendorGalleries']['media_path'];
-            $video_path = HTTP_ROOT.'/img/Vendor/UploadVideo_'.$user_id.'/'.$media_path;
-       
-      ?>
-
-    <div style="float:left">
-    <input type="radio" name="samplevideo" value="<?php echo $media_path; ?>" style="flot:right" /> 
-    </br>
-    <div class="col-md-4 col-sm-6 col-xs-12 pimgtop col-lg-3" style="flot:left">
-                              
-                                <video class="yogaimg" controls style="width:200px;height:200px;border:2px solid black; background-color:#313131;">
-                                  <source src="<?php echo $video_path;?>" type="video/mp4">
-                                </video>
-                              </div>
-                          </div>
-     
-                      
-
-
-
-<?php }  ?>
-
-<div class="" >
-                                               
-                                                 
-                                                                  
-                                            </div>
-                          </p>
-    </div>
-   
-  </div>
-
-
-        </div>
-        <div style="clear:both"></div>
-        <div class="modal-footer">
-        <input type="button" id="select_video"   class="btn btn-primary save-image " name="select_img"  value="Select Video" >  
-        <input type="button" id="delete_galleryvideo"   class="btn btn-primary save-image " name="delete_galleryimg"  value="Delete Selected" >
-          <button type="button" class="btn btn-default dismiss-btn close-samplevideo" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-
-
-
-
-
-
-
-<!--  Model for Video Ends  -->
-
-
-
-
-
-
-  
-
-                             
-
-
-
-
-
-
-
-
 
 			            	<div class="col-sm-12 col-xs-12 sr_pv_padding_lr" style="margin-top: 30px; margin-bottom: 50px;">
 			            		<div class="col-sm-12 col-xs-12">
@@ -1154,6 +854,7 @@ color:#1B191A;float: left;
 	        </div> 
         </div>
     </div>
+
 
     
 </div>
@@ -1822,85 +1523,6 @@ function segment(){
 	$( "#pop3_datepicker4" ).datepicker({yearRange:'1900:2030',minDate:0,changeYear: true, changeMonth: true });
 	
  });
-
-
-$('#class_summary').keyup(function(){
-
-	var content = $(this).val();
-  
-	if(content.length > 250){
-
-      $('#cs4').html('Please Enter Only Maximum 250 Charcter');
-	   $(this).attr("maxlength",'250');
-	}else{
-       $(this).removeAttr("maxlength");
-		$('#cs4').html('');
-	}
-
-});
-
-
-$('#about_class').keyup(function(){
-
-	var content = $(this).val();
-
-	if(content.length > 500){
-      $('#ab_1').html('Please Enter Only Maximum 500 Charcter');
-	   $(this).attr("maxlength",'500');
-	}else{
-         $(this).removeAttr("maxlength");
-		$('#ab_1').html('');
-	}
-
-});
-
-
-$('#about_academy').keyup(function(){
-
-	var content = $(this).val();
-
-	if(content.length > 500){
-      $('#ac_1').html('Please Enter Only Maximum 500 Charcter');
-	   $(this).attr("maxlength",'500');
-	}else{
-         $(this).removeAttr("maxlength");
-		$('#ac_1').html('');
-	}
-
-});
-
-$('#class_topic').keyup(function(){
-
-	var content = $(this).val();
-
-	if(content.length > 50){
-      $('#s3').html('Please Enter Only Maximum 50 Charcter');
-	   $(this).attr("maxlength",'50');
-	}else{
-         $(this).removeAttr("maxlength");
-		$('#s3').html('');
-	}
-
-});
-
-$('#duration').keyup(function(){
-
-	var content = $(this).val();
-     
-	if(!$.isNumeric(content)){
-     $('#s11').html('Please Enter Duration (hrs/days) Only in Numerical');
-	}else{
-         $('#s11').html('');
-		
-	}
-
-});
-
-
-
-
-
-
 </script>
 <script>
 function validateForm() 
@@ -2004,10 +1626,9 @@ if(img1==''){
 		        	$('#is_type').focus();
 		        	return false;
 		    }
-		     //else if(class_type_id == null || class_type_id == "")
-		     else if(class_type_id == "0" )
+		     else if(class_type_id == null || class_type_id == "")
 		    {
-		    	$('#class_5').html('Please Select Class Type');
+		    	$('#class_5').html('Please Enter Class Type');
 		        	$('#class_type_id').focus();
 		        	return false;
 		    }
@@ -2215,7 +1836,6 @@ if(img1==''){
 
 }
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
                 var vendor_type='<?php echo $user_data['UserMaster']['user_type_id']; ?>';
@@ -2234,19 +1854,17 @@ $(document).ready(function(){
                 return false;
                  }
                  else{
-                  
-                 
+                  window.location.href="<?php echo HTTP_ROOT;?>/vendor_classes/create";
                    }
                }
                else if((vendor_type=='2')){
-                 
                  if((area_of_expertise=='')||(dob=='')||(address=='')||(yourself=='')){
                   alert('You Are Not Able to Post Class Please Update Step 2 Process Using Edit Profile Section');
                  window.location.href="<?php echo HTTP_ROOT;?>/Homes/myProfile/";
                 return false;
                  }
                  else{
-                  
+                  window.location.href="<?php echo HTTP_ROOT;?>/vendor_classes/create";
                   }
                }
               
@@ -2266,6 +1884,7 @@ $("#file-upload1").on('change',function(){
 
   $("#img_click1").on('click',function(){
 
+  	//alert("hgfhgfhg");
       $('#file-upload1').click();
   });
 </script>
@@ -2273,347 +1892,38 @@ $("#file-upload1").on('change',function(){
 <script type="text/javascript">
 $("#file-upload2").on('change',function(){
       var a = $(this).val();
+    
       $('#upload_photo2').val(a);
-
-       var filesize = "";
-	   var filetype = "";
-       filesize = this.files[0].size;
-       filetype = this.files[0].type;
-      
-       if(100000 < filesize && 200000 > filesize){
-       $('#s19').html("");
-       }else{
-
-      $('#s19').html("File size should be 100kb to 200kb.");
-      $('#file-upload2').val('');
-        $(this).val('');
-
-         var imagetypes = new Array('image/png','image/jpg','image/jpeg');
-
-     if($.inArray(filetype, imagetypes) < 0){
-
-     	$('#s19').html("You have seleted wrong file type");
-        $('#file-upload2').val('');
-        $(this).val('');
-      
-     }else{
-        $('#s19').html("");
-     	
-     }
-       }
-
-       
-
-
   });
 
   $("#img_click2").on('click',function(){
-
-
-    $.ajax({
-            dataType: "html",
-            type: "POST",
-            evalScripts: true,
-            url: '<?php echo Router::url(array('controller'=>'vendor_classes','action'=>'getimagecount'));?>',
-            data: ({type:'original'}),
-            success: function (data, textStatus){
-
-                var imagecount = parseInt(data);
-              
-              if(parseInt(data) < 10){
-              //$('#file-upload2').click();
-
-              $('#upload_photo_count').val(imagecount);
-              }else{
-              $('button[data-target="#classModal"]').trigger('click');
-                $("#select_classimg").hide();
-                 $("#select_tutorimg").show();
-              }
-
-            }
-        });
-
-            imagecount = $('#upload_photo_count').val();
-             imagecount = parseInt(imagecount);
-
-             if(imagecount < 10){
-             	
-            $('#file-upload2').click();
-            
-             }
-
-
-
   	//alert("hgfhgfhg");
-    //  $('#file-upload2').click();
+      $('#file-upload2').click();
   });
 </script>
 <script type="text/javascript">
 $("#file-upload3").on('change',function(){
       var a = $(this).val();
-      $('#upload_photo3').val(a);
-
-     var filesize = "";
-	   var filetype = "";
-       filesize = this.files[0].size;
-       filetype = this.files[0].type;
-      
-       
-
-    var videotypes = new Array('video/mp4','video/avi','video/mpeg4');
     
-     if($.inArray(filetype, videotypes) < 0){
-      $('#s20').html("You have seleted wrong file type");
-      $('#upload_photo3').val('');
-        $(this).val('');
-     
-     }else{
-
-     	 $('#s20').html("");
-
-
-     	 if(10000000 > filesize){
-       $('#s20').html("");
-       }else{
-
-      $('#s20').html("File size should be less than 10 Mb.");
-       $('#upload_photo3').val('');
-        $(this).val('');
-
-       }
-
-
-
-
-
-     }
-
-     
+      $('#upload_photo3').val(a);
   });
-
-
-  
-  $("#select_classimg").on('click',function(){
-
-  	
-  var image_path = $('input[name="classimage"]:checked').val();
-
-   $('#upload_photo4').val(image_path);
-     $('.close-classimage').trigger('click');
-
-  });
-
-  $("#select_tutorimg").on('click',function(){
-
-  	
-  var image_path = $('input[name="classimage"]:checked').val();
-
-   $('#upload_photo2').val(image_path);
-   $('.close-classimage').trigger('click');
-
-  });
-
-
-
-
-$("#select_video").on('click',function(){
-
-  	
-  var image_path = $('input[name="samplevideo"]:checked').val();
-
-   $('#upload_photo3').val(image_path);
-   $('.close-samplevideo').trigger('click');
-
-  });
-
-
-
-
-
-$("#delete_galleryimg").on('click',function(){
-
-  	
-  var image_path = $('input[name="classimage"]:checked').val();
-
-   $.ajax({
-            dataType: "html",
-            type: "POST",
-            evalScripts: true,
-            url: '<?php echo Router::url(array('controller'=>'vendor_classes','action'=>'deletegalleryitem'));?>',
-            data: ({imgdata:image_path}),
-            success: function (data, textStatus){
-            
-            if(data == '1'){
-            $('input[name="classimage"]:checked').parent().hide();
-            }
-
-            }
-        });
- 
-
-
- 
-   //$('.close-classimage').trigger('click');
-
-  });
-
-
-
-$("#delete_galleryvideo").on('click',function(){
-
-  	
-  var image_path = $('input[name="samplevideo"]:checked').val();
-
-   $.ajax({
-            dataType: "html",
-            type: "POST",
-            evalScripts: true,
-            url: '<?php echo Router::url(array('controller'=>'vendor_classes','action'=>'deletegalleryitem'));?>',
-            data: ({imgdata:image_path}),
-            success: function (data, textStatus){
-            
-            if(data == '1'){
-            $('input[name="samplevideo"]:checked').parent().hide();
-            }
-
-            }
-        });
- 
-
-
- 
-   //$('.close-classimage').trigger('click');
-
-  });
-
-
-
-
-
-
 
   $("#img_click3").on('click',function(){
-  
-   $.ajax({
-            type: "POST",
-            url: '<?php echo Router::url(array('controller'=>'vendor_classes','action'=>'getvideocount'))?>',
-            success: function (response){
-            	var videocount = parseInt(response);
-              
-              if(videocount < 5){
-             
-             //$('#file-upload3').trigger('click');
-             $('#upload_photo3_count').val(videocount);
-             
-
-
-              }else{
-              
-              $('button[data-target="#samplevideoModal"]').trigger('click');
-            
-              }
-
-            
-            }
-        });
-
-        videocount = $('#upload_photo3_count').val();
-             videocount = parseInt(videocount);
-             if(videocount < 5){
-             $('#file-upload3').trigger('click');
-            
-             }
-
-
-
+  	//alert("hgfhgfhg");
+      $('#file-upload3').click();
   });
 </script>
 
 <script type="text/javascript">
 $("#file-upload4").on('change',function(){
-
       var a = $(this).val();
+    
       $('#upload_photo4').val(a);
-
-        var filesize = "";
-	   var filetype = "";
-       filesize = this.files[0].size;
-       filetype = this.files[0].type;
-      
-       if(100000 < filesize && 200000 > filesize){
-       $('#s21').html("");
-       }else{
-
-      $('#s21').html("File size should be 100kb to 200kb.");
-       $('#file-upload4').val('');
-        $(this).val('');
-
-       var imagetypes = new Array('image/png','image/jpg','image/jpeg');
-     
-     if($.inArray(filetype, imagetypes) < 0){
-      $('#s21').html("You have seleted wrong file type");
-       $('#file-upload4').val('');
-        $(this).val('');
-     
-     }else{
-
-     	 $('#s21').html("");
-     }
-
-
-       }
-
-       
-       
-
-
-
-       
-       //$imagetypes = array('image/png','image/jpeg');
-
-       //$.inArray(value, array)
-
-
   });
 
   $("#img_click4").on('click',function(){
-  	
-    $.ajax({
-            dataType: "html",
-            type: "POST",
-            evalScripts: true,
-            url: '<?php echo Router::url(array('controller'=>'vendor_classes','action'=>'getimagecount'));?>',
-            data: ({type:'original'}),
-            success: function (data, textStatus){
-                var imagecount = parseInt(data);
-              if(imagecount < 10){
-               //$('#file-upload4').click();
-              $('#upload_photo_count').val(imagecount);
-              }else{
-              $('button[data-target="#classModal"]').trigger('click');
-            
-             $("#select_tutorimg").hide();
-             $("#select_classimg").show();
-              }
-
-            }
-        });
-
-
-         imagecount = $('#upload_photo_count').val();
-
-             imagecount = parseInt(imagecount);
-
-             if(imagecount < 10){
-             	
-            $('#file-upload4').trigger('click');
-            
-             }
-
-//upload_photo_count
-
-
-      //$('#file-upload4').click();
+  	//alert("hgfhgfhg");
+      $('#file-upload4').click();
   });
 </script>
 
