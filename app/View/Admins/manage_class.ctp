@@ -44,6 +44,11 @@ $(document).ready(function() {
         </div>
         <div class="row">
             <div class="col-md-12">
+                <span style="float: right; margin-bottom: 5px">
+                    <?php echo $this->Html->link('Upload Csv Class',array('controller'=>'Admins','action'=>'upload_csv_classes'),array('class'=>'btn btn-success')) ?>
+                </span>
+            </div>
+            <div class="col-md-12">
                 <div class="dashboard-main">
                     <div class="panel panel-default panel-primary ">
                         <div class="panel-heading strip pannel-heading-strip"><i class="fa fa-pencil-square-o"></i>&nbsp; Manage Class</div>
