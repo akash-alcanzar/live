@@ -208,7 +208,7 @@
                                                                 <?php echo $res['UserMaster']['first_name'];?> 
                                                               </div>
                                                             <?php }?>
-                                                            <div class="indx-address">PLACE :<?php 
+                                                            <div class="indx-address">Place :<?php 
 									if(!empty($res['VendorClasseLocationDetail'])):
 										echo $res['VendorClasseLocationDetail'][0]['Locality']['name'];
 									else:
@@ -240,7 +240,7 @@
 </section> 
 <!-- start middle container -->
 <!-- Start Testimonial section -->
-<section id="testimonial">
+<!--<section id="testimonial">
     <div class="col-lg-offset-1 col-lg-10 col-md-12 col-sm-12">
       <div class="row">
         <div class="col-md-6">
@@ -253,11 +253,11 @@
             </div>
             <div class="col-md-12">
               <!-- Start testimonial slider -->
-              <div class="testimonial-slider">
+              <!--<div class="testimonial-slider">
                 <!-- Start single slider -->
-                <div class="single-slider">
+                <!--<div class="single-slider">
                   <div class="testimonial-img">
-                    <img src="<?php echo HTTP_ROOT;?>/img/testi1.jpg" alt="testimonial image">
+                    <img src="<?php //echo HTTP_ROOT;?>/img/testi1.jpg" alt="testimonial image">
                   </div>
                   <div class="testimonial-content">
                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
@@ -265,9 +265,9 @@
                   </div>
                 </div>
                 <!-- Start single slider -->
-                <div class="single-slider">
+                <!--<div class="single-slider">
                   <div class="testimonial-img">
-                    <img src="<?php echo HTTP_ROOT;?>/img/testi3.jpg" alt="testimonial image">
+                    <img src="<?php //echo HTTP_ROOT;?>/img/testi3.jpg" alt="testimonial image">
                   </div>
                   <div class="testimonial-content">
                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
@@ -275,9 +275,9 @@
                   </div>
                 </div>
                 <!-- Start single slider -->
-                <div class="single-slider">
+                <!--<div class="single-slider">
                   <div class="testimonial-img">
-                    <img src="<?php echo HTTP_ROOT;?>/img/testi2.jpg" alt="testimonial image">
+                    <img src="<?php //echo HTTP_ROOT;?>/img/testi2.jpg" alt="testimonial image">
                   </div>
                   <div class="testimonial-content">
                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
@@ -291,5 +291,5 @@
         <div class="col-md-6"></div>        
       </div>
     </div>
-</section>
+</section>-->
 <!-- End Testimonial section
