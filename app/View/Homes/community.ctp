@@ -109,140 +109,51 @@ a:focus, a:hover {
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div id="testimonials" class="container-fluid">
                                 <div class="row">
+                                   <?php 
+                                              /*echo "<pre>";
+                                                print_r($featured_status);
+                                              echo "</pre>";*/
+                                          ?>
                                     <div class="C_17_num">        
                                         <div id="grid-contant-slider1" class="b_sld">
+                                         
                                             <!-- item 1 -->
+                                          <?php 
+                                              foreach ($featured_status as $result) { 
+                                                if(!empty($result['VendorClasse']['segment_id'])):
+                                                  $seg_pic = explode(',',$result['VendorClasse']['segment_id']);
+                                                endif;
+                                                $class_id = base64_encode($result['VendorClasse']['id']);
+                                          ?>
                                             <div class="item b_1_crs">
-                                                <li>
-                                                  <div class="grid1 gridworkshopsbg1">
-                                                    <div class="view1 view-first">
+                                              <li class="nbs-flexisel-item">
+                                                <div class="grid1 gridfreeclassesbg grid-slider-image">
+                                                      <div class="view3 view-first">
                                                       <div class="index_img">
-                                                        <img src="<?php echo HTTP_ROOT;?>/img/pics9.png" class="img-responsive" alt=""/>
-                                                        <button class="btn butt_dollar">&#8377;320</button>
-                                                      </div>                 
-                                                    </div>                                                
-                                                    <div class="golden">
-                                                          <h4>Cookie Pods Workshop</h4>
-                                                          <p>PLACE :EAST NAGAR, BNG</p>
-                                                          <h5>Sat, 15 jan, 7 to 8pm </h5>
-                                                          <h6>
-                                                              <i class="fa fa-star"></i>
-                                                              <i class="fa fa-star"></i>
-                                                              <i class="fa fa-star"></i>
-                                                              <i class="fa fa-star"></i>
-                                                              <i class="fa fa-star"></i>
-                                                          </h6>
-                                                          <button class="btn" tabindex="0">details</button>
-                                                    </div>
-                                                  </div>
-                                                </li>
-                                            </div>
-                                            <!-- item 2 -->
-                                            <div class="item b_1_crs">
-                                                <li>
-                                                  <div class="grid1 gridworkshopsbg1">
-                                                      <div class="view1 view-first">
-                                                        <div class="index_img2">
-                                                          <img src="<?php echo HTTP_ROOT;?>/img/pics2.png" class="img-responsive" alt=""/>
-                                                          <button class="btn butt_dollar">&#8377;320</button>
-                                                        </div>                 
-                                                      </div> 
-                                                       <div class="golden">
-                                                            <h4>Hatha Yoga For Weight loss</h4>
-                                                            <p>PLACE :EAST NAGAR, BNG</p>
-                                                            <h5>Sat, 15 jan, 7 to 8pm </h5>
-                                                            <h6>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                            </h6>
-                                                            <button class="btn" tabindex="0">details</button>
+                                                            <?php 
+                                    echo "<span class='flexible-fixed flexible-fixed-index'>";
+                                    echo ($result['VendorClasse']['class_timing_id'] == 2)?'Fixed':'Flexible';
+                                    echo "</span>";
+                                    ?>
+                                                            <a href="http://localhost/braingroom/classes/Tattoos  class | Adults | Beginners | Intermediates | 8 Hours.">
+                                                        <img src="/braingroom/img/" class="imgresponsive img-thumbnail" alt="" height="148" width="305"></a>
+                                                            <div class="image_price12 pull-right image_price-index">
+                                                            <span class="ccc" style="color:white">₹1000</span>
+                                                        </div>
+                                                        </div>                
+                                                      </div>                
+                                                      <div class="golden home-tumb-slide">
+                                                      <div class="slider-topic12">Tattoos  class | Adults | Beginners | Intermediates | 8 Hours.</div>
+                                                      <div class="provider-by" style="color:black !important; margin-bottom:2px !important;"><strong>By:</strong>Vijayakumar</div>
+                                                      <div class="indx-address">Place :Madipakkam</div>
+                                                      <h5>No of Sessions:&nbsp;8 </h5>
+                                                      <h5>Total Duration:&nbsp;8 Hours </h5>
                                                       </div>
-                                                  </div>
-                                                </li>
-                                            </div>
-                                            <!-- item 3 -->  
-                                            <div class="item b_1_crs">
-                                              <li>
-                                                <div class="grid1 gridworkshopsbg1">
-                                                  <div class="view1 view-first">
-                                                    <div class="index_img">
-                                                      <img src="<?php echo HTTP_ROOT;?>/img/pics3.png" class="img-responsive" alt=""/>
-                                                      <button class="btn butt_dollar">&#8377;320</button>
-                                                    </div>                      
-                                                  </div> 
-                                                   
-                                                  <div class="golden">
-                                                    <h4>Meringue Tower of Kisses</h4>
-                                                    <p>PLACE :EAST NAGAR, BNG</p>
-                                                    <h5>Sat, 15 jan, 7 to 8pm </h5>
-                                                    <h6>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </h6>
-                                                    <button class="btn" tabindex="0">details</button>
-                                                  </div>
-                                                </div>
-                                              </li>
-                                            </div>
-                                            <!-- item 4 -->          
-                                                    
-                                            <div class="item b_1_crs">
-                                              <li>
-                                                <div class="grid1 gridworkshopsbg1">
-                                                  <div class="view1 view-first">
-                                                    <div class="index_img">
-                                                      <img src="<?php echo HTTP_ROOT;?>/img/pics4.png" class="img-responsive" alt=""/>
-                                                      <button class="btn butt_dollar">&#8377;320</button>
-                                                    </div>                        
-                                                  </div>
-                                                  <div class="golden">
-                                                      <h4>Golden Pineapple Ball(Hands on)</h4>
-                                                      <p>PLACE :EAST NAGAR, BNG</p>
-                                                      <h5>Sat, 15 jan, 7 to 8pm </h5>
-                                                      <h6>
-                                                          <i class="fa fa-star"></i>
-                                                          <i class="fa fa-star"></i>
-                                                          <i class="fa fa-star"></i>
-                                                          <i class="fa fa-star"></i>
-                                                          <i class="fa fa-star"></i>
-                                                      </h6>
-                                                      <button class="btn" tabindex="0">details</button>
-                                                  </div>
-                                                </div>
-                                              </li>
-                                            </div> 
-                                            <!-- item 4 -->   
-                                            <div class="item b_1_crs">
-                                              <li>
-                                                <div class="grid1 gridworkshopsbg1">
-                                                  <div class="view1 view-first">
-                                                    <div class="index_img">
-                                                      <img src="<?php echo HTTP_ROOT;?>/img/pics9.png" class="img-responsive" alt=""/>
-                                                      <button class="btn butt_dollar">&#8377;320</button>
-                                                    </div>                 
-                                                  </div> 
-                                                  <div class="golden">
-                                                        <h4>Cookie Pods Workshop</h4>
-                                                        <p>PLACE :EAST NAGAR, BNG</p>
-                                                        <h5>Sat, 15 jan, 7 to 8pm </h5>
-                                                        <h6>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </h6>
-                                                        <button class="btn" tabindex="0">details</button>
-                                                  </div>
-                                                </div>
-                                              </li>
-                                            </div>
+                                                      </div>    
+                                            </li>
+                                          </div>
+
+
                                             <!-- slider item end -->   
                                         </div>
                                     </div>
