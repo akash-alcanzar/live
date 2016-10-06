@@ -1,0 +1,46 @@
+.cat_bg_color {
+    background: #00CDC6 none repeat scroll 0% 0%;
+    cursor: pointer;
+}
+.seg_brd_tp_class_segment {
+    border-bottom: 1px solid #00C3C1;
+}
+
+.flexible-fixed-fun {
+    color: #FFF;
+    background-color: #00CDC6;
+    font-family: OS_regular;
+    padding: 3px 6px;
+    z-index: 1050;
+    position: absolute;
+    border-radius: 25px;
+    top: 35px;
+    left: 21px;
+    width: 69px;
+    height: 28px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.image_price12-fun {
+    background-color: #00CDC6;
+    height: 26px;
+    margin-right: 5px;
+    border-radius: 25px;
+    width: 61px;
+    padding: 4px 0px;
+    position: relative;
+    bottom: -34px;
+    text-align: center;
+}
+.pull-right-fun {
+    float: right !important;
+}
+
+.hathyga {
+    text-transform: capitalize;
+    font-size: 20px;
+    color: #01091C;
+    font-family: "os_Regular";
+    margin-top: 22px;
+}
