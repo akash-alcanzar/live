@@ -79,7 +79,7 @@ function auto_login(){
 //Comments
 add_filter( 'login_url', 'my_login_linkchanger');
 function my_login_linkchanger($link){
-   return 'http://localhost/braingroom/Homes/login';
+   return 'http://www.goku.braingroom.com/Homes/login';
    //return home_url( '/login');
 }
 
@@ -140,23 +140,23 @@ function getHeader(){
             <div class="col-xs-12 col-sm-12 sr_15_07_padd">
               <!-- ***************left button*************** -->
               <div class="col-md-7 col-sm-7 col-lg-8 col-xs-12 pull-left padd_l_r sr_18_07_header_bdr">
-                                  <a href="http://localhost/braingroom/sell-express">
+                                  <a href="http://www.goku.braingroom.com/sell-express">
                     <button class="btn buttclass">Class Providers</button>
                   </a>
-                  <a href="http://localhost/braingroom/catalogue_for_organizers">
+                  <a href="http://www.goku.braingroom.com/catalogue_for_organizers">
                     <button class="btn butidea sr_18_07_cfo">Catalogue for Organizers</button>
                   </a>
-                  <a href="http://localhost/braingroom/Homes/gift">
+                  <a href="http://www.goku.braingroom.com/Homes/gift">
                     <button class="btn butgift">
                       <i aria-hidden="true" class="fa fa-gift gifticon"></i>
                       Gift A Class
                     </button>
                   </a>  
-                   <a href="http://localhost/braingroom/blog">
+                   <a href="http://www.goku.braingroom.com/blog">
                     <button class="btn butidea sr_18_07_cfo border-blog"> 
                     <i class="glyphicon glyphicon-comment blogicon"></i> Blog</button>
                   </a>
-                  <a href="http://localhost/braingroom/contact">
+                  <a href="http://www.goku.braingroom.com/contact">
                   <button class="btn butidea sr_18_07_cfo border-blog"> 
                     Contact Us</button>  
                   </a>
@@ -209,15 +209,15 @@ function getHeader(){
                  <!--  <div class="col-sm-12  col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 col-xs-12 brn_pad"> -->
                  
                       <div class="col-md-3 col-sm-3 col-xs-12 b_logo brn_pad b_widh sr_29_07_lgo_img">
-                      <img style="width: 50px;" src="http://localhost/braingroom/img/beta.png">
-                        <a href="http://localhost/braingroom">
-                          <img class="blwdh" src="http://localhost/braingroom/img/logo.jpg">
+                      <img style="width: 50px;" src="http://www.goku.braingroom.com/img/beta.png">
+                        <a href="http://www.goku.braingroom.com">
+                          <img class="blwdh" src="http://www.goku.braingroom.com/img/logo.jpg">
                         </a>
                       </div>
                       <!-- ******************new alignment***************** -->
                       <div class="col-md-6 col-sm-5 col-xs-12 padd_l_r b_fcb1 b_pad1 sr_29_07_md_screen">
                         <center class="bl_cntr">
-                          <form method="post" name="s_cat" action="http://localhost/braingroom/vendor_classes/lists">
+                          <form method="post" name="s_cat" action="http://www.goku.braingroom.com/vendor_classes/lists">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                               <input type="hidden" value="" name="search_cat_id" id="search_cat_id">
                                
@@ -233,7 +233,7 @@ function getHeader(){
                                           <option class="slt_pad01_08" value="6">Home Maintenance</option>
 
                                       </select>
-                                      <span class="carrte_select"><img style="height: 10px;" alt="img" src="http://localhost/braingroom/img/caret.png"></span>
+                                      <span class="carrte_select"><img style="height: 10px;" alt="img" src="http://www.goku.braingroom.com/img/caret.png"></span>
                                   </div>
                                   <div class="col-xs-7">
                                       <input type="text" style="border-radius: 0px; width: 100%; padding-right: 40px;" class="b_1_input1" id="search_key" name="search_key" placeholder="Search for classes &amp; activities...">
@@ -261,9 +261,9 @@ function getHeader(){
                       </div>
                       <div class="col-md-3 col-sm-4 col-xs-12 padd_l_r b_fcb2 b_pad12 sr_15_07_connect_btn">
                           <div class="pull-right b_lft">
-                            <button style="padding:5px 20px;" class="btn btclass1 fbttp"><img src="http://localhost/braingroom/img/iconfind.png">Find</button>
+                            <button style="padding:5px 20px;" class="btn btclass1 fbttp"><img src="http://www.goku.braingroom.com/img/iconfind.png">Find</button>
                             <button style="padding:5px 10px;" class="btn btclassnt1  fbttp">
-                            <!--<img src="http://localhost/braingroom/img/iconconnect1.png" />--> <i class="fa fa-group"></i> Connect</button>
+                            <!--<img src="http://www.goku.braingroom.com/img/iconconnect1.png" />--> <i class="fa fa-group"></i> Connect</button>
                           </div>
                       </div>
                       <!-- ******************new alignment***************** -->
@@ -279,173 +279,173 @@ function getHeader(){
         <div class="navbar-collapse collapse na_bg_clr012" id="navbar">
         <ul class="nav navbar-nav navbar-right main-nav col-xs-12 col-sm-12 padd_l_r" id="top-menu">
 		<li class="dropdown active first maiin-menu-list">
-		     <a class="# pad_right_5 maiin-menu-list-link" href="http://localhost/braingroom/fun-and-recreation">
+		     <a class="# pad_right_5 maiin-menu-list-link" href="http://www.goku.braingroom.com/fun-and-recreation">
                 Fun &amp; Recreation                <span class="fa fa-angle-down"></span>
               </a>
 	<ul style="background-color:#38B9B5; z-index:100000;" role="menu" class="dropdown-menu">
     	<li>
-        	                        <a href="http://localhost/braingroom/fun-and-recreation/cooking-and-baking">
+        	                        <a href="http://www.goku.braingroom.com/fun-and-recreation/cooking-and-baking">
                     Cooking &amp; Baking</a>
-                                                <a href="http://localhost/braingroom/fun-and-recreation/arts-and-crafts">
+                                                <a href="http://www.goku.braingroom.com/fun-and-recreation/arts-and-crafts">
                     Arts &amp; Crafts</a>
-                                                <a href="http://localhost/braingroom/fun-and-recreation/music-and-dance">
+                                                <a href="http://www.goku.braingroom.com/fun-and-recreation/music-and-dance">
                     Music &amp; Dance</a>
-                                                <a href="http://localhost/braingroom/fun-and-recreation/sports">
+                                                <a href="http://www.goku.braingroom.com/fun-and-recreation/sports">
                     Sports</a>
-                                                <a href="http://localhost/braingroom/fun-and-recreation/adeventure-and-activities">
+                                                <a href="http://www.goku.braingroom.com/fun-and-recreation/adeventure-and-activities">
                     Adventure Activities</a>
-                                                <a href="http://localhost/braingroom/fun-and-recreation/media-and-literature">
+                                                <a href="http://www.goku.braingroom.com/fun-and-recreation/media-and-literature">
                     Media &amp; Literature</a>
-                                                <a href="http://localhost/braingroom/fun-and-recreation/self-defense">
+                                                <a href="http://www.goku.braingroom.com/fun-and-recreation/self-defense">
                     Self Defence</a>
-                                                <a href="http://localhost/braingroom/fun-and-recreation/india-indigenous">
+                                                <a href="http://www.goku.braingroom.com/fun-and-recreation/india-indigenous">
                     India Indigenous</a>
-                                                <a href="http://localhost/braingroom/fun-and-recreation/photography">
+                                                <a href="http://www.goku.braingroom.com/fun-and-recreation/photography">
                     Photography</a>
                                 </li>
     </ul>
     </li>
     		<li class="dropdown active first maiin-menu-list">
-		     <a class="# pad_right_5 maiin-menu-list-link" href="http://localhost/braingroom/informative-and-motivational">
+		     <a class="# pad_right_5 maiin-menu-list-link" href="http://www.goku.braingroom.com/informative-and-motivational">
                 Informative &amp; Motivational                <span class="fa fa-angle-down"></span>
               </a>
 	<ul style="background-color: rgb(56, 185, 181); z-index: 100000; display: none;" role="menu" class="dropdown-menu">
     	<li>
-        	                        <a href="http://localhost/braingroom/informative-and-motivational/personality-development">
+        	                        <a href="http://www.goku.braingroom.com/informative-and-motivational/personality-development">
                     Personality Development</a>
-                                                <a href="http://localhost/braingroom/informative-and-motivational/communication-and-soft-skills">
+                                                <a href="http://www.goku.braingroom.com/informative-and-motivational/communication-and-soft-skills">
                     Communication &amp; Soft Skills</a>
-                                                <a href="http://localhost/braingroom/informative-and-motivational/brain-efficiency-improvement">
+                                                <a href="http://www.goku.braingroom.com/informative-and-motivational/brain-efficiency-improvement">
                     Brain Efficiency Improvement</a>
-                                                <a href="http://localhost/braingroom/informative-and-motivational/language-learning">
+                                                <a href="http://www.goku.braingroom.com/informative-and-motivational/language-learning">
                     Language Learning</a>
-                                                <a href="http://localhost/braingroom/informative-and-motivational/motivational-talks">
+                                                <a href="http://www.goku.braingroom.com/informative-and-motivational/motivational-talks">
                     Motivational Talks</a>
-                                                <a href="http://localhost/braingroom/informative-and-motivational/spiritual-talks">
+                                                <a href="http://www.goku.braingroom.com/informative-and-motivational/spiritual-talks">
                     Spiritual Talks</a>
-                                                <a href="http://localhost/braingroom/informative-and-motivational/career-management">
+                                                <a href="http://www.goku.braingroom.com/informative-and-motivational/career-management">
                     Career Management</a>
-                                                <a href="http://localhost/braingroom/informative-and-motivational/relationship-management">
+                                                <a href="http://www.goku.braingroom.com/informative-and-motivational/relationship-management">
                     Relationship Management</a>
-                                                <a href="http://localhost/braingroom/informative-and-motivational/india-indigenous">
+                                                <a href="http://www.goku.braingroom.com/informative-and-motivational/india-indigenous">
                     India Indigenous</a>
                                 </li>
     </ul>
     </li>
     		<li class="dropdown active first maiin-menu-list">
-		     <a class="# pad_right_5 maiin-menu-list-link" href="http://localhost/braingroom/health-and-fitness">
+		     <a class="# pad_right_5 maiin-menu-list-link" href="http://www.goku.braingroom.com/health-and-fitness">
                 Health &amp; Fitness                <span class="fa fa-angle-down"></span>
               </a>
 	<ul style="background-color:#38B9B5; z-index:100000;" role="menu" class="dropdown-menu">
     	<li>
-        	                        <a href="http://localhost/braingroom/health-and-fitness/yoga-meditaion">
+        	                        <a href="http://www.goku.braingroom.com/health-and-fitness/yoga-meditaion">
                     Yoga &amp; Meditation</a>
-                                                <a href="http://localhost/braingroom/health-and-fitness/nutritional-cooking-and-eating">
+                                                <a href="http://www.goku.braingroom.com/health-and-fitness/nutritional-cooking-and-eating">
                     Nutritional Cooking / Eating</a>
-                                                <a href="http://localhost/braingroom/health-and-fitness/weight-loss">
+                                                <a href="http://www.goku.braingroom.com/health-and-fitness/weight-loss">
                     Weight Loss</a>
-                                                <a href="http://localhost/braingroom/health-and-fitness/lifestyle-management">
+                                                <a href="http://www.goku.braingroom.com/health-and-fitness/lifestyle-management">
                     Lifestyle Management</a>
-                                                <a href="http://localhost/braingroom/health-and-fitness/disease-management">
+                                                <a href="http://www.goku.braingroom.com/health-and-fitness/disease-management">
                     Disease Management</a>
-                                                <a href="http://localhost/braingroom/health-and-fitness/alternate-therapies">
+                                                <a href="http://www.goku.braingroom.com/health-and-fitness/alternate-therapies">
                     Alternative Therapies</a>
-                                                <a href="http://localhost/braingroom/health-and-fitness/fun-fitness">
+                                                <a href="http://www.goku.braingroom.com/health-and-fitness/fun-fitness">
                     Fun &amp; Fitness</a>
-                                                <a href="http://localhost/braingroom/health-and-fitness/womens-health-and-beauty">
+                                                <a href="http://www.goku.braingroom.com/health-and-fitness/womens-health-and-beauty">
                     Womens Health &amp; Beauty</a>
-                                                <a href="http://localhost/braingroom/health-and-fitness/india-indigenous">
+                                                <a href="http://www.goku.braingroom.com/health-and-fitness/india-indigenous">
                     India Indigenous</a>
                                 </li>
     </ul>
     </li>
     		<li class="dropdown active first maiin-menu-list">
-		     <a class="# pad_right_5 maiin-menu-list-link" href="http://localhost/braingroom/kids-and-teens">
+		     <a class="# pad_right_5 maiin-menu-list-link" href="http://www.goku.braingroom.com/kids-and-teens">
                 Kids &amp; Teens                <span class="fa fa-angle-down"></span>
               </a>
 	<ul style="background-color:#38B9B5; z-index:100000;" role="menu" class="dropdown-menu">
     	<li>
-        	                        <a href="http://localhost/braingroom/kids-and-teens/arts-and-crafts">
+        	                        <a href="http://www.goku.braingroom.com/kids-and-teens/arts-and-crafts">
                     Arts &amp; Crafts</a>
-                                                <a href="http://localhost/braingroom/kids-and-teens/abacus-and-vedic-mathematics">
+                                                <a href="http://www.goku.braingroom.com/kids-and-teens/abacus-and-vedic-mathematics">
                     Abacus &amp; Vedic Mathematics</a>
-                                                <a href="http://localhost/braingroom/kids-and-teens/music-and-dance">
+                                                <a href="http://www.goku.braingroom.com/kids-and-teens/music-and-dance">
                     Music &amp; Dance</a>
-                                                <a href="http://localhost/braingroom/kids-and-teens/personality-development">
+                                                <a href="http://www.goku.braingroom.com/kids-and-teens/personality-development">
                     Personality Development</a>
-                                                <a href="http://localhost/braingroom/kids-and-teens/brain-efficiency">
+                                                <a href="http://www.goku.braingroom.com/kids-and-teens/brain-efficiency">
                     Brain Efficiency</a>
-                                                <a href="http://localhost/braingroom/kids-and-teens/parenting">
+                                                <a href="http://www.goku.braingroom.com/kids-and-teens/parenting">
                     Parenting</a>
-                                                <a href="http://localhost/braingroom/kids-and-teens/special-kids">
+                                                <a href="http://www.goku.braingroom.com/kids-and-teens/special-kids">
                     Special Kids</a>
-                                                <a href="http://localhost/braingroom/kids-and-teens/science-and-technology">
+                                                <a href="http://www.goku.braingroom.com/kids-and-teens/science-and-technology">
                     Science &amp; Technology</a>
-                                                <a href="http://localhost/braingroom/kids-and-teens/special-kids">
+                                                <a href="http://www.goku.braingroom.com/kids-and-teens/special-kids">
                     Special Kids</a>
-                                                <a href="http://localhost/braingroom/kids-and-teens/science-and-technology">
+                                                <a href="http://www.goku.braingroom.com/kids-and-teens/science-and-technology">
                     Science &amp; Technology</a>
-                                                <a href="http://localhost/braingroom/kids-and-teens/sports">
+                                                <a href="http://www.goku.braingroom.com/kids-and-teens/sports">
                     Sports</a>
-                                                <a href="http://localhost/braingroom/kids-and-teens/self-defense">
+                                                <a href="http://www.goku.braingroom.com/kids-and-teens/self-defense">
                     Self Defence</a>
                                 </li>
     </ul>
     </li>
     		<li class="dropdown active first maiin-menu-list">
-		     <a class="# pad_right_5 maiin-menu-list-link" href="http://localhost/braingroom/educational-and-skill-development">
+		     <a class="# pad_right_5 maiin-menu-list-link" href="http://www.goku.braingroom.com/educational-and-skill-development">
                 Education &amp; Skill Development                <span class="fa fa-angle-down"></span>
               </a>
 	<ul style="background-color:#38B9B5; z-index:100000;" role="menu" class="dropdown-menu">
     	<li>
-        	                        <a href="http://localhost/braingroom/educational-and-skill-development/india-indigenous">
+        	                        <a href="http://www.goku.braingroom.com/educational-and-skill-development/india-indigenous">
                     India Indigenous</a>
-                                                <a href="http://localhost/braingroom/educational-and-skill-development/robotics">
+                                                <a href="http://www.goku.braingroom.com/educational-and-skill-development/robotics">
                     Robotics</a>
-                                                <a href="http://localhost/braingroom/educational-and-skill-development/electronics">
+                                                <a href="http://www.goku.braingroom.com/educational-and-skill-development/electronics">
                     Electronics</a>
-                                                <a href="http://localhost/braingroom/educational-and-skill-development/programming">
+                                                <a href="http://www.goku.braingroom.com/educational-and-skill-development/programming">
                     Programming</a>
-                                                <a href="http://localhost/braingroom/educational-and-skill-development/design">
+                                                <a href="http://www.goku.braingroom.com/educational-and-skill-development/design">
                     Design</a>
-                                                <a href="http://localhost/braingroom/educational-and-skill-development/experimental-learning">
+                                                <a href="http://www.goku.braingroom.com/educational-and-skill-development/experimental-learning">
                     Experimental Learning</a>
-                                                <a href="http://localhost/braingroom/educational-and-skill-development/industrial-training">
+                                                <a href="http://www.goku.braingroom.com/educational-and-skill-development/industrial-training">
                     Industrial Training</a>
-                                                <a href="http://localhost/braingroom/educational-and-skill-development/academics">
+                                                <a href="http://www.goku.braingroom.com/educational-and-skill-development/academics">
                     Academics</a>
-                                                <a href="http://localhost/braingroom/educational-and-skill-development/skill-development">
+                                                <a href="http://www.goku.braingroom.com/educational-and-skill-development/skill-development">
                     Skill Development</a>
-                                                <a href="http://localhost/braingroom/educational-and-skill-development/academics">
+                                                <a href="http://www.goku.braingroom.com/educational-and-skill-development/academics">
                     Academics</a>
                                 </li>
     </ul>
     </li>
     		<li class="dropdown active first maiin-menu-list">
-		     <a class="# pad_right_5 maiin-menu-list-link" href="http://localhost/braingroom/home-maintenance">
+		     <a class="# pad_right_5 maiin-menu-list-link" href="http://www.goku.braingroom.com/home-maintenance">
                 Home Maintenance                <span class="fa fa-angle-down"></span>
               </a>
 	<ul style="background-color:#38B9B5; z-index:100000;" role="menu" class="dropdown-menu">
     	<li>
-        	                        <a href="http://localhost/braingroom/home-maintenance/india-indigenous">
+        	                        <a href="http://www.goku.braingroom.com/home-maintenance/india-indigenous">
                     India Indigenous</a>
-                                                <a href="http://localhost/braingroom/home-maintenance/home-hardware">
+                                                <a href="http://www.goku.braingroom.com/home-maintenance/home-hardware">
                     Home Hardware </a>
-                                                <a href="http://localhost/braingroom/home-maintenance/farming-and-gardening">
+                                                <a href="http://www.goku.braingroom.com/home-maintenance/farming-and-gardening">
                     Farming &amp; Gardening</a>
-                                                <a href="http://localhost/braingroom/home-maintenance/interior-design">
+                                                <a href="http://www.goku.braingroom.com/home-maintenance/interior-design">
                     Interior Design</a>
-                                                <a href="http://localhost/braingroom/home-maintenance/automobile-maintenance">
+                                                <a href="http://www.goku.braingroom.com/home-maintenance/automobile-maintenance">
                     Automobile Maintenance</a>
-                                                <a href="http://localhost/braingroom/home-maintenance/eco-friendly-and-energy-savings">
+                                                <a href="http://www.goku.braingroom.com/home-maintenance/eco-friendly-and-energy-savings">
                     Eco Friendly / Energy Savings</a>
-                                                <a href="http://localhost/braingroom/home-maintenance/building-and-buying">
+                                                <a href="http://www.goku.braingroom.com/home-maintenance/building-and-buying">
                     Building &amp; Buying</a>
-                                                <a href="http://localhost/braingroom/home-maintenance/pets-maintenance">
+                                                <a href="http://www.goku.braingroom.com/home-maintenance/pets-maintenance">
                     Pets Maintenance</a>
-                                                <a href="http://localhost/braingroom/home-maintenance/building-and-buying">
+                                                <a href="http://www.goku.braingroom.com/home-maintenance/building-and-buying">
                     Building &amp; Buying</a>
-                                                <a href="http://localhost/braingroom/home-maintenance/pets-maintenance">
+                                                <a href="http://www.goku.braingroom.com/home-maintenance/pets-maintenance">
                     Pets Maintenance</a>
                                 </li>
     </ul>
@@ -552,13 +552,13 @@ function getFooter(){
                 <div class="single_footer_top">
                   <h2><div class="ft-links footer-link-tiltle">LINKS</div></h2>
                   <ul>
-                    <li><a href="http://localhost/braingroom/about">ABOUT US</a></li>
-                    <li><a href="http://localhost/braingroom/about_the_team">ABOUT THE TEAM</a></li>
-                    <li><a href="http://localhost/braingroom/terms-and-conditions">TERMS &amp; CONDITION</a></li>
-                    <li><a href="http://localhost/braingroom/how-it-works">HOW IT WORKS</a></li>
-                    <li><a href="http://localhost/braingroom/privacy">PRIVACY POLICY</a></li>
-                    <li><a href="http://localhost/braingroom/help-center">HELP CENTER</a></li>
-                    <li><a href="http://localhost/braingroom/reviews-and-testimonials">REVIEWS &amp; TESTMONIALS</a></li>
+                    <li><a href="http://www.goku.braingroom.com/about">ABOUT US</a></li>
+                    <li><a href="http://www.goku.braingroom.com/about_the_team">ABOUT THE TEAM</a></li>
+                    <li><a href="http://www.goku.braingroom.com/terms-and-conditions">TERMS &amp; CONDITION</a></li>
+                    <li><a href="http://www.goku.braingroom.com/how-it-works">HOW IT WORKS</a></li>
+                    <li><a href="http://www.goku.braingroom.com/privacy">PRIVACY POLICY</a></li>
+                    <li><a href="http://www.goku.braingroom.com/help-center">HELP CENTER</a></li>
+                    <li><a href="http://www.goku.braingroom.com/reviews-and-testimonials">REVIEWS &amp; TESTMONIALS</a></li>
                   </ul>
                 </div>
               </div>
@@ -567,13 +567,13 @@ function getFooter(){
                     <div class="single_footer_top">
                       <h2><div class="ft-links footer-link-tiltle">CITIES</div></h2>
                       <ul>
-                        <li><a href="http://localhost/braingroom/explore">CHENNAI</a></li>
-                        <li><a href="http://localhost/braingroom/city/Banglore">BANGLORE</a></li>
-                        <li><a href="http://localhost/braingroom/city/Kolkata">KOLKATA</a></li>
-                        <li><a href="http://localhost/braingroom/city/Hyderabad">HYDERABAD</a></li>
-                        <li><a href="http://localhost/braingroom/city/Delhi">DELHI</a></li>
-                        <li><a href="http://localhost/braingroom/city/Pune">PUNE</a></li>
-                        <li><a href="http://localhost/braingroom/city/Mumbai">MUMBAI</a></li>   
+                        <li><a href="http://www.goku.braingroom.com/explore">CHENNAI</a></li>
+                        <li><a href="http://www.goku.braingroom.com/city/Banglore">BANGLORE</a></li>
+                        <li><a href="http://www.goku.braingroom.com/city/Kolkata">KOLKATA</a></li>
+                        <li><a href="http://www.goku.braingroom.com/city/Hyderabad">HYDERABAD</a></li>
+                        <li><a href="http://www.goku.braingroom.com/city/Delhi">DELHI</a></li>
+                        <li><a href="http://www.goku.braingroom.com/city/Pune">PUNE</a></li>
+                        <li><a href="http://www.goku.braingroom.com/city/Mumbai">MUMBAI</a></li>   
                       </ul>
                     </div>
                 </div>  
@@ -585,10 +585,10 @@ function getFooter(){
                     <ul>
                       <li><a href="#">FIND A CLASS</a></li>
                       <li><a href="#target_community">FIND A COMMUNITY GROUP</a></li>
-                      <li><a href="http://localhost/braingroom/arrange-class">HOST A CLASS AT MY PLACE</a></li>
-                      <li><a href="http://localhost/braingroom/connect-page">MAKE NEW FRIENDS</a></li>
-                      <li><a href="http://localhost/braingroom/connect-group">JOIN SIMILAR INTEREST GROUPS IN MY LOCALITY</a></li>
-                      <li><a href="http://localhost/braingroom/login">SIGN UP AS A CLASS PROVIDER</a></li>
+                      <li><a href="http://www.goku.braingroom.com/arrange-class">HOST A CLASS AT MY PLACE</a></li>
+                      <li><a href="http://www.goku.braingroom.com/connect-page">MAKE NEW FRIENDS</a></li>
+                      <li><a href="http://www.goku.braingroom.com/connect-group">JOIN SIMILAR INTEREST GROUPS IN MY LOCALITY</a></li>
+                      <li><a href="http://www.goku.braingroom.com/login">SIGN UP AS A CLASS PROVIDER</a></li>
                       <!-- <li><a href="#">MAKE A PAYMENT</a></li> -->
                      
                     </ul>
