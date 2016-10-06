@@ -7317,6 +7317,7 @@ public function generatePassword($length=8){
                                                                bg_vendor_classes.class_summary,
                                                                bg_vendor_classes.class_timing_id,  
                                                                bg_vendor_classes.class_duration,
+															     bg_vendor_classes.community_id, 
                                                                bg_vendor_classes.location, 
                                                                bg_vendor_classes.price_per_head,
                                                                bg_vendor_classes.no_of_session,
@@ -7343,7 +7344,7 @@ public function generatePassword($length=8){
                                                                ON bg_vendor_classes.id  = bg_vendor_classe_location_details.vendor_class_id
                                                                LEFT JOIN bg_localities
                                                                ON bg_localities.id  = bg_vendor_classe_location_details.locality_id
-                                                               where bg_vendor_classes.community_id=$com_id 
+                                                               where FIND_IN_SET($com_id,bg_vendor_classes.community_id)
                                                                group by bg_vendor_classe_level_details.vendor_class_id
                                                                ORDER BY bg_vendor_classes.id DESC
                                                                ");
