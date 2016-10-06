@@ -94,11 +94,11 @@
         </div>
         <div class="col-md-6 col-sm-6">
           <div class="footer-right">
-            <a href="index.html"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-google-plus"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest"></i></a>
+            <a href="https://www.facebook.com/braingroom/" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://twitter.com/Braingroom1" target="_blank"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.youtube.com/channel/UCrgI-e_M0gJGoTjs95HiPWQ" target="_blank"><i class="fa fa-youtube"></i></a>
+            <a href="https://www.linkedin.com/company/braingroom?trk=biz-companies-cym" target="_blank"><i class="fa fa-linkedin"></i></a>
+            <a href="https://in.pinterest.com/braingroom/" target="_blank"><i class="fa fa-pinterest"></i></a>
           </div>
         </div>
       </div>
