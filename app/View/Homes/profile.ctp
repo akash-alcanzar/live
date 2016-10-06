@@ -746,7 +746,7 @@ border-radius:30%;
                 <div style="color:red; font-size:16px; margin-top:52px; margin-bottom:-18px;"><?php  echo $this->Session->flash(); ?></div>
                 <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r myprflbrd myprfdiv" id="photo2">
                     <div class="col-md-12 col-sm-12 col-xs-12 bgsec">
-                      <div class="col-md-3 col-sm-3 col-xs-6 photos1" id="photo">Section 1</div>
+                      <div class="col-md-3 col-sm-3 col-xs-6 photos1" id="photo">Basic Information</div>
                       <div class="col-md-9 col-sm-9 col-xs-6 photos1" id="vid">
                        
                       </div>
@@ -811,7 +811,7 @@ border-radius:30%;
                     <!-- *****************Interest************** -->
                     <!-- *****************section 2************* -->
                     <div class="col-md-12 col-sm-12 col-xs-12 bgsec">
-                      <div class="col-md-3 col-sm-3 col-xs-6 photos1" id="photo">Section 2</div>
+                      <div class="col-md-3 col-sm-3 col-xs-6 photos1" id="photo">Individual/Organization profile</div>
                       <div class="col-md-9 col-sm-9 col-xs-6 photos1" id="vid">
                        
                       </div>
@@ -877,7 +877,7 @@ border-radius:30%;
                     <!-- *****************Description************** -->
                     <!-- *****************section 3************* -->
                     <div class="col-md-12 col-sm-12 col-xs-12 bgsec">
-                      <div class="col-md-3 col-sm-3 col-xs-6 photos1" id="photo">Section 3</div>
+                      <div class="col-md-3 col-sm-3 col-xs-6 photos1" id="photo">Additional information</div>
                       <div class="col-md-9 col-sm-8 col-xs-6 photos1" id="vid">
                         
                       </div>
@@ -918,7 +918,7 @@ border-radius:30%;
                       <!-- *****************Interest************** -->
                     <!-- *****************section 2************* -->
                     <div class="col-md-12 col-sm-12 col-xs-12 bgsec">
-                      <div class="col-md-3 col-sm-3 col-xs-6 photos1" id="photo">Section 2</div>
+                      <div class="col-md-3 col-sm-3 col-xs-6 photos1" id="photo">Individual/Organization profile</div>
                       <div class="col-md-8 col-sm-8 col-xs-6 photos1" id="vid">
                         
                       </div>
@@ -959,7 +959,7 @@ border-radius:30%;
                       </div>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12 bgsec">
-                      <div class="col-md-3 col-sm-3 col-xs-6 photos1" id="photo">Section 1</div>
+                      <div class="col-md-3 col-sm-3 col-xs-6 photos1" id="photo">Basic Information</div>
                       <div class="col-md-9 col-sm-8 col-xs-6 photos1" id="vid">
                         
                       </div>
