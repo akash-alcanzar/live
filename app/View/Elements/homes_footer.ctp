@@ -36,7 +36,7 @@
                     <li><a href="<?php echo HTTP_ROOT;?>/terms-and-conditions">TERMS & CONDITION</a></li>
                     <li><a href="<?php echo HTTP_ROOT;?>/how-it-works">HOW IT WORKS</a></li>
                     <li><a href="<?php echo HTTP_ROOT;?>/privacy">PRIVACY POLICY</a></li>
-                    <li><a href="<?php echo HTTP_ROOT;?>/help-center">HELP CENTER</a></li>
+                    <li><a href="<?php echo HTTP_ROOT;?>/help-center">PARTNER WITH US</a></li>
                     <li><a href="<?php echo HTTP_ROOT;?>/reviews-and-testimonials">REVIEWS & TESTMONIALS</a></li>
                   </ul>
                 </div>
