@@ -234,7 +234,11 @@ color:#1B191A;float: left;
 							                </div> 
 							            </div> 
 	
+<<<<<<< HEAD
 <div class="col-sm-12 col-xs-12" style="">
+=======
+    <div class="col-sm-12 col-xs-12" style="">
+>>>>>>> f528325b924d743d6309aa636dc9efac5fb60a1e
 					                		<div class="form-group br_state" style="margin-bottom: 10px;">
 					                			
                                                 <select class="form-control reg_input" name="is_type" id="is_type">
