@@ -1105,16 +1105,16 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
     <div class="">&nbsp;</div> 
     <div class="row">
         <div class="col-sm-12 nopadding">
- 			<a href="http://www.braingroom.com/gift/#individual"><?php echo $this->Html->image('Gift_for_individuals.jpg', array('alt' => 'Gift_for_individuals','class'=>'img-responsive'));?></a>
+ 			<a href="http://www.braingroom.com/gift/#individual"><?php echo $this->Html->image('banner.jpg', array('alt' => 'Gift_for_individuals','class'=>'img-responsive'));?></a>
         </div>
-      <div class="row">
+     <!-- <div class="row">
         <div class="col-sm-5 " style="padding: 3px 2px 0px 0px">
          <a href="http://www.braingroom.com/gift/#Corporate"><?php echo $this->Html->image('Gift_for_corporate.jpg', array('alt' => 'Gift_for_corporate','class'=>'img-responsive' ));?></a>
         </div>
         <div class="col-sm-7 " style="padding:4px 0px 0px 2px;">
          <a href="http://www.braingroom.com/gift/#ngo"><?php echo $this->Html->image('Gift_for_NGO.jpg', array('alt' => 'Gift_for_NGO','class'=>'img-responsive'));?></a>
         </div>
-      </div>
+      </div>-->
   </div>
   
         <!--Why Braingroom-->
