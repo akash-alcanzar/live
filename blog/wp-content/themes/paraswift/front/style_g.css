@@ -1,0 +1,346 @@
+.bdr{
+	border: 1px solid red;
+}
+
+.navbar{
+    margin-bottom:0px ! important;
+}
+@font-face {
+    font-family: 'os_bold';
+    src: url('../../fonts/OpenSans-Bold.ttf') ;
+}
+@font-face {
+    font-family: 'os_bold_italic';
+    src: url('../../fonts/OpenSans-BoldItalic.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'os_condBold';
+    src: url('../../fonts/OpenSans-CondBold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'os_condLight';
+    src: url('../../fonts/OpenSans-CondLight.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'os_CondLightItalic';
+    src: url('../../fonts/OpenSans-CondLightItalic.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'os_ExtraBold';
+    src: url('../../fonts/OpenSans-ExtraBold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'os_ExtraBoldItalic';
+    src: url('../../fonts/OpenSans-ExtraBoldItalic.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'os_Italic';
+    src: url('../../fonts/OpenSans-Italic.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'os_Light';
+    src: url('../../fonts/OpenSans-Light.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'os_LightItalic';
+    src: url('../../fonts/OpenSans-LightItalic.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'os_Regular';
+    src: url('../../fonts/OpenSans-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'os_Semibold';
+    src: url('../../fonts/OpenSans-Semibold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'SemiboldItalic';
+    src: url('../../fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+}
+
+/*common css*/
+.pad_all{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+.carousel-indicators .active {
+    background-color: #3ACDC5;
+}
+.learning01{
+    color: #125187;
+    font-family: "os_Semibold";
+    color: #1D4F8A;
+}
+
+.find_new01{
+    color:#302624;
+    font-family: "os_Regular";
+}
+
+.bg_clr01{
+    background-color: #38B9B5;
+}
+.btn_clr01{
+    background-color: transparent !important;
+    color:#302624 !important;
+    font-size: "os_Regular";
+    display: inline;
+    padding: 5px 30px !important;
+    border-radius: 0px !important;
+    border: 2px solid #302624 !important;
+}
+
+/*common css /*/
+.slide2_row1{
+     /*border-top:10px solid rgb(42, 147, 143); */
+     /*border-bottom:10px solid rgb(42, 147, 143);   */
+     padding-top: 17%; 
+      padding-bottom: 10px; 
+     width: 100%;
+    background-image: url('images/img/backforindex.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+/*.slide3_row1{
+    
+ margin-left: 30px;
+ margin-right: 30px; 
+}
+*/
+.slide2_row1 img{
+
+    margin-bottom: 0px;
+}
+
+.slide2_text{ color:#FFF;}
+.slider3_row_text1{
+
+    font-size:30px;
+}
+
+.footer_text{
+  font-size: 10px;
+  color: white;
+  float: left;
+  padding-left: 10px;
+}
+
+
+.footer_row1{
+  background-color: #333; 
+}
+
+
+
+@media only screen and (min-width: 200px) and (max-width: 767px) {
+    .learning01{font-size: 20px;}
+    .find_new01{font-size: 18px;}
+    .btn_clr01{font-size: 16px !important;}
+
+    .golden h4 {font-size: 18px;}
+    .slide2_text{font-size: 18px; }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .learning01{font-size: 22px;}
+    .find_new01{font-size: 20px;}
+    .btn_clr01{font-size: 18px !important;}
+   
+    .golden h4 {font-size: 20px;}
+    .slide2_text{font-size: 23px; }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .learning01{font-size: 24px;}
+    .find_new01{font-size: 23px;}
+    .btn_clr01{font-size: 20px !important;}
+    .map_ex{width: 20px;}
+    .slide2_text{font-size: 23px; }
+    .golden h4 {font-size: 22px;}
+
+}
+@media screen and (max-width: 1366px) and (min-width:1200px){
+    .find_new01{font-size: 26px;}
+}
+@media screen and (max-width: 1479px) and (min-width:1367px){
+    .b_1map {width: 55px;}
+    .find_new01{font-size: 22px;}
+}
+@media only screen and (min-width: 1200px) and (max-width: 1479px) {
+    .learning01{font-size: 24px;}
+    .btn_clr01{font-size: 20px !important;}
+
+    .map_icon{width: 20px;}
+    .golden h4 {font-size: 20px;}
+    .btn_clr01 {
+        background-color: transparent !important;
+        color: #302624 !important;
+        display: inline;
+        padding: 5px 25px !important;
+        border-radius: 0px !important;
+        border: 2px solid #302624 !important;
+        font-size: 20px;
+    }
+    .slide2_text{font-size: 23px; }
+}
+
+@media only screen and (min-width: 1480px){
+    .learning01{font-size: 24px;}
+    .find_new01{font-size: 24px;}
+    .btn_clr01{font-size: 22px !important;}
+   
+    .golden h4 {font-size: 24px;}
+    .slide2_text{font-size: 23px; }
+}
+
+/*Big Image Slider */
+
+.slider1_row1{
+ padding-right: 0px;
+ padding-left:0px; 
+}
+
+.slider1_row1 img{
+    width: 100%;
+    max-height: 768px;
+}
+/************/
+
+/***************************najmuddin css****************************/
+/*****************************bottom image******************/
+@media (max-width: 1920) and (min-width: 768px){
+    .golden {height: 470px;}
+}
+.golden {
+    padding-bottom: 14px;
+    padding-top: 0;
+}
+.golden h4 {
+    color: hsl(195, 100%, 1%);
+    font-family: "os_Regular";    
+    padding-left: 14px;
+    padding-right: 14px;
+}
+.golden p {
+    color: hsl(152, 74%, 39%);
+    font-family: "os_Regular";
+    font-size: 13px;
+}
+.golden h5 {
+    color: hsl(0, 0%, 18%);
+    font-family: "os_Regular";
+    font-size: 16px;
+}
+.golden i{
+    background-color: #C6DFB7;
+    color: #E39E29;
+    font-size: 18px;
+}
+.golden button {
+    background-color: hsl(70, 20%, 94%);
+    border: 1px solid hsl(0, 0%, 44%);
+    color: hsl(0, 0%, 18%);
+    font-size: 18px;
+    padding: 3px 16px;
+    text-transform: capitalize;
+}
+#detail_pad{
+    padding-bottom: 80px;
+}
+.div_pad{
+    padding-left: 9%;
+}
+/******************media screen 15 april**************/
+@media (max-width: 1920px) and (min-width: 1200px){
+    .golden h4{padding-left: 8px;padding-right: 8px;}
+}
+@media (max-width: 1199px) and (min-width: 992px){
+.golden {
+    padding-bottom: 14px;
+    padding-top: 0;
+}
+.golden h4 {
+    color: hsl(195, 100%, 1%);
+    font-family: "os_Regular";
+    
+    padding-left: 16px;
+    padding-right: 16px;
+}
+.golden p {
+    color: hsl(152, 74%, 39%);
+    font-family: "os_Regular";
+    font-size: 13px;
+}
+.golden h5 {
+    color: hsl(0, 0%, 18%);
+    font-family: "os_Regular";
+    font-size: 18px;
+}
+.golden i{
+    background-color: #C6DFB7;
+    color: #E39E29;
+    font-size: 16px;
+}
+.golden button {
+    background-color: hsl(70, 20%, 94%);
+    border: 1px solid hsl(0, 0%, 44%);
+    color: hsl(0, 0%, 18%);
+    font-size: 18px;
+    padding: 0px 10px;
+    text-transform: capitalize;
+}
+#detail_pad{
+    padding-bottom: 80px;
+}
+.div_pad{
+    padding-left: 9%;
+}
+} 
+/******************media screen 15 april**************/
+/*****************************bottom image******************/
+/*****************************image detail*****************/
+.b_sl{
+    background-color: #E5E5E5;
+}
+.b_sl img{
+    padding: 5px;
+}
+@media (min-width: 501px) and (max-width: 1366px) { 
+.b_1map{
+    width: 55px;
+}
+@media (min-width: 1367px) and (max-width: 1479px) { 
+    .find_new01 {font-size: 21px;}
+}
+}
+
+
+
+/*****************************image detail*****************/
+/***************************najmuddin css****************************/
+/*****************code 27 april**************/
+.slide2_row2{
+     /*border-top:10px solid rgb(42, 147, 143); */
+     /*border-bottom:10px solid rgb(42, 147, 143);   */
+     padding-top: 140px; 
+      padding-bottom: 10px; 
+     width: 100%;
+    background-image: url('images/img/backforindex2.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+/*****************code 27 april**************/
+/*****************code 6 may****************/
+.slide2_row12 {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    width: 100%;
+    background-image: url("../../img/img/backforindex2.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+/*****************code 6 may****************/
+/*****************code 7 april*************/
+.pdcmnty{padding-top: 45px;}
+/*****************code 7 april*************/

@@ -1,0 +1,67 @@
+@media all and (max-width: 1100px){
+	.site-branding p.site-title a {
+		font-size: 16px;
+	}
+}
+@media all and (max-width: 980px){
+	.paraswift-footer-widget .col-md-4, 
+	.paraswift-footer-widget .col-md-3, 
+	.paraswift-footer-widget .col-md-6, 
+	.paraswift-footer-widget .col-md-12,
+	.paraswift-innerpage .col-md-9,
+	.paraswift-service .col-md-4.service-box,
+	.paraswift-service .col-md-6.service-box{
+		width: 100%;
+	}
+	.topbar-section .col-md-4{
+		width: 50%;
+		float: left;
+	}
+	.topbar-section .col-md-8{
+		width: 50%;
+		float: right;
+	}
+	.site-branding img{
+		width: auto;
+	}
+	.paraswift-innerpage .col-md-9 {
+	    border-right: 0;
+	    padding: 50px 0px 0 0;
+	}
+	#paraswift-sidebar {
+	    border-left: 0;
+	    margin-left: -1px;
+	    padding: 50px 0 0 0px;
+	    width: 100%;
+	}
+	.site-branding {
+	    margin: 0 auto 0 0;
+	    text-align: center;
+	}
+	
+	 
+}
+@media all and (max-width: 768px){
+	.paraswift-blog-section .col-md-4,
+	.paraswift-service .col-md-4,
+	.paraswift-recent-post-box{
+		width: 100%;
+	}
+	.topbar-section .col-md-4{
+		width: 100%;
+		float: left;
+		text-align: center;
+	}
+	.topbar-section .col-md-8,
+	#paraswift-socials ul{
+		width: 100%;
+		float: left;
+		text-align: center;
+	}
+	.site-branding {
+		text-align: center;
+	}
+
+}
+@media all and (max-width: 480px){
+}

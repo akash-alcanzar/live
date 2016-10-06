@@ -1,0 +1,303 @@
+.row.main-navigation{
+	background:#2f2e2e;
+} 
+ul#para-nav,
+.default-menu ul{
+	float: right;
+	width: auto;
+	list-style: none;
+	margin: 0px;
+}
+ul#para-nav li,
+.default-menu ul li{
+	float: left;
+	padding: 0 20px;
+	line-height: 85px;
+	position: relative;
+}
+ul#para-nav li a,
+.default-menu ul li a{
+	padding: 25px 0;
+	color: #7d7d7d;
+}
+ul#para-nav li.menu-item-has-children a:before{
+	width: 0;
+    height: 0;
+    content: '\203A';
+    float: right;
+    position: absolute;
+    bottom: 52%;
+    right: -7px;
+    font-size: 21px;
+    transform: rotate(90deg);
+}
+ul#para-nav li.current_page_item,
+ul#para-nav li:hover {
+    color: #3CB5D0;
+}
+ul#para-nav li.current_page_item a,
+ul#para-nav li a:hover,
+ul#para-nav li:hover a{
+    color: #3CB5D0;
+}
+.logo-section.sticky ul#para-nav li.menu-item-has-children:after{
+	 border-color: #fff transparent transparent transparent;
+}
+ul#para-nav li ul{
+	position: absolute;
+	width: 190px;
+	background:#3cb5d0;
+	left: 0;
+}
+ul#para-nav li ul li a:before{display: none;}
+ul#para-nav li .current-menu-item.current_page_item a{
+	color: #222 !important;
+}
+ul#para-nav li li{
+	display: none;
+	width: 100%;
+	float:left;
+	border-bottom: 1px soild #29a9c6;
+	position: relative;
+	line-height: 40px;
+	  -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+	-webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+    text-decoration: none;
+    border-bottom: 1px solid #29a9c6;
+}
+ul#para-nav li li a{
+	padding: 10px 0;
+}
+ul#para-nav ul.sub-menu li li{
+	display: none;
+}
+ul#para-nav ul.sub-menu li ul{
+	position: absolute;
+	float: left;
+	margin-left: -190px;
+	left: 0;
+}
+ul#para-nav ul.sub-menu li:hover li{
+	display: block;
+	float: right;
+	margin-left: 190px;
+	position: relative;
+}
+ul#para-nav li li:hover{
+	background: #29a9c6;
+}
+ul#para-nav li:hover li{
+	display: block;
+}
+ul#para-nav li:hover li a{
+	color: #fff;
+	width: 100%;
+	float: left;
+	 -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+    text-decoration: none;
+}
+ul#para-nav li:hover ul:before {
+    content: '';
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent #3cb5d0 transparent;
+    top: -10px;
+    left: 20px;
+    position: absolute;
+}
+ul#para-nav li:hover ul ul:before{
+	display: none;
+}
+ul#para-nav  ul ul ul{
+	display: none;
+}
+ul#para-nav  ul ul li:hover ul{
+	display: block;
+}
+/*ul#para-nav ul.sub-menu li.menu-item-has-children:after{
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 6px 5px 5px 0;
+	border-color: transparent #fff transparent transparent;
+	float: left;
+	content: '';
+    position: absolute;
+    bottom: 37%;
+    left: 4%;
+  
+}*/
+/*CSS for resposnive menu*/
+.responsive-menu{
+	display: none;
+}
+.responsive-menu ul#para-nav{
+	background-color: #333;
+}
+.responsive-menu ul#para-nav li, 
+.logo-section.sticky .responsive-menu ul#para-nav li{
+	line-height: 40px;
+	border-bottom: 1px solid #323232 !important;
+}
+.logo-section.sticky .default-menu li{
+	line-height: 60px;
+}
+.logo-section h1{
+	margin-bottom: 0;
+}
+.logo-section.sticky h1{
+	margin-bottom: 0;
+}
+.logo-section.sticky h1 a{
+	margin-bottom: 0;
+	color: #fff;
+	font-size: 20px;
+}
+.logo-section.sticky p{
+	line-height: 18px;
+	color: #fff;
+	font-size: 15px;
+}
+.logo-section.sticky .default-menu li a{
+	color: #fff;
+}
+.responsive-menu .btn {
+    width: 100%;
+    text-align: left;
+    float: left;
+    background: #3CB5D0 !important;
+    border-radius: 0;
+    color: #fff !important; 
+    text-transform: uppercase;
+    white-space: normal;
+}
+@media (max-width:980px) and (min-width:200px){
+.logo-section .col-md-9{
+    position: relative;
+    left: 0;
+    padding: 0;
+    width: 100%;
+}
+.row.logo-section{
+	padding-left: 0;
+	padding-right: 0;
+}
+ul#pararesponsive-menu {
+    list-style: none;
+    position: absolute;
+    clear: both;
+    float: left;
+    background: #ededed;
+    top: 32px;
+    width: 100%;
+}
+
+.responsive-menu .btn i.fa{
+    float: right;
+   margin-top: 3px;
+}
+ul#pararesponsive-menu li ul{
+	list-style: none;
+}
+ul#pararesponsive-menu li.menu-item-has-children a:after{
+	content: '\203A';
+	font-weight: bold;
+	float: right;
+	transform: rotate(90deg);
+    transform: -webkit-rotate(90deg);
+    transform: -moz-rotate(90deg);
+}
+ul#pararesponsive-menu li.menu-item-has-children ul{
+	padding:0;
+	margin: 0;
+	float: left;
+	width: 100%;
+}
+ul#pararesponsive-menu li li a:after{display: none;}
+ul#pararesponsive-menu li.menu-item-has-children li a{
+	padding-left: 20px;
+	float: left;
+	width: 100%;
+	background: #fff;
+}
+.logo-section.sticky ul#pararesponsive-menu{
+	line-height: 20px;
+	background-color: #fff;
+
+}
+ul#pararesponsive-menu li{
+	width: 100%;
+
+}
+ul#pararesponsive-menu li a{width: 100%; float: left; background: #efefef; padding:0 20px;
+	line-height: 35px;
+border-bottom: 1px solid;
+}
+}
+
+/*===================================================
+/*MENU ANIMATION EFFECT
+/*=================================================== */
+ul#para-nav li:hover > ul,
+#para-nav ul li:hover > ul{
+	display:block;
+	-moz-animation: fadeInUp .2s ease-in  ;
+    -webkit-animation: fadeInUp .2s ease-in ;
+    animation:fadeInUp .2s ease-in ;
+}
+@media screen and (max-width: 980px){
+	.responsive-menu{
+		display: block;
+	}
+	#full-menu{
+		display: none;
+	}
+	ul#para-nav li{
+		width: 100%;
+		float: left;
+		line-height: 40px;
+		
+	}
+	.logo-section.sticky {
+		height: auto !important;
+		opacity: 1.0 !important;
+	}
+	ul#pararesponsive-menu {
+		 height: 350px;
+		overflow-y: scroll;
+	}
+}
+@media screen and (max-width:768px){
+	.site-header{
+		position: relative;
+	}
+	.paraswift-slider img,
+	.paraswift-slider{
+		min-height: 220px !important;
+	}
+	ul#pararesponsive-menu {
+		 height: 280px;
+		overflow-y: scroll;
+	}
+	
+}
+@media screen and (max-width: 480px){
+.logo-section.sticky img {
+    width: auto;
+    margin-bottom: 10px;
+    height: 45px;
+}
+ul#pararesponsive-menu {
+		 height: 200px;
+		overflow-y: scroll;
+	}
+}

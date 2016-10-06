@@ -1,0 +1,122 @@
+=============================================================================
+Changelog describe all the changes made to program source files
+=============================================================================
+
+
+=======================================
+Changelog Legend:
+=======================================
+
+[+] = Feature Added
+[*] = Feature Changed
+[^] = Feature Moved
+[=] = Feature No Changes
+[x] = Feature Deleted
+[!] = Bugs Fixed
+
+=========================================
+version 1.1.5> September 20, 2016
+=========================================
+[!] Bug fixed Php Parse error
+[!] Fixed Responsive sub-menu
+[*] Translatable ready Updated(Regenerating .POT file.
+
+=========================================
+version 1.1.4> September 16, 2016
+=========================================
+[!] Bug fixed Php Parse error
+[!] Fixed Responsive sub-menu
+[*] Translatable ready Updated(Regenerating .POT file.
+
+
+=========================================
+version 1.1.3> July 24, 2016
+=========================================
+[!] Bug fixed post nave for excerpt and seo functionality.
+[*] Translatable ready Updated(Regenerating .POT file.
+
+=========================================
+version 1.1.2> July 15, 2016
+=========================================
+[!] Fixing style issue of responsive scroll menu
+[*] Translatable ready Updated(Regenerating .POT file.
+
+
+=========================================
+version 1.1.1> July 15, 2016
+=========================================
+[!] Fixing style issue of responsive menu
+[*] Translatable ready Updated(Regenerating .POT file.
+
+=========================================
+version 1.1.0> July 7, 2016
+=========================================
+[!] Fixing style issue of theme/sidebar hover
+[!] Fixing style issue for header/logo
+[!] Fixing style issue for radio/checkbox form type
+[*] Translatable ready Updated(Regenerating .POT file.
+
+=========================================
+
+=========================================
+version 1.0.9> June 11, 2016
+=========================================
+[!] Fixing all issue according to reviewer
+[*] Translatable ready Updated(Regenerating .POT file.
+=========================================
+
+
+=========================================
+version 1.0.8 > June 6, 2016
+=========================================
+[!] Fixing all issue according to reviewer
+[*] Translatable ready Updated(Regenerating .POT file)
+[+] Responsive navigartion improved.
+=========================================
+ 
+
+
+=========================================
+version 1.0.7 > April 22, 2016
+=========================================
+[!] Theme support 4 columns gallery(default columns 3).
+[*] Translatable ready (Regenerating .POT file)
+[+] Adding Post-format-content for supported format.
+=========================================
+
+=========================================
+version 1.0.6 > April 21, 2016
+=========================================
+[!] Theme support the default setting (3 columns) for gallery fixed.
+[*] Translatable ready (Regenerating .POT file)
+[+] Adding licence credit for the 'Glyphicons Halflings' font.
+=========================================
+
+
+version 1.0.5 > April 20, 2016
+=========================================
+[X] Delete unwanted source
+[!] Translatable ready fixed/All text translatable
+[!] Custom function/variable/filenane fixed
+[+] Adding Next Previous link in loop posts (index.php).
+
+=========================================
+version 1.0.4 > April 10, 2016
+=========================================
+[+] Adding Next Previous link in loop posts.
+[X] Delete unwanted/unuesd js/css/images files.
+[!] Poested Date link bug fixed.
+[!] Customizer bug fixed.
+[+] Adding Credit/license for required sources.
+[X] Deleted all minified js/css files.
+
+
+=========================================
+version 1.0.3 > April 4, 2016 
+=========================================
+[+] Adding Next Previous link in single post
+
+
+=========================================
+Initial Released: < version 1.0.2 > December 11, 2015 
+=========================================

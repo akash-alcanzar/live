@@ -1,0 +1,192 @@
+.well
+{
+margin-top: 67px;
+}
+.bs-countries-modal-sm {
+  display: none;
+  height: 0;
+}
+.bs-countries-modal-sm .modal-dialog {
+  right: -13px;
+  top: 16px;
+  width: 600px;
+  z-index: 6;
+}
+.directory-counties {
+  margin-top: 10px;
+  overflow: hidden;
+}
+.directory-counties h4 {
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.sidebar .filter-row {
+  margin-bottom: 10px;
+}
+.listings p {
+  margin: 0;
+}
+.listings h3 {
+  margin: 0;
+}
+.listings .listing-row {
+  border-bottom: 1px solid #e6e6e6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.listings .listing-row:nth-child(even) {
+  background: #fafafa;
+}
+.listings .premium.listing-row {
+  background: #FFFFDD;
+  background: #E0F4FF;
+  border-bottom: 1px solid #c6ebff;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+}
+.listings .listing-row.last {
+  border-bottom: 1px solid #fff;
+}
+.recent-listings .panel-body {
+  padding: 0 15px;
+}
+.recent-listings .price-text {
+  text-align: right;
+}
+.recent-listings .listing-row {
+  border-bottom: 1px solid #e6e6e6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.recent-listings .listing-row:nth-child(even) {
+  background: #fafafa;
+}
+.ad-options {
+  margin: 0;
+  padding: 0;
+}
+.ad-options li {
+  display: inline;
+  list-style-type: none;
+  padding-right: 20px;
+}
+
+a.underline {
+  text-decoration: underline;
+}
+a.link-info {
+  color: #65A020;
+}
+a.link-info:hover {
+  color: #333333;
+}
+h3 {
+    font-size: 16px;
+    line-height: 20px;
+}
+p.muted {
+    color: #999999;
+	}
+p
+{
+font-family: 'Open Sans', Tahoma, sans-serif;
+    font-size: 13px;
+    line-height: 1.428571429;
+    color: #333333;
+}
+.thumbnail-radius img
+{
+border-radius: 10px;
+margin-left:-8px;
+width: 128px;
+height: 128px;
+}
+.sidebar-menu .nav li {
+  list-style: none;
+}
+.sidebar-menu .nav > li > a {
+  padding: 1px 10px;
+}
+.sidebar-menu .nav > li > a:hover {
+  color: #333333;
+  background: transparent;
+}
+.sidebar .form-inline .form-group {
+  margin-bottom: 10px;
+}
+.sidebar label {
+  font-weight: 100;
+}
+.sidebar .form-control {
+  height: 25px;
+  line-height: 25px;
+  padding: 0;
+}
+.sidebar .filter-row {
+  margin-bottom: 10px;
+}
+.home-tron {
+  height: 350px;
+  margin-bottom: 0;
+}
+.home-tron-search {
+  margin-bottom: 0;
+  padding: 0px 0;
+}
+.home-tron-search .home-tron-search-inner {
+  border-radius: 3px;
+  padding: 24px 0;
+}
+.home-tron-search .form-control {
+  padding: 10px 8px;
+}
+.home-tron-search .input-group-addon {
+  padding: 0;
+}
+.home-tron-search .input-group-addon.input-group-addon-text {
+  background: transparent;
+  color: #000;
+  border: none;
+  padding-right: 20px;
+}
+.home-tron-search .input-group-addon .btn {
+  padding: 9px 18px;
+}
+.home-tron-search .input-group-addon li a {
+  text-align: left;
+  padding: 10px 18px;
+}
+.home-tron-search .input-group-addon .btn {
+  text-transform: none;
+}
+.home-tron-search .input-group-addon .btn {
+  color: #000;
+  font-weight: 100;
+}
+.home-tron-search .input-group-addon .btn .dropdown-menu ul il a {
+  text-align: left;
+}
+.home-tron-search .btn {
+  -moz-user-select: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 1.42857;
+  margin-top: 0;
+  padding: 13px 15px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.home-tron-search .form-control {
+  padding: 0px 15px;
+  height: 47px;
+}
+.home-search .form-control {
+  padding: 10px 8px;
+}
+	

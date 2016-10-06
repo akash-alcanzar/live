@@ -1,0 +1,500 @@
+.srchbutt {
+    height: 40px;
+    position: relative;
+    right: 9px;
+    box-shadow: 1px 0px 3px 1px #999 !important;
+    border: 1px solid #999 !important;
+    background-color: #eee;
+    top: -5px;
+    padding-right: 12px;
+    padding-left: 12px;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+    .srchbutt{top: -4px !important;}
+    @media (max-width: 1920px) and (min-width: 1200px){
+       .srchbutt{top: -5px !important;} 
+    }
+    .srchbutt {top: -5px !important;}
+    @media screen and (max-width: 991px) and (min-width: 768px){
+        .srchbutt{top: -3px !important;}
+    }
+    @media screen and (max-width: 767px) and (min-width: 320px){
+        .srchbutt{top: -4px !important;}
+    }
+    @media screen and (max-width: 1920px) and (min-width: 1880px){
+        .buttclass {font-size: 22px !important;}
+        .butidea  {font-size: 22px !important;}
+        .butgift{font-size: 22px !important;}
+        .b_signup{font-size: 22px !important;}
+        .b_chennai{font-size: 22px !important;}
+        .navbar-nav > li > a{font-size: 22px !important;}
+        .main-nav li{margin: 0px 6px !important;}
+    }
+    @media screen and (max-width: 1879px) and (min-width: 1849px){
+        .buttclass {font-size: 22px !important;}
+        .butidea  {font-size: 22px !important;}
+        .butgift{font-size: 22px !important;}
+        .b_signup{font-size: 22px !important;}
+        .b_chennai{font-size: 22px !important;}
+        .navbar-nav > li > a{font-size: 22px !important;}
+        .main-nav li{margin: 0px 4px !important;}
+    }
+     @media screen and (max-width: 1848px) and (min-width: 1818px){
+        .buttclass {font-size: 22px !important;}
+        .butidea  {font-size: 22px !important;}
+        .butgift{font-size: 22px !important;}
+        .b_signup{font-size: 22px !important;}
+        .b_chennai{font-size: 22px !important;}
+        .navbar-nav > li > a{font-size: 22px !important;}
+        .main-nav li{margin: 0px 2px !important;}
+    }
+    @media screen and (max-width: 1817px) and (min-width: 1787px){
+        .buttclass {font-size: 22px !important;}
+        .butidea  {font-size: 22px !important;}
+        .butgift{font-size: 22px !important;}
+        .b_signup{font-size: 22px !important;}
+        .b_chennai{font-size: 22px !important;}
+        .navbar-nav > li > a{font-size: 22px !important;}
+        .main-nav li{margin: 0px 0px !important;}
+    }
+    @media screen and (max-width: 1786px) and (min-width: 1756px){
+        .buttclass {font-size: 20px !important;}
+        .butidea  {font-size: 20px !important;}
+        .butgift{font-size: 20px !important;}
+        .b_signup{font-size: 20px !important;}
+        .b_chennai{font-size: 20px !important;}
+        .navbar-nav > li > a{font-size: 20px !important;}
+        .main-nav li{margin: 0px 1px !important;}
+    }
+    @media screen and (max-width: 1755px) and (min-width: 1715px){
+        .buttclass {font-size: 19px !important;}
+        .butidea  {font-size: 19px !important;}
+        .butgift{font-size: 19px !important;}
+        .b_signup{font-size: 19px !important;}
+        .b_chennai{font-size: 19px !important;}
+        .navbar-nav > li > a{font-size: 19px !important;}
+        .main-nav li{margin: 0px 3px !important;}
+    }
+    @media screen and (max-width: 1714px) and (min-width: 1684px){
+        .buttclass {font-size: 18px !important;}
+        .butidea  {font-size: 18px !important;}
+        .butgift{font-size: 18px !important;}
+        .b_signup{font-size: 18px !important;}
+        .b_chennai{font-size: 18px !important;}
+        .navbar-nav > li > a{font-size: 18px !important;}
+        .main-nav li{margin: 0px 1px !important;}
+    }
+    @media screen and (max-width: 1683px) and (min-width: 1653px){
+        .buttclass {font-size: 20px !important;}
+        .butidea  {font-size: 20px !important;}
+        .butgift{font-size: 20px !important;}
+        .b_signup{font-size: 20px !important;}
+        .b_chennai{font-size: 20px !important;}
+        .navbar-nav > li > a{font-size: 20px !important;}
+        .main-nav li{margin: 0px -1px !important;}
+    }
+    @media screen and (max-width: 1652px) and (min-width: 1632px){
+        .buttclass {font-size: 19px !important;}
+        .butidea  {font-size: 19px !important;}
+        .butgift{font-size: 19px !important;}
+        .b_signup{font-size: 19px !important;}
+        .b_chennai{font-size: 19px !important;}
+        .navbar-nav > li > a{font-size: 19px !important;}
+        .main-nav li{margin: 0px 2px !important;}
+    }
+    @media screen and (max-width: 1631px) and (min-width: 1601px){
+        .buttclass {font-size: 19px !important;}
+        .butidea  {font-size: 19px !important;}
+        .butgift{font-size: 19px !important;}
+        .b_signup{font-size: 19px !important;}
+        .b_chennai{font-size: 19px !important;}
+        .navbar-nav > li > a{font-size: 19px !important;}
+        .main-nav li{margin: 0px 0px !important;}
+    }
+    @media screen and (max-width: 1600px) and (min-width: 1570px){
+        .buttclass {font-size: 19px !important;}
+        .butidea  {font-size: 19px !important;}
+        .butgift{font-size: 19px !important;}
+        .b_signup{font-size: 19px !important;}
+        .b_chennai{font-size: 19px !important;}
+        .navbar-nav > li > a{font-size: 19px !important;}
+        .main-nav li{margin: 0px -2px !important;}
+    }
+    @media screen and (max-width: 1569px) and (min-width: 1539px){
+        .buttclass {font-size: 15px !important;}
+        .butidea  {font-size: 15px !important;}
+        .butgift{font-size: 15px !important;}
+        .b_signup{font-size: 15px !important;}
+        .b_chennai{font-size: 15px !important;}
+        .navbar-nav > li > a{font-size: 18px !important;}
+        .main-nav li{margin: 0px 3px !important;}
+    }
+     @media screen and (max-width: 1538px) and (min-width: 1508px){
+        .buttclass {font-size: 15px !important;}
+        .butidea  {font-size: 15px !important;}
+        .butgift{font-size: 15px !important;}
+        .b_signup{font-size: 15px !important;}
+        .b_chennai{font-size: 15px !important;}
+        .navbar-nav > li > a{font-size: 18px !important;}
+        .main-nav li{margin: 0px 1px !important;}
+    }
+    @media screen and (max-width: 1507px) and (min-width: 1477px){
+        .buttclass {font-size: 15px !important;}
+        .butidea  {font-size: 15px !important;}
+        .butgift{font-size: 15px !important;}
+        .b_signup{font-size: 15px !important;}
+        .b_chennai{font-size: 15px !important;}
+        .navbar-nav > li > a{font-size: 16px !important;}
+        .main-nav li{margin: 0px 9px !important;}
+    }
+    @media screen and (max-width: 1477px) and (min-width: 1447px){
+        .buttclass {font-size: 15px !important;}
+        .butidea  {font-size: 15px !important;}
+        .butgift{font-size: 15px !important;}
+        .b_signup{font-size: 15px !important;}
+        .b_chennai{font-size: 15px !important;}
+        .navbar-nav > li > a{font-size: 15px !important;}
+        .main-nav li{margin: 0px 12px !important;}
+    }
+    @media screen and (max-width: 1446px) and (min-width: 1416px){
+        .buttclass {font-size: 15px !important;}
+        .butidea  {font-size: 15px !important;}
+        .butgift{font-size: 15px !important;}
+        .b_signup{font-size: 15px !important;}
+        .b_chennai{font-size: 15px !important;}
+        .navbar-nav > li > a{font-size: 15px !important;}
+        .main-nav li{margin: 0px 10px !important;}
+    }
+     @media screen and (max-width: 1415px) and (min-width: 1385px){
+        .buttclass {font-size: 15px !important;}
+        .butidea  {font-size: 15px !important;}
+        .butgift{font-size: 15px !important;}
+        .b_signup{font-size: 15px !important;}
+        .b_chennai{font-size: 15px !important;}
+        .navbar-nav > li > a{font-size: 15px !important;}
+        .main-nav li{margin: 0px 7px !important;}
+    }
+    @media screen and (max-width: 1384px) and (min-width: 1364px){
+        .buttclass {font-size: 15px !important;}
+        .butidea  {font-size: 15px !important;}
+        .butgift{font-size: 15px !important;}
+        .b_signup{font-size: 15px !important;}
+        .b_chennai{font-size: 15px !important;}
+        .navbar-nav > li > a{font-size: 15px !important;}
+        .main-nav li{margin: 0px 6px !important;}
+    }
+    @media screen and (max-width: 1363px) and (min-width: 1333px){
+        .buttclass {font-size: 15px !important;}
+        .butidea  {font-size: 15px !important;}
+        .butgift{font-size: 15px !important;}
+        .b_signup{font-size: 15px !important;}
+        .b_chennai{font-size: 15px !important;}
+        .navbar-nav > li > a{font-size: 15px !important;}
+        .main-nav li{margin: 0px 4px !important;}
+    }
+    @media screen and (max-width: 1332px) and (min-width: 1302px){
+        .buttclass {font-size: 14px !important;}
+        .butidea  {font-size: 14px !important;}
+        .butgift{font-size: 14px !important;}
+        .b_signup{font-size: 14px !important;}
+        .b_chennai{font-size: 14px !important;}
+        .navbar-nav > li > a{font-size: 14px !important;}
+        .main-nav li{margin: 0px 7px !important;}
+    }
+    @media screen and (max-width: 1301px) and (min-width: 1271px){
+        .buttclass {font-size: 14px !important;}
+        .butidea  {font-size: 14px !important;}
+        .butgift{font-size: 14px !important;}
+        .b_signup{font-size: 14px !important;}
+        .b_chennai{font-size: 14px !important;}
+        .navbar-nav > li > a{font-size: 14px !important;}
+        .main-nav li{margin: 0px 5px !important;}
+    }
+    @media screen and (max-width: 1270px) and (min-width: 1240px){
+        .buttclass {font-size: 13px !important;}
+        .butidea  {font-size: 13px !important;}
+        .butgift{font-size: 13px !important;}
+        .b_signup{font-size: 13px !important;}
+        .b_chennai{font-size: 13px !important;}
+        .navbar-nav > li > a{font-size: 13px !important;}
+        .main-nav li{margin: 0px 8px !important;}
+    }
+    @media screen and (max-width: 1239px) and (min-width: 1200px){
+        .buttclass {font-size: 13px !important;}
+        .butidea  {font-size: 13px !important;}
+        .butgift{font-size: 13px !important;}
+        .b_signup{font-size: 13px !important;}
+        .b_chennai{font-size: 13px !important;}
+        .navbar-nav > li > a{font-size: 13px !important;}
+        .main-nav li{margin: 0px 5px !important;}
+    }
+    @media screen and (max-width: 1199px) and (min-width: 1169px){
+        .buttclass {font-size: 13px !important;}
+        .butidea  {font-size: 13px !important;}
+        .butgift{font-size: 13px !important;}
+        .b_signup{font-size: 13px !important;}
+        .b_chennai{font-size: 13px !important;}
+        .navbar-nav > li > a{font-size: 13px !important;}
+        .main-nav li{margin: 0px 19px !important;}
+    }
+    @media screen and (max-width: 1168px) and (min-width: 1138px){
+        .buttclass {font-size: 13px !important;}
+        .butidea  {font-size: 13px !important;}
+        .butgift{font-size: 13px !important;}
+        .b_signup{font-size: 13px !important;}
+        .b_chennai{font-size: 13px !important;}
+        .navbar-nav > li > a{font-size: 13px !important;}
+        .main-nav li{margin: 0px 16px !important;}
+    }
+    @media screen and (max-width: 1137px) and (min-width: 1108px){
+        .buttclass {font-size: 13px !important;}
+        .butidea  {font-size: 13px !important;}
+        .butgift{font-size: 13px !important;}
+        .b_signup{font-size: 13px !important;}
+        .b_chennai{font-size: 13px !important;}
+        .navbar-nav > li > a{font-size: 13px !important;}
+        .main-nav li{margin: 0px 14px !important;}
+    }
+    @media screen and (max-width: 1107px) and (min-width: 1077px){
+        .buttclass {font-size: 13px !important;}
+        .butidea  {font-size: 13px !important;}
+        .butgift{font-size: 13px !important;}
+        .b_signup{font-size: 13px !important;}
+        .b_chennai{font-size: 13px !important;}
+        .navbar-nav > li > a{font-size: 13px !important;}
+        .main-nav li{margin: 0px 11px !important;}
+    }
+    @media screen and (max-width: 1076px) and (min-width: 1046px){
+        .buttclass {font-size: 13px !important;}
+        .butidea  {font-size: 13px !important;}
+        .butgift{font-size: 13px !important;}
+        .b_signup{font-size: 13px !important;}
+        .b_chennai{font-size: 13px !important;}
+        .navbar-nav > li > a{font-size: 13px !important;}
+        .main-nav li{margin: 0px 9px !important;}
+    }
+    @media screen and (max-width: 1045px) and (min-width: 1015px){
+        .buttclass {font-size: 13px !important;}
+        .butidea  {font-size: 13px !important;}
+        .butgift{font-size: 13px !important;}
+        .b_signup{font-size: 13px !important;}
+        .b_chennai{font-size: 13px !important;}
+        .navbar-nav > li > a{font-size: 13px !important;}
+        .main-nav li{margin: 0px 6px !important;}
+    }
+    @media screen and (max-width: 1014px) and (min-width: 992px){
+        .buttclass {font-size: 13px !important;}
+        .butidea  {font-size: 13px !important;}
+        .butgift{font-size: 13px !important;}
+        .b_signup{font-size: 13px !important;}
+        .b_chennai{font-size: 13px !important;}
+        .navbar-nav > li > a{font-size: 13px !important;}
+        .main-nav li{margin: 0px 4px !important;}
+    }
+    @media screen and (max-width: 991px) and (min-width: 961px){
+        .buttclass {font-size: 13px !important;}
+        .butidea  {font-size: 13px !important;}
+        .butgift{font-size: 13px !important;}
+        .b_signup{font-size: 13px !important;}
+        .b_chennai{font-size: 13px !important;}
+        .navbar-nav > li > a{font-size: 13px !important;}
+        .main-nav li{margin: 0px 9px !important;}
+    }
+    @media screen and (max-width: 960px) and (min-width: 930px){
+        .buttclass {font-size: 13px !important;}
+        .butidea  {font-size: 13px !important;}
+        .butgift{font-size: 13px !important;}
+        .b_signup{font-size: 13px !important;}
+        .b_chennai{font-size: 13px !important;}
+        .navbar-nav > li > a{font-size: 13px !important;}
+        .main-nav li{margin: 0px 6px !important;}
+    }
+    @media screen and (max-width: 929px) and (min-width: 898px){
+        .buttclass {font-size: 12px !important;}
+        .butidea  {font-size: 12px !important;}
+        .butgift{font-size: 12px !important;}
+        .b_signup{font-size: 12px !important;}
+        .b_chennai{font-size: 12px !important;}
+        .navbar-nav > li > a{font-size: 12px !important;}
+        .main-nav li{margin: 0px 8px !important;}
+    }
+    @media screen and (max-width: 897px) and (min-width: 867px){
+        .buttclass {font-size: 11px !important;}
+        .butidea  {font-size: 11px !important;}
+        .butgift{font-size: 11px !important;}
+        .b_signup{font-size: 11px !important;}
+        .b_chennai{font-size: 11px !important;}
+        .navbar-nav > li > a{font-size: 11px !important;}
+        .main-nav li{margin: 0px -1px !important;}
+    }
+    @media screen and (max-width: 868px) and (min-width: 838px){
+        .buttclass {font-size: 10px !important;}
+        .butidea  {font-size: 10px !important;}
+        .butgift{font-size: 10px !important;}
+        .b_signup{font-size: 10px !important;}
+        .b_chennai{font-size: 10px !important;}
+        .navbar-nav > li > a{font-size: 10px !important;}
+        .main-nav li{margin: 0px 7px !important;}
+    }
+    @media screen and (max-width: 837px) and (min-width: 807px){
+        .buttclass {font-size: 10px !important;}
+        .butidea  {font-size: 10px !important;}
+        .butgift{font-size: 10px !important;}
+        .b_signup{font-size: 10px !important;}
+        .b_chennai{font-size: 10px !important;}
+        .navbar-nav > li > a{font-size: 10px !important;}
+        .main-nav li{margin: 0px 3px !important;}
+    }
+    @media screen and (max-width: 806px) and (min-width: 768px){
+        .buttclass {font-size: 10px !important;}
+        .butidea  {font-size: 10px !important;}
+        .butgift{font-size: 10px !important;}
+        .b_signup{font-size: 10px !important;}
+        .b_chennai{font-size: 10px !important;}
+        .navbar-nav > li > a{font-size: 10px !important;}
+        .main-nav li{margin: 0px 1px !important;}
+    }
+}    
+.srci{
+	position: relative;
+	top: -3px;
+}
+.b_1_input {
+    background-color: #FFF;
+    box-shadow: 1px 0px 3px 1px #3CCDC8 !important;
+    border-radius: 6px;
+    height: 40px;
+    position: relative;
+    top: -4px;
+    border: 1px solid #3CCDC8 !important;
+    padding-left: 5px;
+    width: 91%;
+    font-size: 16px;
+    font-family: 'os_regular';
+}
+.btclassnt img{padding-right: 5px;}
+.btclassnt:hover{
+	color: #3CCDC8 !important;
+	/*background-color: #85e0dd;*/
+	font-weight: bold;
+    border-bottom: 2px solid;
+}
+.btclass:hover{
+	/*background-color: #85e0dd;*/
+	font-weight: bold;
+    /*color: #373737 !important;*/
+}
+.btclass{border-bottom: 2px solid; }	
+.srchtp{
+	position: relative;
+	top: -10%;
+	margin-top: 0%
+}
+.fbttp{
+	position: relative;
+	top: -14%;
+}
+/***************code 25 april*****************/
+.b_fcb{
+    position: relative;
+    top: 12px;
+}
+.b_fcb1{
+    position: relative;
+    top: 20px;
+}
+.b_fcb2{
+    position: relative;
+    top: 30px;
+}
+@media only screen and (max-width: 1225px) and (min-width: 992px) {
+    .btclassnt{font-size: 17px !important;}
+    .btclass{font-size: 17px !important;}
+}
+@media only screen and (max-width: 1246px) and (min-width: 992px) {
+    .b_1_input{width: 90%;}
+}
+@media only screen and (max-width: 991px) and (min-width: 768px) {
+    .b_1_input{width: 89%;}
+}
+@media only screen and (max-width: 707px) and (min-width: 320px) {
+    .b_1_input{width: 87%;}
+}
+/***************code 25 april*****************/
+/***************code 26 april****************/
+.br_pd123{padding-bottom: 5%;}
+@media only screen and (max-width: 991px) and (min-width: 768px) {
+    .b_sld{margin-left: -55px !important;}
+    .b_1_crs{width: 215px !important;}
+    .btclassnt{font-size: 15px !important;}
+    .btclass{font-size: 15px !important;}
+}
+@media only screen and (max-width: 767px) and (min-width: 501px) {
+    .b_sld{margin-left: 12px !important;}
+    .b_1_crs{width: 221px !important;}
+}
+@media only screen and (max-width: 1920px) and (min-width: 1400px) {
+    .nbs-flexisel-item {width: 270px;}
+}
+@media only screen and (max-width: 1399px) and (min-width: 1250px) {
+    .nbs-flexisel-item {width: 240px;}
+}
+@media only screen and (max-width: 1920px) and (min-width: 1366px) {
+    .img_br{width: 50%;}
+}
+@media only screen and (max-width: 1365px) and (min-width: 992px) {
+    .img_br{width: 70%;}
+    .curtain {height: 210px !important;}
+}
+@media only screen and (max-width: 991px) and (min-width: 768px) {
+    .img_br{width: 70%;}
+    .curtain {height: 150px !important;}
+}
+@media only screen and (max-width: 767px) and (min-width: 300px) {
+    .img_br{width: 70%;}
+    .curtain {height: 150px !important;}
+}
+@media only screen and (max-width: 1920px) and (min-width: 1820px) {
+    .b_1_crs{padding-left: 12px;}
+}
+@media only screen and (max-width: 1819px) and (min-width: 1720px) {
+    .b_1_crs{padding-left: 8px;}
+}
+@media only screen and (max-width: 1719px) and (min-width: 1620px) {
+    .b_1_crs{padding-left: 4px;}
+}  
+@media only screen and (max-width: 1619px) and (min-width: 1520px) {
+    .b_1_crs{padding-left: 2px;}
+}   
+/***************code 26 april****************/
+.b_1_input1 {
+    background-color: #FFF;
+    box-shadow: 1px 0px 3px 1px #999 !important;
+    border-radius: 6px;
+    height: 40px;
+    position: relative;
+    top: -4px;
+    border: 1px solid #999 !important;
+    padding-left: 48px !important;
+    width: 65%;
+    font-size: 16px;
+    font-family: 'os_regular';
+}
+@media screen and (max-width: 1920px) and (min-width: 1636px){
+    /*.bl_inpt{margin-left: 15% !important;}*/
+    .srchbutt{top: -4px;}
+}
+@media screen and (max-width: 1635px) and (min-width: 1200px){
+    /*.bl_inpt{margin-left: 15% !important;}*/
+    .srchbutt{top: -5px;}
+}
+@media screen and (max-width: 991px) and (min-width: 768px){
+    .srchbutt{top: -4px;}
+    .b_1_input1{font-size: 12px; width: 68% !important;}
+    /*.bl_inpt{width: 59% !important; margin-left: 12% !important;}*/
+}
+@media screen and (max-width: 767px) and (min-width: 300px){
+    .srchbutt{top: -4px;}
+    .b_1_input1{font-size: 12px;}
+/*    .bl_inpt{width: 30% !important; margin-left: 5% !important;}*/
+}

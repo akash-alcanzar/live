@@ -1,0 +1,511 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Paraswift\n"
+"POT-Creation-Date: 2016-09-16 07:26+0545\n"
+"PO-Revision-Date: 2016-09-16 07:27+0545\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: 404.php:15
+msgid "Not Found"
+msgstr ""
+
+#: 404.php:17
+msgid "Page Not Found"
+msgstr ""
+
+#: 404.php:18
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr ""
+
+#: comments.php:28
+#, php-format
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:37 comments.php:58
+msgid "Comment navigation"
+msgstr ""
+
+#: comments.php:40 comments.php:61
+msgid "Older Comments"
+msgstr ""
+
+#: comments.php:41 comments.php:62
+msgid "Newer Comments"
+msgstr ""
+
+#: comments.php:73
+msgid "Comments are closed."
+msgstr ""
+
+#: content-aside.php:21 content-audio.php:21 content-gallery.php:20
+#: content-image.php:28 content-page.php:18 content-quote.php:22
+#: content-single.php:24 content-status.php:21 content-video.php:21
+#: content.php:39
+msgid "Pages:"
+msgstr ""
+
+#: content-none.php:14
+msgid "Nothing Found"
+msgstr ""
+
+#: content-none.php:20
+#, php-format
+msgid ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: content-none.php:24
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: content-none.php:29
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+
+#: content.php:32
+#, php-format
+msgid "Continue Reading %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: footer.php:27
+msgid "Copyright&copy;"
+msgstr ""
+
+#: footer.php:29
+msgid "https://wordpress.org/"
+msgstr ""
+
+#: footer.php:29
+#, php-format
+msgid "Proudly powered by %s"
+msgstr ""
+
+#: footer.php:31
+msgid "Paraswift theme by"
+msgstr ""
+
+#: footer.php:32
+msgid "https://intotheme.com"
+msgstr ""
+
+#: footer.php:33
+msgid "INTOTheme"
+msgstr ""
+
+#: functions.php:58
+msgid "Primary Menu"
+msgstr ""
+
+#: functions.php:59
+msgid "Footer Menu"
+msgstr ""
+
+#: header.php:38
+msgid "Call Us: 12388303098 |"
+msgstr ""
+
+#: header.php:38
+msgid "mailto:info@yourtheme.com"
+msgstr ""
+
+#: header.php:38
+msgid "info@yourtheme.com"
+msgstr ""
+
+#: header.php:77 searchform.php:4 searchform.php:6
+msgid "Search"
+msgstr ""
+
+#: header.php:79
+msgid "404"
+msgstr ""
+
+#: includes/custom-header.php:28
+msgid "Header Image"
+msgstr ""
+
+#: includes/customizer.php:22
+msgid "Theme Sections"
+msgstr ""
+
+#: includes/customizer.php:31
+msgid "Typography"
+msgstr ""
+
+#: includes/customizer.php:37
+msgid "Topbar Setting"
+msgstr ""
+
+#: includes/customizer.php:48
+msgid "Enable Topbar"
+msgstr ""
+
+#: includes/customizer.php:52 includes/customizer.php:238
+#: includes/customizer.php:305 includes/customizer.php:586
+msgid "Enable"
+msgstr ""
+
+#: includes/customizer.php:57
+msgid "Call Us: 12388303098 | info@yourtheme.com "
+msgstr ""
+
+#: includes/customizer.php:61
+msgid "Topbar Small Information"
+msgstr ""
+
+#: includes/customizer.php:70
+msgid "Social Media"
+msgstr ""
+
+#: includes/customizer.php:77
+msgid "Font Size Setting"
+msgstr ""
+
+#: includes/customizer.php:89
+msgid "Body Text Size"
+msgstr ""
+
+#: includes/customizer.php:104
+msgid "H1 Text Size"
+msgstr ""
+
+#: includes/customizer.php:119
+msgid "H2 Text Size"
+msgstr ""
+
+#: includes/customizer.php:134
+msgid "H3 Text Size"
+msgstr ""
+
+#: includes/customizer.php:149
+msgid "Footer Widget Title Text Size"
+msgstr ""
+
+#: includes/customizer.php:164
+msgid "Sidebar Widget Title Text Size"
+msgstr ""
+
+#: includes/customizer.php:177
+msgid "Theme Colors"
+msgstr ""
+
+#: includes/customizer.php:184
+msgid "Primary Color for theme"
+msgstr ""
+
+#: includes/customizer.php:197
+msgid "Choose Primary Color"
+msgstr ""
+
+#: includes/customizer.php:212
+msgid "Choose Primary Hove Color"
+msgstr ""
+
+#: includes/customizer.php:222
+msgid "About Section"
+msgstr ""
+
+#: includes/customizer.php:234
+msgid "Enable About Section"
+msgstr ""
+
+#: includes/customizer.php:248 includes/customizer.php:627
+msgid "Select Page "
+msgstr ""
+
+#: includes/customizer.php:257 includes/template-tags.php:101
+msgid "Read More"
+msgstr ""
+
+#: includes/customizer.php:261
+msgid "About Button Text"
+msgstr ""
+
+#: includes/customizer.php:276
+msgid "About Button Link"
+msgstr ""
+
+#: includes/customizer.php:277 includes/customizer.php:368
+msgid "Example: www.something.com"
+msgstr ""
+
+#: includes/customizer.php:288
+msgid "Announcement CTA"
+msgstr ""
+
+#: includes/customizer.php:301
+msgid "Enable CTA"
+msgstr ""
+
+#: includes/customizer.php:310 includes/customizer.php:321
+#: includes/customizer.php:325
+msgid "CTA Title"
+msgstr ""
+
+#: includes/customizer.php:335
+msgid "Insert  Short Description here"
+msgstr ""
+
+#: includes/customizer.php:339
+msgid "Short Description"
+msgstr ""
+
+#: includes/customizer.php:349
+msgid "Sign Up"
+msgstr ""
+
+#: includes/customizer.php:353
+msgid "CTA Description"
+msgstr ""
+
+#: includes/customizer.php:367
+msgid "CTA Button Link"
+msgstr ""
+
+#: includes/customizer.php:379
+msgid "Social Icons"
+msgstr ""
+
+#: includes/customizer.php:389
+msgid "Facebook Link URL"
+msgstr ""
+
+#: includes/customizer.php:404
+msgid "Twitter Link URL"
+msgstr ""
+
+#: includes/customizer.php:418
+msgid "Linkedin Link URL"
+msgstr ""
+
+#: includes/customizer.php:433
+msgid "Google+ Link URL"
+msgstr ""
+
+#: includes/customizer.php:448
+msgid "Pinterest Link URL"
+msgstr ""
+
+#: includes/customizer.php:462
+msgid "Youtube Link URL"
+msgstr ""
+
+#: includes/customizer.php:476
+msgid "Flickr Link URL"
+msgstr ""
+
+#: includes/customizer.php:490
+msgid "Tumblr Link URL"
+msgstr ""
+
+#: includes/customizer.php:504
+msgid "Instagram Link URL"
+msgstr ""
+
+#: includes/customizer.php:518
+msgid "Dribbble Link URL"
+msgstr ""
+
+#: includes/customizer.php:532
+msgid "Reddit Link URL"
+msgstr ""
+
+#: includes/customizer.php:547
+msgid "Github Link URL"
+msgstr ""
+
+#: includes/customizer.php:561
+msgid "StumbleUpon Link URL"
+msgstr ""
+
+#: includes/customizer.php:572
+msgid "Service Section"
+msgstr ""
+
+#: includes/customizer.php:582
+msgid "Enable Service"
+msgstr ""
+
+#: includes/customizer.php:599
+msgid "Service Header Text"
+msgstr ""
+
+#: includes/customizer.php:614
+msgid "Service Header Short Description"
+msgstr ""
+
+#: includes/customizer.php:637
+msgid "Blog Section"
+msgstr ""
+
+#: includes/customizer.php:649
+msgid "Blog Title"
+msgstr ""
+
+#: includes/customizer.php:665
+msgid "Short Description for Blog Section"
+msgstr ""
+
+#: includes/customizer.php:675
+msgid "Footer Text"
+msgstr ""
+
+#: includes/customizer.php:683
+msgid "[Copyright] Your Site Name"
+msgstr ""
+
+#: includes/customizer.php:688
+msgid "Footer Copyright Text"
+msgstr ""
+
+#: includes/paraswift-demo.php:27
+msgid "Find Out More About Us !"
+msgstr ""
+
+#: includes/paraswift-demo.php:28
+msgid ""
+"Intotheme provides WordPress themes and plugins with great features which "
+"are required key for perfect website. We are take care of our customer and "
+"their business."
+msgstr ""
+
+#: includes/paraswift-demo.php:30
+msgid "Intotheme provides WordPress themes"
+msgstr ""
+
+#: includes/paraswift-demo.php:31 includes/paraswift-demo.php:33
+msgid "We are take care of our customer and their business"
+msgstr ""
+
+#: includes/paraswift-demo.php:32
+msgid "Themes and plugins with great features"
+msgstr ""
+
+#: includes/paraswift-demo.php:37
+msgid "Learn More"
+msgstr ""
+
+#: includes/paraswift-functions.php:7
+msgid "Navigation"
+msgstr ""
+
+#: includes/template-tags.php:17
+msgid "Posted by:&nbsp;"
+msgstr ""
+
+#: includes/template-tags.php:27 includes/template-tags.php:31
+msgid ", "
+msgstr ""
+
+#: includes/template-tags.php:29
+#, php-format
+msgid "Posted in %1$s"
+msgstr ""
+
+#: includes/template-tags.php:33
+#, php-format
+msgid "Tagged %1$s"
+msgstr ""
+
+#: includes/template-tags.php:38
+msgid "Leave a comment"
+msgstr ""
+
+#: includes/template-tags.php:38
+msgid "1 Comment"
+msgstr ""
+
+#: includes/template-tags.php:38
+msgid "% Comments"
+msgstr ""
+
+#: includes/template-tags.php:44
+#, php-format
+msgid "Edit %s"
+msgstr ""
+
+#: includes/template-tags.php:122
+msgid "Post navigation"
+msgstr ""
+
+#: includes/template-tags.php:126
+msgid "<span class=\"meta-nav\">Published In</span>%title"
+msgstr ""
+
+#: includes/template-tags.php:128
+msgid ""
+"<span class=\"meta-nav\"><i class=\"fa fa-angle-double-left\"></i></span>"
+"%title"
+msgstr ""
+
+#: includes/template-tags.php:129
+msgid ""
+"<span class=\"meta-nav\"><i class=\"fa fa-angle-double-right\"></i></span>"
+"%title"
+msgstr ""
+
+#: includes/theme-widgets.php:12
+msgid "Sidebar"
+msgstr ""
+
+#: includes/theme-widgets.php:21
+msgid "Home Slider"
+msgstr ""
+
+#: includes/theme-widgets.php:30
+msgid "Footer Widget 1"
+msgstr ""
+
+#: includes/theme-widgets.php:32
+msgid "Content sidebar for Footer Widget 1"
+msgstr ""
+
+#: includes/theme-widgets.php:39
+msgid "Footer Widget 2"
+msgstr ""
+
+#: includes/theme-widgets.php:41
+msgid "Content sidebar for Footer Widget 2"
+msgstr ""
+
+#: includes/theme-widgets.php:48
+msgid "Footer Widget 3"
+msgstr ""
+
+#: includes/theme-widgets.php:50
+msgid "Content sidebar for Footer Widget 3"
+msgstr ""
+
+#: includes/theme-widgets.php:57
+msgid "Footer Widget 4"
+msgstr ""
+
+#: includes/theme-widgets.php:59
+msgid "Content sidebar for Footer Widget 4"
+msgstr ""
+
+#: search.php:17
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""

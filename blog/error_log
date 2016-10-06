@@ -1,0 +1,4 @@
+[30-Sep-2016 06:12:59 UTC] PHP Parse error:  syntax error, unexpected ''/front/brain.css'' (T_CONSTANT_ENCAPSED_STRING) in /home/brainwma/public_html/goku/blog/wp-content/themes/paraswift-child/functions.php on line 20
+[30-Sep-2016 06:13:01 UTC] PHP Parse error:  syntax error, unexpected ''/front/brain.css'' (T_CONSTANT_ENCAPSED_STRING) in /home/brainwma/public_html/goku/blog/wp-content/themes/paraswift-child/functions.php on line 20
+[30-Sep-2016 15:36:41 UTC] PHP Fatal error:  Cannot use object of type WP_User as array in /home/brainwma/public_html/goku/blog/wp-content/themes/paraswift-child/functions.php on line 32
+[30-Sep-2016 15:36:42 UTC] PHP Fatal error:  Cannot use object of type WP_User as array in /home/brainwma/public_html/goku/blog/wp-content/themes/paraswift-child/functions.php on line 32
