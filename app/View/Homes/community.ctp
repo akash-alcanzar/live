@@ -37,6 +37,20 @@
 .pull-right-fun {
     float: right !important;
 }
+.flexible-fixed_price {
+    color: #fff;
+    background-color: #00CDC6;
+    font-family: OS_regular;
+    padding: 5px 13px;
+    z-index: 1050;
+    position: absolute;
+    border-radius: 25px;
+    top: 8px;
+    width: 70px;
+    height: 30px;
+    text-align: center;
+    float: right !important;
+}
 
 .hathyga {
     text-transform: capitalize;
@@ -109,51 +123,140 @@ a:focus, a:hover {
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div id="testimonials" class="container-fluid">
                                 <div class="row">
-                                   <?php 
-                                              /*echo "<pre>";
-                                                print_r($featured_status);
-                                              echo "</pre>";*/
-                                          ?>
                                     <div class="C_17_num">        
                                         <div id="grid-contant-slider1" class="b_sld">
-                                         
                                             <!-- item 1 -->
-                                          <?php 
-                                              foreach ($featured_status as $result) { 
-                                                if(!empty($result['VendorClasse']['segment_id'])):
-                                                  $seg_pic = explode(',',$result['VendorClasse']['segment_id']);
-                                                endif;
-                                                $class_id = base64_encode($result['VendorClasse']['id']);
-                                          ?>
                                             <div class="item b_1_crs">
-                                              <li class="nbs-flexisel-item">
-                                                <div class="grid1 gridfreeclassesbg grid-slider-image">
-                                                      <div class="view3 view-first">
+                                                <li>
+                                                  <div class="grid1 gridworkshopsbg1">
+                                                    <div class="view1 view-first">
                                                       <div class="index_img">
-                                                            <?php 
-                                    echo "<span class='flexible-fixed flexible-fixed-index'>";
-                                    echo ($result['VendorClasse']['class_timing_id'] == 2)?'Fixed':'Flexible';
-                                    echo "</span>";
-                                    ?>
-                                                            <a href="http://localhost/braingroom/classes/Tattoos  class | Adults | Beginners | Intermediates | 8 Hours.">
-                                                        <img src="/braingroom/img/" class="imgresponsive img-thumbnail" alt="" height="148" width="305"></a>
-                                                            <div class="image_price12 pull-right image_price-index">
-                                                            <span class="ccc" style="color:white">₹1000</span>
-                                                        </div>
-                                                        </div>                
-                                                      </div>                
-                                                      <div class="golden home-tumb-slide">
-                                                      <div class="slider-topic12">Tattoos  class | Adults | Beginners | Intermediates | 8 Hours.</div>
-                                                      <div class="provider-by" style="color:black !important; margin-bottom:2px !important;"><strong>By:</strong>Vijayakumar</div>
-                                                      <div class="indx-address">Place :Madipakkam</div>
-                                                      <h5>No of Sessions:&nbsp;8 </h5>
-                                                      <h5>Total Duration:&nbsp;8 Hours </h5>
+                                                        <img src="<?php echo HTTP_ROOT;?>/img/pics9.png" class="img-responsive" alt=""/>
+                                                        <button class="btn butt_dollar">&#8377;320</button>
+                                                      </div>                 
+                                                    </div>                                                
+                                                    <div class="golden">
+                                                          <h4>Cookie Pods Workshop</h4>
+                                                          <p>PLACE :EAST NAGAR, BNG</p>
+                                                          <h5>Sat, 15 jan, 7 to 8pm </h5>
+                                                          <h6>
+                                                              <i class="fa fa-star"></i>
+                                                              <i class="fa fa-star"></i>
+                                                              <i class="fa fa-star"></i>
+                                                              <i class="fa fa-star"></i>
+                                                              <i class="fa fa-star"></i>
+                                                          </h6>
+                                                          <button class="btn" tabindex="0">details</button>
+                                                    </div>
+                                                  </div>
+                                                </li>
+                                            </div>
+                                            <!-- item 2 -->
+                                            <div class="item b_1_crs">
+                                                <li>
+                                                  <div class="grid1 gridworkshopsbg1">
+                                                      <div class="view1 view-first">
+                                                        <div class="index_img2">
+                                                          <img src="<?php echo HTTP_ROOT;?>/img/pics2.png" class="img-responsive" alt=""/>
+                                                          <button class="btn butt_dollar">&#8377;320</button>
+                                                        </div>                 
+                                                      </div> 
+                                                       <div class="golden">
+                                                            <h4>Hatha Yoga For Weight loss</h4>
+                                                            <p>PLACE :EAST NAGAR, BNG</p>
+                                                            <h5>Sat, 15 jan, 7 to 8pm </h5>
+                                                            <h6>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                            </h6>
+                                                            <button class="btn" tabindex="0">details</button>
                                                       </div>
-                                                      </div>    
-                                            </li>
-                                          </div>
-
-
+                                                  </div>
+                                                </li>
+                                            </div>
+                                            <!-- item 3 -->  
+                                            <div class="item b_1_crs">
+                                              <li>
+                                                <div class="grid1 gridworkshopsbg1">
+                                                  <div class="view1 view-first">
+                                                    <div class="index_img">
+                                                      <img src="<?php echo HTTP_ROOT;?>/img/pics3.png" class="img-responsive" alt=""/>
+                                                      <button class="btn butt_dollar">&#8377;320</button>
+                                                    </div>                      
+                                                  </div> 
+                                                   
+                                                  <div class="golden">
+                                                    <h4>Meringue Tower of Kisses</h4>
+                                                    <p>PLACE :EAST NAGAR, BNG</p>
+                                                    <h5>Sat, 15 jan, 7 to 8pm </h5>
+                                                    <h6>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </h6>
+                                                    <button class="btn" tabindex="0">details</button>
+                                                  </div>
+                                                </div>
+                                              </li>
+                                            </div>
+                                            <!-- item 4 -->          
+                                                    
+                                            <div class="item b_1_crs">
+                                              <li>
+                                                <div class="grid1 gridworkshopsbg1">
+                                                  <div class="view1 view-first">
+                                                    <div class="index_img">
+                                                      <img src="<?php echo HTTP_ROOT;?>/img/pics4.png" class="img-responsive" alt=""/>
+                                                      <button class="btn butt_dollar">&#8377;320</button>
+                                                    </div>                        
+                                                  </div>
+                                                  <div class="golden">
+                                                      <h4>Golden Pineapple Ball(Hands on)</h4>
+                                                      <p>PLACE :EAST NAGAR, BNG</p>
+                                                      <h5>Sat, 15 jan, 7 to 8pm </h5>
+                                                      <h6>
+                                                          <i class="fa fa-star"></i>
+                                                          <i class="fa fa-star"></i>
+                                                          <i class="fa fa-star"></i>
+                                                          <i class="fa fa-star"></i>
+                                                          <i class="fa fa-star"></i>
+                                                      </h6>
+                                                      <button class="btn" tabindex="0">details</button>
+                                                  </div>
+                                                </div>
+                                              </li>
+                                            </div> 
+                                            <!-- item 4 -->   
+                                            <div class="item b_1_crs">
+                                              <li>
+                                                <div class="grid1 gridworkshopsbg1">
+                                                  <div class="view1 view-first">
+                                                    <div class="index_img">
+                                                      <img src="<?php echo HTTP_ROOT;?>/img/pics9.png" class="img-responsive" alt=""/>
+                                                      <button class="btn butt_dollar">&#8377;320</button>
+                                                    </div>                 
+                                                  </div> 
+                                                  <div class="golden">
+                                                        <h4>Cookie Pods Workshop</h4>
+                                                        <p>PLACE :EAST NAGAR, BNG</p>
+                                                        <h5>Sat, 15 jan, 7 to 8pm </h5>
+                                                        <h6>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </h6>
+                                                        <button class="btn" tabindex="0">details</button>
+                                                  </div>
+                                                </div>
+                                              </li>
+                                            </div>
                                             <!-- slider item end -->   
                                         </div>
                                     </div>
@@ -403,23 +506,13 @@ a:focus, a:hover {
                             <div class="col-xs-12 col-sm-12 fun01_img_w">
                               <span class="flexible-fixed-fun"><?php echo $class_name_type; ?></span>
                               <span class="image_price12-fun pull-right-fun" style="color:white">₹ <?php echo $class_price; ?></span><a href="<?php echo HTTP_ROOT?>/classes/<?php echo $class_topic; ?>" >
-                             
-                              <?php 
-							  	if(!empty($allclass_value['bg_vendor_classes']['upload_class_photo'])){
-							  echo $this->Html->image('Vendor/class_image/'.$allclass_value['bg_vendor_classes']['upload_class_photo'].'.jpg', array('class' => 'imgresponsive img-thumbnail')); 
-								} else {
-								echo $this->Html->image('Vendor/class_image/defult_pic.png', array('class' => 'imgresponsive img-thumbnail'));
-								}?>
+                              <img src="<?php echo HTTP_ROOT.'/img/Vendor/class_image/'.$upload_class_photo; ?>" class="imgresponsive img-thumbnail" alt="">
                             </a>
                             </div></div><!-- ********images************ -->
                           <!-- ********text************ -->
                           <div class="col-md-8 col-sm-8 col-xs-12 text_res sr_2605_03_padding">
                              <div class="col-xs-12 col-sm-12 sr_2605_06 sr_2605_06_textLorem021">
-                                <div class="hathyga col-xs-12 col-sm-12">
-								<a href="<?php echo HTTP_ROOT?>/classes/<?php echo $class_topic; ?>" >
-								<?php echo $class_topic; ?>
-                                </a>
-                                <span class="pull-right">
+                                <div class="hathyga col-xs-12 col-sm-12"><?php echo $class_topic; ?><span class="pull-right">
                                         <div class="col-xs-12 col-sm-12 sr_2605_03_padding sr_serch_div_l_hite sr_class_acc_div padd_l_r" style="margin-bottom:7px;">
                                             <div class="row">
                                   <img class="img-responsive" style="display: inline; margin-right: 5px;" src="http://www.braingroom.com/img/fun&refreshment/user.png">
@@ -510,106 +603,62 @@ a:focus, a:hover {
                     <div class="row">
                       <div class="C_17_num">
                         <div id="grid-contant-slider3" class="b_sld">
+
+                            <?php 
+                            //echo "<pre>";
+                            //print_r($recommended_class);
+                            //echo "</pre>";
+                            //die;
+                            //$result
+                            foreach ($recommended_class as $key =>$result_rc){
+
+                              $class_topic        = $result_rc['VendorClasse']['class_topic'];
+                              $class_timing_id    = $result_rc['VendorClasse']['class_timing_id'];
+                              $upload_class_photo = $result_rc['VendorClasse']['upload_class_photo'];
+                              $first_name         = $result_rc['User']['first_name'];
+                              $class_price        = $result_rc['VendorClasseLevelDetail']['price'];
+                              if( $class_timing_id == 1){
+
+                                $cl_type = 'Flexible';
+                              }
+                              else{
+
+                                $cl_type = 'Fixed';
+                              }
+                              ?>
                           <div class="item b_1_crs">
                             <li>
                               <div class="grid1 gridfreeclassesbg">
                                 <div class="view3 view-first">
-                                      <div class="index_img">
-                                        <img src="<?php echo HTTP_ROOT;?>/img/pic3.jpg" class="img-responsive" alt=""/>
-                                        <button class="btn butt_dollar">&#8377;320</button>
-                                      </div>                
-                                </div>                
+                                       <div class="index_img">
+                                    <span class="flexible-fixed flexible-fixed-index"><?php echo $cl_type; ?></span>
+                                     <span class="flexible-fixed_price" style="float:right;">
+                                    ₹100</span>
+
+                                    <a href="<?php echo HTTP_ROOT; ?>/classes/<?php echo $class_topic; ?>">
+                                      <img src="<?php echo HTTP_ROOT; ?>/Vendor/class_image/<?php echo $upload_class_photo; ?>" class="imgresponsive img-thumbnail" alt="">                     
+                                    </a>
+                                   
+                                    </div>                      
+                                </div>
                                 <div class="golden">
-                                    <h4>Furry Teddy Bear Making Workshop</h4>
-                                    <p>PLACE :EAST NAGAR, BNG</p>
-                                    <h5>Sat, 15 jan, 7 to 8pm </h5>
-                                    <h6>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </h6>
-                                    <button class="btn" tabindex="0">details</button>
+                                   <div class="golden">
+                                    <div class="slider-topic12">
+                                      <?php echo  $class_topic; ?>
+                                    </div>
+                                    <div class="provider-by" style="color:black !important; margin-bottom:2px !important;">
+                                    <strong>By:</strong><?php echo $first_name; ?></div>
+                                    <div class="indx-address">Place :NA</div>
+                                    <h5>No of Sessions:&nbsp; </h5>
+                                    <h5>Total Duration:&nbsp;  Hours </h5>
+                                    </div>
                                 </div>
                               </div>
                             </li>
                           </div>
-                          <div class="item b_1_crs">
-                            <li>
-                              <div class="grid1 gridfreeclassesbg">
-                                <div class="view3 view-first">
-                                    <div class="index_img1">
-                                      <img src="<?php echo HTTP_ROOT;?>/img/pics2.png" class="img-responsive" alt=""/>
-                                      <button class="btn butt_dollar">&#8377;320</button>
-                                    </div>        
-                                </div>                
-                                <div class="golden">
-                                  <h4>Zumba Fitness Friday Promotion</h4>
-                                  <p>PLACE :EAST NAGAR, BNG</p>
-                                  <h5>Sat, 15 jan, 7 to 8pm </h5>
-                                  <h6>
-                                      <i class="fa fa-star"></i>
-                                      <i class="fa fa-star"></i>
-                                      <i class="fa fa-star"></i>
-                                      <i class="fa fa-star"></i>
-                                      <i class="fa fa-star"></i>
-                                  </h6>
-                                  <button class="btn" tabindex="0">details</button>
-                                </div>
-                              </div>
-                            </li>
-                          </div>
-                          <div class="item b_1_crs">
-                            <li>
-                              <div class="grid1 gridfreeclassesbg">
-                                <div class="view3 view-first">
-                                  <div class="index_img2">
-                                    <img src="<?php echo HTTP_ROOT;?>/img/pics3.png" class="img-responsive" alt=""/>
-                                    <button class="btn butt_dollar">&#8377;320</button>
-                                  </div>
-                                </div>                  
-                                <div class="golden">
-                                  <h4>Meringue Tower of Kisses</h4>
-                                  <p>PLACE :EAST NAGAR, BNG</p>
-                                  <h5>Sat, 15 jan, 7 to 8pm </h5>
-                                  <h6>
-                                      <i class="fa fa-star"></i>
-                                      <i class="fa fa-star"></i>
-                                      <i class="fa fa-star"></i>
-                                      <i class="fa fa-star"></i>
-                                      <i class="fa fa-star"></i>
-                                  </h6>
-                                  <button class="btn" tabindex="0">details</button>
-                                </div>
-                              </div>
-                            </li>
-                          </div>
-                          <div class="item b_1_crs">
-                            <li>
-                              <div class="grid1 gridfreeclassesbg">
-                                <div class="view3 view-first">
-                                  <div class="index_img2">
-                                    <img src="<?php echo HTTP_ROOT;?>/img/pics4.png" class="img-responsive" alt=""/>
-                                    <button class="btn butt_dollar">&#8377;320</button>
-                                  </div>
-                                </div>                  
-                                <div class="golden">
-                                  <h4>Golden Pineapple Ball(Hands on)</h4>
-                                  <p>PLACE :EAST NAGAR, BNG</p>
-                                  <h5>Sat, 15 jan, 7 to 8pm </h5>
-                                  <h6>
-                                      <i class="fa fa-star"></i>
-                                      <i class="fa fa-star"></i>
-                                      <i class="fa fa-star"></i>
-                                      <i class="fa fa-star"></i>
-                                      <i class="fa fa-star"></i>
-                                  </h6>
-                                  <button class="btn" tabindex="0">details</button>
-                                </div>
-                              </div>
-                            </li>
-                          </div>        
+                          <?php
+                            }
+                        ?>
                         </div>                                       
                       </div>
                     </div>
