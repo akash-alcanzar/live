@@ -271,40 +271,44 @@ border-radius:30%;
                 <div class="">&nbsp;</div><div class="">&nbsp;</div>
                 <div class="row">
                 	<div class="col-xs-12 col-sm-12 col-md-12 pad_all">
-                   
-                             <a href="<?php echo HTTP_ROOT;?>/Homes/community/1">
-                      <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Parents & Kids.png" alt="Parents & Kids"  class="community1">									                      </a>
-                      <a href="<?php echo HTTP_ROOT;?>/Homes/community/2">
-                      <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Study Groups.png" alt="Study Groups"  class="community">
-                      </a>
-                      <a href="<?php echo HTTP_ROOT;?>/Homes/community/3">
-                      <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Hobby Groups.png" alt="Hobby Groups"  class="community">
-                      </a>
-                      <a href="<?php echo HTTP_ROOT;?>/Homes/community/4">
-                      <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Fitness Groups.png" alt="Fitness Groups" class="community cc xx" >
-                      </a>
-                      <a href="<?php echo HTTP_ROOT;?>/Homes/community/9">
-                      <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Residential Community.png" alt="Residential Community" class="community aa"></a>
-                      <a href="<?php echo HTTP_ROOT;?>/Homes/community/10">
-                      <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Senior Citizens.png" alt="Senior Citizens" class="community">
-                      </a>
-                      <a href="<?php echo HTTP_ROOT;?>/Homes/community/11">
-                      <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Kids Gangs.png" alt="Kids Gangs"  class="community2">
-                      </a>
-                      <a href="<?php echo HTTP_ROOT;?>/Homes/community/12">
-                      <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Peers & Colleagues.png" alt="Peers & Colleagues" class="community aa1"></a>
-                      <a href="<?php echo HTTP_ROOT;?>/Homes/community/5">
-                      <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Ladies Club.png" alt="Ladies Club" class="community zz">
-                      </a>
-                      <a href="<?php echo HTTP_ROOT;?>/Homes/community/6">
-                      <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Pack of Men.png" alt="Pack of Men" class="community cc">
-                      </a>
-                      <a href="<?php echo HTTP_ROOT;?>/Homes/community/7">
-                      <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Friends Gangs.png" alt="Friends Gangs" class="community">
-                      </a>
-                      <a href="<?php echo HTTP_ROOT;?>/Homes/community/8">
-                      <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Couples.png" alt="Couples" class="community zz1">
-                      </a>
+                        <div class="img_sad_div_w">
+                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/1">
+                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Parents & Kids.png" alt="Parents & Kids"  class="community1">									                      
+                            </a>
+
+                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/2">
+                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Study Groups.png" alt="Study Groups"  class="community">
+                            </a>
+
+                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/3">
+                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Hobby Groups.png" alt="Hobby Groups"  class="community">
+                            </a>
+                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/4">
+                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Fitness Groups.png" alt="Fitness Groups" class="community xx" >
+                            </a>
+                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/9">
+                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Residential Community.png" alt="Residential Community" class="community "></a>
+                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/10">
+                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Senior Citizens.png" alt="Senior Citizens" class="community">
+                            </a>
+                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/11">
+                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Kids Gangs.png" alt="Kids Gangs"  class="community2">
+                            </a>
+                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/12">
+                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Peers & Colleagues.png" alt="Peers & Colleagues" class="community aa1"></a>
+                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/5">
+                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Ladies Club.png" alt="Ladies Club" class="community">
+                            </a>
+                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/6">
+                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Pack of Men.png" alt="Pack of Men" class="community">
+                            </a>
+                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/7">
+                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Friends Gangs.png" alt="Friends Gangs" class="community">
+                            </a>
+                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/8">
+                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Couples.png" alt="Couples" class="community">
+                            </a>
+                        </div>
                     </div>
                     	
                     </div>
@@ -1107,14 +1111,7 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
         <div class="col-sm-12 nopadding">
  			<a href="http://www.braingroom.com/gift/#individual"><?php echo $this->Html->image('banner.jpg', array('alt' => 'Gift_for_individuals','class'=>'img-responsive'));?></a>
         </div>
-     <!-- <div class="row">
-        <div class="col-sm-5 " style="padding: 3px 2px 0px 0px">
-         <a href="http://www.braingroom.com/gift/#Corporate"><?php echo $this->Html->image('Gift_for_corporate.jpg', array('alt' => 'Gift_for_corporate','class'=>'img-responsive' ));?></a>
-        </div>
-        <div class="col-sm-7 " style="padding:4px 0px 0px 2px;">
-         <a href="http://www.braingroom.com/gift/#ngo"><?php echo $this->Html->image('Gift_for_NGO.jpg', array('alt' => 'Gift_for_NGO','class'=>'img-responsive'));?></a>
-        </div>
-      </div>-->
+  
   </div>
   
         <!--Why Braingroom-->
