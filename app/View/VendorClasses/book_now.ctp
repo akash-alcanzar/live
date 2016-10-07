@@ -251,8 +251,8 @@ border-radius:30%;
 							  <input type="hidden" name="firstname" id="firstname" value="<?php echo $class['User']['first_name']?>" />
 							  <input type="hidden" name="email" id="email" value="<?php echo $email; ?>" />
 							  <input type="hidden" name="phone" id="phone" value="<?php echo $mobile; ?>"/>
-                             <textarea name="productinfo" id="productinfo" style="display:none;"><?php echo $prod_info;?></textarea> 
-                              <input type="hidden" name="udf1" id="udf1" value="<?php if(!empty($class['User']['id'])): echo $class['User']['id']; endif; ?>"/>
+                             <textarea name="productinfo" id="productinfo" style="display:none;"><?php echo $class['VendorClasse']['class_topic'];?></textarea> 
+                              <input type="hidden" name="udf1" id="udf1" value="<?php if(!empty($user_id)): echo $user_id; endif; ?>"/>
                              <input type="hidden" name="udf2" id="udf2" value="<?php echo $class_id; ?>"/>
                               <input type="hidden" name="udf3" id="udf3" value="<?php echo $locality_id; ?>"/>
 							  <textarea name="udf4" id="udf4" style="display:none;"><?php echo $ticket; ?></textarea>
@@ -781,14 +781,14 @@ $("#payfor_Coupon").click(function() {
   var coupon_value     = $("#coupon_value").val();
   var class_id         = $("#class_id").val();
   var no_of_ticket     = $("#reg_t_id").val();
-  var tot_ticket     = $("#udf4").val();
+  //var tot_ticket     = $("#udf4").val();
   var status = 2;
   var book_id= $("#book_id").val();
 
 $.ajax({  
     type: "POST",  
     url: "<?php echo HTTP_ROOT; ?>/Homes/saveCoupon",  
-    data: 'coupon_number='+coupon_value+'&payment_amt='+amount_coupan+'&payment_type='+radioValue+'&status='+status+'&class_id='+class_id+'&no_of_ticket='+no_of_ticket+'&booking_id='+book_id+'&tot_ticket='+tot_ticket,  
+    data: 'coupon_number='+coupon_value+'&payment_amt='+amount_coupan+'&payment_type='+radioValue+'&status='+status+'&class_id='+class_id+'&no_of_ticket='+no_of_ticket+'&booking_id='+book_id,  //+'&tot_ticket='+tot_ticket
     success: function(Coupon_respone){  
         //$("#status1").html('');
     //alert(Coupon_respone);
