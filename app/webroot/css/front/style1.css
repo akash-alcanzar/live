@@ -4382,17 +4382,6 @@ a#back-to-top {
 	text-align:center;
 	font-size:24px;
 }
-
-/***Community Groups***/
-.community1{
-	margin-left:15px;width:160px;height:160px;margin-top:-30px;
-}
-.community2{
-	margin-top:-30px;margin-left:95px;width:160px;height:160px;
-}
-.community{
-	margin-top:-30px;width:160px;height:160px;
-}
 /***Gift***/
 .denomination{
 	margin-top:-250px;
@@ -5196,4 +5185,57 @@ a#back-to-top {
 	height:100px;
 }
 }
+
+/* 
+*   add by sitaram 03.10.2016
+*   images sad css
+*/
+
+/***Community Groups***/
+
+
+
+/*media query*/
+@media (min-width: 200px) and (max-width: 499px){
+    .img_sad_div_w{  width: 300px !important; margin:0 auto;}
+    .community1{margin-left:0px; margin-right:0px; width:120px; height:120px; margin-top:0px;}
+    .community{margin-top:0px; width:120px; height:120px; margin-right: 0px;}
+    .community2{margin-top:0px; margin-left:0px; width:120px; height:120px; margin-right: 0px;}
+}
+
+@media (min-width: 500px) and (max-width: 767px){
+    .img_sad_div_w{  width: 400px !important; margin:0 auto;}
+    .community1{margin-left:0px; margin-right:0px; width:120px; height:120px; margin-top:0px;}
+    .community{margin-top:0px; width:120px; height:120px; margin-right: 0px;}
+    .community2{margin-top:0px; margin-left:0px; width:120px; height:120px; margin-right: 0px;}
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+    .img_sad_div_w{  width: 735px !important; margin:0 auto;}
+    .community1{margin-left:-10px; margin-right:-10px; width:120px; height:120px; margin-top:-20px;}
+    .community{margin-top:-20px; width:120px; height:120px; margin-right: -10px;}
+    .community2{margin-top:-20px; margin-left:45px; width:120px; height:120px; margin-right: -10px;}
+}
+
+@media (min-width: 992px) and (max-width: 1199px){
+    .img_sad_div_w{  width: 930px !important; margin:0 auto;}
+    .community1{margin-left:-10px; margin-right:-10px; width:150px; height:150px; margin-top:-30px;}
+    .community{margin-top:-30px; width:150px; height:150px; margin-right: -10px;}
+    .community2{margin-top:-30px; margin-left:60px; width:150px; height:150px; margin-right: -10px;}
+}
+@media (min-width: 1200px) and (max-width: 1479px){
+    .img_sad_div_w{  width: 985px !important; margin:0 auto;}
+    .community1{margin-left:-10px; margin-right:-10px; width:160px; height:160px; margin-top:-30px;}
+    .community{margin-top:-30px; width:160px; height:160px; margin-right: -10px;}
+    .community2{margin-top:-30px; margin-left:60px; width:160px; height:160px; margin-right: -10px;}
+}
+
+@media (min-width: 1480px) {
+    .img_sad_div_w{  width: 1080px !important; margin:0 auto;}
+    .community2{margin-top:-30px;margin-left:95px;width:160px;height:160px;}
+    .community1{margin-left:15px;width:160px;height:160px;margin-top:-30px;}
+    .community{margin-top:-30px;width:160px;height:160px;}
+}
+
+
 
