@@ -1,3 +1,13 @@
+<?php 
+
+$url = $_SERVER['REQUEST_URI']; 
+
+$data = explode('/',$url);
+
+$page_name = $data[count($data)-1];
+
+?>
+
 <style>
   .home_header_city{
       -moz-appearance: none;
@@ -179,13 +189,31 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
                             </div>    
                         </center>
                       </div>
-                      <div class="col-md-3 col-sm-4 col-xs-12 padd_l_r b_fcb2 b_pad12 sr_15_07_connect_btn">
+                   <!--   <div class="col-md-3 col-sm-4 col-xs-12 padd_l_r b_fcb2 b_pad12 sr_15_07_connect_btn">
                           <div class="pull-right b_lft">
-                            <button class="btn btclass1 fbttp" style="padding:5px 20px;"><img src="<?php echo HTTP_ROOT;?>/img/iconfind.png" />Find</button>
+                            <button class="btn btclass1 fbttp" style="padding:5px 20px;"><img src="<?php //echo HTTP_ROOT;?>/img/iconfind.png" />Find</button>
                             <button class="btn btclassnt1  fbttp" style="padding:5px 10px;">
-                            <!--<img src="<?php echo HTTP_ROOT;?>/img/iconconnect1.png" />--> <i class="fa fa-group"></i> Connect</button>
+                           <img src="<?php // echo HTTP_ROOT;?>/img/iconconnect1.png" /> <i class="fa fa-group"></i> Connect</button>
                           </div>
-                      </div>
+                      </div> -->
+		    	
+		  <div class="col-md-3 col-sm-4 col-xs-12 padd_l_r b_fcb2 b_pad12 sr_15_07_connect_btn">
+			<div class="pull-right b_lft">
+			  <button class="btn btclass1 fbttp" style="padding:5px 20px;"  id="header_find">
+			    <img src="<?php echo HTTP_ROOT;?>/img/iconfind.png" />
+			      Find
+			  </button>
+			  <a href="<?php echo HTTP_ROOT;?>/Connect/connectpage">
+			    <button class="btn btclassnt1  fbttp" style="padding:5px 10px;" id="header_connect">
+			      <img src="<?php echo HTTP_ROOT;?>/img/iconconnect1.png" />
+			      Connect
+			    </button>
+			  </a>
+			</div>
+		    </div>
+
+		    
+		    
                       <!-- ******************new alignment***************** -->
                   </div>
         </div>
@@ -339,4 +367,17 @@ function serch_cat(catid){
        window.location.href = "<?php echo HTTP_ROOT;?>/homes/upcoming/"+btoa(id); 
     }
   }
+</script>
+
+<script>
+   $(document).ready(function(){
+      var page_name = "<?php echo $page_name; ?>";
+      if(page_name == 'connectpage' || page_name == 'connectGroup'){
+        $('#header_connect').css('color','#2bcdc1');
+        $('#header_connect img').attr('src','<?php echo HTTP_ROOT;?>/img/iconconnect.png');
+        $('#header_find').css({'color':'#989898','border-bottom':'none'});
+        $('#header_connect').css({'color':'#2bcdc1','border-bottom':'2px solid'});
+        $('#header_find img').attr('src','<?php echo HTTP_ROOT;?>/img/iconfind1.png');
+      }
+    });
 </script>
