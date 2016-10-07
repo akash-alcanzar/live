@@ -8734,7 +8734,26 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                 
         }
     }
+   
+  public function Repost(){
 
+          $this->autoRender = false;
+          /*print_r($this->request->data);
+          die;*/
+          $e_class_id     = $this->request->data['e_class_id'];
+          $e_start_date   = $this->request->data['e_start_date'];
+          $e_end_date     = $this->request->data['e_end_date'];
+          $up_modife     = strtotime(date('d-m-Y H:i:s'));
+         /* echo $e_class_id;
+          die;*/
+          $this->VendorClasse->query("UPDATE bg_vendor_classes SET  bg_vendor_classes.starting_month='$e_start_date',
+                                                                     bg_vendor_classes.end_month='$e_end_date', 
+                                                                     bg_vendor_classes.modify_date='$up_modife'
+                                                                WHERE bg_vendor_classes.id='$e_class_id'");
+          echo 1;
+          
+    }	
+	
    ############## Start Registration By Rohit #############
     public function Register(){
 
