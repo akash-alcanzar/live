@@ -59,7 +59,7 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
                     <button class="btn butidea sr_18_07_cfo border-blog"> 
                     <i class="glyphicon glyphicon-comment blogicon"></i> Blog</button>
                   </a>
-                  <a href="#">
+                  <a href="<?php echo HTTP_ROOT;?>/Connect/connectpage">
                   <button class="btn butidea sr_18_07_cfo border-blog"> 
                     Contact US</button>  
                   </a>
