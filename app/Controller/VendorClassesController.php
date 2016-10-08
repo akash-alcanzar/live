@@ -2,7 +2,7 @@
 
 class VendorClassesController extends AppController {
 
-	 var $uses = array('Admin','UserMaster','City','Locality','Category','Community','UserVerfication','ClassType','ClassSegment','VendorClasse','ClassRegular','ClassLrregular','ClassSchedule','VendorGalleries','TransactionHistorie','Locality','Cookie','Ticket','PayuTransaction','VendorClasseLevelDetail','Categories','ConnectGroup','RequestCatalog','GiftCard','GiftCardSegment','Ngo','RegularRecurringClasse','TicketBooking','TicketBookingDate');
+	 var $uses = array('Admin','UserMaster','City','Locality','Category','Community','UserVerfication','ClassType','ClassSegment','VendorClasse','ClassRegular','ClassLrregular','ClassSchedule','VendorGalleries','TransactionHistorie','Locality','Cookie','Ticket','PayuTransaction','VendorClasseLevelDetail','Categories','ConnectGroup','RequestCatalog');
 
 	public function slider(){
 
@@ -42,7 +42,7 @@ class VendorClassesController extends AppController {
 
 	public function classes($slug = NULL){
 
-
+        
 
 		$this->layout='fun_layout';
 
@@ -62,7 +62,7 @@ class VendorClassesController extends AppController {
 
 						'conditions'=>array(
 
-						"VendorClasse.class_topic" =>$slug,
+						"VendorClasse.class_topic Like '%$slug%'",
 
 					),
 
@@ -85,10 +85,6 @@ class VendorClassesController extends AppController {
 						'ClassLrregular',
 
 						'ClassRegular',
-						'RegularRecurringClasse'=>array(
-							'fields'=> array( 'DISTINCT RegularRecurringClasse.class_no'),
-							'conditions' => array('RegularRecurringClasse.status' => 0)
-						),
 
 						'VendorClasseLocationDetail'=> 
 
@@ -106,7 +102,7 @@ class VendorClassesController extends AppController {
 
 				); 
 
-			//	echo '<pre>'; print_r($class); die;
+			//echo '<pre>'; print_r($class); die;
 
 				
 
@@ -228,11 +224,42 @@ class VendorClassesController extends AppController {
 
 	public function create(){
 
-	
+	   
 
-		$user=$this->Session->read('User');
+		 $user=$this->Session->read('User');
+         $user_id = $user['UserMaster']['id'];
+         $user_id = 5;
+         $this->set('user_id',$user_id);
+      
+       
+		  $gallery=$this->VendorGalleries->find('all', array(
+                            'conditions' => array(
+                              'VendorGalleries.user_id'    => $user_id,
+                              'VendorGalleries.category_id' => 1
+                          )
+                      ));
+		  $this->set('imagecount',count($gallery));
 
-		$this->layout='postclass_layout';
+		  $this->set('gallery',$gallery);
+
+
+        $videoGallery =$this->VendorGalleries->find('all', array(
+                            'conditions' => array(
+                              'VendorGalleries.user_id'    => $user_id,
+                              'VendorGalleries.category_id' => 2
+                          )
+                      ));
+
+        //echo '<pre>';
+        //print_r( $videoGallery);
+        //exit;
+         $this->set('videocount',count($videoGallery));
+		  $this->set('videoGallery',$videoGallery);
+
+
+
+       
+		$this->layout='vendor_layout';
 
 		$this->set('user_view',$user);
 
@@ -405,42 +432,7 @@ class VendorClassesController extends AppController {
 		array('session_id' => $_SESSION['irregular_session'])
 
 	);
-$tot_irregular_classes = $this->ClassRegular->find('all', array('conditions' => array('class_session_id' => $_SESSION['regular_session'])));
-	$this->log($tot_irregular_classes);
-	if(!empty($tot_irregular_classes)){
-		foreach($tot_irregular_classes as $value){
-			
-			if($value['ClassRegular']['type'] == 1){
-				$dat = new DateTime($value['ClassRegular']['start_date']);
-				$end = new DateTime($value['ClassRegular']['end_date']);
-				$interval = new DateInterval('P1W');
-				$daterange = new DatePeriod($dat, $interval ,$end);
-			} else {
-				$dat = new DateTime($value['ClassRegular']['date_month']);
-				$end = new DateTime($value['ClassRegular']['end_date']);
-				$interval = new DateInterval('P1M');
-				$daterange = new DatePeriod($dat, $interval ,$end);	
-			}
-			
-			$i = 1;
-			$this->loadModel('RegularRecurringClasses');
-			foreach($daterange as $dat){
-				
-				$dat->modify('next '.$value['ClassRegular']['day_of_week']);
-				$this->log($dat);
-				$this->RegularRecurringClasses->create();
-				$this->request->data['RegularRecurringClasses']['day'] = $dat->format('Y-m-d');
-				$this->request->data['RegularRecurringClasses']['type'] = $value['ClassRegular']['type'];
-				$this->request->data['RegularRecurringClasses']['time'] = $value['ClassRegular']['time_of_day'];
-				$this->request->data['RegularRecurringClasses']['class_regular_id'] = $value['ClassRegular']['id'];
-				$this->request->data['RegularRecurringClasses']['class_no'] = $i;
-				$this->request->data['RegularRecurringClasses']['vendor_class_id'] = $last_des_id;
-				$this->request->data['RegularRecurringClasses']['class_session_id'] = $_SESSION['regular_session'];
-				$this->RegularRecurringClasses->save($this->request->data['RegularRecurringClasses']);
-				$i++;
-			}
-		}
-	}
+
 	$this->loadModel('VendorClasseLevelDetail');
 
 	$this->loadModel('VendorClasseLocationDetail');
@@ -910,14 +902,34 @@ $tot_irregular_classes = $this->ClassRegular->find('all', array('conditions' => 
           //echo $target_file;
 
           //die;
+		  
+		  /*$file_tmp = file Temporary Name
+		  $destination_url = full path with image name
+		  $quality = quality in number 1 to 100
+		  getimageoptimized($file_tmp,$destination_url,$quality);
+		  */
+		   $file_tmp = $_FILES['data']['tmp_name'][$na];
+          $this->getimageoptimized($file_tmp,$target_file,50);		  
 
-          if (move_uploaded_file($_FILES['data']['tmp_name'][$na], $target_file)) {
-
+          //if (move_uploaded_file($_FILES['data']['tmp_name'][$na], $target_file)) {
+			  
+          if ($this->getimageoptimized($file_tmp,$target_file,50)) {
               
 
               //$this->UserMaster->updateAll(array('profile_image' => $newfile),array('id' => $last_des_id));
 
-
+              $photodata = $this->VendorGalleries->set(array(
+                                                        'user_id' => $user_id,
+                                                        'category_id' => 1,
+                                                        'media_title' => 'My Image',
+                                                        'media_path' => $newfile,
+                                                        'description' => '',
+                                                        'status'      => 1,
+                                                        'add_date'    => time(),
+                                                        'modify_date' => time()
+                                                      )
+                                                    );
+                $photoresult =   $this->VendorGalleries->save($photodata);
 
            $this->VendorClasse->query("UPDATE bg_vendor_classes SET  upload_tutor_picture='".$newfile."' WHERE id='".$last_des_id."'");
 
@@ -1060,12 +1072,44 @@ $tot_irregular_classes = $this->ClassRegular->find('all', array('conditions' => 
           //echo $target_file;
 
           //die;
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
 
           if (move_uploaded_file($_FILES['data']['tmp_name'][$na], $target_file)) {
 
               
 
               //$this->UserMaster->updateAll(array('profile_image' => $newfile),array('id' => $last_des_id));
+
+
+
+             $photodata = $this->VendorGalleries->set(array(
+                                                        'user_id' => $user_id,
+                                                        'category_id' => 2,
+                                                        'media_title' => 'My Video',
+                                                        'media_path' => $newfile,
+                                                        'description' => '',
+                                                        'status'      => 1,
+                                                        'add_date'    => time(),
+                                                        'modify_date' => time()
+                                                      )
+                                                    );
+                $photoresult =   $this->VendorGalleries->save($photodata);
+
+
 
 
 
@@ -1098,7 +1142,7 @@ $tot_irregular_classes = $this->ClassRegular->find('all', array('conditions' => 
             {
 
 
-$this->log($img4_name);
+
             //$filename=$_FILES["fileToUpload".$i]["name"];
 
             //$titlename=$this->request->data["titlename".$i];
@@ -1212,15 +1256,40 @@ $this->log($img4_name);
           //echo $target_file;
 
           //die;
+		  
+		  
+		  /*
+		  $file_tmp = file Temporary Name
+		  $destination_url = full path with image name
+		  $quality = quality in number 1 to 100
+		  getimageoptimized($file_tmp,$destination_url,$quality);
+		  */
+		   $file_tmp = $_FILES['data']['tmp_name'][$na];
+          $this->getimageoptimized($file_tmp,$target_file,50);		  
 
-          if (move_uploaded_file($_FILES['data']['tmp_name'][$na], $target_file)) {
+          // if (move_uploaded_file($_FILES['data']['tmp_name'][$na], $target_file)) {
+			  
+          if ($this->getimageoptimized($file_tmp,$target_file,50)) {
+
+         
 
               
 
               //$this->UserMaster->updateAll(array('profile_image' => $newfile),array('id' => $last_des_id));
 
+               $photodata = $this->VendorGalleries->set(array(
+                                                        'user_id' => $user_id,
+                                                        'category_id' => 1,
+                                                        'media_title' => 'My Image',
+                                                        'media_path' => $newfile,
+                                                        'description' => '',
+                                                        'status'      => 1,
+                                                        'add_date'    => time(),
+                                                        'modify_date' => time()
+                                                      )
+                                                    );
+                $photoresult =   $this->VendorGalleries->save($photodata);
 
-$this->log($newfile);
            $this->VendorClasse->query("UPDATE bg_vendor_classes SET  upload_class_photo='".$newfile."' WHERE id='".$last_des_id."'");
 
               } else {
@@ -2045,25 +2114,18 @@ $this->log($newfile);
 
 		$last_id = $this->PayuTransaction->getLastInsertID();
 
-		
-		$this->loadModel('TicketBooking');
-		$this->TicketBooking->create();
-		$ticket_booking['TicketBooking']['booking_id'] = $this->get_random_booking();
-		$ticket_booking['TicketBooking']['user_id'] = $_POST['udf1'];
-		$ticket_booking['TicketBooking']['payu_transaction_id'] = $last_id;
-		$ticket_booking['TicketBooking']['vendor_class_id'] = $_POST['udf2'];
-		$ticket_booking['TicketBooking']['class_date_id'] = $_POST['udf2'];
-		$this->TicketBooking->save($ticket_booking);
-		
-		$booking_id = $this->TicketBooking->getLastInsertID();
-		
-		$this->loadModel('TicketBookingDate');
-		$this->TicketBookingDate->create();
-		$ticket_booking_date['TicketBookingDate']['ticket_booking_id'] = $booking_id;
-		$ticket_booking_date['TicketBookingDate']['product_info'] = $_POST['productinfo'];
-		$this->TicketBookingDate->save($ticket_booking_date);
-		
-		$this->log($ticket_booking);$this->log($ticket_booking_date);
+
+		$total_price_set_by_system =  $this->Session->read('Transc.amount');
+        $this->Session->delete('Transc.amount');
+
+		$total_price_set_by_customer = $_POST['amount'];
+
+		if($total_price_set_by_system != $total_price_set_by_customer ){
+
+			$this->Session->setFlash('Something went wrong please contact customer care');
+
+		}else{
+
 		$tick =array();
 
 		$cookie = htmlspecialchars_decode($_POST['udf4']);
@@ -2103,8 +2165,6 @@ $this->log($val);
 									$this->request->data['Ticket'][$i]['start_code'] = $this->get_randon();
 
 									$this->request->data['Ticket'][$i]['end_code'] = $this->get_randon();
-									
-									$this->request->data['Ticket'][$i]['ticket_booking_id'] = $booking_id;
 
 									$this->Ticket->save($this->request->data['Ticket'][$i]);
 
@@ -2287,6 +2347,8 @@ $this->sendMail('bookClass_status',$_POST['email'],$booking_status_mail);
 
 				$this->redirect(array('controller'=>'vendor_classes','action'=>'classes',$class));
 
+			}	
+
 		}
 
 	public function book_now(){
@@ -2329,13 +2391,35 @@ $this->sendMail('bookClass_status',$_POST['email'],$booking_status_mail);
 
 		if(!empty($this->request->data)){
 
-					
-
+			 $totol_amount= 0;
+			  $level_amount = 0;
+			  $quantity = 0;		
+     
 		foreach($this->request->data['level_check'] as $key => $val){
 
 			$as[$val] = $this->request->data['tic_'.$val];
 
+
+			 $level_amount_array =  $this->VendorClasseLevelDetail->find('first', 
+			                                                     array(
+																 'conditions'=>array('id'=>$val),
+                                                                  'fields'=>array('price')
+                                                                   ));
+       
+              $level_amount = $level_amount_array['VendorClasseLevelDetail']['price'];
+              $quantity = $this->request->data['tic_'.$val];
+			
+			$totol_amount += $level_amount*$quantity;
+
 		}
+        
+        $this->Session->write('Transc.amount', $totol_amount);
+
+        
+
+
+         
+
 
 			$txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
 
@@ -2362,29 +2446,13 @@ $this->sendMail('bookClass_status',$_POST['email'],$booking_status_mail);
 			}	
 
 	}
-	
-	public function get_random_booking(){
-		
-			$randnum = rand(1111111111,9999999999);
-			$this->loadModel('TicketBooking');
-			$check = $this->TicketBooking->find('first',
-				array(
-					'conditions' => array(
-							'TicketBooking.booking_id' => $randnum,
-					)
-				)
-			);
-			if(!empty($check)){
-					$this->get_random_booking();
-			} else {
-					return $randnum;
-				}
-		}
 
 	public function get_randon(){
 
 			$randnum = rand(1111111111,9999999999);
+		
 			$this->loadModel('Ticket');
+			
 			$check = $this->Ticket->find('first',
 				array(
 					'conditions' => array(
@@ -2489,123 +2557,147 @@ $this->sendMail('bookClass_status',$_POST['email'],$booking_status_mail);
 				$this->set('all_class_type',$all_class_type);
 
 			}
-public function gift(){
+
+
+			public function getimagecount(){
+
+             $user=$this->Session->read('User');
+
+            $user_id = $user['UserMaster']['id'];
+
+         
+      
+       
+		  $gallery=$this->VendorGalleries->find('count', array(
+                            'conditions' => array(
+                              'VendorGalleries.user_id'    => $user_id,
+                              'VendorGalleries.category_id' => 1
+                          )
+                      ));
+
+		  echo $gallery;
+		  exit;
+
+			}
+
+
+			public function getvideocount(){
+
+             $user=$this->Session->read('User');
+         $user_id = $user['UserMaster']['id'];
+         $this->set('user_id',$user_id);
+      
+       
+		  $gallery=$this->VendorGalleries->find('count', array(
+                            'conditions' => array(
+                              'VendorGalleries.user_id'    => $user_id,
+                              'VendorGalleries.category_id' => 2
+                          )
+                      ));
+
+		  echo $gallery;
+		  exit;
+
+			}
+
+
+
+
+			public function deletegalleryitem(){
+
+		  $medial_path = $this->request->data['imgdata'];
 				
-              //$this->checkUser();
-              $this->layout='fun_layout';
-              $user=$this->Session->read('User');
-              $this->set('user_view',$user);
-                //$gift_ngo_id=7;
-              $gift_card_in = $this->GiftCard->find('all', array('conditions' => array('card_type_status'=>1)));
-              $gift_card_co = $this->GiftCard->find('all', array('conditions' => array('card_type_status'=>2)));
-              $gift_card_ngo = $this->GiftCard->find('all', array('conditions' => array('card_type_status'=>3)));
+
+          $user=$this->Session->read('User');
+         $user_id = $user['UserMaster']['id'];
         
-               $ngo_segment1 = $this->GiftCardSegment->query('SELECT bg_gift_card_segments.id,
-                                     bg_class_segments.id,
-                                     bg_class_segments.segment_name  
-                                     FROM bg_gift_card_segments LEFT JOIN bg_class_segments 
-                                     ON bg_gift_card_segments.segment_id = bg_class_segments.id
-                                     WHERE bg_gift_card_segments.gift_card_id =7');
-                                     
-              $ngo_segment2 = $this->GiftCardSegment->query('SELECT bg_gift_card_segments.id, bg_class_segments.id, bg_class_segments.segment_name FROM bg_gift_card_segments LEFT JOIN bg_class_segments ON bg_gift_card_segments.segment_id = bg_class_segments.id WHERE bg_gift_card_segments.gift_card_id = 8');
-                                      
-              $ngo_segment3 = $this->GiftCardSegment->query('SELECT bg_gift_card_segments.id,
-                                     bg_class_segments.id,
-                                     bg_class_segments.segment_name  
-                                     FROM bg_gift_card_segments LEFT JOIN bg_class_segments 
-                                     ON bg_gift_card_segments.segment_id = bg_class_segments.id
-                                     WHERE bg_gift_card_segments.gift_card_id = 9'); 
+          $condition = array(
+                              'VendorGalleries.user_id'    => $user_id,
+                               'VendorGalleries.media_path' => $medial_path
+                          );
+		  $delete=$this->VendorGalleries->deleteAll($condition,false);
 
-              $ngo_dropdown_name1 = $this->Ngo->find('all', array('conditions' => array('gift_card_id'=>7)));
-              $ngo_dropdown_name2 = $this->Ngo->find('all', array('conditions' => array('gift_card_id'=>8)));
-              $ngo_dropdown_name3 = $this->Ngo->find('all', array('conditions' => array('gift_card_id'=>9)));
-              $all_cat_name = $this->Category->find('all',array('conditions'=>array('status'=>1)));
+		  echo $delete;
+		  exit;
+
+			}
+			
+			
+			public function getimageoptimized($file_tmp,$destination_url,$quality,$thumb = FALSE, $thumb_folder = '', $thumb_width = '', $thumb_height = ''){
+				
+				 $image_size_info    = getimagesize($file_tmp); //get image size
+
+							if($image_size_info){
+								$image_width        = $image_size_info[0]; //image width
+								$image_height       = $image_size_info[1]; //image height
+								$image_type         = $image_size_info['mime']; //image type
+							}else{
+								die("Make sure image file is valid!");
+							}
+
+							//switch statement below checks allowed image type 
+							//as well as creates new image from given file 
+							
+							
+							$destination_url = $desired_dir.$final_name;
+							
+							
+							
+							switch($image_type){
+								case 'image/png':
+									$image_res =  imagecreatefrompng($file_tmp); 
+									imagepng($image_res, $destination_url, $quality);
+									break;
+								case 'image/gif':
+									$image_res =  imagecreatefromgif($file_tmp); 
+                                   imagegif($image_res, $destination_url, $quality);
+								   break;									
+								case 'image/jpeg': case 'image/pjpeg':
+									$image_res = imagecreatefromjpeg($file_tmp); 
+									
+									
+									imagejpeg($image_res, $destination_url, $quality);
+									break;
+								default:
+									$image_res = false;
+							}
+							
+							
+							//thumbnail creation
+							if($thumb == TRUE)
+							{
+							$destination_url_thumb = $desired_dir."thumb_".$final_name;
+							
+							$thumb_create = imagecreatetruecolor($thumb_width,$thumb_height);
+							
+							imagecopyresized($thumb_create,$image_res,0,0,0,0,$thumb_width,$thumb_height,$image_width,$image_height);
+							
+							switch($image_type){
+								case 'image/jpeg': case 'image/pjpeg':
+									imagejpeg($thumb_create,$destination_url_thumb,100);
+									break;
+								case 'image/png':
+									imagepng($thumb_create,$destination_url_thumb,100);
+									break;
+
+								case 'image/gif':
+									imagegif($thumb_create,$destination_url_thumb,100);
+									break;
+								default:
+									imagejpeg($thumb_create,$destination_url_thumb,100);
+							}
+							}
+							
+					   imagedestroy($image_res);
+				
+					   $uploadflag = imagejpeg($image_res, $destination_url, $quality);
+				       return $uploadflag;
+				
+			}
+			
+			
+			
 
 
 
-                                     
-              $this->set('individual',$gift_card_in);
-              $this->set('corporate',$gift_card_co);
-              $this->set('ngo',$gift_card_ngo);
-              $this->set('ngo_segment1',$ngo_segment1);
-              $this->set('ngo_segment2',$ngo_segment2);
-              $this->set('ngo_segment3',$ngo_segment3);
-              $this->set('ngo_dropdown_name1',$ngo_dropdown_name1);
-              $this->set('ngo_dropdown_name2',$ngo_dropdown_name2);
-              $this->set('ngo_dropdown_name3',$ngo_dropdown_name3);
-              $this->set('cat_name',$all_cat_name);
-              
-
-   
-				if(!empty($this->request->data)){
-					
-					foreach($this->request->data['level_check'] as $key => $val){
-						
-						$as[$val] = $this->request->data['tic_'.$val];
-						
-						}
-						$this->set('tot_ticket',json_encode($as));
-						$this->set('class_id',$this->request->data['classid']);
-						$this->set('tot_amount',$this->request->data['total_cost']);
-						$this->set('loc_id',$this->request->data['VendorClasses']['locality']);
-						//echo '<pre>'; print_r($this->request->data); die;
-					}	
-			} 
-public function gift_class(){
-		
-
-		$this->layout='book_now_layout';
-
-		$class = $this->VendorClasse->find('first', array(
-
-					'conditions' => array(
-
-									'VendorClasse.id' => $this->request->data['class_id'],
-
-									),
-
-					'contain' => array(
-
-									'User',
-
-									'VendorClasseLocationDetail' => array(
-
-											'conditions' => array(
-
-												'VendorClasseLocationDetail.id' => $this->request->data['loc_id'],
-
-												'VendorClasseLocationDetail.vendor_class_id' => $this->request->data['class_id']
-
-											),
-
-										),
-
-									)
-
-					));
-
-		$this->set('class',$class);		
-
-		$this->set('book',$this->request->data);
-
-		
-
-		if(!empty($this->request->data)){
-
-	
-	//echo '<pre>'; print_r($this->request->data); die;
-			$txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
-			$user = $this->Session->read('User');
-			$this->set('ticket',$this->request->data['tot_ticket']);
-			$this->set('txnid',$txnid);
-			$this->set('class_id',$class['VendorClasse']['id']);
-			$this->set('user_id',$user['UserMaster']['id']);
-			$this->set('email',$this->request->data['email_id']);
-			$this->set('name',$this->request->data['reciepent_name']);
-			$this->set('total_amount',$this->request->data['tot_amount']);
-			$this->set('phone',$this->request->data['phone']);	
-			$this->set('locality_id',$this->request->data['loc_id']);
-			}	
-	
-	}
 }
