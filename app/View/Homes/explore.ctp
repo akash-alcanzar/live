@@ -1,4 +1,16 @@
 <style>
+#click_tab102{
+	background:#000873;
+	border-radius:5px;
+}
+/*#people_near:active{
+	background:#000873;
+	border-radius:5px;
+}
+#group:active{
+	background:#000873;
+	border-radius:5px;
+}*/
 #marker-tooltip {
    
     position:absolute;
@@ -7,6 +19,15 @@
     background-color: #ccc;
     margin: 15px;
      overflow-y: auto;
+}
+#marker-tooltip1 {
+   
+   /* position:absolute;
+    width: 300px;
+    height: 600px;
+    background-color: #ccc;
+    margin: 15px;
+    overflow-y: auto;*/
 }
 </style>
 <?php echo $this->Html->css('front/geolocation');?>
@@ -46,12 +67,13 @@
     <div class="container-fluid  padd_l_r" style="">            
         <div class="col-md-12 col-sm-12 col-xs-12" style="">  </div>   
         <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r br_srch_act">
-            <div class="col-md-7 col-sm-7 col-xs-6 left-box-content">
+            <div class="col-md-7 col-sm-7 col-xs-6 left-box-content" style="border-radius:5px;">
                 <div class="col-md-4 col-sm-3 col-xs-12 padd_l_r find-near-div find-near-field  cur" id="click_tab102">
                     <center>
-                        <img class="globgreen" src="<?php echo HTTP_ROOT?>/img/glob.png">
-                        <img class="globblack" src="<?php echo HTTP_ROOT?>/img/globblack.png">
-                        <span id="clr01">Find classes near by you </span>
+                    <div class="image1"></div>
+                      <img class="globgreen" src="<?php echo HTTP_ROOT?>/img/glob.png">
+                        <!--  <img class="globblack" src="<?php echo HTTP_ROOT?>/img/globblack.png">-->
+                        <span id="clr01">Find classes near you </span>
                     </center>
                     <!-- <hr class="near-border nearr-border active" id="hr1"> -->
                     <center>
@@ -61,9 +83,11 @@
 
                 <div class="col-md-4 col-sm-4 col-xs-12 padd_l_r find-people-near-div find-near-div find-people-near find-near-field  cur" id="people_near">
                     <center>
-                        <img class="handblack" src="<?php echo HTTP_ROOT?>/img/handblack.png">
-                        <img class="handgreen" src="<?php echo HTTP_ROOT?>/img/handgreen.png">
-                        <span id="clr02">Find people near by you </span>
+                    <div id="image2"></div>
+                    <!--  <img class="handgreen" src="<?php echo HTTP_ROOT?>/img/handgreen.png">-->
+                      <img class="handblack" src="<?php echo HTTP_ROOT?>/img/handblack.png">
+                        
+                        <span id="clr02">Find people near you </span>
                     </center>
                     <!-- <hr class="near-border near-border1 nearr-border1" id="hr2"> -->
                     
@@ -74,11 +98,12 @@
 
                 <div class="col-md-4 col-sm-4 col-xs-12 padd_l_r find-people-near find-people-near-div-last find-near-field" id="group">
                     <center>
-                        <img class="manblack" src="<?php echo HTTP_ROOT?>/img/manblack.png">
-                        <img class="mangreen" src="<?php echo HTTP_ROOT?>/img/mangreen.png">
-                        <span>   Find groups near by you </span>
+                    <div id="image3"></div>
+                    <img class="manblack" src="<?php echo HTTP_ROOT?>/img/manblack.png">
+                         <!--   <img class="mangreen" src="<?php echo HTTP_ROOT?>/img/mangreen.png">-->
+                        <span>Find groups near you </span>
                     </center>
-                    <hr class="near-border nearr-border2">
+                    <hr class="near-border nearr-border2" style="margin-top:29px;">
                     <center>
                         <img class="caret-border-img2" src="<?php echo HTTP_ROOT;?>/img/caret.png">
                     </center>
@@ -105,7 +130,7 @@
 
 
 
-<div class="col-xs-12 col-sm-12  col-md-12 col-lg-offset-1 col-lg-10" >
+<div class="col-xs-12 col-sm-12  col-md-12 col-lg-offset-1 col-lg-10">
    
     
     <div class="container-fluid  padd_l_r " id="tab1" style=""> 
@@ -120,11 +145,57 @@
                     <div class="col-md-2 col-sm-2 col-xs-3 rec_health padd_l_r one_seg12" id="explore">EXPLORE </div>
                     <div class="col-md-10 col-sm-10 col-xs-9 sr_2605_03_padding  sr_2705_bdr3 one_seg12 padd_l_r">
                         <div class="row">
-                            <?php foreach ($category as  $res) { ?>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padd_l_r two_seg seg_brd_tp_class_segment" id="<?php echo $res['Category']['id'];?>" style="background-color:#<?php echo $res['Category']['color_code'];?>;">
-                                    <a style="color:#fff;"><?php echo $res['Category']['category_name']; ?></a>
+                           <!-- <?php //foreach ($category as  $res) { ?>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padd_l_r two_seg seg_brd_tp_class_segment" id="<?php// echo $res['Category']['id'];?>" style="background-color:#<?php //echo $res['Category']['color_code'];?>;">
+                                    <a style="color:#fff;"><?php //echo $res['Category']['category_name']; ?></a>
                                 </div> 
-                            <?php  } ?>    
+                            <?php // } ?>    -->
+                            <?php foreach ($category as  $res) { ?>
+                            <div id="<?php echo $idd=$res['Category']['id'];?>"> 
+							<div class=""></div>
+                            <?php if($idd=="1"){?> 
+                                    <div class="fun col-lg-4 col-md-4 col-sm-4 col-xs-6 padd_l_r two_seg seg_brd_tp_class_segment">
+                                        <a style="color:#fff;"><?php echo $res['Category']['category_name']; ?></a>
+                                        <img src="<?php echo HTTP_ROOT;?>/img/explore/fun.png" style="float:right;padding:0px;" />
+                                    </div>
+							 <?php } ?>
+                             <?php if($idd=="2"){?> 
+                                    <div class="informative col-lg-4 col-md-4 col-sm-4 col-xs-6 padd_l_r two_seg seg_brd_tp_class_segment">
+                                        <a style="color:#fff;"><?php echo $res['Category']['category_name']; ?></a>
+                                        <img src="<?php echo HTTP_ROOT;?>/img/explore/informative.png" style="float:right;padding:0px;" />
+                                    </div>
+							 <?php } ?>
+                             <?php if($idd=="3"){?> 
+                                    <div class="health col-lg-4 col-md-4 col-sm-4 col-xs-6 padd_l_r two_seg seg_brd_tp_class_segment">
+                                        <a style="color:#fff;"><?php echo $res['Category']['category_name']; ?></a>
+                                        <img src="<?php echo HTTP_ROOT;?>/img/explore/health.png" style="float:right;padding:0px;" />
+                                    </div>
+							 <?php } ?>
+                             <?php if($idd=="4"){?> 
+                                    <div class="kids col-lg-4 col-md-4 col-sm-4 col-xs-6 padd_l_r two_seg seg_brd_tp_class_segment">
+                                        <a style="color:#fff;"><?php echo $res['Category']['category_name']; ?></a>
+                                        <img src="<?php echo HTTP_ROOT;?>/img/explore/kids.png" style="float:right;padding:0px;" />
+                                    </div>
+							 <?php } ?>
+                             <?php if($idd=="5"){?> 
+                                    <div class="education col-lg-4 col-md-4 col-sm-4 col-xs-6 padd_l_r two_seg seg_brd_tp_class_segment">
+                                        <a style="color:#fff;"><?php echo $res['Category']['category_name']; ?></a>
+                                        <img src="<?php echo HTTP_ROOT;?>/img/explore/education.png" style="float:right;padding:0px;" />
+                                    </div>
+							 <?php } ?>
+                             <?php if($idd=="6"){?> 
+                                    <div class="home col-lg-4 col-md-4 col-sm-4 col-xs-6 padd_l_r two_seg seg_brd_tp_class_segment">
+                                        <a style="color:#fff;"><?php echo $res['Category']['category_name']; ?></a>
+                                        <img src="<?php echo HTTP_ROOT;?>/img/explore/home.png" style="float:right;padding:0px;" />
+                                    </div>
+							 <?php } ?>
+                                     
+                                   
+                              
+                                
+                                <?php //echo $res['Category']['color_code'];?>
+                                </div> 
+                                <?php  } ?>    
                         </div>
                     </div>
                 </div>
@@ -168,8 +239,46 @@
 
     <!-- google map code -->
     <div class="col-md-12 col-sm-12 col-xs-12 sr_2605_03 padd_l_r map11"> 
+    	<div class="col-md-8 col-sm-8 col-xs-8">
           <div id="googleMap" class="google-map-div" style="width:100%;height:600px;"></div>
           <div id="marker-tooltip" style="display:none;"></div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-4 pad_all">
+          <div class="row">
+          	
+           <div id="marker-tooltip1" style="display:none;"></div>
+          </div>
+          <div style="margin-bottom:0px;">
+            	<div class="row">
+	          			<img src="<?php echo HTTP_ROOT;?>/img/explore/fun.png"/>
+                        <label>Fun & Recreation</label>
+                    </div>
+                    <div class="row">
+                      	<img src="<?php echo HTTP_ROOT;?>/img/explore/informative.png"/>
+                    	<label>Informative & Motivational</label>       
+                    </div>
+                    <div class="row"> 
+                    	<img src="<?php echo HTTP_ROOT;?>/img/explore/health.png"/> 
+                        <label>Health & Fitness</label>  
+                        		
+                     </div>
+                
+                     <div class="row">
+	                    <img src="<?php echo HTTP_ROOT;?>/img/explore/kids.png"/>
+                        <label>Kids & Teens</label>
+                        
+                     </div>
+                     <div class="row"> 
+                        <img src="<?php echo HTTP_ROOT;?>/img/explore/education.png"/> 
+                        <label>Education & Skill Development</label>  
+                     </div>
+                     <div class="row">   
+                        <img src="<?php echo HTTP_ROOT;?>/img/explore/home.png"/>
+                        <label>Home Maintenance</label>
+                     </div>
+                     </div>
+            
+          </div>
     </div> 
 
    <div class="col-md-12 col-sm-12 col-xs-12 "> &nbsp; </div>
@@ -194,12 +303,32 @@
                     <div class="col-md-2 col-sm-2 col-xs-3 rec_health padd_l_r one_seg12">EXPLORE</div>
                     <div class="col-md-10 col-sm-10 col-xs-9 sr_2605_03_padding  sr_2705_bdr3 one_seg12 padd_l_r">
                         <div class="row">
-                            <?php foreach ($category as  $res) { ?>
+                           <!-- <?php //foreach ($category as  $res) { ?>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padd_l_r two_seg seg_brd_tp_class_segment1" 
-                                id="<?php echo $res['Category']['id'];?>" style="background-color:#<?php echo $res['Category']['color_code'];?>">
-                                    <a style="color:#fff;"><?php echo $res['Category']['category_name']; ?></a>
+                                id="<?php //echo $res['Category']['id'];?>" style="background-color:#<?php //echo $res['Category']['color_code'];?>">
+                                    <a style="color:#fff;"><?php //echo $res['Category']['category_name']; ?></a>
                                 </div> 
-                            <?php  } ?>    
+                            <?php  //} ?>    -->
+                            <?php foreach ($category as  $res) { ?>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padd_l_r two_seg seg_brd_tp_class_segment" id="<?php echo $res['Category']['id'];?>" >
+                                <a style="color:#fff;"><?php echo $res['Category']['category_name']; ?></a>
+                                <?php if($res['Category']['category_name']=="Fun & Recreation"){?>
+                                <img src="<?php echo HTTP_ROOT;?>/img/explore/fun.png" style="float:right;padding:0px;" />
+                                <?php } elseif($res['Category']['category_name']=="Informative & Motivational"){?>
+                                <img src="<?php echo HTTP_ROOT;?>/img/explore/informative.png" style="float:right;" />
+                                <?php } elseif($res['Category']['category_name']=="Health & Fitness"){?>
+                                <img src="<?php echo HTTP_ROOT;?>/img/explore/health.png" style="float:right;" />
+                                <?php } elseif($res['Category']['category_name']=="Kids & Teens"){?>
+                                <img src="<?php echo HTTP_ROOT;?>/img/explore/kids.png" style="float:right;" />
+                                <?php } elseif($res['Category']['category_name']=="Education & Skill Development"){?>
+                                <img src="<?php echo HTTP_ROOT;?>/img/explore/education.png" style="float:right;" />
+                                <?php } elseif($res['Category']['category_name']=="Home Maintenance"){?>
+                                <img src="<?php echo HTTP_ROOT;?>/img/explore/home.png" style="float:right;" />
+                                <?php } ?>
+                                
+                                <?php //echo $res['Category']['color_code'];?>
+                                </div> 
+                                <?php  } ?>    
                         </div>
                     </div>
                 </div>
@@ -409,12 +538,16 @@ google.maps.event.addListener(marker, 'mouseover', function (event) {
         $('.loader').hide();
             if(output=='0'){
               $('#marker-tooltip').hide();
+			      $('#marker-tooltip1').hide();
             }
             else{
 
        $('#marker-tooltip').html(output).css({
             'left': point.x,
                 'top': point.y
+        }).show();
+		 $('#marker-tooltip1').html(output).css({
+            
         }).show();
          }
      }
@@ -556,12 +689,16 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
          $('.loader').hide();
       if(output=='0'){
               $('#marker-tooltip').hide();
+			   $('#marker-tooltip1').hide();
             }
             else{
 
        $('#marker-tooltip').html(output).css({
             'left': point.x,
                 'top': point.y
+        }).show();
+		$('#marker-tooltip1').html(output).css({
+           
         }).show();
          }
          }
@@ -661,12 +798,16 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
          $('.loader').hide();
       if(output=='0'){
               $('#marker-tooltip').hide();
+			  $('#marker-tooltip1').hide(); 
             }
             else{
 
        $('#marker-tooltip').html(output).css({
             'left': point.x,
                 'top': point.y
+        }).show();
+		$('#marker-tooltip1').html(output).css({
+           
         }).show();
          }
          }
@@ -802,12 +943,16 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
           $('.loader').hide();
       if(output=='0'){
               $('#marker-tooltip').hide();
+			    $('#marker-tooltip1').hide();
             }
             else{
 
        $('#marker-tooltip').html(output).css({
             'left': point.x,
                 'top': point.y
+        }).show();
+		$('#marker-tooltip1').html(output).css({
+           
         }).show();
          }
          }
@@ -1010,12 +1155,16 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
          $('.loader').hide();
       if(output=='0'){
               $('#marker-tooltip').hide();
+			    $('#marker-tooltip1').hide();
             }
             else{
 
        $('#marker-tooltip').html(output).css({
             'left': point.x,
                 'top': point.y
+        }).show();
+		$('#marker-tooltip1').html(output).css({
+          
         }).show();
          }
          }
@@ -1077,18 +1226,26 @@ $(document).ready(function(){
        });
   });  
 
-
 $('#people_near').click(function(){
     $('#class_search1').show();
     $('#postSearch1').show();
     $('#class_search').hide();
     $('#postSearch').hide();
+
     
  $(this).css('border-color','#00cdc6');
+ $(this).css('background','#000873');
+ $('#click_tab102').css('background','#fff');
+  $(this).css('border-radius','5px');
  $('#carrot1').show();
  $('#carrot').hide();
  $('#clr01').css('color','#000');
-//var longitude=longitude;
+  //  $('#image1').html('<img  src='+<?php echo HTTP_ROOT?>/img/globblack.png+'>');
+	// $('#image2').html('<img src='+<?php echo HTTP_ROOT?>/img/handgreen.png+'>');
+
+ //  $('#image3').html('<img  src='+<?php echo HTTP_ROOT?>/img/manblack.png+'>');
+
+ //var longitude=longitude;
 var latitude1=$('#latitude1').val();
 var longitude1=$('#longitude1').val();
 
@@ -1111,7 +1268,7 @@ else{
        url: '<?php echo HTTP_ROOT;?>/Homes/findNearAllClasses/'+latitude1+"/"+longitude1,
         type: 'post',
          success: function(output) {
-            alert(output);
+            //alert(output);
           $('#googleMap1').html('');
           $('#googleMap1').html(output);
           
@@ -1125,6 +1282,8 @@ else{
     $('#hr2').css('border-bottom-color', '#00cdc6 !important');
     $('#hr1').css('border-color', '#000 !important');
     $('#click_tab102').css('color', '#343434');
+	//$('#click_tab102').css('background','000873');
+	//$('#click_tab102').css('border-radius','5px');
 
 
 });
@@ -1137,8 +1296,13 @@ $('#click_tab102').click(function(){
     $('#people_near').css('border-color','#000');
     $('#carrot1').hide();
     $('#clr02').css('color','#000');
+	 $(this).css('background','#000873');
+  $(this).css('border-radius','5px');
+   $('#people_near').css('background','#fff');
     $('#tab2').hide();
-
+// $('#image1').html('<img  src='+<?php echo HTTP_ROOT?>/img/globgreen.png+'>');
+	 // $('#image2').html('<img  src='+<?php echo HTTP_ROOT?>/img/handblack.png+'>');
+// $('#image3').html('<img  src='+<?php echo HTTP_ROOT?>/img/manblack.png+'>');
     $('#tab1').show();
     $('#clr01').css('color', '#00cdc6');
     $('#click_tab1').css('color', '#343434');
@@ -1152,6 +1316,8 @@ window.location.href="<?php echo HTTP_ROOT?>/Homes/explore";
 });
 $('#group').click(function(){
    $(this).css('color', '#00cdc6');
+    $(this).css('background','#000873');
+  $(this).css('border-radius','5px');
   window.location.href='<?php echo HTTP_ROOT;?>/Homes/connectpage';
 })
 $('#ran').change(function(){
@@ -1171,7 +1337,7 @@ $('#postSearch').click(function(){
 
            var result=jQuery.parseJSON(output);
             if(result.found=='0'){
-              alert('RecordNot Found');
+              alert('Record Not Found');
               //$('googleMap').html('');
               $('.loader').hide();
               return false;
@@ -1240,12 +1406,16 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
         $('.loader').hide();
       if(output=='0'){
               $('#marker-tooltip').hide();
+			   $('#marker-tooltip1').hide();
             }
             else{
 
        $('#marker-tooltip').html(output).css({
             'left': point.x,
-                'top': point.y
+               'top': point.y
+        }).show();
+		  $('#marker-tooltip1').html(output).css({
+           
         }).show();
          }
          }
@@ -1271,3 +1441,17 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
         
  })
 </script>
+<script type="text/javascript">
+$('.fun').click(function() {
+    $('.fun').css({
+        'border-color': '#ffa0d0',
+  });
+});
+</script>
+<style>.fun:hover{background:#ffa0d0;}
+.informative:hover{background:#a3a3a3;}
+.health:hover{background:#50bef7;}
+.kids:hover{background:#ff9600;}
+.education:hover{background:#026510;;}
+.home:hover{background:#ab47ff;}
+</style>
