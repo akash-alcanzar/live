@@ -188,7 +188,7 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
                               <i class="fa fa-home" aria-hidden="true"style="margin-right:5px;"></i>Home</button>
                              </a>
                             <button class="btn btclass1 fbttp" style="padding:5px 20px;"><img src="<?php echo HTTP_ROOT;?>/img/iconfind.png" />Find</button>
-                            <a href="<?php echo HTTP_ROOT;?>/Homes/upcoming">
+                            <a href="<?php echo HTTP_ROOT;?>/Connect/connectpage">
                             <button class="btn btclassnt1  fbttp" style="padding:5px 10px;">
                             <!--<img src="<?php echo HTTP_ROOT;?>/img/iconconnect1.png" />--> <i class="fa fa-group"></i> Connect</button>
                             </a>

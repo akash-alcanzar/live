@@ -172,9 +172,9 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
                       </div>
                       <div class="col-md-3 col-sm-4 col-xs-12 padd_l_r b_fcb2 b_pad12 sr_15_07_connect_btn">
                           <div class="pull-right b_lft">
-                            <button class="btn btclass1 fbttp" style="padding:5px 20px;"><img src="<?php echo HTTP_ROOT;?>/img/iconfind.png" />Find</button>
+                            <button class="btn btclass1 fbttp" style="padding:5px 20px;"><img src="<?php echo HTTP_ROOT;?>/img/iconfind.png" />Find</button>  <a href="<?php echo HTTP_ROOT;?>/Connect/connectpage">
                             <button class="btn btclassnt1  fbttp" style="padding:5px 10px;">
-                            <!--<img src="<?php echo HTTP_ROOT;?>/img/iconconnect1.png" />--> <i class="fa fa-group"></i> Connect</button>
+                            <!--<img src="<?php echo HTTP_ROOT;?>/img/iconconnect1.png" />--> <i class="fa fa-group"></i> Connect</button></a>
                           </div>
                       </div>
                       <!-- ******************new alignment***************** -->
