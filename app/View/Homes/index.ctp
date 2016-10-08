@@ -102,7 +102,7 @@ border-radius:30%;
       display: block;
     }
 </style>
-
+<?php  $image_location = "img/category_image/optimizedsliderimage";  ?>
   
 
  <!-- banner slider -->
