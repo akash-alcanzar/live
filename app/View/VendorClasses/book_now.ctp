@@ -781,14 +781,13 @@ $("#payfor_Coupon").click(function() {
   var coupon_value     = $("#coupon_value").val();
   var class_id         = $("#class_id").val();
   var no_of_ticket     = $("#reg_t_id").val();
-  //var tot_ticket     = $("#udf4").val();
   var status = 2;
   var book_id= $("#book_id").val();
 
 $.ajax({  
     type: "POST",  
     url: "<?php echo HTTP_ROOT; ?>/Homes/saveCoupon",  
-    data: 'coupon_number='+coupon_value+'&payment_amt='+amount_coupan+'&payment_type='+radioValue+'&status='+status+'&class_id='+class_id+'&no_of_ticket='+no_of_ticket+'&booking_id='+book_id,  //+'&tot_ticket='+tot_ticket
+    data: 'coupon_number='+coupon_value+'&payment_amt='+amount_coupan+'&payment_type='+radioValue+'&status='+status+'&class_id='+class_id+'&no_of_ticket='+no_of_ticket+'&booking_id='+book_id,  
     success: function(Coupon_respone){  
         //$("#status1").html('');
     //alert(Coupon_respone);
