@@ -43,10 +43,10 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
             <div class="col-xs-12 col-sm-12 sr_15_07_padd">
               <!-- ***************left button*************** -->
               <div class="col-md-7 col-sm-7 col-lg-8 col-xs-12 pull-left padd_l_r sr_18_07_header_bdr">
-                                  <a href="<?php echo HTTP_ROOT;?>/sell-express">
+                                  <a href="<?php echo HTTP_ROOT;?>/sellExpress">
                     <button class="btn buttclass" >Class Providers</button>
                   </a>
-                  <a href="<?php echo HTTP_ROOT;?>/arrange-class">
+                  <a href="<?php echo HTTP_ROOT;?>/arrange_class">
                     <button class="btn butidea sr_18_07_cfo">Catalogue for Organizers</button>
                   </a>
                   <a href="<?php echo HTTP_ROOT;?>/Homes/gift">
