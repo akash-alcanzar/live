@@ -1,12 +1,7 @@
-
-
 <style>
   a:hover{
      text-decoration: none;
    } 
-#upload-btn{
-cursor:pointer;
-}
 </style>
 <?php 
   //echo "<pre>";print_r($galleryimage);
@@ -139,16 +134,6 @@ border-radius:30%;
     background-color: #00CDC6;
     padding: 10px 0px;
 }
-.numberCircle12{
-background: crimson none repeat scroll 0 0;
-border-radius: 50%;
-color: white;
-padding: 4px 6px;
-text-align: center;
-position: relative;
-left: 72%;
-top:-20px;
-}
 @media (max-width: 767px) and (min-width: 550px){
   .fa-camera-br {right: -47px;top: -12px;}
 }
@@ -266,7 +251,7 @@ top:-20px;
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4 mntop">
                     <div class="pull-right">
-                        <img id="notification" src="<?php echo HTTP_ROOT;?>/img/profile_img/notification.png" class="note321">
+                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/notification.png" class="note321">
                         <?php if($user_view['UserMaster']['user_type_id']=='1'){ ?>
 <a href="<?php echo HTTP_ROOT;?>/Homes/msgInboxVendor">
 <?php if(!empty($ven_msg)){ ?>
@@ -288,7 +273,7 @@ top:-20px;
               </div>  
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
-              <div style='background-color: rgb(0, 205, 198); border-radius: 5px; float: right; padding-left: 15px; width: 85px;'>
+              <div class="pull-right">
                 <span onclick="ClickUpload1()">
                   <i class="fa fa-camera edit-bg" aria-hidden="true"></i>
                   <span class="edit-photo">Edit</span>
@@ -405,24 +390,6 @@ top:-20px;
                           <!-- *****************section 2************* -->
                           <!-- *****************Institution************** -->
                           <div id="section2">
-                          <div class="col-md-12 col-sm-12 col-xs-12 detail">
-                            <div class="col-md-3 col-sm-6 col-xs-4 br_name">
-                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/building.png">
-                              <span>Vendor Type:</span>
-                            </div>
-                            <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
-                              <?php if($user_view['UserMaster']['vendor_type_id']==1){?>
-                                <span>Organization</span>
-                              <?php }
-                              else if($user_view['UserMaster']['vendor_type_id']==2){?>
-                               <span>Indivisual"</span>
-                             <?php }
-                              else{?>
-                               <span>N/A</span>
-                            <?php }?>
-                              
-                            </div>
-                          </div>
                           <div class="col-md-12 col-sm-12 col-xs-12 detail">
                             <div class="col-md-3 col-sm-6 col-xs-4 br_name">
                               <img src="<?php echo HTTP_ROOT;?>/img/profile_img/building.png">
@@ -758,18 +725,7 @@ top:-20px;
                     </div>
                     <!-- *****************section 2************* -->
                     <!-- *****************Institution************** -->
-                   <div class="col-md-12 col-sm-12 col-xs-12 detail1">
-                      <div class="col-md-3 col-sm-4 col-xs-4 br_name">
-                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/building.png">
-                        <span>Vendor Type:</span>
-                      </div>
-                      <div class="col-md-5 col-sm-7 col-xs-8 br_name1">
-                        <?php echo $this->Form->input('vendor_type_id',array('type'=>'select','class'=>'form-control reg_input input_text','id'=>'vendor_Type','label'=>false,'div'=>false,'placeholder'=>'Vendor Type','selected'=>$user_view['UserMaster']['vendor_type_id'],'options'=>$vendor_type));?>
-                       <span class="carimg crt_prf "><img src="<?php echo HTTP_ROOT;?>/img/profile_img/caret_prf.png" class="crt786"></span>                     
-                      </div>
-                    </div>
-                                        <div id="vendor_org">
-                    <div class="col-md-12 col-sm-12 col-xs-12 detail1" id="vendor_org1">
+                    <div class="col-md-12 col-sm-12 col-xs-12 detail1">
                       <div class="col-md-3 col-sm-4 col-xs-4 br_name">
                         <img src="<?php echo HTTP_ROOT;?>/img/profile_img/building.png">
                         <span>Institution:</span>
@@ -781,8 +737,7 @@ top:-20px;
                     </div>
                     <!-- *****************Institution************** -->
                     <!-- *****************Registration Id************** -->
-                    
-                    <div class="col-md-12 col-sm-12 col-xs-12 detail1" id="vendor_org_reg_id">
+                    <div class="col-md-12 col-sm-12 col-xs-12 detail1">
                       <div class="col-md-3 col-sm-4 col-xs-4 br_name">
                         <img src="<?php echo HTTP_ROOT;?>/img/profile_img/are.png">
                         <span>Registration Id:</span>
@@ -791,18 +746,6 @@ top:-20px;
                         <?php echo $this->Form->input('official_reg_id',array('type'=>'text','class'=>'form-control reg_input input_text','id'=>'email','label'=>false,'div'=>false,'placeholder'=>'Registration Id','value'=>$user_view['UserMaster']['official_reg_id']));?>
                       </div>
                     </div>
-                    </div>
-                   
-                    <div class="col-md-12 col-sm-12 col-xs-12 detail1" id="vendor_indivisual_dob" style="display:none;">
-                      <div class="col-md-3 col-sm-4 col-xs-4 br_name">
-                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/are.png">
-                        <span>Date Of Birth:</span>
-                      </div>
-                      <div class="col-md-5 col-sm-7 col-xs-8 br_name1">
-                        <?php echo $this->Form->input('d_o_b',array('type'=>'text','class'=>'form-control reg_input input_text','id'=>'datepicker2','label'=>false,'div'=>false,'placeholder'=>'Date Of Birth','value'=>$user_view['UserMaster']['d_o_b']));?>
-                      </div>
-                    </div>
-                    
                     <!-- *****************Registration Id************** -->
                     <!-- *****************Experience Area************** -->
                     <div class="col-md-12 col-sm-12 col-xs-12 detail1">
@@ -994,11 +937,11 @@ top:-20px;
                         <div class="col-md-12 col-sm-12 col-xs-12 vid1">
                             <div class="col-md-12 col-sm-12 col-xs-12 uploadd-btn">
                               <span>Photos</span>
-                              <span class="pull-right" id ="upload-btn" style="cursor:pointer;color:blue!importent">Add Photo</span>
+                              <span class="pull-right" id ="upload-btn" style="cursor:pointer;">Add Photo</span>
                             </div>
 
                             <!-- <center>
-                              <button type="button" id ="upload-btn" class="btn btn-success uploadd-btn" style="cursor:pointer;color:blue!importent">Upload Video</button> -->
+                              <button type="button" id ="upload-btn" class="btn btn-success uploadd-btn">Upload Video</button> -->
                             <!-- </center> -->
                             <div class="col-md-12 col-sm-12 col-xs-12">
                               <div class="col-md-12 col-sm-12 col-xs-12 march"></div>
@@ -1024,7 +967,7 @@ top:-20px;
                                         <div class="modal-header" style="border-radius:5px 5px 0px 0px; background-color: #00CDC6;" id="shopmodal">
                                             
                                             <button type="button" class="close" data-dismiss="modal">×</button>
-                                            <h3 style="padding:0px; margin:0px; color:#fff;">Upload Video</h3>
+                                            <h3 style="padding:0px; margin:0px; color:#fff;">Upload Image</h3>
                                         
                                         </div>
                                         <?php echo $this->Form->create('AddVideo', array('class' => '','enctype'=>'multipart/form-data','onSubmit'=>'return chk_vid();'))?>  
@@ -1218,7 +1161,7 @@ top:-20px;
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 padd_l_r"><img src="<?php echo HTTP_ROOT;?>/img/8.jpg" class="star all-star-img"></div>
-                                                    <a href="<?php echo HTTP_ROOT;?>/Homes/bookClass/<?php echo base64_encode($result['VendorClasse']['id']); ?>">   
+                                                    <a href="<?php echo HTTP_ROOT;?>/Vendor_classes/classes/<?php echo base64_encode($result['VendorClasse']['id']); ?>">   
                                                       <div class="col-xs-12 col-sm-12" style="text-align: right;padding-right:0px;"><button class="booking">Booking Status</button></div></a> 
                                                   </div>
                                               </div>        
@@ -1760,23 +1703,7 @@ top:-20px;
             <!-- *************hide2*************** -->            
   </div>  
   <!-- ***************navbar******************** -->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-    
-    <!-- Load jQuery JS -->
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <!-- Load jQuery UI Main JS  -->
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    
-    <!-- Load SCRIPT.JS which will create datepicker for input field  -->
-    
-    
-    <link rel="stylesheet" href="runnable.css" />
-            
-           
  <script>
- 
 function ClickUpload() {
 $("#FileUpload").trigger('click');
 }
@@ -1802,7 +1729,6 @@ $(document).ready(function(){
 
     $('.uploadbox').change(function() {
            user_id=$('.customer').val();
-           
            $('.loader').show();
            var front=1;
           //alert(user_id);
@@ -1921,32 +1847,7 @@ $('.funmp1').css('background-image', 'url(' + imageUrl + ')');
 </script>
 
 <script type="text/javascript">
-
   $(document).ready(function(){
-    
-      
-   
-      $('#vendor_Type').on('change',function(){
-       var type=$(this).val();
-       if(type==1){
-        $('#vendor_indivisual_dob').hide();
-       $('#vendor_org').show();
-       }
-       else{
-       $('#vendor_indivisual_dob').show();
-       $('#vendor_org').hide();
-       }
-
-       });
-      $('#upload-btn').click(function(){
-     
-      $('#myModal').modal();
-    });
-       $('#upload-btn1').click(function(){
-      $('#myModal1').modal();
-    });
-
-     $('#upload-btn').css('color',blue);
     $('.upcomming-class').click(function(){
       $('.upcomming-divv').show();
       $('.past-tab').hide();
@@ -2039,27 +1940,130 @@ $('.funmp1').css('background-image', 'url(' + imageUrl + ')');
       // $('.lernr-class').hide();
       //$('#photo1').hide();
     });
-   
-   
-   
+    $('#upload-btn').click(function(){
+      $('#myModal').modal();
+    });
+    $('#upload-btn1').click(function(){
+      $('#myModal1').modal();
+    });
     jQuery("#photos").on('change ',function(){
+
+       $.ajax({
+            dataType: "html",
+            type: "POST",
+            evalScripts: true,
+            url: '<?php echo Router::url(array('controller'=>'vendor_classes','action'=>'getimagecount'));?>',
+            data: ({type:'original'}),
+            success: function (data, textStatus){
+
+             var imagecount = parseInt(data);
+              if(imagecount < 10){
+               $('#msg1').html("");
+              
+              return true; 
+             
+              }else{
+
+                $('#msg1').html("Reached max Image count Please choose  or delete Image from gallery and upload New");
+               $(this).val('');
+              return false; 
+             
+              }
+
+
+
+
+
+
+
+              
+
+            }
+        });
+
+
       var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+      var filesize = "";
+       filesize = this.files[0].size;
+
       if(jQuery.inArray(jQuery(this).val().split('.').pop().toLowerCase(), fileExtension) == -1){
-        jQuery("#msg1").html("Invalid image please upload only bmp,jpg,jpeg,gif,png.");
+        jQuery("#msg1").html("Invalid image please upload only jpg,jpeg,png.");
+        $(this).val('');
         return false;
       }else{
-        jQuery("#msg1").html("");
+          
+
+        if(100000 < filesize && 200000 > filesize){
+
+               $('#msg1').html('');  
+               return true;
+             }else{
+
+              $('#msg1').html("File size should be 100kb to 200kb.");
+              
+              $(this).val('');
+              return false;
+             }
+
+
+
         return true;
       }
     });
     jQuery("#videos").on('change ',function(){
-      var fileExtension = ['3gp','mp4'];
+
+      $.ajax({
+            type: "POST",
+            url: '<?php echo Router::url(array('controller'=>'vendor_classes','action'=>'getvideocount'))?>',
+            success: function (response){
+              var videocount = parseInt(response);
+              
+              if(videocount < 5){
+               $('#msg2').html("");
+              return true;
+              
+              }else{
+
+                $('#msg2').html("Reached max Video count Please choose  or delete Video from gallery and upload New.");
+              $(this).val('');
+              return false;
+               
+              }
+
+            
+            }
+        });
+
+
+
+
+
+
+
+
+      var fileExtension = ['avi','mp4','mpeg4'];
+
+       var filesize = "";
+       filesize = this.files[0].size;
+       
+
       if(jQuery.inArray(jQuery(this).val().split('.').pop().toLowerCase(), fileExtension) == -1){
-        jQuery("#msg2").html("Invalid video format please upload only 3gp,mp4.");
+        jQuery("#msg2").html("Invalid video format please upload only avi,mp4,mpeg4");
+         $(this).val('');
         return false;
       }else{
-        jQuery("#msg2").html("");
-        return true;
+        
+
+        if(10485760 > filesize){
+        $('#msg2').html("");
+       }else{
+
+      $('#msg2').html("File size should be less than 10 Mb.");
+       $(this).val('');
+       return false;
+
+        }
+
       }
     });
   });
@@ -2146,7 +2150,7 @@ var last_valid_selection = null;
       });
     });
     $(document).ready(function() {
-      
+    
       $('.menu-icon').click(function() {
         $('#navbar').toggleClass('left');
       });
@@ -2354,7 +2358,7 @@ var last_valid_selection = null;
               $("#sr_class").css('background','#fff');
               $("#sr_class").css('color','#00CDC6');
           });
-          
+
             $("#photo").click(function(){
              
               $("#photo1").fadeIn();
@@ -2404,9 +2408,7 @@ var last_valid_selection = null;
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 <script>
-$('#notification').on('click',function(){
-alert('Notification Functionality Comming Soon');
-});
+
   $("#file-upload_4_2").on('change',function(){
         var a = $(this).val();
       
@@ -2421,14 +2423,15 @@ alert('Notification Functionality Comming Soon');
 <script type="text/javascript">
     function chk_frm(){
         var img = $('#photos').val(); 
-        // var filExtension = ['mp4','wmv','avi'];  
-        // alert(filExtension);    
+
         if(img == ""){
             $('#msg1').html('Please browse the image.');  
             return false;
         }else{
             return true;
+
         }
+
     }
 
     function chk_vid(){
@@ -2442,16 +2445,4 @@ alert('Notification Functionality Comming Soon');
     }
   
 </script>
-<script>
- (document).ready(
-  
-  /* This is the function that will get executed after the DOM is fully loaded */
-  function () {
-    $("#datepicker2").datepicker({
-      changeMonth: true,//this option for allowing user to select month
-      changeYear: true //this option for allowing user to select from year range
-    });
-  }
 
-);
-</script>
