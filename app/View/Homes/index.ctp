@@ -93,15 +93,30 @@ border-radius:30%;
 @media (max-width: 549px) and (min-width: 300px){
   
 }
+
+.main-slider .single-slide {
+      display: none;
+    }
+    .main-slider .single-slide:first-child {
+      display: block;
+    }
+    .main-slider.slick-initialized .single-slide {
+      display: block;
+    }
 </style>
 
+  
 
+
+
+
+<?php  $image_location = "img/category_image/optimizedsliderimage";  ?>
  <!-- banner slider -->
     <section id="slider">
         <div class="main-slider">    
             <div class="single-slide">
                 <a href="<?php echo HTTP_ROOT;?>/fun-and-recreation">
-                    <img src="<?php echo HTTP_ROOT;?>/img/category_image/fun and recreation.jpg" title="fun and recreation" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
+                    <img src="<?php echo HTTP_ROOT;?>/<?php echo $image_location;?>/fun and recreation.jpg" title="fun and recreation" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
                   <?php /*?>  <?php
 													echo $this->Image->resize('category_image/fun and recreation.jpg','1024','199', array('class' => 'img-responsive sr_28_07_slider_img'));
 													?><?php */?>
@@ -109,7 +124,7 @@ border-radius:30%;
             </div>       
             <div class="single-slide">
                 <a href="<?php echo HTTP_ROOT;?>/educational-and-skill-development">
-                    <img src="<?php echo HTTP_ROOT;?>/img/category_image/education and skills development.jpg" title="education and skills development" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
+                    <img src="<?php echo HTTP_ROOT;?>/<?php echo $image_location;?>/education and skills development.jpg" title="education and skills development" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
                    <?php /*?> <?php
 													echo $this->Image->resize('category_image/education and skills development.jpg','1024','199', array('class' => 'img-responsive sr_28_07_slider_img'));
 													?><?php */?>
@@ -117,7 +132,7 @@ border-radius:30%;
             </div>
             <div class="single-slide">
                 <a href="<?php echo HTTP_ROOT;?>/kids-and-teens">
-                    <img src="<?php echo HTTP_ROOT;?>/img/category_image/kids and teens.jpg" title="kids and teens" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
+                    <img src="<?php echo HTTP_ROOT;?>/<?php echo $image_location;?>/kids and teens.jpg" title="kids and teens" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
                    <?php /*?>  <?php
 													echo $this->Image->resize('category_image/kids and teens.jpg','1024','199', array('class' => 'img-responsive sr_28_07_slider_img'));
 													?><?php */?>
@@ -125,7 +140,7 @@ border-radius:30%;
             </div>
             <div class="single-slide">
                 <a href="<?php echo HTTP_ROOT;?>/health-and-fitness">
-                    <img src="<?php echo HTTP_ROOT;?>/img/category_image/health and wellness.jpg" title="health and wellness" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
+                    <img src="<?php echo HTTP_ROOT;?>/<?php echo $image_location;?>/health and wellness.jpg" title="health and wellness" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
                      <?php /*?><?php
 													echo $this->Image->resize('category_image/health and wellness.jpg','1024','199', array('class' => 'img-responsive sr_28_07_slider_img'));
 													?><?php */?>
@@ -133,7 +148,7 @@ border-radius:30%;
             </div>
             <div class="single-slide">
                 <a href="<?php echo HTTP_ROOT;?>/informative-and-motivational">
-                    <img src="<?php echo HTTP_ROOT;?>/img/category_image/informative and motivational.jpg" title="informative and motivational" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
+                    <img src="<?php echo HTTP_ROOT;?>/<?php echo $image_location;?>/informative and motivational.jpg" title="informative and motivational" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
                      <?php /*?> <?php
 													echo $this->Image->resize('category_image/informative and motivational.jpg','1024','199', array('class' => 'img-responsive sr_28_07_slider_img'));
 													?><?php */?>
@@ -141,12 +156,12 @@ border-radius:30%;
             </div>
             <div class="single-slide">
                 <a href="<?php echo HTTP_ROOT;?>/home-maintenance">
-                    <img src="<?php echo HTTP_ROOT;?>/img/category_image/home maintenance.jpg" title="home maintenance" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
+                    <img src="<?php echo HTTP_ROOT;?>/<?php echo $image_location;?>/home maintenance.jpg" title="home maintenance" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
                 </a>
             </div>
             <div class="single-slide">
                 <a href="<?php echo HTTP_ROOT;?>">
-                    <img src="<?php echo HTTP_ROOT;?>/img/braingroom_group.jpg" title="Braingroom" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
+                    <img src="<?php echo HTTP_ROOT;?>/<?php echo $image_location;?>/braingroom_group.jpg" title="Braingroom" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
                 </a>
             </div>
         </div> 
@@ -154,6 +169,7 @@ border-radius:30%;
 <!-- banner slider /-->
 
 <!-- Start middle container -->
+<?php $thmb ="thumbnail";  ?>
     <section> 
         <div class="col-lg-offset-1 col-lg-10 col-md-12 col-sm-12 col-xs-12  sr_16_07_div_padding">
 
@@ -180,28 +196,27 @@ border-radius:30%;
                     <div class="col-xs-12 col-sm-12 col-md-12 pad_all hidden-xs padding-60">
                         <div class="img-align-1 img-absolute">
                             <a href="<?php echo HTTP_ROOT;?>/homes/explore">
-                                <img src="<?php echo HTTP_ROOT;?>/img/home-map/find-classes.png" />
+                                <img src="<?php echo HTTP_ROOT;?>/img/home-map/<?php echo $thmb; ?>/find-classes.png" />
                             </a>
                         </div>
                         <div class="img-align-2 img-absolute">
                             <a href="<?php echo HTTP_ROOT;?>/homes/explore">
-                                <img src="<?php echo HTTP_ROOT;?>/img/home-map/find-groups.png" />
+                                <img src="<?php echo HTTP_ROOT;?>/img/home-map/<?php echo $thmb; ?>/find-groups.png" />
                             </a>
                         </div>
                         <div class="img-align-3 img-absolute">
                             <a href="<?php echo HTTP_ROOT;?>/homes/explore">
-                                <img src="<?php echo HTTP_ROOT;?>/img/home-map/find-people.png" />
+                                <img src="<?php echo HTTP_ROOT;?>/img/home-map/<?php echo $thmb; ?>/find-people.png" />
                             </a>
                         </div>
                         <div class="img-align-4 img-absolute">
                             <a href="<?php echo HTTP_ROOT;?>/homes/explore">
-                                <img src="<?php echo HTTP_ROOT;?>/img/home-map/explore.png" />
+                                <img src="<?php echo HTTP_ROOT;?>/img/home-map/<?php echo $thmb; ?>/4.png" />
                             </a>
                             </div>
                             <div class="border-wrapper row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 pad_all">
-                                    <script src="https://maps.googleapis.com/maps/api/js"></script>
-                                    
+                                    <script src="http://maps.googleapis.com/maps/api/js"></script>
                                     <div class="map_hite01" style="overflow:hidden;width:100%;">
                                         <div id="googleMap" style="width:95%;" class="map_hite01"></div>
                                             <div id="marker-tooltip" style="display:none;"></div>
@@ -253,7 +268,7 @@ border-radius:30%;
                 <div class="">&nbsp;</div>
             </div>--> <!-- step 1 google map code & explode code /-->
 
-                      <!-- step 2, 4circle images slider code -->
+            <!-- step 2, 4circle images slider code -->
             <div class="col-xs-12 col-sm-12 pad_all">            
                 <div class="col-xs-12 col-sm-12 pad_all">
                     <center>
@@ -268,51 +283,9 @@ border-radius:30%;
 						?>
                     </center>
                 </div>
-                <div class="">&nbsp;</div><div class="">&nbsp;</div>
+                <div class="">&nbsp;</div>
                 <div class="row">
-                	<div class="col-xs-12 col-sm-12 col-md-12 pad_all">
-                        <div class="img_sad_div_w">
-                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/1">
-                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Parents & Kids.png" alt="Parents & Kids"  class="community1">									                      
-                            </a>
-
-                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/2">
-                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Study Groups.png" alt="Study Groups"  class="community">
-                            </a>
-
-                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/3">
-                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Hobby Groups.png" alt="Hobby Groups"  class="community">
-                            </a>
-                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/4">
-                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Fitness Groups.png" alt="Fitness Groups" class="community xx" >
-                            </a>
-                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/9">
-                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Residential Community.png" alt="Residential Community" class="community "></a>
-                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/10">
-                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Senior Citizens.png" alt="Senior Citizens" class="community">
-                            </a>
-                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/11">
-                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Kids Gangs.png" alt="Kids Gangs"  class="community2">
-                            </a>
-                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/12">
-                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Peers & Colleagues.png" alt="Peers & Colleagues" class="community aa1"></a>
-                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/5">
-                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Ladies Club.png" alt="Ladies Club" class="community">
-                            </a>
-                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/6">
-                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Pack of Men.png" alt="Pack of Men" class="community">
-                            </a>
-                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/7">
-                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Friends Gangs.png" alt="Friends Gangs" class="community">
-                            </a>
-                            <a href="<?php echo HTTP_ROOT;?>/Homes/community/8">
-                                <img src="<?php echo HTTP_ROOT;?>/img/community-groups/Couples.png" alt="Couples" class="community">
-                            </a>
-                        </div>
-                    </div>
-                    	
-                    </div>
-                    <!--<img class="img-full" src="img/classeslist-home.png" />-->
+                    <img class="img-full" src="img/classeslist-home.png" />
                 </div>
 
                 <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
@@ -492,7 +465,6 @@ border-radius:30%;
                                     ?>
                                     <div class="item b_1_crs featured" id="<?php echo $result['VendorClasse']['id'];?>">
                                     <li>
-                                     <a href="<?php echo HTTP_ROOT?>/classes/<?php echo $result['VendorClasse']['class_topic']; ?>" >
                                     <div class="grid1 gridfreeclassesbg grid-slider-image">
                                     <div class="view3 view-first">
                                     <div class="index_img">
@@ -504,19 +476,19 @@ border-radius:30%;
                                    <?php 
 											if(!empty($result['VendorClasse']['upload_class_photo'])){
 											?>
-											
+											<a href="<?php echo HTTP_ROOT?>/classes/<?php echo $result['VendorClasse']['class_topic']; ?>" >
 											<?php
 											
 											echo $this->Image->resize('Vendor/class_image/'.$result['VendorClasse']['upload_class_photo'].'.jpg','305','148', array('class' => 'imgresponsive img-thumbnail'));
 											?>
-											
+											</a>
 											<?php  }else{
 											$seg_pic = explode(',',$result['VendorClasse']['segment_id']);
-											?>	  
+											?>	  <a href="<?php echo HTTP_ROOT?>/classes/<?php echo $result['VendorClasse']['class_topic']; ?>" >
 											<?php
 											echo $this->Html->image('Vendor/'.$result['VendorClasse']['category_id'].'/'.$seg_pic[0].'/defult_pic.jpg', array('class' => 'imgresponsive img-thumbnail'));
 											?>
-											
+											</a>
 									<?php } ?>
                                     <div class="image_price12 pull-right image_price-index">
                                     <span class="ccc" style="color:white">
@@ -529,7 +501,6 @@ border-radius:30%;
                                     </div>                
                                     </div>                
                                     <div class="golden home-tumb-slide">
-                                    
                                     <div class="slider-topic12">
                                     <?php 
 									if(!empty($result['VendorClasse'])):
@@ -567,9 +538,7 @@ border-radius:30%;
 									endif; ?> </h5>
                                     </div>
                                     </div>
-                                    </a>
                                     </li>
-
                                     </div>
                                     <?php } ?>
                                     </div>                                       
@@ -668,7 +637,7 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
            
       <div class="col-xs-12 col-sm-12 pad_all sr_11_08_featured_div_mar">
           <center>
-          <span class="learning01">FEATURED CLASSES & ACTIVITIES</span>
+          <span class="learning01">FEATURED CLASSES & ACTIVITIES </span>
           </center>
       </div>
       
@@ -789,7 +758,6 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
                                     ?>
                                     <div class="item b_1_crs featured" id="<?php echo $result['VendorClasse']['id'];?>">
                                     <li>
-                                    <a href="<?php echo HTTP_ROOT?>/classes/<?php echo $result['VendorClasse']['class_topic']; ?>" >
                                     <div class="grid1 gridfreeclassesbg grid-slider-image">
                                     <div class="view3 view-first">
                                     <div class="index_img">
@@ -801,18 +769,18 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
                                       <?php 
 											if(!empty($result['VendorClasse']['upload_class_photo'])){
 											?>
-											
+											<a href="<?php echo HTTP_ROOT?>/classes/<?php echo $result['VendorClasse']['class_topic']; ?>" >
 											<?php	
 											echo $this->Image->resize('Vendor/class_image/'.$result['VendorClasse']['upload_class_photo'].'.jpg','305','148', array('class' => 'imgresponsive img-thumbnail'));
 											?>
-											
+											</a>
 											<?php  }else{
 											$seg_pic = explode(',',$result['VendorClasse']['segment_id']);
-											?>	 
+											?>	  <a href="<?php echo HTTP_ROOT?>/classes/<?php echo $result['VendorClasse']['class_topic']; ?>" >
 											<?php
 											echo $this->Html->image('Vendor/'.$result['VendorClasse']['category_id'].'/'.$seg_pic[0].'/defult_pic.jpg', array('class' => 'imgresponsive img-thumbnail'));
 											?>
-											
+											</a>
 									<?php } ?>
                                     <div class="image_price12 pull-right image_price-index">
                                     <span class="ccc" style="color:white">
@@ -862,7 +830,6 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
 									endif; ?> </h5>
                                     </div>
                                     </div>
-</a>
                                     </li>
                                     </div>
                                     <?php } ?>
@@ -1003,7 +970,6 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
                                     <div class="item b_1_crs featured" id="<?php echo $result['VendorClasse']['id'];?>">
                                     <li>
                                     <div class="grid1 gridfreeclassesbg grid-slider-image">
-                                     <a href="<?php echo HTTP_ROOT?>/classes/<?php echo $result['VendorClasse']['class_topic']; ?>" >
                                     <div class="view3 view-first">
                                     <div class="index_img">
                                     <?php 
@@ -1014,18 +980,19 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
                                    <?php 
 											if(!empty($result['VendorClasse']['upload_class_photo'])){
 											?>
-											
+											<a href="<?php echo HTTP_ROOT?>/classes/<?php echo $result['VendorClasse']['class_topic']; ?>" >
 											<?php	
 											echo $this->Image->resize('Vendor/class_image/'.$result['VendorClasse']['upload_class_photo'].'.jpg','305','148', array('class' => 'imgresponsive img-thumbnail'));
 											?>
-											
+											</a>
 											<?php  }else{
 											$seg_pic = explode(',',$result['VendorClasse']['segment_id']);
-											?>	 
+											?>	  <a href="<?php echo HTTP_ROOT?>/classes/<?php echo $result['VendorClasse']['class_topic']; ?>" >
 											<?php
-											echo $this->Html->image('Vendor/'.$result['VendorClasse']['category_id'].'/'.$seg_pic[0].'/defult_pic.jpg', array('class' => 'imgresponsive img-thumbnail'));
+											echo "default pic";
+											//echo $this->Html->image('Vendor/'.$result['VendorClasse']['category_id'].'/'.$seg_pic[0].'/defult_pic.jpg', array('class' => 'imgresponsive img-thumbnail'));
 											?>
-											
+											</a>
 									<?php } ?>
                                     <div class="image_price12 pull-right image_price-index">
                                     <span class="ccc" style="color:white">
@@ -1074,9 +1041,8 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
 									echo $result['VendorClasse']['class_duration'].' '.'Hours';
 									endif; ?> </h5>
                                      <input type="hidden" value="0" id="latitude">
-                                              <input type="hidden" value="0" id="longitude">
+                                    <input type="hidden" value="0" id="longitude">
                                     </div>
-</a>
                                     </div>
                                     </li>
                                     </div>
@@ -1109,49 +1075,18 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
     <div class="">&nbsp;</div> 
     <div class="row">
         <div class="col-sm-12 nopadding">
- 			<a href="http://www.braingroom.com/gift/#individual"><?php echo $this->Html->image('banner.jpg', array('alt' => 'Gift_for_individuals','class'=>'img-responsive'));?></a>
+ 			<a href="http://www.braingroom.com/gift/#individual"><?php echo $this->Html->image('coll1.jpg', array('alt' => 'CakePHP','class'=>'img-responsive'));?></a>
         </div>
-  
+      <div class="row">
+        <div class="col-sm-5 " style="padding: 3px 2px 0px 0px">
+         <a href="http://www.braingroom.com/gift/#Corporate"><?php echo $this->Html->image('coll22.jpg', array('alt' => 'CakePHP','class'=>'img-responsive' ));?></a>
+        </div>
+        <div class="col-sm-7 " style="padding:4px 0px 0px 2px;">
+         <a href="http://www.braingroom.com/gift/#ngo"><?php echo $this->Html->image('coll33.jpg', array('alt' => 'CakePHP','class'=>'img-responsive'));?></a>
+        </div>
+      </div>
   </div>
   
-        <!--Why Braingroom-->
-        <div class="">&nbsp;</div> 
-        
-        <div class="col-xs-12 col-sm-12 pad_all sr_11_08_featured_div_mar">
-			 <center><span class="learning01">WHY BRAINGROOM?</span></center>
-		</div>
-        
-        <div class="col-xs-12 col-sm-12 ">
-			<center><img src="<?php echo HTTP_ROOT;?>/img/underline.png" alt="images not found" width="641" height="31" class="b_img_line img-responsive"></center>
-		</div>  
-
-		<div class="">&nbsp;</div> 
-		<div class="container">
-			<div class="row">
-            	  <div class="col-xs-12 col-sm-12" ><!--pad_all funsld-->
-					  
-						  <div class="col-xs-1 col-sm-12" id="braingroomsquare"><div class="braingroomff1">Best Microclasses in the city.</div><img class="braingroomimg braingroomimg2" src="<?php echo HTTP_ROOT;?>/img/mark.png" alt="images not found"></img></div>
-	 
-						  <div class="col-xs-1 col-sm-12" id="braingroomsquare"><div class="braingroomff1">Result-oriented, Time-bound & Quick.</div><img class="braingroomimg braingroomimgss" src="<?php echo HTTP_ROOT;?>/img/mark.png" alt="images not found"></img></div>
-	 
-						  <div class="col-xs-1 col-sm-12" id="braingroomsquare"><div class="braingroomff1">Verified Quality vendors with detailed profiles & reviews.</div><img class="braingroomimg1" src="<?php echo HTTP_ROOT;?>/img/mark.png" alt="images not found"></img></div>
-	 
-						  <div class="col-xs-1 col-sm-12" id="braingroomsquare"><div class="braingroomff1">Easy Booking & Payment options.</div><img class="braingroomimg" src="<?php echo HTTP_ROOT;?>/img/mark.png" alt="images not found"></img></div>
-	 
-						  <div class="col-xs-1 col-sm-12" id="braingroomsquare"><div class="braingroomff1">Community learning & Gifting options.</div><img class="braingroomimg" src="<?php echo HTTP_ROOT;?>/img/mark.png" alt="images not found"></img></div>
-                           <div class="">&nbsp;</div> 
-                           <div class="col-xs-12 col-sm-12" >
-											  
-						  <div class="col-xs-4 col-sm-12 css-shapes-preview csp1"><div class="ff tab blink"">120+ CLASS PROVIDERS</div><img class="cicon1" src="<?php echo HTTP_ROOT;?>/img/class provider.png" alt="images not found"></img></div>
-					  
-						  <div class="col-xs-4 col-sm-12 css-shapes-preview csp"><div class="ff1 tab blink">1000+ CLASSES</div><img class="cicon2" src="<?php echo HTTP_ROOT;?>/img/class.png" alt="images not found"></img></div> 
-						  
-						  <div class="col-xs-4 col-sm-12 css-shapes-preview csp"><div class="fff tab blink">50+ FUN LEARNING ACTIVITIES</div><img class="cicon3" src="<?php echo HTTP_ROOT;?>/img/fun.png" alt="images not found"></img></div>
-		  
-            
-            </div>
-        </div>
-          
    <div class="">&nbsp;</div> 
      <div class="col-xs-12 col-sm-12 pad_all sr_11_08_featured_div_mar">
           <center>
@@ -1190,30 +1125,32 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
                       })
                     })
         </script>    
-
+		
+       <?php $vthumb1 = "thumbnail"; ?>
        <section class="row">
         <div class="owl-carousel">
                 <div class="item">
                     <div id="videomodal" onClick="videoClick('<?php echo HTTP_ROOT;?>/video_1.mp4')" >                       
-                        <img src="<?php echo HTTP_ROOT;?>/img/video/3.jpg" class="video-home" />
+                        <img src="<?php echo HTTP_ROOT;?>/img/video/<?php echo $vthumb1; ?>/1.jpg" class="video-home" />
                     </div> 
                 </div>
                 <div class="item">
                     <div id="videomodal" onClick="videoClick('<?php echo HTTP_ROOT;?>/video_2.mp4')" >
-                        <img src="<?php echo HTTP_ROOT;?>/img/video/1.jpg" class="video-home" />
+                        <img src="<?php echo HTTP_ROOT;?>/img/video/<?php echo $vthumb1; ?>/2.jpg" class="video-home" />
                     </div> 
                 </div>
                 <div class="item">
                     <div id="videomodal" onClick="videoClick('<?php echo HTTP_ROOT;?>/video_3.mp4')" >
-                        <img src="<?php echo HTTP_ROOT;?>/img/video/4.jpg" class="video-home" />
+                        <img src="<?php echo HTTP_ROOT;?>/img/video/<?php echo $vthumb1; ?>/3.jpg" class="video-home" />
                     </div> 
                 </div>
                 <div class="item">
                     <div id="videomodal" onClick="videoClick('<?php echo HTTP_ROOT;?>/video_4.mp4')" >
-                        <img src="<?php echo HTTP_ROOT;?>/img/video/2.jpg" class="video-home" />
+                        <img src="<?php echo HTTP_ROOT;?>/img/video/<?php echo $vthumb1; ?>/4.jpg" class="video-home" />
                     </div> 
                 </div>
-                      
+                    
+					
         </div>
        </section>
      <div class="border row">  
@@ -1246,7 +1183,7 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
 $(document).ready(function(){
 getLocation();
   showMap();
-  /*$('.treding').on('click',function(){
+  $('.treding').on('click',function(){
     var id=$(this).attr('id');
     window.location.href="<?php echo HTTP_ROOT;?>/vendor_classes/classes/"+btoa(id);
   
@@ -1255,11 +1192,11 @@ $('.featured').on('click',function(){
  var id=$(this).attr('id');
     window.location.href="<?php echo HTTP_ROOT;?>/vendor_classes/classes/"+btoa(id);
    
-})*/
+})
 });
-</script>
-<!-- End middle container -->
-<script>
+
+ /* End middle container */
+
 
 
 function getLocation() {
@@ -1294,9 +1231,9 @@ function fromLatLngToPoint(latLng, map) {
     return new google.maps.Point((worldPoint.x - bottomLeft.x) * scale, (worldPoint.y - topRight.y) * scale);
 }
 function showMap(){
-  var latitude=$('#latitude').val();
-  var longitude=$('#longitude').val();
-
+  var latitude=($('#latitude').val()) ? $('#latitude').val() : '0' ;
+  var longitude=($('#longitude').val()) ? $('#longitude').val() : '0';
+  
   $.ajax({ 
         url: '<?php echo HTTP_ROOT;?>/Homes/index/'+latitude+'/'+longitude,
         type: 'post',
