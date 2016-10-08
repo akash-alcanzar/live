@@ -91,15 +91,26 @@ border-radius:30%;
 @media (max-width: 549px) and (min-width: 300px){
   
 }
+
+.main-slider .single-slide {
+      display: none;
+    }
+    .main-slider .single-slide:first-child {
+      display: block;
+    }
+    .main-slider.slick-initialized .single-slide {
+      display: block;
+    }
 </style>
 
+  
 
  <!-- banner slider -->
     <section id="slider">
         <div class="main-slider">    
             <div class="single-slide">
                 <a href="<?php echo HTTP_ROOT;?>/fun-and-recreation">
-                    <img src="<?php echo HTTP_ROOT;?>/img/category_image/fun and recreation.jpg" title="fun and recreation" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
+                    <img src="<?php echo HTTP_ROOT;?>/<?php echo $image_location;?>/fun and recreation.jpg" title="fun and recreation" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
                   <?php /*?>  <?php
 													echo $this->Image->resize('category_image/fun and recreation.jpg','1024','199', array('class' => 'img-responsive sr_28_07_slider_img'));
 													?><?php */?>
@@ -107,7 +118,7 @@ border-radius:30%;
             </div>       
             <div class="single-slide">
                 <a href="<?php echo HTTP_ROOT;?>/educational-and-skill-development">
-                    <img src="<?php echo HTTP_ROOT;?>/img/category_image/education and skills development.jpg" title="education and skills development" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
+                    <img src="<?php echo HTTP_ROOT;?>/<?php echo $image_location;?>/education and skills development.jpg" title="education and skills development" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
                    <?php /*?> <?php
 													echo $this->Image->resize('category_image/education and skills development.jpg','1024','199', array('class' => 'img-responsive sr_28_07_slider_img'));
 													?><?php */?>
@@ -115,7 +126,7 @@ border-radius:30%;
             </div>
             <div class="single-slide">
                 <a href="<?php echo HTTP_ROOT;?>/kids-and-teens">
-                    <img src="<?php echo HTTP_ROOT;?>/img/category_image/kids and teens.jpg" title="kids and teens" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
+                    <img src="<?php echo HTTP_ROOT;?>/<?php echo $image_location;?>/kids and teens.jpg" title="kids and teens" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
                    <?php /*?>  <?php
 													echo $this->Image->resize('category_image/kids and teens.jpg','1024','199', array('class' => 'img-responsive sr_28_07_slider_img'));
 													?><?php */?>
@@ -123,7 +134,7 @@ border-radius:30%;
             </div>
             <div class="single-slide">
                 <a href="<?php echo HTTP_ROOT;?>/health-and-fitness">
-                    <img src="<?php echo HTTP_ROOT;?>/img/category_image/health and wellness.jpg" title="health and wellness" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
+                    <img src="<?php echo HTTP_ROOT;?>/<?php echo $image_location;?>/health and wellness.jpg" title="health and wellness" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
                      <?php /*?><?php
 													echo $this->Image->resize('category_image/health and wellness.jpg','1024','199', array('class' => 'img-responsive sr_28_07_slider_img'));
 													?><?php */?>
@@ -131,7 +142,7 @@ border-radius:30%;
             </div>
             <div class="single-slide">
                 <a href="<?php echo HTTP_ROOT;?>/informative-and-motivational">
-                    <img src="<?php echo HTTP_ROOT;?>/img/category_image/informative and motivational.jpg" title="informative and motivational" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
+                    <img src="<?php echo HTTP_ROOT;?>/<?php echo $image_location;?>/informative and motivational.jpg" title="informative and motivational" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
                      <?php /*?> <?php
 													echo $this->Image->resize('category_image/informative and motivational.jpg','1024','199', array('class' => 'img-responsive sr_28_07_slider_img'));
 													?><?php */?>
@@ -139,12 +150,12 @@ border-radius:30%;
             </div>
             <div class="single-slide">
                 <a href="<?php echo HTTP_ROOT;?>/home-maintenance">
-                    <img src="<?php echo HTTP_ROOT;?>/img/category_image/home maintenance.jpg" title="home maintenance" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
+                    <img src="<?php echo HTTP_ROOT;?>/<?php echo $image_location;?>/home maintenance.jpg" title="home maintenance" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
                 </a>
             </div>
             <div class="single-slide">
                 <a href="<?php echo HTTP_ROOT;?>">
-                    <img src="<?php echo HTTP_ROOT;?>/img/braingroom_group.jpg" title="Braingroom" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
+                    <img src="<?php echo HTTP_ROOT;?>/<?php echo $image_location;?>/braingroom_group.jpg" title="Braingroom" class="img-responsive sr_28_07_slider_img" alt="img" width="1024" height="199">
                 </a>
             </div>
         </div> 
@@ -152,6 +163,7 @@ border-radius:30%;
 <!-- banner slider /-->
 
 <!-- Start middle container -->
+<?php $thmb ="thumbnail";  ?>
     <section> 
         <div class="col-lg-offset-1 col-lg-10 col-md-12 col-sm-12 col-xs-12  sr_16_07_div_padding">
 
@@ -1158,27 +1170,28 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
                       })
                     })
         </script>    
-
+		
+       <?php $vthumb1 = "thumbnail"; ?>
        <section class="row">
         <div class="owl-carousel">
                 <div class="item">
                     <div id="videomodal" onClick="videoClick('<?php echo HTTP_ROOT;?>/video_1.mp4')" >                       
-                        <img src="<?php echo HTTP_ROOT;?>/img/video/3.jpg" class="video-home" />
+                        <img src="<?php echo HTTP_ROOT;?>/img/video/<?php echo $vthumb1; ?>/1.jpg" class="video-home" />
                     </div> 
                 </div>
                 <div class="item">
                     <div id="videomodal" onClick="videoClick('<?php echo HTTP_ROOT;?>/video_2.mp4')" >
-                        <img src="<?php echo HTTP_ROOT;?>/img/video/1.jpg" class="video-home" />
+                        <img src="<?php echo HTTP_ROOT;?>/img/video/<?php echo $vthumb1; ?>/2.jpg" class="video-home" />
                     </div> 
                 </div>
                 <div class="item">
                     <div id="videomodal" onClick="videoClick('<?php echo HTTP_ROOT;?>/video_3.mp4')" >
-                        <img src="<?php echo HTTP_ROOT;?>/img/video/4.jpg" class="video-home" />
+                        <img src="<?php echo HTTP_ROOT;?>/img/video/<?php echo $vthumb1; ?>/3.jpg" class="video-home" />
                     </div> 
                 </div>
                 <div class="item">
                     <div id="videomodal" onClick="videoClick('<?php echo HTTP_ROOT;?>/video_4.mp4')" >
-                        <img src="<?php echo HTTP_ROOT;?>/img/video/2.jpg" class="video-home" />
+                        <img src="<?php echo HTTP_ROOT;?>/img/video/<?php echo $vthumb1; ?>/4.jpg" class="video-home" />
                     </div> 
                 </div>
                       
