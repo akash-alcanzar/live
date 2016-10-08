@@ -347,7 +347,7 @@ $this->set('user_view',$user);
        }
 
      
-          public function arrangeClass() {
+          public function arrange_class() {
                  
                $this->layout='arrange_layout';
                $user = $this->Session->read('User');
