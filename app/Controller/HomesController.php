@@ -5,13 +5,13 @@ class HomesController extends AppController {
 'ClassSchedule','VendorGalleries','TransactionHistorie','Cookie', 'PromoteClassDetail','Wishlist','ConnectGroup','CupanDetail','GiftCupan','GiftCard','GiftCardSegment','Ngo');*/
 
    var $uses = array('Admin','UserMaster','City','Locality','Category','Community','UserVerfication','ClassType','ClassSegment','VendorClasse','ClassRegular','ClassLrregular','ClassSchedule','VendorGalleries',
-'TransactionHistorie','AccountDetail','RequestCatalog','CupanDetail','GiftCupan','GiftCard','GiftCardSegment','FeaturedPrice','PromoteClassDetail','Blog','BlogComment','BlogLike','UserSegment','ConnectGroup','Wishlist','Ngo','ChatMessage','GetQuote','Communitie','Cookie','VendorClasseLocationDetail');
+'TransactionHistorie','AccountDetail','RequestCatalog','CupanDetail','GiftCupan','GiftCard','GiftCardSegment','FeaturedPrice','PromoteClassDetail','Blog','BlogComment','BlogLike','UserSegment','ConnectGroup','Wishlist','Ngo','ChatMessage','GetQuote','Communitie','CustomerReview');
   
    var $components = array('Paginator','Messages','Session');
 
 	public function beforeFilter() {
     	parent::beforeFilter();
-		$this->response->disableCache();
+		  $this->response->disableCache();
 	}
 	public function cat_segments(){
 			$this->loadModel('Category');
@@ -50,6 +50,8 @@ class HomesController extends AppController {
         
    }
 public function Attendence(){
+ require ('sendgrid-php/vendor/autoload.php');
+ require ('sendgrid-php/lib/SendGrid.php'); 
   $this->autoRender=false;
   $this->loadModel('Ticket');
   if(!empty($_POST)){
@@ -74,12 +76,47 @@ public function Attendence(){
     }
   }
   else{
+    
    $check=$this->Ticket->find('first',array('conditions'=>array('Ticket.user_id'=>$user_id,
       'Ticket.vendor_classe_id'=>$class_id,'Ticket.start_code'=>$start_code,'Ticket.end_code'=>$end_code))); 
+   $user_email=$this->UserMaster->find('first',array('conditions'=>array('id'=>$user_id)));
+   $email=$user_email['UserMaster']['email'];
+   $mobile=$user_email['UserMaster']['mobile'];
+    $link=HTTP_ROOT.'/homes/customerReviewForm/'.base64_encode($user_id).'/'.base64_encode($class_id);
+      
+   $msg='Hello%20'.$user_email['UserMaster']['first_name'].'%20Your%20Class%20Has%20been%20Completed%20Successfully%20Please%20click%20on%20this%20link%20for%20Review%20%20:'.$link;
+     
   if(!empty($check)){
      $check['Ticket']['end_status']=1;
       $check['Ticket']['end_code_date']=date('Y-m-d h:i:s A');
       $this->Ticket->save($check);
+     $this->sendMail('review',$email,$link);
+        
+                    $Url = 'http://193.105.74.159/api/v3/sendsms/plain?user=braingroom&password=3e4IG3WL&sender=BRAING&SMSText='.$msg.'&type=longsms&GSM=91'.$mobile;
+                    $ch = curl_init();
+                    // Set URL to download
+                    curl_setopt($ch, CURLOPT_URL, $Url);
+                 
+                    // Set a referer
+                    // curl_setopt($ch, CURLOPT_REFERER, "'http://bulksms.mysmsmantra.com:8080/WebSMS/SMSAPI.jsp?username=gurpreet&password=1627184459&sendername=NETSMS&mobileno='.$mobile_no.'&message='.$otp");
+                 
+                    // User agent
+                    curl_setopt($ch, CURLOPT_USERAGENT, "MozillaXYZ/1.0");
+                 
+                    // Include header in result? (0 = yes, 1 = no)
+                    curl_setopt($ch, CURLOPT_HEADER, 0);
+                 
+                    // Should cURL return or print out the data? (true = return, false = print)
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                 
+                    // Timeout in seconds
+                    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+                  
+                    // Download the given URL, and return output
+                    $output = curl_exec($ch);
+                   
+                    // Close the cURL resource, and free system resources
+                    curl_close($ch);
       return '3';//Start Code,End Code Updated Class Ended; 
     }
     else{
@@ -104,6 +141,10 @@ public function Attendence(){
 			ini_set('memory_limit', '1024M');
       $this->layout='index_layout';
       $loggedinuser = $this->Session->read('User');
+    if(!empty($loggedinuser)){
+      $this->set('user_view',$$loggedinuser);
+      }
+
       $user_id = $loggedinuser['UserMaster']['id'];
       $user = $this->UserMaster->find('all', array('conditions'=>array('id'=>$user_id)));
       $this->set('user_view',$user);
@@ -191,6 +232,8 @@ else{
 	  				),
 	  			'limit' => 15,
 	  			));
+				
+		
 				
 	      $segment_IDS = $this->ClassSegment->find('all', array(
 		  
@@ -296,7 +339,8 @@ else{
           public function arrangeClass() {
                  
                $this->layout='arrange_layout';
-      
+               $user = $this->Session->read('User');
+               $this->set('user_view',$user);
       $catalog = $this->VendorClasse->find('all',array(
             'joins' =>   array(
                             array(
@@ -343,6 +387,8 @@ else{
 
    public function bookClass(){
       $this->checkUser();
+      $this->loadModel('Ticket');
+      $this->loadModel('PayuTransaction');
       $this->layout='vendor_layout';
       $user=$this->Session->read('User');
       $this->set('user_view',$user);
@@ -350,43 +396,12 @@ else{
       if(!empty($this->params->pass[0])){
         $class_id=base64_decode($this->params->pass[0]);
         
-          $bookingArr = $this->TransactionHistorie->find('all',array(
-            'joins'=>array(
-                        array(
-                            'table' => 'vendor_classes',
-                            'alias' => 'vc',
-                            'type'  => 'LEFT',
-                            'conditions' => array(
-                              'vc.id'=> $class_id,
-                              'TransactionHistorie.class_id' => $class_id,
-                              ),
-                          ),
-                        array(
-                            'table' => 'user_masters',
-                            'alias' => 'um',
-                            'type'  => 'LEFT',
-                            'conditions' => array(
-                              'um.id'=> $user_id,
-                              'TransactionHistorie.user_id' => $user_id
-                              ),
-                          )
-                        ),
-            'conditions' => array(
-              'TransactionHistorie.class_id' => $class_id,
-              'TransactionHistorie.status' => 2
-            ),
-            'fields' => array('TransactionHistorie.*,vc.*,um.first_name')
-           )
-          );
+           $bookingArr =$res=$this->TransactionHistorie->query("SELECT bg_payu_transactions.*,bg_tickets.*,bg_vendor_classes.*,bg_user_masters.*,count(bg_tickets.id) as 'total_ticket' from bg_payu_transactions,bg_tickets,bg_user_masters,bg_vendor_classes where bg_payu_transactions.txnid=bg_tickets.txn_id and bg_tickets.vendor_classe_id=bg_vendor_classes.id and  bg_tickets.user_id=bg_user_masters.id and bg_tickets.status='success' and bg_tickets.vendor_classe_id='$class_id' group by bg_payu_transactions.txnid order by bg_payu_transactions.created desc");
           
-          //echo "<pre>";print_r($bookingArr);die;
-        // $booking_status = $this->TransactionHistorie->query('SELECT bg_transaction_histories.*,bg_vendor_classes.*,bg_user_masters.first_name  FROM bg_transaction_histories INNER JOIN bg_vendor_classes ON bg_transaction_histories.class_id = bg_vendor_classes.id AND bg_transaction_histories.user_id = bg_vendor_classes.user_id  INNER JOIN bg_user_masters ON bg_transaction_histories.user_id = bg_user_masters.id  WHERE bg_transaction_histories.user_id ="'.$user_id.'" AND bg_transaction_histories.class_id ="'.$class_id.'" AND bg_transaction_histories.status=2');
-        //   echo "<pre>";print_r($booking_status);die;
+              
         $this->set('booking_status',$bookingArr);
-          //$this->set(compact($booking_status));
-          //$class_status = $this->VendorClasse->find('first',array('conditions'=> array('id' => $class_id ,'user_id' => $user_id)));
-        // print_r($class_status);die; 
-        // $this->set('class_status',$class_status);
+          
+        
       }
     }
 
@@ -1498,6 +1513,235 @@ public function addCatalogue(){
              }
               
     }
+	public function get_randon(){
+
+			$randnum = rand(1111111111,9999999999);
+		
+			$this->loadModel('Ticket');
+			
+			$check = $this->Ticket->find('first',
+				array(
+					'conditions' => array(
+						'OR' => array(
+							'Ticket.start_code' => $randnum,
+							'Ticket.end_code' => $randnum,
+							'Ticket.ticket_id' => $randnum,
+						),
+					)
+				)
+			);
+			if(!empty($check)){
+					$this->get_randon();
+			} else {
+					return $randnum;
+				}
+
+		}
+    public function saveCoupon(){
+
+              $this->autoRender = false;
+              $user=$this->Session->read('User');
+              $user_id = $user['UserMaster']['id'];
+              $amount =   $_POST['payment_amt'];
+              $c_id            = $this->request->data['class_id'];
+              $no_of_ticket    = $this->request->data['no_of_ticket'];
+              $coupon_number   = $this->request->data['coupon_number'];
+              $booking_id      = $this->request->data['booking_id'];
+			  $tot_ticket      = $this->request->data['tot_ticket'];
+              $coupon_number   = trim($coupon_number);
+              $Coup_id = array();
+                        $Coup_id['GiftCupan']['coupon_number'] = $coupon_number;
+                        $Coup_id['GiftCupan']['price'] = $amount;
+                        $this->Session->write('coup_id',$Coup_id);
+
+               $class_cat_id_by_cl_id = $this->VendorClasse->find('first',array('conditions'=>array('VendorClasse.id'=>$c_id),'fields'=>array('VendorClasse.category_id')));
+
+               $class_cat_id_by_gift_id = $this->GiftCupan->find('first', array('conditions'=>array('GiftCupan.no_of_coupons'=>$coupon_number,'status'=>1),'fields'=>array('GiftCupan.cat_id')));
+              
+              //print_r($class_cat_id_by_gift_id);
+              //die;
+                if(!empty($class_cat_id_by_cl_id)){
+
+                  $cl_cat_id = $class_cat_id_by_cl_id['VendorClasse']['category_id'];
+                }
+                if(!empty($class_cat_id_by_gift_id)){
+
+                    $gift_cat_id = $class_cat_id_by_gift_id['GiftCupan']['cat_id'];
+                  
+                }
+                if($gift_cat_id==''){
+
+                    echo 5;
+                        die;
+                }
+                
+                if($gift_cat_id!=0){
+                    if($cl_cat_id!=$gift_cat_id){
+
+                        echo 5;
+                        die;
+                    }
+              }
+
+              $find_class_max_price = $this->VendorClasse->find('first', array('conditions'=>array('VendorClasse.user_id'=>$user_id)));
+              /*echo "<pre>";
+              print_r($find_class_max_price);
+              echo "</pre>";*/
+              $max_sheet = $find_class_max_price['VendorClasse']['max_ticket_available'];
+
+              //die;
+              $this->request->data['user_id']=$user_id;
+              $date = date("d-m-Y H:i:s");
+              $timestamp = strtotime($date);
+              $this->request->data['transaction_date']= $timestamp;
+              //$this->request->data['class_id']=$class_id;
+              //echo 'hi';
+              $find_cupan = $this->GiftCupan->find('first', array('conditions'=>array('no_of_coupons'=>$coupon_number,'status'=>1)));
+
+
+                  if(empty($find_cupan)){
+                    echo 4;
+                    die;
+                  }
+
+              else if(!empty($find_cupan)){
+
+                        $expdate = $find_cupan['GiftCupan']['exp_date'];
+                        $c_date = date("d-m-Y");
+                        $c_timestamp = strtotime($c_date);
+                        //$adddate = $find_cupan['GiftCupan']['add_date'];
+                        if($expdate < $c_timestamp){
+                              echo 6;
+                              exit();
+                               }
+                          $cupan_rupess = $find_cupan['GiftCupan']['available_amt'];
+                         $cupanid = $find_cupan['GiftCupan']['id'];
+                         $this->request->data['cupon_id']=$cupanid; 
+                         if($cupan_rupess<$amount){
+
+                             echo 2;
+                             die;
+                        }
+                      }
+                  else if($no_of_ticket>$max_sheet){
+                    
+                     echo 3;
+                     die;
+                  }
+                  if($this->TransactionHistorie->save($this->request->data)){
+                    
+                      /*echo 'abil_amt-> :'.$cupan_rupess;
+                      echo "</br>";
+                      echo 'total_tickat-- > :'.$amount;
+                      echo "</br>";
+                      $abl_amt = $cupan_rupess-$amount;
+                      echo 'last amount--> :'.$abl_amt;
+
+                      echo "</br>";
+                      die;*/
+                     //$cupan_rupess = $cupan_rupess-$amount;
+					 $this->log('tickets');
+				$last_id = $this->TransactionHistorie->getLastInsertID();	 
+				$this->log($last_id);
+				$tick =array();
+		$cookie = htmlspecialchars_decode($tot_ticket);
+		$tick = json_decode($cookie, true);
+		$this->loadModel('Ticket');
+		
+		foreach($tick as $key => $val){
+			for($i=0;$i<$val;$i++){
+			$this->request->data['Ticket'][$key] = $key;
+						$this->Ticket->create();
+						$this->request->data['Ticket'][$i]['vendor_classe_id'] = $c_id;
+						$this->request->data['Ticket'][$i]['user_id'] = $user_id;
+						$this->request->data['Ticket'][$i]['transaction_history_id'] = $last_id;
+						$this->request->data['Ticket'][$i]['ticket_id'] = $this->get_randon();
+						$this->request->data['Ticket'][$i]['start_code'] = $this->get_randon();
+						$this->request->data['Ticket'][$i]['end_code'] = $this->get_randon();
+						$this->Ticket->save($this->request->data['Ticket'][$i]);
+			}
+		}
+		
+		$this->loadModel('Ticket');
+		$z = $this->Ticket->find('all', array(
+			'conditions' => array('Ticket.transaction_history_id'=>$last_id),
+			
+			
+			));
+		$this->log($z);	
+		 	require ('sendgrid-php/vendor/autoload.php');
+            require ('sendgrid-php/lib/SendGrid.php'); 
+			 $booking_status_mail ='';            
+
+$booking_status_mail.='<table border="1" cellpadding="0" cellspacing="0" width="100%">
+
+    <tr>
+     <td>
+       	 <img src="http://www.braingroom.com/img/logo.jpg"/>    
+                                                      
+     </td>
+    </tr>
+    <tr>
+
+     <td>
+      
+      <table border="1" cellpadding="0" cellspacing="0" width="100%">
+
+      <tr>
+<td>Ticket ID
+</td>
+<td>Class Name
+</td>
+<td>Start Code
+</td>
+<td>End Code
+</td>
+<td>Level
+</td>
+</tr>
+<tr>';
+;
+foreach($z as $x){
+$booking_status_mail.= '<tr>
+    <td>'.$x['Ticket']['ticket_id'].'</td>
+    <td>'.$x['VendorClasse']['class_topic'].'</td>
+    <td>'.$x['Ticket']['start_code'].'</td>
+    <td>'.$x['Ticket']['end_code'].'</td>
+    <td>';
+			if($x['VendorClasseLevelDetail']['level_id'] == 1){
+                   $booking_status_mail.= '<p>Begineer - Level '.$x['VendorClasseLevelDetail']['expert_level_id'];
+				}
+			else if($x['VendorClasseLevelDetail']['level_id'] == 2){
+					$booking_status_mail.= '<p>Intermediate - Level '.$x['VendorClasseLevelDetail']['expert_level_id'];
+				}
+				else{
+					$booking_status_mail.= '<p>Expert - Level '.$x['VendorClasseLevelDetail']['expert_level_id'];
+				}
+   $booking_status_mail.= ' </td>';
+	}
+  $booking_status_mail.='</tr></table>';
+
+$booking_status_mail.='<tr>
+    <td style="font-size: 0; line-height: 0;" width="20">&nbsp;
+   <p>Note - You have to give the above mentioned start verification code when the class starts and end verification code when the class ends to the tutor. Braingroom will take care of any issues raised regarding clasess only if you avail right codes in the first place.</p>
+  </td>
+    </tr>
+   </table>';
+$this->sendMail('bookClass_status',$user['UserMaster']['email'],$booking_status_mail);
+		  
+		  
+                      $abl_amt = $cupan_rupess-$amount;
+                      $max_ticket_available = $max_sheet-$no_of_ticket;
+
+
+                      $this->VendorClasse->query("UPDATE bg_vendor_classes SET  max_ticket_available='".$max_ticket_available."' WHERE id='".$c_id."' and user_id='".$user_id."'");
+                      $this->GiftCupan->query("UPDATE bg_gift_cupans SET  available_amt='".$abl_amt."',booking_id='".$booking_id."' WHERE no_of_coupons='".$coupon_number."'");
+                      //$find_class_max_price = $this->VendorClasse->find('first', array('conditions'=>array('user_id'=>$user_id,'fields' => array('VendorClasse.max_ticket_available'))));
+                    echo 1;
+                    die;
+                }
+}
+
 
     public function savegiftCoupon(){ 
           $this->autoRender = false; 
@@ -1733,28 +1977,28 @@ public function addCatalogue(){
                            
                               foreach ($find_gift_class as $key => $value_class) {
 
-                                                 $id      =   $value_class['bg_vendor_classes']['id'];
-                                         $class_topic     =   $value_class['bg_vendor_classes']['class_topic'];
-                                  $upload_class_photo     =   $value_class['bg_vendor_classes']['upload_class_photo'];
+                                    $id                   = $value_class['bg_vendor_classes']['id'];
+                                    $class_topic          = $value_class['bg_vendor_classes']['class_topic'];
+                                    $upload_class_photo   = $value_class['bg_vendor_classes']['upload_class_photo'];
 
-                                       $class_summary     =   $value_class['bg_vendor_classes']['class_summary'];
-                                      $class_timing_id    =   $value_class['bg_vendor_classes']['class_timing_id'];
-                                       $class_duration    =   $value_class['bg_vendor_classes']['class_duration'];
-                                       $price_per_head    =   $value_class['bg_vendor_classe_level_details']['price'];
+                                    $class_summary        = $value_class['bg_vendor_classes']['class_summary'];
+                                    $class_timing_id      = $value_class['bg_vendor_classes']['class_timing_id'];
+                                    $class_duration       = $value_class['bg_vendor_classes']['class_duration'];
+                                    $price_per_head       = $value_class['bg_vendor_classe_level_details']['price'];
 
-                                         $session_date    =   $value_class['bg_class_schedules']['session_date'];
-                                         $session_time    =   $value_class['bg_class_schedules']['session_time'];
-                                                  $uid    =   $value_class['bg_user_masters']['id'];
+                                    $session_date         = $value_class['bg_class_schedules']['session_date'];
+                                    $session_time         = $value_class['bg_class_schedules']['session_time'];
+                                             $uid         =   $value_class['bg_user_masters']['id'];
                                             $user_name    =   $value_class['bg_user_masters']['first_name'];
-                                        $no_of_session    =   $value_class['bg_vendor_classes']['no_of_session'];
-                                        $location_name    =   $value_class['bg_localities']['name'];
-                                        
-                                        if($upload_class_photo==''){
-                                                  $upload_class_photo = 'FFFFFF.png';
-                                                }
-                                            else{
-                                              $upload_class_photo = $upload_class_photo.'.jpg';
-                                              }
+                                            $no_of_session    =   $value_class['bg_vendor_classes']['no_of_session'];
+                                            if($upload_class_photo==''){
+                                  $upload_class_photo = 'FFFFFF.png';
+                                    }
+                                    else{
+                                    $upload_class_photo = $upload_class_photo.'.jpg';
+                                  }
+                                            
+
                                     if($class_timing_id=1){
 
                                         $class_name_type='Flexible';
@@ -1807,17 +2051,17 @@ public function addCatalogue(){
                               </div></div>
                               <div class="col-xs-12 col-sm-12 sr_2605_03_padding sr_serch_div_l_hite">
                                   <img class="img-responsive" style="display: inline; margin-top: -10px;  width: 20px; margin-right: 5px;" src="http://www.braingroom.com/img/fun&refreshment/location.png">
-                                <span class="city">'.$location_name.'</span>
+                                <span class="city">Madipakkam</span>
                                 <img src="http://www.braingroom.com/img/8.jpg" class="pull-right star" style="height: 20px;">
                                 </div>'.$date_time.'<div class="col-xs-12 col-sm-12 sr_2605_03_padding sr_2605_06_textLorem sr_serch_div_l_hite">
                                   <img class="img-responsive" style="display: inline; margin-right: 5px; width: 10px; margin-top: -5px;" src="http://www.braingroom.com/img/fun&refreshment/information.png">&nbsp;&nbsp; 
-                                  <p class="comment more city text-justify">'.$class_summary.'</p>
+                                  <p class="comment more city text-justify"> LearnKeyboard  from Spark Dance Academy who has 18 years of experinece.Our academy is the best music training institute with best tutors.<a href="" class="morelink">more</a></p>
                                 </div>
                                 <div class="col-xs-12 col-sm-12">
                                   <span>Age Group: <?php echo $age_group; ?></span>
                                 </div>
                                 <div class="col-xs-12 col-sm-12">
-                                <span>Other Localities:'.$location_name.'</span>
+                                <span>Other Localities:Madipakkam</span>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 sr_2605_03_padding">
                                           <a href="#" class="btn gift-this-butt" id="" onclick="show_gift_form('.$id.');">Gift This Class</a>
@@ -1876,51 +2120,39 @@ public function addCatalogue(){
                                                                    bg_class_schedules.session_date,
                                                                    bg_user_masters.id,
                                                                    bg_user_masters.first_name,
-                                                                   bg_vendor_classe_level_details.price,
-                                                                   bg_vendor_classe_location_details.id,
-                                                                   bg_vendor_classe_location_details.locality_id,
-                                                                   bg_localities.id, 
-                                                                   bg_localities.name 
-                                                                   FROM bg_vendor_classes
-                                                                   INNER JOIN bg_vendor_classe_level_details
-                                                                   ON bg_vendor_classes.id = bg_vendor_classe_level_details.vendor_class_id 
-                                                                   LEFT JOIN bg_user_masters
-                                                                   ON bg_user_masters.id = bg_vendor_classes.user_id
-                                                                   LEFT JOIN bg_class_schedules
-                                                                   ON bg_vendor_classes.id  = bg_class_schedules.class_id
-                                                                   LEFT JOIN bg_vendor_classe_location_details
-                                                                   ON bg_vendor_classes.id  = bg_vendor_classe_location_details.vendor_class_id
-                                                                   LEFT JOIN bg_localities
-                                                                   ON bg_localities.id  = bg_vendor_classe_location_details.locality_id
-                                                                   where bg_vendor_classes.segment_id like '%$get_seg_id%' 
-                                                                   Group by bg_vendor_classe_level_details.vendor_class_id");
+                                                                   bg_vendor_classe_level_details.price 
+                                                                    FROM bg_vendor_classes
+                                                                    INNER JOIN bg_vendor_classe_level_details
+                                                                    ON bg_vendor_classes.id = bg_vendor_classe_level_details.vendor_class_id 
+                                                                    LEFT JOIN bg_user_masters
+                                                                    ON bg_user_masters.id = bg_vendor_classes.user_id
+                                                                    LEFT JOIN bg_class_schedules
+                                                                    ON bg_vendor_classes.id  = bg_class_schedules.class_id
+                                                                    where bg_vendor_classes.segment_id like '%$get_seg_id%' 
+                                                                    Group by bg_vendor_classe_level_details.vendor_class_id");
       
                               
-                             /* echo "<pre>";
+                              /*echo "<pre>";
                               print_r($find_gift_class);
-                              echo "</pre>";
-                              die;*/
+                              echo "</pre>";*/
+                              //die;
                               foreach ($find_gift_class as $key => $value_class) {
 
-                                    $id                   =   $value_class['bg_vendor_classes']['id'];
-                                    $class_topic          =   $value_class['bg_vendor_classes']['class_topic'];
-                                    $upload_class_photo   =   $value_class['bg_vendor_classes']['upload_class_photo'];
+                                    $id                   = $value_class['bg_vendor_classes']['id'];
+                                    $class_topic          = $value_class['bg_vendor_classes']['class_topic'];
+                                    $upload_class_photo   = $value_class['bg_vendor_classes']['upload_class_photo'];
 
-                                    $class_summary        =   $value_class['bg_vendor_classes']['class_summary'];
-                                    $class_timing_id      =   $value_class['bg_vendor_classes']['class_timing_id'];
-                                    $class_duration       =   $value_class['bg_vendor_classes']['class_duration'];
-                                    $price_per_head       =   $value_class['bg_vendor_classe_level_details']['price'];
+                                    $class_summary        = $value_class['bg_vendor_classes']['class_summary'];
+                                    $class_timing_id      = $value_class['bg_vendor_classes']['class_timing_id'];
+                                    $class_duration       = $value_class['bg_vendor_classes']['class_duration'];
+                                    $price_per_head       = $value_class['bg_vendor_classe_level_details']['price'];
 
-                                    $session_date         =   $value_class['bg_class_schedules']['session_date'];
-                                    $session_time         =   $value_class['bg_class_schedules']['session_time'];
+                                    $session_date         = $value_class['bg_class_schedules']['session_date'];
+                                    $session_time         = $value_class['bg_class_schedules']['session_time'];
                                     $uid                  =   $value_class['bg_user_masters']['id'];
-                                          $user_name      =   $value_class['bg_user_masters']['first_name'];
-                                        $no_of_session    =   $value_class['bg_vendor_classes']['no_of_session'];
-                                          $location_name  =   $value_class['bg_localities']['name'];
-                                            
-                                  
-
-                                  if($upload_class_photo==''){
+                                            $user_name    =   $value_class['bg_user_masters']['first_name'];
+                                            $no_of_session    =   $value_class['bg_vendor_classes']['no_of_session'];
+                                if($upload_class_photo==''){
                                   $upload_class_photo = 'FFFFFF.png';
                                     }
                                     else{
@@ -1960,7 +2192,7 @@ public function addCatalogue(){
                             <div class="col-xs-12 col-sm-12 fun01_img_w">
                               <span class="flexible-fixed-fun">'.$class_name_type.'</span>
                               <span class="image_price12-fun pull-right-fun" style="color:white">₹'.$price_per_head.'</span><a href="#">
-                              <img src="https://www.braingroom.com/img/Vendor/class_image/'.$upload_class_photo.'"class="imgresponsive img-thumbnail" alt="'.$upload_class_photo.'">
+                              <img src="http://www.braingroom.com/img/Vendor/class_image/'.$upload_class_photo.'"class="imgresponsive img-thumbnail" alt="'.$upload_class_photo.'">
                             </a>
                             </div></div>
                             <div class="col-md-8 col-sm-8 col-xs-12 text_res sr_2605_03_padding">
@@ -1978,20 +2210,20 @@ public function addCatalogue(){
                               </div></div>
                               <div class="col-xs-12 col-sm-12 sr_2605_03_padding sr_serch_div_l_hite">
                                   <img class="img-responsive" style="display: inline; margin-top: -10px;  width: 20px; margin-right: 5px;" src="http://www.braingroom.com/img/fun&refreshment/location.png">
-                                <span class="city">'.$location_name.'</span>
+                                <span class="city">Madipakkam</span>
                                 <img src="http://www.braingroom.com/img/8.jpg" class="pull-right star" style="height: 20px;">
                                 </div>'.$date_time.'<div class="col-xs-12 col-sm-12 sr_2605_03_padding sr_2605_06_textLorem sr_serch_div_l_hite">
                                   <img class="img-responsive" style="display: inline; margin-right: 5px; width: 10px; margin-top: -5px;" src="http://www.braingroom.com/img/fun&refreshment/information.png">&nbsp;&nbsp; 
-                                  <p class="comment more city text-justify">'.$class_summary.'</p>
+                                  <p class="comment more city text-justify"> LearnKeyboard  from Spark Dance Academy who has 18 years of experinece.Our academy is the best music training institute with best tutors.<a href="" class="morelink">more</a></p>
                                 </div>
                                 <div class="col-xs-12 col-sm-12">
                                   <span>Age Group: <?php echo $age_group; ?></span>
                                 </div>
                                 <div class="col-xs-12 col-sm-12">
-                                <span>Other Localities:'.$location_name.'</span>
+                                <span>Other Localities:Madipakkam</span>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 sr_2605_03_padding">
-                                          <a href="#" class="btn gift-this-butt" id="" onclick="show_gift_form('.$id.');">Gift This Class</a>
+                       <a href="'.HTTP_ROOT.'/classes/'.$class_topic.'\gift" class="btn gift-this-butt" id="" onclick="">Gift This Class</a>
                                         </div>
                                 </div></div>';
                                    }
@@ -2152,6 +2384,212 @@ public function addCatalogue(){
                             //die;      
     }
 
+public function buyFailure(){
+
+    //$this->autoRender = false;
+    $this->layout='book_layout';
+    $status     = $_POST["status"];
+    $amount     = $_POST["amount"];
+    $txnid      = $_POST["txnid"];
+    $firstname  = $_POST["firstname"];
+    
+    $posted_hash=$_POST["hash"];
+    $key=$_POST["key"];
+    $salt="GQs7yium";
+    $cupan_term_id = $this->Session->read('term_id');
+    $find_term_id = $cupan_term_id['GiftCupan']['term_id'];
+    $cupan_term_id='';
+    $book_id = $uuid=uniqid();
+
+    $this->request->data['payment_amt']        = $amount;
+    $this->request->data['transaction_id']     = $txnid;
+    $this->request->data['booking_id']         = $book_id;
+    $this->request->data['status']             = 1;
+    $this->request->data['payment_from_class'] = 2;
+    $date = date("d-m-Y H:i:s");
+    $timestamp = strtotime($date);
+    $this->request->data['transaction_date']= $timestamp;
+    
+    $user = $this->Session->read('User');
+    $user_id = $user['UserMaster']['id'];
+    $this->request->data['user_id'] = $user_id;
+
+
+    if($this->TransactionHistorie->save($this->request->data)){
+    
+        $this->GiftCupan->query("UPDATE bg_gift_cupans SET  bg_gift_cupans.booking_id='$book_id',
+                                                            bg_gift_cupans.status='1' WHERE bg_gift_cupans.term_id='$find_term_id'");
+         require ('sendgrid-php/vendor/autoload.php');
+         require ('sendgrid-php/lib/SendGrid.php');
+
+          //$email = 'rohitdtrm@gmail.com';
+         $all_gift_cupan = $this->GiftCupan->find('all', array('conditions' => array('GiftCupan.term_id' =>$find_term_id,'GiftCupan.status'=>1),'group'=>'GiftCupan.email'));
+         /*echo "<pre>";
+         print_r($all_gift_cupan);
+         echo "</pre>";
+         die;*/
+          //echo $find_term_id;
+
+        foreach ($all_gift_cupan as $key => $value){
+
+              $gift_email_id   = $value['GiftCupan']['email'];
+              $gift_rupees     = $value['GiftCupan']['rupees'];
+              $no_of_coupons   = $value['GiftCupan']['no_of_coupons'];
+              $reciepent_name  = $value['GiftCupan']['reciepent_name'];
+              $class_id        = $value['GiftCupan']['class_id'];
+              $gift_card_id    = $value['GiftCupan']['gift_card_id'];
+              $gift_by         = $value['GiftCupan']['gift_by'];
+              $gift_type       = $value['GiftCupan']['gift_type'];
+              $ngo_id          = $value['GiftCupan']['ngo_id']; 
+              $no_of_coupons   = trim($no_of_coupons);
+
+              
+              $ngo_name_get = $this->Ngo->find('all', array('conditions'=>array('Ngo.id'=>$ngo_id)));
+               $ngo_email_id = $ngo_name_get['Ngo']['email'];
+              
+              
+              $all_cat_by_gift = $this->Category->find('all', array('conditions' => array('Category.id' =>$cat_id,'Category.status'=>1),'fields'=>array('Category.id','Category.category_name')));
+            
+              $gift_cat_name = $all_cat_by_gift[0]['Category']['category_name'];
+              if(empty($all_cat_by_gift)){
+                $gift_cat_name='General';
+              }
+              
+              $find_class_img  = $this->VendorClasse->find('all',array('conditions'=>array('VendorClasse.id' =>$class_id),'fields'=>array('VendorClasse.upload_class_photo','VendorClasse.class_topic')));
+              if($gift_card_id!=''){
+                $find_ngo_img  = $this->GiftCard->find('all',array('conditions'=>array('GiftCard.id' =>$gift_card_id),'fields'=>array('GiftCard.gift_image','GiftCard.title')));
+              }
+              
+              //$share_text = array('gift_rupees'=>$gift_rupees,'no_of_coupons'=>$no_of_coupons,);
+              if($no_of_coupons=='555'){
+                  
+                  $send_mail_html='<div>Hi &nbsp;'.$reciepent_name.'</div><br><div>You have denoted the amount of Rs &nbsp;'.$gift_rupees.' to NGO successfully.</div></br><hr>';
+                  $this->sendMail('giftmailFailure',$ngo_email_id,$send_mail_html);
+                }
+                else if($no_of_coupons=='444'){
+                  $class_name     = $find_class_img[0]['VendorClasse']['class_topic'];
+                  
+                  $send_mail_html='<div>Hi &nbsp;'.$reciepent_name.'</div><br><div>This is to inform you that '.$firstname.' have been gifted a card '.$class_name.'&nbsp;</div></br><hr>';
+                  $this->sendMail('giftmailFailure',$gift_email_id,$send_mail_html);
+                }
+               
+                 else if($reciepent_name!=''){
+
+                  $all_gift_cupan_email = $this->GiftCupan->find('all', array('conditions' => array('GiftCupan.term_id' =>$find_term_id,'GiftCupan.status'=>1,'GiftCupan.email'=>$gift_email_id)));
+                  foreach ($all_gift_cupan_email as $key => $value_email){
+
+
+
+                    $gift_email_id_email   = $value_email['GiftCupan']['email'];
+                    $gift_rupees_email     = $value_email['GiftCupan']['rupees'];
+                    $no_of_coupons_email   = $value_email['GiftCupan']['no_of_coupons'];
+                    $reciepent_name_email  = $value_email['GiftCupan']['reciepent_name'];
+                    $class_id_email        = $value_email['GiftCupan']['class_id'];
+                    $gift_card_id_email    = $value_email['GiftCupan']['gift_card_id'];
+                    $gift_by_email         = $value_email['GiftCupan']['gift_by'];
+                    $gift_type_email       = $value_email['GiftCupan']['gift_type'];
+                    $cat_id_email          = $value_email['GiftCupan']['cat_id'];
+                    $no_of_coupons_email   = trim($no_of_coupons);
+
+                     $all_cat_by_gift = $this->Category->find('all', array('conditions' => array('Category.id' =>$cat_id_email,'Category.status'=>1),'fields'=>array('Category.id','Category.category_name')));
+            
+              $gift_cat_name = $all_cat_by_gift[0]['Category']['category_name'];
+              if(empty($all_cat_by_gift)){
+                $gift_cat_name='General';
+              }
+                    $send_mail_html.='<div>Category Name : &nbsp;&nbsp;'.$gift_cat_name.'</div></br><div>Coupon Amount &nbsp;&nbsp;'.$gift_rupees_email.'</div></br><div>Coupon Code &nbsp;&nbsp;:'.$no_of_coupons_email.'</div></br><hr>';
+                    
+                  //$send_mail_html='';
+                   }
+                    
+                    $this->sendMail('giftmailFailure',$gift_email_id_email,$send_mail_html);
+                    $send_mail_html='';
+                 }
+                else if($reciepent_name==''){
+
+                  $all_gift_cupan_email = $this->GiftCupan->find('all', array('conditions' => array('GiftCupan.term_id' =>$find_term_id,'GiftCupan.status'=>1)));
+                  foreach ($all_gift_cupan_email as $key => $value_email){
+
+                    $gift_email_id_email   = $value_email['GiftCupan']['email'];
+                    $gift_rupees_email     = $value_email['GiftCupan']['rupees'];
+                    $no_of_coupons_email   = $value_email['GiftCupan']['no_of_coupons'];
+                    $reciepent_name_email  = $value_email['GiftCupan']['reciepent_name'];
+                    $class_id_email        = $value_email['GiftCupan']['class_id'];
+                    $gift_card_id_email    = $value_email['GiftCupan']['gift_card_id'];
+                    $gift_by_email         = $value_email['GiftCupan']['gift_by'];
+                    $gift_type_email       = $value_email['GiftCupan']['gift_type'];
+                    $cat_id_email          = $value_email['GiftCupan']['cat_id'];
+                    $no_of_coupons_email   = trim($no_of_coupons);
+
+                     $all_cat_by_gift = $this->Category->find('all', array('conditions' => array('Category.id' =>$cat_id_email,'Category.status'=>1),'fields'=>array('Category.id','Category.category_name')));
+            
+              $gift_cat_name = $all_cat_by_gift[0]['Category']['category_name'];
+              if(empty($all_cat_by_gift)){
+                $gift_cat_name='General';
+              }
+                    $send_mail_html.='<div>Category Name : &nbsp;&nbsp;'.$gift_cat_name.'</div></br><div>Coupon Amount &nbsp;&nbsp;'.$gift_rupees_email.'</div></br><div>Coupon Code &nbsp;&nbsp;:'.$no_of_coupons_email.'</div></br><hr>';
+                    
+                  //$send_mail_html='';
+                   }
+                    
+                    $this->sendMail('giftmailFailure',$gift_email_id,$send_mail_html);
+                    $send_mail_html='';
+
+                  $send_mail_html.='<div>Category Name : &nbsp;&nbsp;'.$gift_cat_name.'</div></br><div>Coupon Amount &nbsp;&nbsp;'.$gift_rupees.'</div></br><div>Coupon Code &nbsp;&nbsp;:'.$no_of_coupons.'</div></br><hr>';
+                  
+                }
+              }
+                 
+        if(isset($_POST["additionalCharges"])) {
+         $additionalCharges=$_POST["additionalCharges"];
+          $retHashSeq = $additionalCharges.'|'.$salt.'|'.$status.'|||||||||||'.$amount.'|'.$txnid.'|'.$key;
+          
+                    }
+    else {    
+
+        $retHashSeq = $salt.'|'.$status.'|||||||||||'.$total_price;
+
+         }
+     $hash = hash("sha512", $retHashSeq);
+     if($gift_by==1 and $gift_type==2){
+          
+          $class_img  = 'http://162.243.205.148/braingroom/img/gift_image/Card.png';
+          $text_msg   = 'Cupon has booked through BrainGroom.com';
+        }
+        else if($gift_by==2 and $gift_type==2){
+          $class_img  =  'http://162.243.205.148/braingroom/img/gift_image/Card.png';
+          $text_msg   =  'Cupon has booked through BrainGroom.com';
+        }
+        else if($gift_by==1 and $gift_type==1){
+          $class_img_find = $find_class_img[0]['VendorClasse']['upload_class_photo'];
+          $class_name     = $find_class_img[0]['VendorClasse']['class_topic'];
+          $class_img      = 'http://162.243.205.148/braingroom/img/Vendor/class_image/'.$class_img_find;
+          $text_msg       =  $class_name.' class has booked through BrainGroom.com';
+          
+        }
+        else if($gift_by==2 and $gift_type==1){
+         
+          $class_img_find = $find_class_img[0]['VendorClasse']['upload_class_photo'];
+          $class_name     = $find_class_img[0]['VendorClasse']['class_topic'];
+          $class_img      = 'http://162.243.205.148/braingroom/img/Vendor/class_image/'.$class_img_find;
+          $text_msg       = $class_name.' class has booked through BrainGroom.com';
+        }
+         else if($gift_by==3 and $gift_type==1){
+          $ngo_img_find   = $find_ngo_img[0]['GiftCard']['gift_image'];
+          $ngo_text       = $find_ngo_img[0]['GiftCard']['title'];
+          $class_img      = 'http://162.243.205.148/braingroom/img/gift_class/'.$ngo_img_find;
+          $text_msg       = 'You have successfully denoted the amount of Rs. '.$gift_rupees. 'to '.$ngo_text.'Ngo through braingroom.com';
+           }
+          $this->set('status',$status);
+          $this->set('txnid',$txnid);
+          $this->set('book_id',$book_id);
+          $this->set('firstname',$firstname);
+          $this->set('class_img',$class_img);
+          $this->set('email',$gift_email_id);
+          $this->set('text_msg',$text_msg);
+          
+}
+}
 public function buySuccess(){ 
 
     //$this->autoRender = false;
@@ -2349,206 +2787,6 @@ public function buySuccess(){
           
 }
 }
-
-public function buyFailure(){
-
-    //$this->autoRender = false;
-    $this->layout='book_layout';
-    $status     = $_POST["status"];
-    $amount     = $_POST["amount"];
-    $txnid      = $_POST["txnid"];
-    $firstname  = $_POST["firstname"];
-    
-    $posted_hash=$_POST["hash"];
-    $key=$_POST["key"];
-    $salt="GQs7yium";
-    $cupan_term_id = $this->Session->read('term_id');
-    $find_term_id = $cupan_term_id['GiftCupan']['term_id'];
-    $cupan_term_id='';
-    $book_id = $uuid=uniqid();
-
-    $this->request->data['payment_amt']        = $amount;
-    $this->request->data['transaction_id']     = $txnid;
-    $this->request->data['booking_id']         = $book_id;
-    $this->request->data['status']             = 1;
-    $this->request->data['payment_from_class'] = 2;
-    $date = date("d-m-Y H:i:s");
-    $timestamp = strtotime($date);
-    $this->request->data['transaction_date']= $timestamp;
-    
-    $user = $this->Session->read('User');
-    $user_id = $user['UserMaster']['id'];
-    $this->request->data['user_id'] = $user_id;
-
-
-    if($this->TransactionHistorie->save($this->request->data)){
-    
-        $this->GiftCupan->query("UPDATE bg_gift_cupans SET  bg_gift_cupans.booking_id='$book_id',
-                                                            bg_gift_cupans.status='1' WHERE bg_gift_cupans.term_id='$find_term_id'");
-         require ('sendgrid-php/vendor/autoload.php');
-         require ('sendgrid-php/lib/SendGrid.php');
-
-          //$email = 'rohitdtrm@gmail.com';
-         $all_gift_cupan = $this->GiftCupan->find('all', array('conditions' => array('GiftCupan.term_id' =>$find_term_id,'GiftCupan.status'=>1),'group'=>'GiftCupan.email'));
-        /* echo "<pre>";
-         print_r($all_gift_cupan);
-         echo "</pre>";
-         die;*/
-          //echo $find_term_id;
-
-        foreach ($all_gift_cupan as $key => $value){
-
-              $gift_email_id   = $value['GiftCupan']['email'];
-              $gift_rupees     = $value['GiftCupan']['rupees'];
-              $no_of_coupons   = $value['GiftCupan']['no_of_coupons'];
-              $reciepent_name  = $value['GiftCupan']['reciepent_name'];
-              $class_id        = $value['GiftCupan']['class_id'];
-              $gift_card_id    = $value['GiftCupan']['gift_card_id'];
-              $gift_by         = $value['GiftCupan']['gift_by'];
-              $gift_type       = $value['GiftCupan']['gift_type'];
-              $ngo_id          = $value['GiftCupan']['ngo_id']; 
-              $no_of_coupons   = trim($no_of_coupons);
-
-              
-              $ngo_name_get = $this->Ngo->find('all', array('conditions'=>array('Ngo.id'=>$ngo_id)));
-               $ngo_email_id = $ngo_name_get['Ngo']['email'];
-              
-              
-              $all_cat_by_gift = $this->Category->find('all', array('conditions' => array('Category.id' =>$cat_id,'Category.status'=>1),'fields'=>array('Category.id','Category.category_name')));
-            
-              $gift_cat_name = $all_cat_by_gift[0]['Category']['category_name'];
-              if(empty($all_cat_by_gift)){
-                $gift_cat_name='General';
-              }
-              
-              $find_class_img  = $this->VendorClasse->find('all',array('conditions'=>array('VendorClasse.id' =>$class_id),'fields'=>array('VendorClasse.upload_class_photo','VendorClasse.class_topic')));
-              if($gift_card_id!=''){
-                $find_ngo_img  = $this->GiftCard->find('all',array('conditions'=>array('GiftCard.id' =>$gift_card_id),'fields'=>array('GiftCard.gift_image','GiftCard.title')));
-              }
-              
-              //$share_text = array('gift_rupees'=>$gift_rupees,'no_of_coupons'=>$no_of_coupons,);
-              if($no_of_coupons=='555'){
-                  
-                  $send_mail_html='<div>Hi &nbsp;'.$reciepent_name.'</div><br><div>You have denoted the amount of Rs &nbsp;'.$gift_rupees.' to NGO successfully.</div></br><hr>';
-                  $this->sendMail('giftmailFailure',$ngo_email_id,$send_mail_html);
-                }
-                else if($no_of_coupons=='444'){
-                  $class_name     = $find_class_img[0]['VendorClasse']['class_topic'];
-                  
-                  $send_mail_html='<div>Hi &nbsp;'.$reciepent_name.'</div><br><div>This is to inform you that '.$firstname.' have been gifted a card '.$class_name.'&nbsp;</div></br><hr>';
-                  $this->sendMail('giftmailFailure',$gift_email_id,$send_mail_html);
-                }
-                else if($reciepent_name!=''){
-                  $all_gift_cupan_email = $this->GiftCupan->find('all', array('conditions' => array('GiftCupan.term_id' =>$find_term_id,'GiftCupan.status'=>1,'GiftCupan.email'=>$gift_email_id)));
-                    foreach ($all_gift_cupan_email as $key => $value_email){
-
-                    $gift_email_id_email   = $value_email['GiftCupan']['email'];
-                    $gift_rupees_email     = $value_email['GiftCupan']['rupees'];
-                    $no_of_coupons_email_r   = $value_email['GiftCupan']['no_of_coupons'];
-                    $reciepent_name_email  = $value_email['GiftCupan']['reciepent_name'];
-                    $class_id_email        = $value_email['GiftCupan']['class_id'];
-                    $gift_card_id_email    = $value_email['GiftCupan']['gift_card_id'];
-                    $gift_by_email         = $value_email['GiftCupan']['gift_by'];
-                    $gift_type_email       = $value_email['GiftCupan']['gift_type'];
-                    $cat_id_email          = $value_email['GiftCupan']['cat_id'];
-                    $no_of_coupons_email   = trim($no_of_coupons);
-
-                    $all_cat_by_gift = $this->Category->find('all', array('conditions' => array('Category.id' =>$cat_id_email,'Category.status'=>1),'fields'=>array('Category.id','Category.category_name')));
-                    $gift_cat_name = $all_cat_by_gift[0]['Category']['category_name'];
-                      if(empty($all_cat_by_gift)){
-                        $gift_cat_name='General';
-                      }
-                          $send_mail_html.='<div>Category Name : &nbsp;&nbsp;'.$gift_cat_name.'</div></br><div>Coupon Amount &nbsp;&nbsp;'.$gift_rupees_email.'</div></br><div>Coupon Code &nbsp;&nbsp;:'.$no_of_coupons_email_r.'</div></br><hr>';
-                      }
-                      $this->sendMail('giftmailFailure',$gift_email_id_email,$send_mail_html);
-                       $send_mail_html='';
-                    
-                 }
-                else if($reciepent_name==''){
-
-                  $all_gift_cupan_email = $this->GiftCupan->find('all', array('conditions' => array('GiftCupan.term_id' =>$find_term_id,'GiftCupan.status'=>1)));
-                  foreach ($all_gift_cupan_email as $key => $value_email){
-
-                    $gift_email_id_email   = $value_email['GiftCupan']['email'];
-                    $gift_rupees_email     = $value_email['GiftCupan']['rupees'];
-                    $no_of_coupons_email   = $value_email['GiftCupan']['no_of_coupons'];
-                    $reciepent_name_email  = $value_email['GiftCupan']['reciepent_name'];
-                    $class_id_email        = $value_email['GiftCupan']['class_id'];
-                    $gift_card_id_email    = $value_email['GiftCupan']['gift_card_id'];
-                    $gift_by_email         = $value_email['GiftCupan']['gift_by'];
-                    $gift_type_email       = $value_email['GiftCupan']['gift_type'];
-                    $cat_id_email          = $value_email['GiftCupan']['cat_id'];
-                    $no_of_coupons_email   = trim($no_of_coupons);
-
-                     $all_cat_by_gift = $this->Category->find('all', array('conditions' => array('Category.id' =>$cat_id_email,'Category.status'=>1),'fields'=>array('Category.id','Category.category_name')));
-            
-              $gift_cat_name = $all_cat_by_gift[0]['Category']['category_name'];
-              if(empty($all_cat_by_gift)){
-                $gift_cat_name='General';
-              }
-                    $send_mail_html.='<div>Category Name : &nbsp;&nbsp;'.$gift_cat_name.'</div></br><div>Coupon Amount &nbsp;&nbsp;'.$gift_rupees_email.'</div></br><div>Coupon Code &nbsp;&nbsp;:'.$no_of_coupons_email.'</div></br><hr>';
-                    
-                  //$send_mail_html='';
-                   }
-                    
-                    $this->sendMail('giftmailFailure',$gift_email_id,$send_mail_html);
-                    $send_mail_html='';
-
-                  $send_mail_html.='<div>Category Name : &nbsp;&nbsp;'.$gift_cat_name.'</div></br><div>Coupon Amount &nbsp;&nbsp;'.$gift_rupees.'</div></br><div>Coupon Code &nbsp;&nbsp;:'.$no_of_coupons.'</div></br><hr>';
-                  
-                }
-              }
-                 
-        if(isset($_POST["additionalCharges"])) {
-         $additionalCharges=$_POST["additionalCharges"];
-          $retHashSeq = $additionalCharges.'|'.$salt.'|'.$status.'|||||||||||'.$amount.'|'.$txnid.'|'.$key;
-          
-                    }
-    else {    
-
-        $retHashSeq = $salt.'|'.$status.'|||||||||||'.$total_price;
-
-         }
-     $hash = hash("sha512", $retHashSeq);
-     if($gift_by==1 and $gift_type==2){
-          
-          $class_img  = 'http://162.243.205.148/braingroom/img/gift_image/Card.png';
-          $text_msg   = 'Cupon has booked through BrainGroom.com';
-        }
-        else if($gift_by==2 and $gift_type==2){
-          $class_img  =  'http://162.243.205.148/braingroom/img/gift_image/Card.png';
-          $text_msg   =  'Cupon has booked through BrainGroom.com';
-        }
-        else if($gift_by==1 and $gift_type==1){
-          $class_img_find = $find_class_img[0]['VendorClasse']['upload_class_photo'];
-          $class_name     = $find_class_img[0]['VendorClasse']['class_topic'];
-          $class_img      = 'http://162.243.205.148/braingroom/img/Vendor/class_image/'.$class_img_find;
-          $text_msg       =  $class_name.' class has booked through BrainGroom.com';
-          
-        }
-        else if($gift_by==2 and $gift_type==1){
-         
-          $class_img_find = $find_class_img[0]['VendorClasse']['upload_class_photo'];
-          $class_name     = $find_class_img[0]['VendorClasse']['class_topic'];
-          $class_img      = 'http://162.243.205.148/braingroom/img/Vendor/class_image/'.$class_img_find;
-          $text_msg       = $class_name.' class has booked through BrainGroom.com';
-        }
-         else if($gift_by==3 and $gift_type==1){
-          $ngo_img_find   = $find_ngo_img[0]['GiftCard']['gift_image'];
-          $ngo_text       = $find_ngo_img[0]['GiftCard']['title'];
-          $class_img      = 'http://162.243.205.148/braingroom/img/gift_class/'.$ngo_img_find;
-          $text_msg       = 'You have successfully denoted the amount of Rs. '.$gift_rupees. 'to '.$ngo_text.'Ngo through braingroom.com';
-           }
-          $this->set('status',$status);
-          $this->set('txnid',$txnid);
-          $this->set('book_id',$book_id);
-          $this->set('firstname',$firstname);
-          $this->set('class_img',$class_img);
-          $this->set('email',$gift_email_id);
-          $this->set('text_msg',$text_msg);
-          
-}
-}
 public function coupanDetail(){
 
   //$this->autoRender = false;
@@ -2586,16 +2824,42 @@ public function coupanDetail(){
   $this->set('coupan_Detail',$all_gift_cupan_email);
 
 }
+public function coupanDetail_bck(){
 
-public function coupanDetail2(){
-
-  //$this->autoRender = false;
-  $this->layout= Null;
-  require ('sendgrid-php/vendor/autoload.php');
-  require ('sendgrid-php/lib/SendGrid.php');
-  $send_mail_html_coupon_gift = "Rohit Mishra";
-  $coupan_mail_for_gift='rohitdtrm@gmail.com';
-  $this->sendMail('gift_rohit',$coupan_mail_for_gift,$send_mail_html_coupon_gift);
+  $this->layout='book_layout';
+   require ('sendgrid-php/vendor/autoload.php');
+   require ('sendgrid-php/lib/SendGrid.php');
+  
+  $cupan_coup_id = $this->Session->read('coup_id');
+  $cu_id     = $cupan_coup_id['GiftCupan']['coupon_number'];
+  $cu_price = $cupan_coup_id['GiftCupan']['price'];
+ /* echo "<pre>";
+  print_r($cupan_coup_id);
+  echo "</pre>";*/
+  //echo $cu_id;
+  //die;
+  $coupon_id = $cu_id;
+  $class_id = $this->params->pass[0];
+  $all_gift_cupan_email   = $this->GiftCupan->find('all',array('conditions'=>array('GiftCupan.no_of_coupons' =>$coupon_id,'GiftCupan.status'=>1)));
+  $all_gift_vendor_classe = $this->VendorClasse->find('all',array('conditions'=>array('VendorClasse.id'=>$class_id),'fields'=>array('VendorClasse.id','VendorClasse.class_topic')));
+  $cat_gift_id = $all_gift_cupan_email[0]['GiftCupan']['cat_id'];
+  $cat=$this->Category->find('all',array('conditions'=>array('Category.id'=>$cat_gift_id)));
+  $cat_name = $cat[0]['Category']['category_name'];
+  $class_topic_mail      = $all_gift_vendor_classe[0]['VendorClasse']['class_topic'];
+  $available_rupees_mail = $all_gift_cupan_email[0]['GiftCupan']['available_amt'];
+  $coupan_mail           = $all_gift_cupan_email[0]['GiftCupan']['email'];
+  if($cat_name==''){
+    $cat_name = 'General';
+  }
+  $send_mail_html_coupon ='<div>Category Name : &nbsp;&nbsp;'.$cat_name.'</div></br><div>Class Name &nbsp;&nbsp;:'.$class_topic_mail.'</div></br><div>Amount deducted from coupon &nbsp;&nbsp;:'.$cu_price.'</div></br><div>Available amount in coupon &nbsp;&nbsp;:'.$available_rupees_mail.'</div></br><hr>';
+  $this->sendMail('bookClass_status_by_coupan',$coupan_mail,$send_mail_html_coupon);
+  $this->set('deducted',$cu_price);
+  $this->set('category',$cat_name);
+  //echo "</pre>";
+  //die;
+ 
+  $this->set('gift_vendor_classe',$all_gift_vendor_classe);
+  $this->set('coupan_Detail',$all_gift_cupan_email);
 }
 /* ============================ END Rohit Gift Section =====================*/
 
@@ -4072,12 +4336,16 @@ else{
           }else{  
                if(!empty($this->params->pass[0])){
                   $email=base64_decode($this->params->pass[0]);
+                  print_r($email);die;
                   $user=$this->UserMaster->find('first',array('conditions'=>array('email'=>$email)));
                       if(!empty($user)){
                            $user['UserMaster']['status']=1;
                            $this->UserMaster->save($user);
                            $this->layout='vendor_layout';
+                     $user=$this->UserMaster->find('first',array('conditions'=>array('email'=>$email)));
+                     print_r($user);die;
                            $this->set('user_view',$user);
+                           
                        }else{
                            $this->redirect(array('controller'=>'Homes','action'=>'login'));
                        }
@@ -4085,9 +4353,9 @@ else{
 
                      $this->checkUser();
                      $user=$this->Session->read('User');
-                     //print_r($user);die;
+                    
                      $user=$this->UserMaster->find('first',array('conditions'=>array('email'=>$user['UserMaster']['email'],'user_type_id'=>$user['UserMaster']['user_type_id'])));
-                     
+                     print_r($user);die;
                      $this->layout='vendor_layout';
                      $this->set('user_view',$user);
                 }
@@ -4112,6 +4380,9 @@ else{
                            $user['UserMaster']['status']=1;
                            $this->UserMaster->save($user);
                            $this->layout='vendor_layout';
+                           $user=$this->UserMaster->find('first',array('conditions'=>array('email'=>$email)));
+                          
+                           $this->Session->write('User',$user); 
                            $this->set('user_view',$user);
                        }else{
                            $this->redirect(array('controller'=>'Homes','action'=>'login'));
@@ -4120,7 +4391,7 @@ else{
                      $this->checkUser();
                      $user=$this->Session->read('User');
                      $user=$this->UserMaster->find('first',array('conditions'=>array('email'=>$user['UserMaster']['email'])));
-                    // print_r($user);die;
+                     //print_r($user);die;
                      $this->layout='vendor_layout';
                      $this->set('user_view',$user);
                 }
@@ -4284,16 +4555,38 @@ else{
     }
 
     public function myProfile(){
+		
+		
       $this->checkUser();
       $this->layout='vendor_layout';
       $userdata = $this->Session->read('User');
       
       $user_id = $userdata['UserMaster']['id'];
-
+      $vendor_type=array();
+      
+      $vendor_type[1]='Organisation';
+      $vendor_type[2]='Indivisual';
+      
+      $this->set('vendor_type',$vendor_type);
+     
+      if($userdata['UserMaster']['user_type_id'] == 1){
+		$ven_msg = $this->ChatMessage->find('count',array('conditions'=>array('ChatMessage.reciever_id'=>$user_id,
+		'ChatMessage.sender_id'=>0,
+		'ChatMessage.status'=>1)));
+		if(!empty($ven_msg)){
+		$this->set('ven_msg',$ven_msg);
+		}
+		}else{
+		$ven_msg = $this->ChatMessage->find('count',array('conditions'=>array('ChatMessage.reciever_id'=>$user_id,
+		'ChatMessage.sender_id'=>0,
+		'ChatMessage.status'=>1)));
+		if(!empty($ven_msg)){
+		$this->set('ven_msg',$ven_msg);
+		}
+		}
       $page_section_name =  $this->params['pass'][0];
       $this->set('page_section_name',$page_section_name);
-
-
+    
       //upload image file
       if(isset($_FILES['imagefiles'])){
           $errors= array();
@@ -4303,6 +4596,7 @@ else{
             $file_name = $user_id."_".$_FILES['imagefiles']['name'][$key];
             $file_size =$_FILES['imagefiles']['size'][$key];
             $file_tmp =$_FILES['imagefiles']['tmp_name'][$key];
+			
             $file_type=$_FILES['imagefiles']['type'][$key];
             //debug($key." - ".$tmp_name." - ".$file_size ." - ".$file_name);die;
             if($file_size > 2097152){
@@ -4320,8 +4614,74 @@ else{
                       mkdir("$desired_dir", 0777);    // Create directory if it does not exist
                   }
                   if(is_dir("$desired_dir/".$final_name)==false){
+					  
+					        $image_size_info    = getimagesize($file_tmp); //get image size
+
+							if($image_size_info){
+								$image_width        = $image_size_info[0]; //image width
+								$image_height       = $image_size_info[1]; //image height
+								$image_type         = $image_size_info['mime']; //image type
+							}else{
+								die("Make sure image file is valid!");
+							}
+
+							//switch statement below checks allowed image type 
+							//as well as creates new image from given file 
+							
+							$quality  = 50;
+							$destination_url = $desired_dir.$final_name;
+							$destination_url_thumb = $desired_dir."thumb_".$final_name;
+							$thumb_width = 90;
+							$thumb_height = 50;
+							$thumb_create = imagecreatetruecolor($thumb_width,$thumb_height);
+							
+							
+							switch($image_type){
+								case 'image/png':
+									$image_res =  imagecreatefrompng($file_tmp); 
+									imagepng($image_res, $destination_url, $quality);
+									break;
+								case 'image/gif':
+									$image_res =  imagecreatefromgif($file_tmp); 
+                                   imagegif($image_res, $destination_url, $quality);
+								   break;									
+								case 'image/jpeg': case 'image/pjpeg':
+									$image_res = imagecreatefromjpeg($file_tmp); 
+									
+									imagejpeg($image_res, $destination_url, $quality);
+									break;
+								default:
+									$image_res = false;
+							}
+					
+							
+							imagecopyresized($thumb_create,$image_res,0,0,0,0,$thumb_width,$thumb_height,$image_width,$image_height);
+							
+							switch($image_type){
+								case 'image/jpeg': case 'image/pjpeg':
+									imagejpeg($thumb_create,$destination_url_thumb,50);
+									break;
+								case 'image/png':
+									imagepng($thumb_create,$destination_url_thumb,50);
+									break;
+
+								case 'image/gif':
+									imagegif($thumb_create,$destination_url_thumb,50);
+									break;
+								default:
+									imagejpeg($thumb_create,$destination_url_thumb,50);
+							}
+							
+						
+				
+					        
+					   
+					   imagedestroy($image_res);
+					   
+					  
+					/*
                     move_uploaded_file($file_tmp,$desired_dir.$final_name);
-                    
+                    */
                     $photodata = $this->VendorGalleries->set(array(
                                                         'user_id' => $user_id,
                                                         'category_id' => 1,
@@ -4333,7 +4693,13 @@ else{
                                                         'modify_date' => time()
                                                       )
                                                     );
-                    $photoresult =   $this->VendorGalleries->save($data);
+										  							
+                    $photoresult =   $this->VendorGalleries->save($photodata);
+					
+					
+					
+					
+					
                   }
                   if($photoresult){
                     $this->requestAction(array('controller'=>'Cpanels', 'action'=>'generateMessages'), 
@@ -4356,6 +4722,8 @@ else{
          echo "Success";
         }
       }
+	  
+	  /* image upload ends here    */
       $galleryimage = $this->VendorGalleries->find('all', array(
                             'conditions' => array(
                               'VendorGalleries.user_id'    => $user_id,
@@ -5459,14 +5827,19 @@ echo json_encode($dataArray);die;
 
     public function Faq(){
 
-      //$this->checkUser();
+    //  $this->checkUser();
 
 
 
-      $this->layout='vendor_layout';
+      $this->layout='index_layout';
 
       $user=$this->Session->read('User');
-
+      if($this->params->pass[0] == 'learner'){
+        $page_section_name =  $this->params['pass'][0];
+           if(!empty($page_section_name)){
+              $this->set('page_section_name',$page_section_name);
+            }
+     }
       $this->set('user_view',$user);
 
     }
@@ -5622,8 +5995,8 @@ public function flexibleclassattendance(){
                            
                               ),
             
-            'fields'    =>array('Ticket.*','Payu.*','UserMaster.*','VendorClasse.*')
-           
+            'fields'    =>array('Ticket.*','Payu.*','UserMaster.*','VendorClasse.*'),
+            
             ));
       
        $this->set('view_ticket',$res);
@@ -6520,26 +6893,26 @@ if ($geo['status'] = 'OK') {
 
           public function socialLogin(){
 
-    $this->autoRender = false;
+       $this->autoRender = false;
      require ('sendgrid-php/vendor/autoload.php');
       require ('sendgrid-php/lib/SendGrid.php'); 
-
+     
     $fb_name=$_POST['response']['name'];
 
     $fb_id=$_POST['response']['id'];
 
     $email=$_POST['response']['email'];
-
+    
     $profile_image=$_POST['response']['picture']['data']['url'];
     
    
 
-   $find =$this->UserMaster->find('first',array('conditions'=>array('social_network_id'=>$fb_id,'email'=>$email)));
+   $find =$this->UserMaster->find('first',array('conditions'=>array('social_network_id'=>$fb_id)));
    
-   if(!empty($find))
+      if(!empty($find))
 
                 {
-                    $find['UserMaster']['profile_image']=$profile_image;
+                    //$find['UserMaster']['profile_image']=$profile_image;
                     $this->UserMaster->save($find); 
                     $status = $find['UserMaster']['status'];
 
@@ -6581,7 +6954,7 @@ if ($geo['status'] = 'OK') {
 
                     
 
-                   /* $find = $this->UserMaster->find('first', array('conditions' => array('UserMaster.social_network_id'=>$fb_id)));
+                   $find = $this->UserMaster->find('first', array('conditions' => array('UserMaster.social_network_id'=>$fb_id)));
 
                     $id   = $find['UserMaster']['id'];
 
@@ -6618,21 +6991,29 @@ if ($geo['status'] = 'OK') {
             else
 
                 {
-
+                    
                     $check=$this->UserMaster->find('first',array('conditions'=>array('email'=>$email)));
-
+                    
                     if(!empty($check)){
 
                     $userArray['social_network_id']=$fb_id;
 
                     $userArray['first_name']=$fb_name;
 
-                    $userArray['profile_image']=$profile_image;
+                    //$userArray['profile_image']=$profile_image;
 
                     $userArray['id']=$check['UserMaster']['id'];
-                    
-                    $this->UserMaster->save($userArray);
+                    $userArray['status']=1;
+                    $userArray['user_type_id']=0;
+                    $password=$this->generatePassword(8);
+                    $userArray['password']=md5($password);
 
+                    $userArray['add_date']=strtotime(date('Y-m-d H:i:s'));
+                     $userArray['modify_date']=strtotime(date('Y-m-d H:i:s'));
+                    $this->UserMaster->save($userArray);
+                    if(!empty($email)){
+                    $this->sendMail('social',$email,$password);
+                    }
                     $find = $this->UserMaster->find('first', array('conditions'=> array('social_network_id'=>$fb_id)));
 
                    
@@ -6673,10 +7054,11 @@ if ($geo['status'] = 'OK') {
                     $this->request->data['add_date']=strtotime(date('Y-m-d H:i:s'));
                     $this->request->data['modify_date']=strtotime(date('Y-m-d H:i:s'));
                     $this->UserMaster->save($this->request->data);
-                  
+                    if(!empty($email)){
                     $this->sendMail('social',$email,$password);
+                    }
 
-         $find = $this->UserMaster->find('first', array('conditions'=> array('social_network_id'=>$fb_id)));
+                  $find = $this->UserMaster->find('first', array('conditions'=> array('social_network_id'=>$fb_id)));
 
                    
 
@@ -6720,41 +7102,20 @@ public function generatePassword($length=8){
     }
      public function community(){
             //$this->checkUser();
-                   ini_set('memory_limit', '1024M');  
+            $this->layout='fun_layout';
+            $user = $this->Session->read('User');
 
-                    $this->layout='fun_layout';
-                    $user = $this->Session->read('User');
+            $Categorie_data=$this->Category->find('all',array('conditions'=>array('status'=>1)));
+            $this->set('coummunity_data',$Categorie_data);
 
-                    $Categorie_data=$this->Category->find('all',array('conditions'=>array('status'=>1)));
-                    $this->set('coummunity_data',$Categorie_data);
+            $usermaster_data=$this->UserMaster->find('all',array('conditions'=>array('status'=>1,'user_type_id'=>1)));
+            $this->set('usermaster_data',$usermaster_data);
+            $com_id = $this->params->pass[0];
 
-                    $usermaster_data=$this->UserMaster->find('all',array('conditions'=>array('status'=>1,'user_type_id'=>1)));
-                    $this->set('usermaster_data',$usermaster_data);
-                    $com_id = $this->params->pass[0];
+             $cum_img = $this->Communitie->find('first',array('conditions'=>array('Communitie.id'=>$com_id)));
+            //$res_class = $this->Communitie->query("select * FROM bg_communities");
+            $this->set('com_img',$cum_img);
 
-                     $cum_img = $this->Communitie->find('first',array('conditions'=>array('Communitie.id'=>$com_id)));
-                    //$res_class = $this->Communitie->query("select * FROM bg_communities");
-                    $this->set('com_img',$cum_img);
-
-                    /*Recommended_Class*/
-
-                    $recommended_class = $this->VendorClasse->find('all', array(
-                      'conditions' => array(//'featured_status' => 1
-                        ),
-                      'contain' => array(   
-                        'ClassType',
-                        'User',
-                        'Category',
-                        'Segment',
-                        'Community',
-                        'VendorClasseLevelDetail',
-                        'VendorClasseLocationDetail'=> array(
-                          'Locality'
-                          )),
-                      'order' => array('VendorClasse.id DESC'),
-                      'limit' => 12,
-                      ));
-                  $this->set('recommended_class',$recommended_class);
               ########## Start Show Search community #####
             if (isset($_POST["search"])){
 
@@ -6807,8 +7168,6 @@ public function generatePassword($length=8){
                                                           
                                                                   $sort_value = $_POST['optionsRadios'];
                                                                   $this->set('filter','Sort');
-                                                                  //echo $sort_value;
-                                                                  //die;
 
                                                                   if($sort_value==1)
                                                                   {
@@ -6877,20 +7236,12 @@ public function generatePassword($length=8){
                       $cat_id       = $this->params->pass[0];
                       $community_id        = $_POST['Community_id'];
                       $location            = $_POST['location'];
-
-                      //echo $location;
-                      //die;
-                      
-
                       if($location==''){ 
                         $filter_query = "bg_vendor_classes.category_id ='$community_id'";
-                      }else if($community_id==''){
-                        $filter_query = "bg_localities.name LIKE '%$location%'";
-                      } 
-                      else{ 
+                      } else{ 
                         $filter_query = "bg_vendor_classes.category_id = '$community_id'
-                                         and bg_localities.name LIKE '%$location%'"; 
-                          }
+                                         or bg_localities.name LIKE '%$location%'"; 
+                            }
                         $res_class = $this->VendorClasse->query("SELECT  
                                                                          bg_vendor_classes.id,
                                                                          bg_vendor_classes.id,
@@ -6950,7 +7301,8 @@ public function generatePassword($length=8){
                                                                bg_vendor_classes.class_summary,
                                                                bg_vendor_classes.class_timing_id,  
                                                                bg_vendor_classes.class_duration,
-                                                               bg_vendor_classes.location, 
+                                                               bg_vendor_classes.location,
+															   bg_vendor_classes.community_id, 
                                                                bg_vendor_classes.price_per_head,
                                                                bg_vendor_classes.no_of_session,
                                                                bg_vendor_classes.upload_class_photo,
@@ -6976,7 +7328,7 @@ public function generatePassword($length=8){
                                                                ON bg_vendor_classes.id  = bg_vendor_classe_location_details.vendor_class_id
                                                                LEFT JOIN bg_localities
                                                                ON bg_localities.id  = bg_vendor_classe_location_details.locality_id
-                                                               where bg_vendor_classes.community_id=$com_id 
+                                                              	where FIND_IN_SET($com_id,bg_vendor_classes.community_id)
                                                                group by bg_vendor_classe_level_details.vendor_class_id
                                                                ORDER BY bg_vendor_classes.id DESC
                                                                ");
@@ -7156,15 +7508,11 @@ public function generatePassword($length=8){
                                                                bg_class_schedules.id,
                                                                bg_class_schedules.session_date,
                                                                bg_vendor_classe_level_details.price
-                                                               bg_vendor_classe_location_details.id,
-                                                               bg_vendor_classe_location_details.locality_id
                                                                FROM bg_vendor_classes LEFT JOIN bg_class_schedules
                                                                ON bg_vendor_classes.id = bg_class_schedules.class_id
                                                                LEFT JOIN bg_vendor_classe_level_details
                                                                ON bg_vendor_classes.id = bg_vendor_classe_level_details.vendor_class_id
-                                                               LEFT JOIN bg_vendor_classe_location_details
-                                                               ON bg_vendor_classes.id = bg_vendor_classe_location_details.vendor_class_id
-                                                               where bg_vendor_classes.community_id = $com_id 
+                                                               where bg_vendor_classes.community_id=$com_id 
                                                                group by bg_vendor_classe_level_details.vendor_class_id
                                                                ORDER BY bg_vendor_classes.id DESC
                                                                ");
@@ -7239,8 +7587,10 @@ public function login(){
             
              $email=$data['email'];
              $password=md5($data['password']);
-             $res=$this->UserMaster->find('first',array('conditions'=>array('email'=>$email,'password'=>$password)));
-                     if(!empty($res)){
+             $re=$this->UserMaster->find('first',array('conditions'=>array('email'=>$email)));
+                if(!empty($re)){
+                      $res=$this->UserMaster->find('first',array('conditions'=>array('email'=>$email,'password'=>$password)));
+                      if(!empty($res)){
                       if($res['UserMaster']['status']!='1'){ //User Not Verified
                          $this->requestAction(array('controller'=>'Cpanels', 'action'=>'generateMessages'), 
                             array('pass'=>array('653','0')));
@@ -7263,6 +7613,9 @@ public function login(){
                         if($res['UserMaster']['user_type_id']=='1'){
 
                              $this->Session->write('User',$res);
+
+                             setcookie("authCookie", $res['UserMaster']['id'], time() + (86400 * 30), "/");
+
                              if($type=='login'){
                                  $class_id11=base64_decode($class_id11);
                                   $this->redirect(array('controller'=>'Homes','action'=>'bookNow/'.base64_encode($class_id11)));
@@ -7282,6 +7635,9 @@ public function login(){
                         else{
 
                           $this->Session->write('User',$res);
+                          
+                           setcookie("authCookie", $res['UserMaster']['id'], time() + (86400 * 30), "/");
+
                             if($type=='login'){
                                  $class_id11=base64_decode($class_id11);
                                   $this->redirect(array('controller'=>'Homes','action'=>'bookNow/'.base64_encode($class_id11)));
@@ -7301,8 +7657,13 @@ public function login(){
                       }
                      }
                      else{
-                            $this->requestAction(array('controller'=>'Cpanels', 'action'=>'generateMessages'), 
+                      $this->requestAction(array('controller'=>'Cpanels', 'action'=>'generateMessages'), 
                             array('pass'=>array('604','0')));
+                     }
+                   }
+                     else{
+                            $this->requestAction(array('controller'=>'Cpanels', 'action'=>'generateMessages'), 
+                            array('pass'=>array('954','0')));
                             if($type=='login'){
                             $class_id11=base64_decode($class_id11);
                            $this->redirect(array('controller'=>'Homes','action'=>'login/'.base64_encode($class_id11)."/login"));
@@ -7413,6 +7774,58 @@ public function login(){
         }
       }
   }
+    public function book_now_login(){
+	  
+		
+      $this->layout=null;
+      $this->autoRender = false;
+        if ($this->request->is('post')) {
+
+            $user = $this->request->data['email'];
+            $pass = $this->request->data['password'];
+            $phone = $this->request->data['phone'];
+            $pass= md5($pass);
+            $chkUser_mo = $this->UserMaster->find('first',array('conditions'=>array('UserMaster.email'=>$user, 
+                                                                                  'UserMaster.password'=>$pass, 
+                                                                                  'UserMaster.status' =>'1')));
+            $find_mo = $chkUser_mo['UserMaster']['mobile'];
+            if($find_mo!=''){
+              $phone = $find_mo;
+            }
+            if($phone==''){
+              echo '2';
+              die;
+            }
+            else{
+              $this->UserMaster->updateAll(array('mobile'=>"'$phone'"),array('email'=>$user));
+              $chkUser = $this->UserMaster->find('first',array('conditions'=>array('UserMaster.email'=>$user, 
+                                                                                  'UserMaster.password'=>$pass, 
+                                                                                  'UserMaster.status' =>'1')));//echo $chkUser;
+                if(empty($chkUser)){
+
+                        echo "0";
+                      }else{
+
+                        $this->Session->write('User',$chkUser);
+                        $f_name  = $chkUser['UserMaster']['first_name'];
+                        $u_mail  = $chkUser['UserMaster']['email'];
+                        $u_phone = $chkUser['UserMaster']['mobile'];
+						$u_id = $chkUser['UserMaster']['id'];
+                        
+                        echo $f_name;
+                        echo '*';
+                        echo $u_mail;
+                        echo '*';
+                        echo $u_phone;
+                        echo '*';
+						echo $u_id;
+                        echo '*';
+                        echo "1";
+              }
+        }
+      }
+    
+	}
     public function giftLogin_bck(){
       $this->layout=null;
       $this->autoRender = false;
@@ -7452,15 +7865,18 @@ public function login(){
         $validate=0;
         if($this->request->is('post')){
             $data=$this->data;
+           
             if(empty($data['mobile_no'])){
                $validate++;
                $this->requestAction(array('controller'=>'Cpanels', 'action'=>'generateMessages'), 
                             array('pass'=>array('625','0')));
             }
             else{
+                
                 if($validate=='0'){
                   $mobile_no=$data['mobile_no'];
-                  $res=$this->UserMaster->find('first',array('conditions'=>array('contact_no'=>$mobile_no,'status !='=>4)));
+                  $res=$this->UserMaster->find('first',array('conditions'=>array('mobile'=>$mobile_no)));
+                  
                   if(!empty($res)){
                      $otp=$this->requestAction(array('controller'=>'Apis','action'=>'generateCode'),
                                                array('pass'=>array(6)));
@@ -7524,7 +7940,8 @@ public function login(){
                 $send_otp=$data['otp_code'];
                 $mobile_no=$this->Session->read('verify.mobile_no');
                 $otp=$this->Session->read('verify.otp');
-                $check=$this->UserMaster->find('first',array('conditions'=>array('contact_no'=>$mobile_no,'reset_otp'=>$send_otp)));
+               
+                $check=$this->UserMaster->find('first',array('conditions'=>array('mobile'=>$mobile_no,'reset_otp'=>$send_otp)));
                 if(!empty($check)){
                   $this->Session->delete('verify');
                   $this->Session->write('match',$mobile_no);
@@ -7605,9 +8022,19 @@ public function signout(){
 			$this->redirect(array('controller'=>'Homes','action'=>'login'));
 	}
 	public function logout(){
+    // delete cookie
+    setcookie("authCookie","", time() + (86400 * 30), "/");
+    setcookie("authCookie", "", time() - 3600);
+    unset($_COOKIE['authCookie']);
+    //echo $_COOKIE['authCookie'];
+    //exit;
+    
 		$this->log('check session');
 		$this->log($this->Session->read('User'));
-		$this->Session->destroy();
+		$this->Session->delete('User');
+    //delete cookie
+
+
 		$this->log('check session after destroy');
 		$this->log($this->Session->read('User'));
 		$msgResponse="you have successfully logged out!";
@@ -7632,7 +8059,81 @@ public function signout(){
 function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
         
         switch($mailFor){
-            
+			 case 'bookClass_status':                
+
+                $sendgrid = new SendGrid('madhulas','thirdeye123');
+
+                $email     = new SendGrid\Email();
+
+                $email->addTo($mail)->addTo('')->setFrom('support@braingroom.com')->setSubject('Book Class Status')->setText('!')->setHtml('
+
+                <html>
+
+                    <head><title></title></head>
+
+                    <body>
+
+                        <div style="border-radius: 6px;background-color: rgba(255,255,255,0.3);padding: 10px;width: 81%;margin-left:20px;">
+
+                        <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+
+                        <p>
+
+                            <span style="font-size:20px;font-weight:bold;color:#6397cb;line-height:110%">Hi, <br> <br> Class has been booked. </span><br>
+
+                                <span style="font-size:14px;color:#666666;font-style:italic"></span>
+
+                            </p>
+
+                            <p>Class information is.</p>'.$activationCode.'<p></p>
+
+                            <hr style="border:0;border-top:1px solid #d7d7d7;min-height:0">
+
+                            <p>If you have any problems, or believe you have received this in error, please contact us.</p>
+
+                            <p></p>
+
+                            <p>BRAINGROOM</p>
+
+                            <span style="font-size:11px;color:#8a8a8a;line-height:100%">Copyright © 2014 braingroom.com All rights reserved.</span>
+
+                        </div>        
+
+                    </body>
+
+                </html>');
+
+                $sendgrid->send($email);
+
+                break ;
+            case 'review' : 
+           
+	           $sendgrid = new SendGrid('madhulas','thirdeye123');
+
+            $email    = new SendGrid\Email();
+            $email->addTo($mail)->addTo('')->setFrom('support@braingroom.com')->setSubject('braingroom| Customer Review Collection')->setText('!')->setHtml('
+            <html>
+                <head><title></title></head>
+                <body>
+                    <div style="border-radius: 6px;background-color: rgba(255,255,255,0.3);padding: 10px;width: 81%;margin-left:20px;">
+                    <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+                    <p>
+                        <span style="font-size:20px;font-weight:bold;color:#6397cb;line-height:110%">Dear,user your class has been Competed Successfully,</span><br>
+                            <span style="font-size:14px;color:#666666;font-style:italic"></span>
+                        </p>
+                        <p>Please Click on This Link For Review  Class...,</p>
+                        <p>'.$activationCode.'</p>
+                        
+                        <hr style="border:0;border-top:1px solid #d7d7d7;min-height:0">
+                        <p>If you have any problems, or believe you have received this in error, please contact us.</p>
+                        <p></p>
+                        <p>braingroom</p>
+                        <span style="font-size:11px;color:#8a8a8a;line-height:100%">Copyright © 2016 braingroom.com All rights reserved.</span>
+                    </div>        
+                </body>
+            </html>');
+            $sendgrid->send($email);
+             break;
             case 'signup' : 
            
 	           $sendgrid = new SendGrid('madhulas','thirdeye123');
@@ -7649,7 +8150,7 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                             <span style="font-size:14px;color:#666666;font-style:italic"></span>
                         </p>
                         <p>Please Verify Your Account to continue...,</p>
-                        <p>http://www.braingroom.com/Homes/dashboard/'.base64_encode($activationCode).'</p>
+                        <p>https://www.braingroom.com/Homes/dashboard/'.base64_encode($activationCode).'</p>
                         <p>Click On Link to Activate Your Account</p>
                         <hr style="border:0;border-top:1px solid #d7d7d7;min-height:0">
                         <p>If you have any problems, or believe you have received this in error, please contact us.</p>
@@ -7843,7 +8344,7 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                           <meta name="viewport" content="width=device-width, initial-scale=1">
                           <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
                           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-                          <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+                          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
                                          </head>
                                         <body>
                             <div class="" style="width:100%!important;height:100%!important;background-color:white!important;">
@@ -7911,7 +8412,9 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
             </html>');
                 $sendgrid->send($email);
               break ;
-              case 'bookClass_status':                
+            
+            
+             case 'bookClass_status':                
                 $sendgrid = new SendGrid('madhulas','thirdeye123');
                 $email     = new SendGrid\Email();
                 $email->addTo($mail)->addTo('')->setFrom('support@braingroom.com')->setSubject('Book Class Status')->setText('!')->setHtml('
@@ -7935,7 +8438,7 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                 </html>');
                 $sendgrid->send($email);
                 break ;
-                case 'bookClass_status_by_coupan':                
+                 case 'bookClass_status_by_coupan':                
                 $sendgrid = new SendGrid('madhulas','thirdeye123');
                 $email     = new SendGrid\Email();
                 $email->addTo($mail)->addTo('')->setFrom('support@braingroom.com')->setSubject('Book Class Status')->setText('!')->setHtml('
@@ -7945,7 +8448,7 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                         <div style="border-radius: 6px;background-color: rgba(255,255,255,0.3);padding: 10px;width: 81%;margin-left:20px;">
                         <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
                         <p>
-                            <span style="font-size:20px;font-weight:bold;color:#6397cb;line-height:110%">Hi, <br> <br> Class has been booked. </span><br>
+                            <span style="font-size:20px;font-weight:bold;color:#6397cb;line-height:110%">Hi,<br> <br> Class has been booked. </span><br>
                                 <span style="font-size:14px;color:#666666;font-style:italic"></span>
                             </p>
                             <p>Class information is.</p>'.$activationCode.'<p></p>
@@ -7959,31 +8462,8 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                 </html>');
                 $sendgrid->send($email);
                 break ;
-
-                 case 'gift_rohit':                
-                $sendgrid = new SendGrid('madhulas','thirdeye123');
-                $email     = new SendGrid\Email();
-                $email->addTo($mail)->addTo('')->setFrom('support@braingroom.com')->setSubject('Book Class Status')->setText('!')->setHtml('
-                <html>
-                    <head><title></title></head>
-                    <body>
-                        <div style="border-radius: 6px;background-color: rgba(255,255,255,0.3);padding: 10px;width: 81%;margin-left:20px;">
-                        <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
-                        <p>
-                            <span style="font-size:20px;font-weight:bold;color:#6397cb;line-height:110%">Hi, <br> <br> Class has been booked. </span><br>
-                                <span style="font-size:14px;color:#666666;font-style:italic"></span>
-                            </p>
-                            <p>Class information is.</p>'.$activationCode.'<p></p>
-                            <hr style="border:0;border-top:1px solid #d7d7d7;min-height:0">
-                            <p>If you have any problems, or believe you have received this in error, please contact us.</p>
-                            <p></p>
-                            <p>BRAINGROOM</p>
-                            <span style="font-size:11px;color:#8a8a8a;line-height:100%">Copyright © 2016 braingroom.com All rights reserved.</span>
-                        </div>        
-                    </body>
-                </html>');
-                $sendgrid->send($email);
-                break ;
+              
+                
         }
     }
 
@@ -8071,6 +8551,10 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
               $uuid=uniqid('fas_');
               $this->request->data['uuid']=$uuid;
              $post_data = $this->request->data;
+             if(empty($this->request->data['vendor_type_id'])){
+               $this->request->data['vendor_type_id']=1;
+               }
+
              /*echo "<pre>";
              print_r($post_data);
              echo "</pre>";
@@ -9467,7 +9951,7 @@ $this->loadModel('ClassLrregular');
 
 }
 
-//echo '1';
+echo '1';
 
 die;
 
@@ -9476,146 +9960,68 @@ die;
 public function bookDesign(){
 
       //$this->checkUser();
+
       $this->layout='book_layout';
+
       $user=$this->Session->read('User');
-      $this->set('user_view',$user);
+
+      
+
+     $this->set('user_view',$user);
+
+      
+
+
+
     }
-public function bookNow(){
 
-    $user=$this->Session->read('User');
-    $this->set('user_view',$user);
-    if(!empty($this->params->pass[0])){ 
-              
-               $class_id = $this->params->pass[0];
-               $class_id = base64_decode($class_id);
-               $class_detail = $this->VendorClasse->find('first',array('conditions'=>array('id'=>$class_id)));
-               $this->set('view_class',$class_detail);
-               $this->set('class_id',$class_id);
-               $class_type = $class_detail['VendorClasse']['class_timing_id'];
-               if($class_type==2){
-                  $fixed_class_detail = $this->ClassSchedule->find('first',array('conditions'=>array('class_id'=>$class_id)));
-                  $this->set('view_fixed_class',$fixed_class_detail);
+  public function bookNow(){
 
-              }
-          }
+      //$this->checkUser();
+
+      $this->layout='vendor_layout_payment';
+
+      $user=$this->Session->read('User');
+
+      $this->set('user_view',$user);
+
+      if(!empty($this->params->pass[0])){ 
+
+
+
+        $class_id = $this->params->pass[0];
+
+        $class_id = base64_decode($class_id);
+
+        $class_detail = $this->VendorClasse->find('first',array('conditions'=>array('id'=>$class_id)));
+
+        $this->set('view_class',$class_detail);
+
+        $this->set('class_id',$class_id);
+
+        
+
+       
+
+        $class_type = $class_detail['VendorClasse']['class_timing_id'];
+
+        if($class_type==2)
+
+        {
+
+
+
+          $fixed_class_detail = $this->ClassSchedule->find('first',array('conditions'=>array('class_id'=>$class_id)));
+
+          $this->set('view_fixed_class',$fixed_class_detail);
+
         }
-    public function saveCoupon(){
 
-              $this->autoRender = false;
-              $user=$this->Session->read('User');
-              $user_id = $user['UserMaster']['id'];
-              $amount =   $_POST['payment_amt'];
-              $c_id            = $this->request->data['class_id'];
-              $no_of_ticket    = $this->request->data['no_of_ticket'];
-              $coupon_number   = $this->request->data['coupon_number'];
-              $booking_id      = $this->request->data['booking_id'];
-              $coupon_number   = trim($coupon_number);
-              $Coup_id = array();
-                        $Coup_id['GiftCupan']['coupon_number'] = $coupon_number;
-                        $Coup_id['GiftCupan']['price'] = $amount;
-                        /*echo "<pre>";
-                        print_r($Coup_id);
-                        echo "</pre>";*/
-
-                        $this->Session->write('coup_id',$Coup_id);
-              //$coupon_number rohit
-
-               $class_cat_id_by_cl_id = $this->VendorClasse->find('first',array('conditions'=>array('VendorClasse.id'=>$c_id),'fields'=>array('VendorClasse.category_id')));
-
-               $class_cat_id_by_gift_id = $this->GiftCupan->find('first', array('conditions'=>array('GiftCupan.no_of_coupons'=>$coupon_number,'status'=>1),'fields'=>array('GiftCupan.cat_id')));
-              
-              //print_r($class_cat_id_by_gift_id);
-              //die;
-                if(!empty($class_cat_id_by_cl_id)){
-
-                  $cl_cat_id = $class_cat_id_by_cl_id['VendorClasse']['category_id'];
-                }
-                if(!empty($class_cat_id_by_gift_id)){
-
-                    $gift_cat_id = $class_cat_id_by_gift_id['GiftCupan']['cat_id'];
-                  
-                }
-                if($gift_cat_id==''){
-
-                    echo 5;
-                        die;
-                }
-                
-                if($gift_cat_id!=0){
-                    if($cl_cat_id!=$gift_cat_id){
-
-                        echo 5;
-                        die;
-                    }
-              }
-
-              $find_class_max_price = $this->VendorClasse->find('first', array('conditions'=>array('VendorClasse.user_id'=>$user_id)));
-              /*echo "<pre>";
-              print_r($find_class_max_price);
-              echo "</pre>";*/
-              $max_sheet = $find_class_max_price['VendorClasse']['max_ticket_available'];
-
-              //die;
-              $this->request->data['user_id']=$user_id;
-              $date = date("d-m-Y H:i:s");
-              $timestamp = strtotime($date);
-              $this->request->data['transaction_date']= $timestamp;
-              //$this->request->data['class_id']=$class_id;
-              //echo 'hi';
-              $find_cupan = $this->GiftCupan->find('first', array('conditions'=>array('no_of_coupons'=>$coupon_number,'status'=>1)));
-              if(empty($find_cupan)){
-                    echo 4;
-                    die;
-                  }
-
-              else if(!empty($find_cupan)){
-
-                        $expdate = $find_cupan['GiftCupan']['exp_date'];
-                        $c_date = date("d-m-Y");
-                        $c_timestamp = strtotime($c_date);
-                        //$adddate = $find_cupan['GiftCupan']['add_date'];
-                        if($expdate < $c_timestamp){
-                              echo 6;
-                              exit();
-                               }
-                          $cupan_rupess = $find_cupan['GiftCupan']['available_amt'];
-                         $cupanid = $find_cupan['GiftCupan']['id'];
-                         $this->request->data['cupon_id']=$cupanid; 
-                         if($cupan_rupess<$amount){
-
-                             echo 2;
-                             die;
-                        }
-                      }
-                  else if($no_of_ticket>$max_sheet){
-                    
-                     echo 3;
-                     die;
-                  }
-                  if($this->TransactionHistorie->save($this->request->data)){
-                    
-                      /*echo 'abil_amt-> :'.$cupan_rupess;
-                      echo "</br>";
-                      echo 'total_tickat-- > :'.$amount;
-                      echo "</br>";
-                      $abl_amt = $cupan_rupess-$amount;
-                      echo 'last amount--> :'.$abl_amt;
-
-                      echo "</br>";
-                      die;*/
-                     //$cupan_rupess = $cupan_rupess-$amount;
-                      $abl_amt = $cupan_rupess-$amount;
-                      $max_ticket_available = $max_sheet-$no_of_ticket;
+      }
 
 
-                      $this->VendorClasse->query("UPDATE bg_vendor_classes SET  max_ticket_available='".$max_ticket_available."' WHERE id='".$c_id."' and user_id='".$user_id."'");
-                      $this->GiftCupan->query("UPDATE bg_gift_cupans SET  available_amt='".$abl_amt."',booking_id='".$booking_id."' WHERE no_of_coupons='".$coupon_number."'");
-                      //$find_class_max_price = $this->VendorClasse->find('first', array('conditions'=>array('user_id'=>$user_id,'fields' => array('VendorClasse.max_ticket_available'))));
-                    echo 1;
-                    die;
-                }
-}
 
+    }
 
 public function gmailSave(){
 
@@ -9636,10 +10042,10 @@ public function gmailSave(){
     $vendor_type_id=$_POST['vendor_type_id'];
     
     
-    $find=$this->UserMaster->find('first',array('conditions'=>array('social_network_id'=>$sn_id,'UserMaster.email'=>$email)));
+    $find=$this->UserMaster->find('first',array('conditions'=>array('UserMaster.email'=>$email)));
    if(!empty($find)){
-     $find['UserMaster']['profile_image']=$profile_image;
-      
+     //$find['UserMaster']['profile_image']=$profile_image;
+     $find['UserMaster']['social_network_id']=$sn_id; 
        
        $find['UserMaster']['status']=1;
      $this->UserMaster->save($find);
@@ -9678,7 +10084,7 @@ public function gmailSave(){
                         return 1;
 
             }
-            else if($status==0)
+            else if($status==2)
 
                 {
 
@@ -9698,7 +10104,7 @@ public function gmailSave(){
 
                     $Login['UserMaster']['email']= $email;
 
-                    $Login['UserMaster']['profile_image']=$profile_image;
+                   // $Login['UserMaster']['profile_image']=$profile_image;
                     $Login['UserMaster']['user_type_id']=$find['UserMaster']['user_type_id'];
                     $Login['UserMaster']['vendor_type_id']=$find['UserMaster']['vendor_type_id'];
 
@@ -9709,7 +10115,7 @@ public function gmailSave(){
 
                    //print_r($this->Session->read('User11'));die; 
 
-                    echo "1";die;
+                    echo "2";die;
 
                 
 
@@ -9938,15 +10344,17 @@ foreach($_POST as $key => $value) {
 
 }
 
-public function paySuccess(){
+public function paySuccess()
 
-    $status =$_POST["status"];
+{
 
-    $amount =$_POST["amount"];
+    $status=$_POST["status"];
 
-    $txnid =$_POST["txnid"];
+    $amount=$_POST["amount"];
 
-    $posted_hash =$_POST["hash"];
+    $txnid=$_POST["txnid"];
+
+    $posted_hash=$_POST["hash"];
 
     $key=$_POST["key"];
 
@@ -9992,9 +10400,6 @@ public function paySuccess(){
 		$cookie = $_COOKIE[$result['Cookie']['cook']];
 		$cookie = stripslashes($cookie);
 		$tick = json_decode($cookie, true);
-    echo "<pre>";
-    print_r($result);
-     echo "</pre>";
 		
 		$this->loadModel('Ticket');
 		
@@ -10151,9 +10556,6 @@ If (isset($_POST["additionalCharges"])) {
            
             ));
          $group_image=$this->ConnectGroup->find('first',array('conditions'=>array('id'=>$catalog_id),'fields'=>array('banner_image')));
-          
-          //print_r($group_image);
-         // die;
           $this->set('banner_image',$group_image['ConnectGroup']['banner_image']);
           $this->set('cataloglist',$catalog_det);
           $this->set('catalog_id',$catalog_id);
@@ -10190,6 +10592,8 @@ If (isset($_POST["additionalCharges"])) {
 //echo "<pre>";print_r($catalog);die;
       
       $this->set('papluar_catalog',$catalog);
+        $user=$this->Session->read('User');
+        $this->set('user_view',$user);
         }
         else{
           $this->redirect(array('controller'=>'Homes','action'=>'arrangeClass'));
@@ -10202,7 +10606,7 @@ If (isset($_POST["additionalCharges"])) {
 
             $this->layout='fun_layout';
             $user=$this->Session->read('User');
-            
+            $this->set('user_view',$user);
             $res1=$this->UserMaster->find('first',array('conditions'=>array('id'=>$user['UserMaster']['id'])));
            
             $this->Session->delete('User');
@@ -10212,7 +10616,9 @@ If (isset($_POST["additionalCharges"])) {
             $class_id = base64_decode($this->params->pass[0]);
 
             $group_id=base64_decode($this->params->pass[1]);
-            $catalog_det = $this->VendorClasse->find('first',array(
+			//echo '<pre>'; print_r($class_id);
+			//echo '<pre>'; print_r($group_id);
+            /*$catalog_det = $this->VendorClasse->find('first',array(
             'joins' =>   array(
                             array(
                                 'table' => 'bg_add_catalogs',
@@ -10240,7 +10646,7 @@ If (isset($_POST["additionalCharges"])) {
                                 'type'  =>  'INNER',
                                 'conditions' => array('Catalog.catalog_id = RequestCatalog.id','RequestCatalog.class_id'=>$class_id)
                                 ),
-                                array(
+                               array(
                                 'table' => 'bg_cities',
                                 'alias' => 'City',
                                 'type'  =>  'INNER',
@@ -10250,10 +10656,27 @@ If (isset($_POST["additionalCharges"])) {
                            
                               ),
             
-            'fields'    =>array('VendorClasse.*','Catalog.*','UserMaster.*','ConnectGroup.*','RequestCatalog.*','City.name')
+            'fields'    =>array('VendorClasse.*','Catalog.*','UserMaster.*','ConnectGroup.*','RequestCatalog.*')
            
-            ));
-          
+            ));*/
+			$view  =  $this->VendorClasse->find('first', array(
+				'conditions' => array(
+					'VendorClasse.id' => $class_id,
+				),
+					'contain' => array(
+						'VendorClasseLevelDetail',
+						'ClassType',
+						'User',
+						'Category',
+						'Segment',
+						'Community',
+						'Locality',
+						'VendorClasseLocationDetail'=> array('Locality'),
+				),
+			));
+			//echo '<pre>'; print_r($view); die;
+           $class_type1=$this->ClassType->find('all');
+           $this->set('all_class_type',$class_type1);
            
            $locality_array=$catalog_det['RequestCatalog']['locality'];
            $group_array=$catalog_det['RequestCatalog']['group_name'];
@@ -10274,7 +10697,7 @@ If (isset($_POST["additionalCharges"])) {
             $this->set('group_name',$str_group);
             $this->set('locality_name',$str_locality);
             
-            $this->set('detail',$catalog_det);
+            $this->set('detail',$view);
            
             
 
@@ -10295,7 +10718,9 @@ If (isset($_POST["additionalCharges"])) {
           $this->request->data['quote_data']   = $timestamp_get;
           $this->request->data['add_date']     = $timestamp_add_date;
           $this->request->data['modify_date']  = $timestamp_add_date;
-          $this->request->data['user_id']= $u_id; 
+          $this->request->data['modify_date']  = $timestamp_add_date;
+          $this->request->data['class_id']= $this->request->data['class_id']; 
+          $this->request->data['user_id']= $u_id;
           if($this->GetQuote->save($this->request->data))
            {
                 echo 1;
@@ -10406,14 +10831,50 @@ public function test(){
 
 
 
-public function updateUser($email=null,$user_type_id=null,$user_type_id1=null){
+public function updateUser(){
   $this->autoRender=false;
-  $res=$this->UserMaster->find('first',array('conditions'=>array('email'=>$email)));
+   $ide=$this->params->pass[0];
+   $user_type_id=$this->params->pass[1];
+   
+   $email_ide=$this->params->pass[2];
+   $mobile_no=$this->params->pass[3];
+   
+  if(($email_ide!='')&&($mobile_no!='')){
+   $res=$this->UserMaster->find('first',array('conditions'=>array('UserMaster.id'=>$ide)));
+   
+  if(!empty($res)){
+   $res1=$this->UserMaster->find('first',array('conditions'=>array('UserMaster.email'=>$email_ide,'UserMaster.id !='=>$ide)));
+   
+   $res2=$this->UserMaster->find('first',array('conditions'=>array('UserMaster.mobile'=>$mobile_no,'UserMaster.id !='=>$ide)));
+   if(!empty($res1)){
+    return "2";die;
+    }
+   else if(!empty($res2)){
+     return "3";die;
+    }
+   
+  else {
+  $res['UserMaster']['user_type_id']=$user_type_id; 
+  $res['UserMaster']['email']=$email_ide;
+  $res['UserMaster']['mobile']=$mobile_no;
+  $res['UserMaster']['status']=1;
+ 
+  $this->UserMaster->save($res);
+  $this->Session->delete('User');
+  $res12=$this->UserMaster->find('first',array('conditions'=>array('UserMaster.id'=>$ide)));
+  $this->Session->write('User',$res12);
+  return "1";die;
+  }
+  }
+  }
+  else{
+  $res=$this->UserMaster->find('first',array('conditions'=>array('id'=>$ide)));
   if(!empty($res)){
   $res['UserMaster']['user_type_id']=$user_type_id; 
   $this->UserMaster->save($res);
-  return "1";
+  return "1";die;
   }
+ }
 }
 
      
@@ -10438,7 +10899,11 @@ public function updateUser($email=null,$user_type_id=null,$user_type_id1=null){
                                                'City.status'=>1,
                                               'City.id'=>$city_ids)));
           $city_name = $res1['City']['name'];
+          //$this->set('city_name',$city_name);
+         //$all_city=$this->City->find('all');
+        // $this->set('Allcities',$all_city);
           return $city_name;
+
       }     
    }
 
@@ -10461,6 +10926,12 @@ public function updateUser($email=null,$user_type_id=null,$user_type_id1=null){
     $this->checkUser();
     $this->layout='vendor_layout';
     $user=$this->Session->read('User'); 
+   if($this->params->pass[0] == 'learner'){
+        $page_section_name =  $this->params['pass'][0];
+           if(!empty($page_section_name)){
+              $this->set('page_section_name',$page_section_name);
+            }
+     }
     $user=$this->UserMaster->find('first',array('conditions'=>array('email'=>$user['UserMaster']['email'])));
     $user_id    = $user['UserMaster']['id'];
     $this->set('user_id',$user_id);
@@ -10523,8 +10994,9 @@ public function updateUser($email=null,$user_type_id=null,$user_type_id1=null){
 
       $promt_data =  $this->VendorClasse->find('all',array(
                                                'conditions'=>array(
-                                               'VendorClasse.user_id'=>$user_id,
-                                               'VendorClasse.status'=>1)));
+                                               'VendorClasse.user_id'=>$user_id
+                                               )));
+     
 
       $promt_data1 =  $this->VendorClasse->find('all',array(
                               'joins'=>
@@ -11127,6 +11599,78 @@ public function updateUser($email=null,$user_type_id=null,$user_type_id1=null){
       $this->redirect(array('controller'=>'Homes','action'=>'vendorMsgRead'));
     }  
   }
+public function addBlog(){
+
+          $this->checkUser();
+          $user=$this->Session->read('User');
+          $user=$this->UserMaster->find('first',array('conditions'=>array('email'=>$user['UserMaster']['email'])));
+          $this->layout='vendor_layout';
+          $this->set('user_view',$user);
+          if(!empty($user)){
+            $user_data     = $this->UserMaster->find('first',array('conditions'=>array(
+                                                                   'UserMaster.id'=>$user['UserMaster']['id'],
+                                                                   'UserMaster.user_type_id'=>1,
+                                                                   'UserMaster.status'=>1)));
+            $cat_ids       = $user_data['UserMaster']['category_id'];
+            $category_ids  = explode(",",$cat_ids);
+            $cat_data      = $this->Category->find('all',array('conditions'=>array(
+                                                               'Category.id'=>$category_ids)));
+            $this->set('cat_data',$cat_data);
+          }
+  }
+public function customerReviewForm(){
+      $this->layout='cutomer_review_layout';
+      if(!empty($this->params['pass'][0])){
+       $user_id = base64_decode($this->params['pass'][0]);
+        $class_id = base64_decode($this->params['pass'][1]);
+        $user=$this->UserMaster->find('first',array('conditions'=>array('id'=>$user_id)));
+        $this->Session->delete('User');
+        $this->Session->write('User',$user);
+        $this->checkUser();
+        $user    = $this->Session->read('User');
+        $user_id = $user['UserMaster']['id'];
+        $this->set('user_view',$user);
+      
+       
+       
+        $this->set('class_id',$class_id);
+      }else{
+         $this->redirect(array('controller'=>'Homes','action'=>'index'));  
+      }
+  }
+public function submitreview(){
+
+    $this->autoRender = false;
+    if(!empty($_POST)){
+      $check_review_data = $this->CustomerReview->find('first',array('conditions' => array(
+                                                                     'CustomerReview.user_id' => $_POST['user_id'],
+                                                                     'CustomerReview.class_id' => $_POST['class_id'],
+                                                                     'CustomerReview.status' =>1)));
+      if(empty($check_review_data)){  
+          $review_data  = array();
+          $review_data['rating']    = $_POST['rating_star'];
+          $review_data['review']    = $_POST['review'];
+          $review_data['user_id']   = $_POST['user_id'];
+          $review_data['class_id']  = $_POST['class_id'];
+          $review_data['status']    = 1;
+          $review_data['add_date']  = time();
+          $review_data['modify_date'] = time();
+          $this->CustomerReview->save($review_data);
+          $result_string.='<center class="connet_text_hed" style="color:#2bcdc1"><h4><i> Thank you for taking your time for the review.</i></h4>
+                            <img alt="img not found" style="width:300px;height:300px;" class="img-responsive" src="'.HTTP_ROOT.'/img/thank-you.jpg">
+                           </center>';
+          print_r($result_string);die;
+      }else{
+          $result_string.='<center class="connet_text_hed" style="color:#2bcdc1"><h4><i>You have already reviewed this class.</i></h4>
+                            <img alt="img not found" style="width:300px;height:200px;" class="img-responsive" 
+                            src="'.HTTP_ROOT.'/img/not_allowed.png">
+                           </center>';
+           print_r($result_string);die;                   
+      }
+    }
+  }
+
+
 
 
 
