@@ -260,7 +260,7 @@ border-radius:30%;
                 <div class="">&nbsp;</div>
             </div>--> <!-- step 1 google map code & explode code /-->
 
-                      <!-- step 2, 4circle images slider code -->
+                        <!-- step 2, 4circle images slider code -->
             <div class="col-xs-12 col-sm-12 pad_all">            
                 <div class="col-xs-12 col-sm-12 pad_all">
                     <center>
@@ -339,6 +339,7 @@ border-radius:30%;
                                                     <div class="slide2_text col-xs-12  padd_l_r sr_16_07_line_hite">Parents & kids</div>
                                                 </center>
                                             </div> 
+
                                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 rad_br sr_16_07_circle_slider_padding">
                                                 <center>
                                                
@@ -370,6 +371,7 @@ border-radius:30%;
                                                 </center>
                                             </div>
                                         </div>
+
                                         <div class="row" id="pdcmnty">
                                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 rad_br sr_16_07_circle_slider_padding">
                                                 <center>
@@ -411,6 +413,7 @@ border-radius:30%;
                                                 </center>
                                             </div>
                                         </div>
+
                                         <div class="row " id="pdcmnty1">    
                                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 rad_br sr_16_07_circle_slider_padding">
                                                 <center>
@@ -1094,8 +1097,7 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
         </div>
   
   </div>
-  
-        <!--Why Braingroom-->
+     <!--Why Braingroom-->
         <div class="">&nbsp;</div> 
         
         <div class="col-xs-12 col-sm-12 pad_all sr_11_08_featured_div_mar">
@@ -1121,9 +1123,9 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
 	 
 						  <div class="col-xs-1 col-sm-12" id="braingroomsquare"><div class="braingroomff1">Community learning & Gifting options.</div><img class="braingroomimg" src="<?php echo HTTP_ROOT;?>/img/mark.png" alt="images not found"></img></div>
                            <div class="">&nbsp;</div> 
-                           <div class="col-xs-12 col-sm-12">
+                           <div class="col-xs-12 col-sm-12" >
 											  
-						  <div class="col-xs-4 col-sm-12 css-shapes-preview csp1"><div class="ff tab blink">120+ CLASS PROVIDERS</div><img class="cicon1" src="<?php echo HTTP_ROOT;?>/img/class provider.png" alt="images not found"></img></div>
+						  <div class="col-xs-4 col-sm-12 css-shapes-preview csp1"><div class="ff tab blink"">120+ CLASS PROVIDERS</div><img class="cicon1" src="<?php echo HTTP_ROOT;?>/img/class provider.png" alt="images not found"></img></div>
 					  
 						  <div class="col-xs-4 col-sm-12 css-shapes-preview csp"><div class="ff1 tab blink">1000+ CLASSES</div><img class="cicon2" src="<?php echo HTTP_ROOT;?>/img/class.png" alt="images not found"></img></div> 
 						  
