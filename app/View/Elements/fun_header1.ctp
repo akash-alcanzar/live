@@ -42,10 +42,10 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
             <div class="col-xs-12 col-sm-12 sr_15_07_padd">
               <!-- ***************left button*************** -->
               <div class="col-md-8 col-sm-7 col-lg-8 col-xs-12 pull-left padd_l_r sr_18_07_header_bdr">
-                 <a href="<?php echo HTTP_ROOT;?>/sell-express">
+                 <a href="<?php echo HTTP_ROOT;?>/class_providers">
                     <button class="btn buttclass" >Class Providers</button>
                   </a>
-                  <a href="<?php echo HTTP_ROOT;?>/arrange-class">
+                  <a href="<?php echo HTTP_ROOT;?>/catalogue_for_organizers">
                     <button class="btn butidea sr_18_07_cfo">Catalogue for Organizers</button>
                   </a>
                   <a href="<?php echo HTTP_ROOT;?>/gift">
@@ -189,7 +189,7 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
                              </a>
                             <button class="btn btclass1 fbttp" style="position: relative;right: -126px;top: -3px;">
                             <img src="<?php echo HTTP_ROOT;?>/img/iconfind.png" />Find</button>
-                            <a href="<?php echo HTTP_ROOT;?>/Homes/upcoming">
+                            <a href="<?php echo HTTP_ROOT;?>/Connect/connectpage">
                             <button class="btn btclassnt1  fbttp" style="position: absolute;right: -16px;top: 10px;padding: 5px 10px;">
                             <i class="fa fa-group"></i> Connect</button>
                             </a>
