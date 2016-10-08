@@ -279,6 +279,21 @@ else{
       $this->layout='fun_layout';
 
        }
+	    public function privacy() {
+
+      $this->layout='fun_layout';
+
+       }
+	    public function reviews_and_testimonials() {
+
+      $this->layout='fun_layout';
+
+       }    
+	    public function partner_with_us() {
+
+      $this->layout='fun_layout';
+
+       }   
 	   public function contact(){
 
 //$this->checkUser();
