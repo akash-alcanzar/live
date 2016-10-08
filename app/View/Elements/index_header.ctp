@@ -1,13 +1,3 @@
-<?php 
-
-$url = $_SERVER['REQUEST_URI']; 
-
-$data = explode('/',$url);
-
-$page_name = $data[count($data)-1];
-
-?>
-
 <style>
   .home_header_city{
       -moz-appearance: none;
@@ -17,7 +7,6 @@ $page_name = $data[count($data)-1];
       margin-top:3px; 
   }
 </style>
-
 
 
 <?php $Allcities    = $this->requestAction(array('controller'=>'Homes', 'action'=>'getCities')); ?>
@@ -54,10 +43,10 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
             <div class="col-xs-12 col-sm-12 sr_15_07_padd">
               <!-- ***************left button*************** -->
               <div class="col-md-7 col-sm-7 col-lg-8 col-xs-12 pull-left padd_l_r sr_18_07_header_bdr">
-                                  <a href="<?php echo HTTP_ROOT;?>/class_providers">
+                                  <a href="<?php echo HTTP_ROOT;?>/sell-express">
                     <button class="btn buttclass" >Class Providers</button>
                   </a>
-                  <a href="<?php echo HTTP_ROOT;?>/catalogue_for_organizers">
+                  <a href="<?php echo HTTP_ROOT;?>/arrange-class">
                     <button class="btn butidea sr_18_07_cfo">Catalogue for Organizers</button>
                   </a>
                   <a href="<?php echo HTTP_ROOT;?>/Homes/gift">
@@ -70,9 +59,9 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
                     <button class="btn butidea sr_18_07_cfo border-blog"> 
                     <i class="glyphicon glyphicon-comment blogicon"></i> Blog</button>
                   </a>
-                  <a href="<?php echo HTTP_ROOT;?>/contact">
+                  <a href="#">
                   <button class="btn butidea sr_18_07_cfo border-blog"> 
-                    Contact Us</button>  
+                    Contact US</button>  
                   </a>
               </div>
               <!-- ***************left button*************** -->
@@ -87,8 +76,6 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
 
                         if(!empty($user))
                         {
-                           
-                                        
                           ?>
                           <?php echo $this->Element('home_comman_logout'); ?>
                         
@@ -107,14 +94,8 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
                               <option selected value="<?php echo $city_name;?>">
                                 <?php echo $city_name ;?>
                               </option>
-                           <?php 
-                                     $all_city=$this->City->find('all');
-        
-                                   foreach ($all_city as  $city_value){ ?>
-                                    <option style="font-size:14px;" value="<?php echo $city_value['City']['id']; ?>">
-                                      <?php echo $city_value['City']['name']; ?>
-                                    </option>
-                                <?php }}
+                            
+                                <?php }
                                 else{
                                   foreach ($Allcities as  $city_value){ ?>
                                     <option style="font-size:14px;" value="<?php echo $city_value['City']['id']; ?>">
@@ -163,7 +144,7 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
                                           <option value="6" class="slt_pad01_08">Home Maintenance</option>
 
                                       </select>
-                                      <span class="carrte_select"><img src="<?php echo HTTP_ROOT;?>/img/caret.png" alt="img" style="height: 10px;"></span>
+                                      <span class="carrte_select"><img src="<?php echo HTTP_ROOT;?>/img/thumbnail/caret.png" alt="img" style="height: 10px;"></span>
                                   </div>
                                   <div class="col-xs-7">
                                       <input type="text" placeholder="Search for classes & activities..." name="search_key" id="search_key" class="b_1_input1" style="border-radius: 0px; width: 100%; padding-right: 40px;">
@@ -189,31 +170,13 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
                             </div>    
                         </center>
                       </div>
-                   <!--   <div class="col-md-3 col-sm-4 col-xs-12 padd_l_r b_fcb2 b_pad12 sr_15_07_connect_btn">
+                      <div class="col-md-3 col-sm-4 col-xs-12 padd_l_r b_fcb2 b_pad12 sr_15_07_connect_btn">
                           <div class="pull-right b_lft">
-                            <button class="btn btclass1 fbttp" style="padding:5px 20px;"><img src="<?php //echo HTTP_ROOT;?>/img/iconfind.png" />Find</button>
+                            <button class="btn btclass1 fbttp" style="padding:5px 20px;"><img src="<?php echo HTTP_ROOT;?>/img/iconfind.png" />Find</button>
                             <button class="btn btclassnt1  fbttp" style="padding:5px 10px;">
-                           <img src="<?php // echo HTTP_ROOT;?>/img/iconconnect1.png" /> <i class="fa fa-group"></i> Connect</button>
+                            <!--<img src="<?php echo HTTP_ROOT;?>/img/iconconnect1.png" />--> <i class="fa fa-group"></i> Connect</button>
                           </div>
-                      </div> -->
-		    	
-		  <div class="col-md-3 col-sm-4 col-xs-12 padd_l_r b_fcb2 b_pad12 sr_15_07_connect_btn">
-			<div class="pull-right b_lft">
-			  <button class="btn btclass1 fbttp" style="padding:5px 20px;"  id="header_find">
-			    <img src="<?php echo HTTP_ROOT;?>/img/iconfind.png" />
-			      Find
-			  </button>
-			  <a href="<?php echo HTTP_ROOT;?>/Connect/connectpage">
-			    <button class="btn btclassnt1  fbttp" style="padding:5px 10px;" id="header_connect">
-			      <img src="<?php echo HTTP_ROOT;?>/img/iconconnect1.png" />
-			      Connect
-			    </button>
-			  </a>
-			</div>
-		    </div>
-
-		    
-		    
+                      </div>
                       <!-- ******************new alignment***************** -->
                   </div>
         </div>
@@ -367,17 +330,4 @@ function serch_cat(catid){
        window.location.href = "<?php echo HTTP_ROOT;?>/homes/upcoming/"+btoa(id); 
     }
   }
-</script>
-
-<script>
-   $(document).ready(function(){
-      var page_name = "<?php echo $page_name; ?>";
-      if(page_name == 'connectpage' || page_name == 'connectGroup'){
-        $('#header_connect').css('color','#2bcdc1');
-        $('#header_connect img').attr('src','<?php echo HTTP_ROOT;?>/img/iconconnect.png');
-        $('#header_find').css({'color':'#989898','border-bottom':'none'});
-        $('#header_connect').css({'color':'#2bcdc1','border-bottom':'2px solid'});
-        $('#header_find img').attr('src','<?php echo HTTP_ROOT;?>/img/iconfind1.png');
-      }
-    });
 </script>
