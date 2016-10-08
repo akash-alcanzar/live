@@ -20,10 +20,11 @@
                           <img src="<?php echo HTTP_ROOT;?>/img/iconfind.png" />
                           <span>Find</span>
                         </button>
+                          <a href="<?php echo HTTP_ROOT;?>/Connect/connectpage">
                         <button class="btn btclassnt1-br break_sr_16_07_top_btn02 fbttp" style="">
                           <i class="fa fa-group"></i> Connect</button>
                           <span>Connect</span>
-                        </button>
+                        </button></a>
                          <?php  
                          
                         //$user =$this->Session->read('User'); 
