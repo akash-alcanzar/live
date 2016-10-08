@@ -279,6 +279,17 @@ else{
       $this->layout='fun_layout';
 
        }
+	   public function contact(){
+
+//$this->checkUser();
+
+$this->layout='fun_layout';
+
+$user=$this->Session->read('User');
+
+$this->set('user_view',$user);
+
+}
         public function weighLoss() {
     
             $this->layout='fun_layout';

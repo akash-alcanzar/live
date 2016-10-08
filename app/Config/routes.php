@@ -70,6 +70,7 @@
 	Router::connect('/partner_with_us/*', array('controller' => 'homes', 'action' => 'partner_with_us'));
 	Router::connect('/reviews-and-testimonials/*', array('controller' => 'homes', 'action' => 'reviews_and_testimonials'));
 	Router::connect('/', array('controller' => 'homes', 'action' => 'index', 'home'));
+	Router::connect('/contact/*', array('controller' => 'homes', 'action' => 'contact'));
 	
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
