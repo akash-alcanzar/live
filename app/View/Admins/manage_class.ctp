@@ -1,3 +1,5 @@
+
+
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
 <?php 
@@ -15,10 +17,6 @@
     echo $this->Html->css('backend/datatable');
     echo $this->Html->css('backend/jquery.dataTables.min');
     echo $this->Html->css('backend/buttons.dataTables.min');
-
-
-
-
 ?>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -28,7 +26,6 @@ $(document).ready(function() {
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
-
     } );
 } );
 </script>
@@ -101,7 +98,7 @@ $(document).ready(function() {
                                     <td><?php echo !empty($res['VendorClasse']['class_duration'])?$res['VendorClasse']['class_duration']:"N/A";?></td>
                                       
                                    <td><?php echo !empty($res['VendorClasse']['max_ticket_available'])?$res['VendorClasse']['max_ticket_available']:"N/A";?></td>
-                                   <td><?php echo !empty($res['VendorClasse']['price_per_head'])?$res['VendorClasse']['price_per_head']."&#8377;":"N/A";?></td>
+                                   <td><?php echo !empty($res['ClassLevel']['price'])?$res['ClassLevel']['price']."&#8377;":"N/A";?></td>
 
                                     
                                       
@@ -143,3 +140,6 @@ $(document).ready(function(){
 $('#Manage_Class').css('background-color','black');
 });
 </script>
+
+   
+
