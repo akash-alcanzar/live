@@ -2539,13 +2539,13 @@ public function manageClass(){
     if($res['VendorClasse']['status']==1){
       $res['VendorClasse']['status']=2;
       $this->VendorClasse->save($res);
-      $this->requestAction(array('controller'=>'Cpanels','action'=>'generateMessages'),array('pass'=>array('156','1')));
+      $this->requestAction(array('controller'=>'Cpanels','action'=>'generateMessages'),array('pass'=>array('159','1')));
       $this->redirect($this->referer());
     }
      if($res['VendorClasse']['status']==2){
       $res['VendorClasse']['status']=1;
       $this->VendorClasse->save($res);
-      $this->requestAction(array('controller'=>'Cpanels','action'=>'generateMessages'),array('pass'=>array('157','1')));
+      $this->requestAction(array('controller'=>'Cpanels','action'=>'generateMessages'),array('pass'=>array('158','1')));
       $this->redirect($this->referer());
     }
    }
