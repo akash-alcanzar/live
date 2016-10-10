@@ -2497,7 +2497,21 @@ public function groupStatus(){
 public function manageClass(){
    $this->checkUser();
    $this->layout="admin_layout";
-   $class = $this->VendorClasse->find('all');
+   $class = $this->VendorClasse->find('all',array(
+                              'joins'  =>  array(
+                                              array(
+                                                  'table' => 'bg_vendor_classe_level_details',
+                                                  'alias' => 'ClassLevel',
+                                                  'conditions' => array('VendorClasse.id = ClassLevel.vendor_class_id',
+                                                                        'VendorClasse.level_id=ClassLevel.level_id'),
+                                                  ),
+                                             ),
+                            'conditions'=>array('VendorClasse.status'=>1),
+                            'group'=>array('VendorClasse.id'),
+                            'fields'  => array('VendorClasse.*','ClassLevel.*'),
+                            ));
+  
+   //$class = $this->VendorClasse->find('all');
       if(!empty($class)){
         $l=0;
        foreach($class as $res){
@@ -2511,7 +2525,7 @@ public function manageClass(){
       }
       $l++;
       }
-     
+   
       $this->set('view_class',$class);
      }
 
