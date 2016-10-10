@@ -2530,6 +2530,26 @@ public function manageClass(){
      }
 
 }
+ public function ClassStatus(){
+   $this->checkUser();
+   $this->autoRender=false;
+   $ide=base64_decode($this->params->pass[0]);
+   $res=$this->VendorClasse->find('first',array('conditions'=>array('VendorClasse.id'=>$ide)));
+   if(!empty($res)){
+    if($res['VendorClasse']['status']==1){
+      $res['VendorClasse']['status']=2;
+      $this->VendorClasse->save($res);
+      $this->requestAction(array('controller'=>'Cpanels','action'=>'generateMessages'),array('pass'=>array('156','1')));
+      $this->redirect($this->referer());
+    }
+     if($res['VendorClasse']['status']==2){
+      $res['VendorClasse']['status']=1;
+      $this->VendorClasse->save($res);
+      $this->requestAction(array('controller'=>'Cpanels','action'=>'generateMessages'),array('pass'=>array('157','1')));
+      $this->redirect($this->referer());
+    }
+   }
+}
 public function viewClass(){
    $this->checkUser();
    $this->layout="admin_layout";
