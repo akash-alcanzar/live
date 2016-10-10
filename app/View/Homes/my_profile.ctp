@@ -1,12 +1,14 @@
 <style>
-  a:hover{
+  
+   a:hover{
      text-decoration: none;
    } 
+
 </style>
 <?php 
   //echo "<pre>";print_r($galleryimage);
 if($user_view['UserMaster']['user_type_id']=='1'){?>
-<?php if(!empty($user_view['UserMaster']['background_image'])){?>
+  <?php if(!empty($user_view['UserMaster']['background_image'])){?>
 <style>
 .funmp1 {
     width: 100%;
@@ -141,7 +143,6 @@ border-radius:30%;
   
 }
 </style>
-
 <div class="col-md-10 col-sm-9 col-xs-12 ruth6542 ruth654786">
     <div class="col-md-12 col-sm-12 col-xs-12 clrdash123 ruth1">
         <div class="col-md-3 col-sm-3 col-xs-4 bar321 bar786">
@@ -153,30 +154,30 @@ border-radius:30%;
                 <span class="dashbrd1 grg">Settings</span>
                 <i class="fa fa-bell dshclr1" aria-hidden="true"></i>
                 <span class="dashbrd1 grg">Notification</span>
-                 <?php   
+                 <?php 
                        $profile_img=$user_view['UserMaster']['profile_image'];
                       
                        $user_type_id=$user_view['UserMaster']['user_type_id'];
-                      $user_pic1 = substr($profile_img,0,4);
-                         if($user_pic1 == 'http'){ ?>
-                           
-                       
-                          <img src="<?php echo $profile_img; ?>" class="georgeimg prflimg"> 
-
-                          <?php } 
-                               else if($profile_img!='' and $user_type_id==1) {  ?>
+                       //echo $user_type_id;
+                       //die;
+                       if($profile_img!='' and $user_type_id==1)
+                       {
+                        ?>
                          <img src="<?php echo HTTP_ROOT;?>/img/Vendor/profile/<?php echo $profile_img; ?>" class="georgeimg prflimg"> 
-
-                        <?php }elseif($profile_img!='' and $user_type_id==2){  ?>
-
+                         <?php
+                     }
+                     elseif($profile_img!='' and $user_type_id==2)
+                     {
+                        ?>
                         <img src="<?php echo HTTP_ROOT;?>/img/Buyer/profile/<?php echo $profile_img; ?>" class="georgeimg prflimg"> 
-                         <?php }elseif($profile_img!='' and $user_type_id==''){ ?>
-
+                        <?php
+                    }
+                    elseif($profile_img!='' and $user_type_id=='')
+                     {
+                        ?>
                         <img src="<?php echo $profile_img; ?>" class="georgeimg prflimg"> 
                         <?php
                     }
-                   
-
                  ?>
                 <span class="dropdown1">
                     <span class="dashbrd1 grg1"><?php echo $user_view['UserMaster']['first_name'];?></span>
@@ -192,7 +193,7 @@ border-radius:30%;
             </div>
         </div>
     </div> 
-          <div class="col-md-12 col-sm-12 col-xs-12 funmp1"> 
+           <div class="col-md-12 col-sm-12 col-xs-12 funmp1"> 
             <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
               <div class="row">
                 <div class="col-md-8 col-sm-8 col-xs-8 starruth">
@@ -251,7 +252,7 @@ border-radius:30%;
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4 mntop">
                     <div class="pull-right">
-                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/notification.png" class="note321">
+                        <img id="notification" src="<?php echo HTTP_ROOT;?>/img/profile_img/notification.png" class="note321">
                         <?php if($user_view['UserMaster']['user_type_id']=='1'){ ?>
 <a href="<?php echo HTTP_ROOT;?>/Homes/msgInboxVendor">
 <?php if(!empty($ven_msg)){ ?>
@@ -273,7 +274,7 @@ border-radius:30%;
               </div>  
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="pull-right">
+              <div style='background-color: rgb(0, 205, 198); border-radius: 5px; float: right; padding-left: 15px; width: 85px;'>
                 <span onclick="ClickUpload1()">
                   <i class="fa fa-camera edit-bg" aria-hidden="true"></i>
                   <span class="edit-photo">Edit</span>
@@ -389,10 +390,43 @@ border-radius:30%;
                           </div>
                           <!-- *****************section 2************* -->
                           <!-- *****************Institution************** -->
-                          <div id="section2">
+                             <div id="type_vendor">
                           <div class="col-md-12 col-sm-12 col-xs-12 detail">
                             <div class="col-md-3 col-sm-6 col-xs-4 br_name">
                               <img src="<?php echo HTTP_ROOT;?>/img/profile_img/building.png">
+                              <span>Vendor Type:</span>
+                            </div>
+                            <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
+                              <?php if($user_view['UserMaster']['vendor_type_id']==1){?>
+                                <span>Organization</span>
+                              <?php }
+                              else if($user_view['UserMaster']['vendor_type_id']==2){?>
+                               <span>Indivisual</span>
+                             <?php }
+                              else{?>
+                               <span>N/A</span>
+                            <?php }?>
+                              
+                            </div>
+                          </div>
+                           
+                          
+                         <?php if($user_view['UserMaster']['vendor_type_id']==2){?>
+                       <div class="col-md-12 col-sm-12 col-xs-12 detail">
+                            <div class="col-md-3 col-sm-6 col-xs-4 br_name">
+                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/are.png">
+                              <span>DOB:</span>
+                            </div>
+                            <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
+                              <span><?php echo !empty($user_view['UserMaster']['d_o_b'])?$user_view['UserMaster']['d_o_b']:"N/A";?></span>
+                            </div>
+                          </div>
+                         <?php }else if($user_view['UserMaster']['vendor_type_id']==2){?>
+                          
+                         
+                           <div class="col-md-12 col-sm-12 col-xs-12 detail">
+                            <div class="col-md-3 col-sm-6 col-xs-4 br_name">
+                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/are.png">
                               <span>Institution:</span>
                             </div>
                             <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
@@ -410,6 +444,7 @@ border-radius:30%;
                               <span><?php echo !empty($user_view['UserMaster']['official_reg_id'])?$user_view['UserMaster']['official_reg_id']:"N/A";?></span>
                             </div>
                           </div>
+                          <?php }?>
                           <!-- *****************Registration Id************** -->
                           <!-- *****************Experience Area************** -->
                           <div class="col-md-12 col-sm-12 col-xs-12 detail">
@@ -483,6 +518,99 @@ border-radius:30%;
                               }if(empty($user_view['UserMaster']['gender'])){
                                 echo "N/A";
                               }?></span>
+                            </div>
+                          </div>
+                         <div class="col-md-12 col-sm-12 col-xs-12 detail">
+                            <div class="col-md-3 col-sm-6 col-xs-4 br_name b_pad">
+                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/experience.png">
+                              <span>Primary Verification 1:</span>
+                            </div>
+                            <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
+                              <span><?php echo !empty($user['UserVerfication']['identity_of_primary_verification1'])?$user['UserVerfication']['identity_of_primary_verification1']:"N/A";?></span>
+                            </div>
+                          </div>
+                          <div class="col-md-12 col-sm-12 col-xs-12 detail">
+                            <div class="col-md-3 col-sm-6 col-xs-4 br_name b_pad">
+                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/experience.png">
+                              <span>Document Id 1:</span>
+                            </div>
+                            <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
+                              <span><?php echo !empty($user['UserVerfication']['primary_verfication_no1'])?$user['UserVerfication']['primary_verfication_no1']:"N/A";?></span>
+                            </div>
+                          </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 detail">
+                            <div class="col-md-3 col-sm-6 col-xs-4 br_name b_pad">
+                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/experience.png">
+                              <span>Document Photo 1:</span>
+                            </div>
+                            <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
+                               <img src="<?php echo HTTP_ROOT;?>/img/Vendor/Varification/<?php echo $user['UserVerfication']['primary_attached_media1']?>" height="50" width="50">
+
+                            </div>
+                          </div>
+                          <div class="col-md-12 col-sm-12 col-xs-12 detail">
+                            <div class="col-md-3 col-sm-6 col-xs-4 br_name b_pad">
+                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/experience.png">
+                              <span>Primary Verification 2:</span>
+                            </div>
+                            <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
+                              <span><?php echo !empty($user['UserVerfication']['identity_of_primary_verification2'])?$user['UserVerfication']['identity_of_primary_verification2']:"N/A";?></span>
+                            </div>
+                          </div>
+                          <div class="col-md-12 col-sm-12 col-xs-12 detail">
+                            <div class="col-md-3 col-sm-6 col-xs-4 br_name b_pad">
+                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/experience.png">
+                              <span>Document Id 2:</span>
+                            </div>
+                            <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
+                              <span><?php echo !empty($user['UserVerfication']['primary_verfication_no2'])?$user['UserVerfication']['primary_verfication_no2']:"N/A";?></span>
+                            </div>
+                          </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 detail">
+                            <div class="col-md-3 col-sm-6 col-xs-4 br_name b_pad">
+                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/experience.png">
+                              <span>Document Photo 2:</span>
+                            </div>
+                            <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
+                              <img src="<?php echo HTTP_ROOT;?>/img/Vendor/Varification/<?php echo $user['UserVerfication']['primary_attached_media2']?>" height="50" width="50">
+
+                            </div>
+                          </div>
+                          <div class="col-md-12 col-sm-12 col-xs-12 detail">
+                            <div class="col-md-3 col-sm-6 col-xs-4 br_name b_pad">
+                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/experience.png">
+                              <span>Secondry Verification Type1:</span>
+                            </div>
+                            <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
+                              <span><?php echo !empty($user['UserVerfication']['identity_of_secoundry_verification1'])?$user['UserVerfication']['identity_of_secoundry_verification1']:"N/A";?></span>
+                            </div>
+                          </div>
+                          <div class="col-md-12 col-sm-12 col-xs-12 detail">
+                            <div class="col-md-3 col-sm-6 col-xs-4 br_name b_pad">
+                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/experience.png">
+                              <span>Secondry Document Photo1:</span>
+                            </div>
+                            <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
+                              <img src="<?php echo HTTP_ROOT;?>/img/Vendor/Varification/<?php echo $user['UserVerfication']['secoundry_attached_media1']?>" height="50" width="50">
+
+                            </div>
+                          </div>
+                          <div class="col-md-12 col-sm-12 col-xs-12 detail">
+                            <div class="col-md-3 col-sm-6 col-xs-4 br_name b_pad">
+                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/experience.png">
+                              <span>Secondry Verification Type2:</span>
+                            </div>
+                            <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
+                              <span><?php echo !empty($user['UserVerfication']['identity_of_secoundry_verification2'])?$user['UserVerfication']['identity_of_secoundry_verification2']:"N/A";?></span>
+                            </div>
+                          </div>
+                          <div class="col-md-12 col-sm-12 col-xs-12 detail">
+                            <div class="col-md-3 col-sm-6 col-xs-4 br_name b_pad">
+                              <img src="<?php echo HTTP_ROOT;?>/img/profile_img/experience.png">
+                              <span>Secondry Document Photo2:</span>
+                            </div>
+                            <div class="col-md-9 col-sm-6 col-xs-8 br_name1">
+                              <img src="<?php echo HTTP_ROOT;?>/img/Vendor/Varification/<?php echo $user['UserVerfication']['secoundry_attached_media2']?>" height="50" width="50">
                             </div>
                           </div>
                         
@@ -625,7 +753,7 @@ border-radius:30%;
                         <span>Contact No:</span>
                       </div>
                       <div class="col-md-5 col-sm-7 col-xs-8 br_name1">
-                        <?php echo $this->Form->input('mobile',array('type'=>'text','class'=>'form-control reg_input input_text','id'=>'mobile','label'=>false,'div'=>false,'placeholder'=>'Contact_number','value'=>$user_view['UserMaster']['mobile']));?>
+                        <?php echo $this->Form->input('mobile',array('type'=>'text','class'=>'form-control reg_input input_text','id'=>'contact_no','label'=>false,'div'=>false,'placeholder'=>'Contact_number','value'=>$user_view['UserMaster']['mobile']));?>
                       </div>
                     </div>
                     <!-- *****************contact no************** -->
@@ -638,6 +766,7 @@ border-radius:30%;
                       <div class="col-md-5 col-sm-7 col-xs-8 br_name1">
                         <select class="form-control reg_input input_text" name="data[UserMaster][city_id]" id="city_id" onblur="city(this.value)">
                           <option value="">Select City</option>
+                           <option selected value="1">Chennai</option>
                           <?php
                             foreach ($city as $key => $city_value){
                             $id   =$city_value['City']['id'];
@@ -725,7 +854,18 @@ border-radius:30%;
                     </div>
                     <!-- *****************section 2************* -->
                     <!-- *****************Institution************** -->
-                    <div class="col-md-12 col-sm-12 col-xs-12 detail1">
+                   <div class="col-md-12 col-sm-12 col-xs-12 detail1">
+                      <div class="col-md-3 col-sm-4 col-xs-4 br_name">
+                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/building.png">
+                        <span>Vendor Type:</span>
+                      </div>
+                      <div class="col-md-5 col-sm-7 col-xs-8 br_name1">
+                        <?php echo $this->Form->input('vendor_type_id',array('type'=>'select','class'=>'form-control reg_input input_text','id'=>'vendor_Type','label'=>false,'div'=>false,'placeholder'=>'Vendor Type','selected'=>$user_view['UserMaster']['vendor_type_id'],'options'=>$vendor_type));?>
+                       <span class="carimg crt_prf "><img src="<?php echo HTTP_ROOT;?>/img/profile_img/caret_prf.png" class="crt786"></span>                     
+                      </div>
+                    </div>
+                                        <div id="vendor_org">
+                    <div class="col-md-12 col-sm-12 col-xs-12 detail1" id="vendor_org1">
                       <div class="col-md-3 col-sm-4 col-xs-4 br_name">
                         <img src="<?php echo HTTP_ROOT;?>/img/profile_img/building.png">
                         <span>Institution:</span>
@@ -737,13 +877,25 @@ border-radius:30%;
                     </div>
                     <!-- *****************Institution************** -->
                     <!-- *****************Registration Id************** -->
-                    <div class="col-md-12 col-sm-12 col-xs-12 detail1">
+                    
+                    <div class="col-md-12 col-sm-12 col-xs-12 detail1" id="vendor_org_reg_id">
                       <div class="col-md-3 col-sm-4 col-xs-4 br_name">
                         <img src="<?php echo HTTP_ROOT;?>/img/profile_img/are.png">
                         <span>Registration Id:</span>
                       </div>
                       <div class="col-md-5 col-sm-7 col-xs-8 br_name1">
                         <?php echo $this->Form->input('official_reg_id',array('type'=>'text','class'=>'form-control reg_input input_text','id'=>'email','label'=>false,'div'=>false,'placeholder'=>'Registration Id','value'=>$user_view['UserMaster']['official_reg_id']));?>
+                      </div>
+                    </div>
+                    </div>
+                   
+                    <div class="col-md-12 col-sm-12 col-xs-12 detail1" id="vendor_indivisual_dob" style="display:none;">
+                      <div class="col-md-3 col-sm-4 col-xs-4 br_name">
+                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/are.png">
+                        <span>Date Of Birth:</span>
+                      </div>
+                      <div class="col-md-5 col-sm-7 col-xs-8 br_name1">
+                        <?php echo $this->Form->input('d_o_b',array('type'=>'text','class'=>'form-control reg_input input_text','id'=>'datepicker','label'=>false,'div'=>false,'placeholder'=>'Date Of Birth','value'=>$user_view['UserMaster']['d_o_b']));?>
                       </div>
                     </div>
                     <!-- *****************Registration Id************** -->
@@ -765,7 +917,7 @@ border-radius:30%;
                         <span>Address:</span>
                       </div>
                       <div class="col-md-5 col-sm-7 col-xs-8 br_name1">
-                        <?php echo $this->Form->input('address',array('type'=>'textarea','class'=>'form-control reg_input input_text','id'=>'address','label'=>false,'div'=>false,'placeholder'=>' Address','value'=>$user_view['UserMaster']['address']));?>
+                        <?php echo $this->Form->input('address1',array('type'=>'textarea','class'=>'form-control reg_input input_text','id'=>'address1','label'=>false,'div'=>false,'placeholder'=>' Address','value'=>$user_view['UserMaster']['address']));?>
                       </div>
                     </div>
                     <!-- *****************Address************** -->
@@ -788,7 +940,7 @@ border-radius:30%;
                     <?php echo $this->Form->end();?>
                     <!-- *****************Description************** -->
                     <!-- *****************section 3************* -->
-                    <?php echo $this->Form->create('UserMaster');?>
+                    <?php echo $this->Form->create('UserMaster',array('enctype'=>'multipart/form-data'));?>
                      <input type="hidden" value="<?php echo $user_view['UserMaster']['id'];?>" name="data[UserMaster][id]">                     
                     <div class="col-md-12 col-sm-12 col-xs-12 bgsec">
                       <div class="col-md-2 col-sm-3 col-xs-6 photos1" id="photo">Section 3</div>
@@ -828,6 +980,126 @@ border-radius:30%;
                           <option value="2">Female</option>
                         </select>
                         <span class="carimg crt_prf"><img src="<?php echo HTTP_ROOT;?>/img/profile_img/caret_prf.png" class="crt786"></span>
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 detail1 imp_pad1 imp_pad">
+                      <div class="col-md-3 col-sm-4 col-xs-4 br_name">
+                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/gender.png">
+                        <span>Primary Verification Type1:</span>
+                      </div>
+                      <div class="col-md-5 col-sm-7 col-xs-8 br_name1">    
+                       <select class="form-control reg_input input_text" id="sel1" name="data[UserVerfication][identity_of_primary_verification1]">
+                          <option value="Aadhar Card">Aadhar Card</option>
+                          <option value="Passport">Passport</option>
+                          <option value="Voter Id">Voter Id</option>
+                          <option value="Pan Card">Pan Card</option>
+                          <option value="Other Central Gov Issued">Other Central Gov Issued</option>
+                        </select>
+                         <span class="carimg crt_prf"><img src="<?php echo HTTP_ROOT;?>/img/profile_img/caret_prf.png" class="crt786"></span>
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 detail1 imp_pad1 imp_pad">
+                      <div class="col-md-3 col-sm-4 col-xs-4 br_name">
+                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/gender.png">
+                        <span>Document Id 1:</span>
+                      </div>
+                      <div class="col-md-5 col-sm-7 col-xs-8 br_name1">    
+                      <input type="text" name="data[UserVerfication][primary_verfication_no1]" class="form-control reg_input input_text" placeholder="Enter Document Id Number">
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 detail1 imp_pad1 imp_pad">
+                      <div class="col-md-3 col-sm-4 col-xs-4 br_name">
+                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/gender.png">
+                        <span>Document Image 1</span>
+                      </div>
+                      <div class="col-md-5 col-sm-7 col-xs-8 br_name1">    
+                      <input type="file" name="data[UserVerfication][primary_attached_media1]" class="form-control reg_input input_text">
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 detail1 imp_pad1 imp_pad">
+                      <div class="col-md-3 col-sm-4 col-xs-4 br_name">
+                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/gender.png">
+                        <span>Primary Verification Type2:</span>
+                      </div>
+                      <div class="col-md-5 col-sm-7 col-xs-8 br_name1">    
+                       <select class="form-control reg_input input_text" id="sel1" name="data[UserVerfication][identity_of_primary_verification2]">
+                          <option value="Aadhar Card">Aadhar Card</option>
+                          <option value="Passport">Passport</option>
+                          <option value="Voter Id">Voter Id</option>
+                          <option value="Pan Card">Pan Card</option>
+                          <option value="Other Central Gov Issued">Other Central Gov Issued</option>
+                        </select>
+                         <span class="carimg crt_prf"><img src="<?php echo HTTP_ROOT;?>/img/profile_img/caret_prf.png" class="crt786"></span>
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 detail1 imp_pad1 imp_pad">
+                      <div class="col-md-3 col-sm-4 col-xs-4 br_name">
+                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/gender.png">
+                        <span>Document Id 2:</span>
+                      </div>
+                      <div class="col-md-5 col-sm-7 col-xs-8 br_name1">    
+                      <input type="text" name="data[UserVerfication][primary_verfication_no2]" class="form-control reg_input input_text" placeholder="Enter Document Id Number">
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 detail1 imp_pad1 imp_pad">
+                      <div class="col-md-3 col-sm-4 col-xs-4 br_name">
+                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/gender.png">
+                        <span>Document Image 2</span>
+                      </div>
+                      <div class="col-md-5 col-sm-7 col-xs-8 br_name1">    
+                      <input type="file" name="data[UserVerfication][primary_attached_media2]" class="form-control reg_input input_text">
+                      </div>
+                    </div>
+                  <div class="col-md-12 col-sm-12 col-xs-12 detail1 imp_pad1 imp_pad">
+                      <div class="col-md-3 col-sm-4 col-xs-4 br_name">
+                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/gender.png">
+                        <span>Secondry Verification Type1:</span>
+                      </div>
+                      <div class="col-md-5 col-sm-7 col-xs-8 br_name1">    
+                       <select class="form-control reg_input input_text" id="sel1" name="data[UserVerfication][identity_of_secoundry_verification1]">
+                          <option value="Certificates of Excellence">Certificates of Excellence</option>
+                          <option value="Awards Received">Awards Received</option>
+                          <option value="Course Completion Certificates">Course Completion Certificates</option>
+                          <option value="Paper Published">Paper Published</option>
+                          <option value="Distinguished Accomplishment">Distinguished Accomplishment</option>
+                          <option value="Newspaper Mentions">Newspaper Mentions</option>
+                        </select>
+                         <span class="carimg crt_prf"><img src="<?php echo HTTP_ROOT;?>/img/profile_img/caret_prf.png" class="crt786"></span>
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 detail1 imp_pad1 imp_pad">
+                      <div class="col-md-3 col-sm-4 col-xs-4 br_name">
+                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/gender.png">
+                        <span>Document Secondry Image1</span>
+                      </div>
+                      <div class="col-md-5 col-sm-7 col-xs-8 br_name1">    
+                      <input type="file" name="data[UserVerfication][secoundry_attached_media1]" class="form-control reg_input input_text">
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 detail1 imp_pad1 imp_pad">
+                      <div class="col-md-3 col-sm-4 col-xs-4 br_name">
+                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/gender.png">
+                        <span>Secondry Verification Type2:</span>
+                      </div>
+                      <div class="col-md-5 col-sm-7 col-xs-8 br_name1">    
+                       <select class="form-control reg_input input_text" id="sel1" name="data[UserVerfication][identity_of_secoundry_verification2]">
+                          <option value="Certificates of Excellence">Certificates of Excellence</option>
+                          <option value="Awards Received">Awards Received</option>
+                          <option value="Course Completion Certificates">Course Completion Certificates</option>
+                          <option value="Paper Published">Paper Published</option>
+                          <option value="Distinguished Accomplishment">Distinguished Accomplishment</option>
+                          <option value="Newspaper Mentions">Newspaper Mentions</option>
+                        </select>
+                         <span class="carimg crt_prf"><img src="<?php echo HTTP_ROOT;?>/img/profile_img/caret_prf.png" class="crt786"></span>
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 detail1 imp_pad1 imp_pad">
+                      <div class="col-md-3 col-sm-4 col-xs-4 br_name">
+                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/gender.png">
+                        <span>Document Secondry Image2</span>
+                      </div>
+                      <div class="col-md-5 col-sm-7 col-xs-8 br_name1">    
+                      <input type="file" name="data[UserVerfication][secoundry_attached_media2]" class="form-control reg_input input_text">
                       </div>
                     </div>
                     <div class="col-md-8 col-sm-8 col-xs-8 br_butt">
@@ -907,8 +1179,9 @@ border-radius:30%;
                                             <h3 style="padding:0px; margin:0px; color:#fff;">Upload Image</h3>
                                         
                                         </div>
-                                        <?php echo $this->Form->create('AddImage', array('class' => '','enctype'=>'multipart/form-data','onSubmit'=>'return chk_frm();'))?>  
+                                        
                                         <?php //echo $this->Form->create('AddDiamond', array('class' => '', 'enctype'=>'multipart/form-data','onSubmit'=>'return chk_frm();'))?> 
+                                         <?php echo $this->Form->create('AddVideo', array('class' => '','enctype'=>'multipart/form-data','onSubmit'=>'return chk_vid();'))?>  
                                             <div class="modal-body">                       
                                                 <div class="row">&nbsp;</div>
                                                 <div class="row"> 
@@ -916,7 +1189,7 @@ border-radius:30%;
                                                     <div class="col-md-12 col-lg-12  " >                                
                                                        <center>
                                                             <span class="btn btn-default btn-file upload-btn-file">
-                                                                Browse Your image to upload <input type="file" name="imagefiles[]" multiple id="photos" class="txtbox " accept="image/*"> 
+                                                                Browse Your image to upload <input type="file" name="imagefiles[]" multiple id="photos" class="txtbox" accept="image/*"> 
                                                             </span>
                                                         </center>
                                                         <span style="color:red; text-align:;" id="msg1"></span>            
@@ -926,9 +1199,9 @@ border-radius:30%;
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="#" class="btn btn-default dismiss-btn" data-dismiss="modal">Close</a>
-                                                <input type="submit"  class="btn btn-primary save-image " name="save_img"  value="Submit" >                        
+                                                <input type="submit"  class="btn btn-primary save-image " name="save_img" id='upload_image'  value="Submit" >                        
                                             </div>
-                                        <?php echo $this->Form->end(); ?>   
+                                         
                                     </div>
                                 </div>
                             </div>
@@ -1161,7 +1434,7 @@ border-radius:30%;
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 padd_l_r"><img src="<?php echo HTTP_ROOT;?>/img/8.jpg" class="star all-star-img"></div>
-                                                    <a href="<?php echo HTTP_ROOT;?>/Vendor_classes/classes/<?php echo base64_encode($result['VendorClasse']['id']); ?>">   
+                                                    <a href="<?php echo HTTP_ROOT;?>/Homes/bookClass/<?php echo base64_encode($result['VendorClasse']['id']); ?>">   
                                                       <div class="col-xs-12 col-sm-12" style="text-align: right;padding-right:0px;"><button class="booking">Booking Status</button></div></a> 
                                                   </div>
                                               </div>        
@@ -1262,8 +1535,8 @@ border-radius:30%;
                                                                 <div class="col-md-10 col-sm-10 col-xs-10 sr_class_acc_text02 upclass-location"><?php echo $result['VendorClasse']['time_of_day'];?></div>
                                                               </div>
                                                             </div>
-                                                            <?php }?>
-                                                          </div>
+                                                       <?php }?>
+                                                       </div>
                                                         </div>
                                                       </div>
                                                       <div class="col-xs-12 col-sm-12 col-md-12 sr_2605_06_textLorem sr_serch_div_l_hite sr_class_acc_div padd_l_r">
@@ -1277,7 +1550,7 @@ border-radius:30%;
                                                           </div>
                                                       </div>
                                                       <div class="col-xs-12 col-sm-12 padd_l_r"><img src="<?php echo HTTP_ROOT;?>/img/8.jpg" class="star all-star-img"></div>
-                                                      <div class="col-xs-12 col-sm-12" style="text-align: right;padding-right:0px;"><button class="booking">Edit/Repost</button></div> 
+                                                      <div class="col-xs-12 col-sm-12" style="text-align: right;padding-right:0px;"><button class="booking" onclick="mypopup();">Edit/Repost</button></div> 
                                                     </div>
                                                 </div>        
                                               <!-- ********text************ -->
@@ -1552,7 +1825,7 @@ border-radius:30%;
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 padd_l_r"><img src="<?php echo HTTP_ROOT;?>/img/8.jpg" class="star all-star-img"></div>
-                                                   <!--  <a href="<?php echo HTTP_ROOT;?>/Vendor_classes/classes/<?php echo base64_encode($result['VendorClasse']['id']); ?>">   
+                                                   <!--  <a href="<?php echo HTTP_ROOT;?>/Homes/bookClass/<?php echo base64_encode($result['VendorClasse']['id']); ?>">   
                                                       <div class="col-xs-12 col-sm-12" style="text-align: right;padding-right:0px;"><button class="booking">Booking Status</button></div></a>  -->
                                                   </div>
                                               </div>        
@@ -1692,7 +1965,7 @@ border-radius:30%;
                                           </span>
                                         </center>  
                                       </div>  
-                                <?php } ?>
+                                <?php } ?>                                    
                                 </div><!-- tab 1 / -->
                               </div>
                             </div>
@@ -1703,6 +1976,17 @@ border-radius:30%;
             <!-- *************hide2*************** -->            
   </div>  
   <!-- ***************navbar******************** -->
+  <link  rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script>
+$(function(){
+$("#datepicker").datepicker({
+
+dateFormat: 'dd/mm/yy',
+
+});
+});
+</script>
  <script>
 function ClickUpload() {
 $("#FileUpload").trigger('click');
@@ -1715,11 +1999,11 @@ $(document).ready(function(){
 
   $('.upcoming_class').click(function(){
     var id=$(this).attr('id');
-    window.location.href="<?php echo HTTP_ROOT;?>/Vendor_classes/classes/"+btoa(id);
+    window.location.href="<?php echo HTTP_ROOT;?>/Homes/classDetail/"+btoa(id);
   });
   $('.past_class').click(function(){
     var id=$(this).attr('id');
-    window.location.href="<?php echo HTTP_ROOT;?>/Vendor_classes/classes/"+btoa(id);
+    window.location.href="<?php echo HTTP_ROOT;?>/Homes/classDetail/"+btoa(id);
   });
   // $('.upcoming-class-title').click(function(){
   //   var id = $(this'.upcoming_class').attr('id');
@@ -1787,8 +2071,58 @@ $('.funmp1').css('background-image', 'url(' + imageUrl + ')');
 </script>
 
 <script type="text/javascript">
-  $(document).ready(function(){
 
+  $(document).ready(function(){
+    $("#editrpost").click(function() {
+  //alert('hi');
+  var  e_class_id    = $("#e_class_id").val();
+  var  e_start_date  = $("#e_start_date").val();
+  var  e_end_date    = $("#e_end_date").val();
+  
+ if(e_start_date==''){
+    $('#error_get').html('Please Choose Start Date');
+    return false;
+  }
+  else if(e_end_date==''){
+    $('#error_get').html('Please Choose End Date');
+    return false;
+  }
+  else{
+  var query = $('#registration_form22').serialize();
+        var url = '<?php echo HTTP_ROOT; ?>/Homes/Repost';
+              $.post(url, query, function (response) {
+              //alert (response);
+               if(response==1){
+                alert('Update successfully');
+                  $("#quote_btn_click").modal('hide');
+            }
+          });
+    }
+  });
+    $('#notification').on('click',function(){
+   alert('Notification Functionality Comming Soon');
+});
+     var type='<?php echo $user_view['UserMaster']['vendor_type_id'];?>';
+     if(type==1){
+      $('#vendor_indivisual_dob').hide();
+       $('#vendor_org').show();
+     }
+     if(type==2){
+        $('#vendor_indivisual_dob').show();
+        $('#vendor_org').hide();
+     }
+     $('#vendor_Type').on('change',function(){
+       var type=$(this).val();
+       if(type==1){
+        $('#vendor_indivisual_dob').hide();
+       $('#vendor_org').show();
+       }
+       else{
+       $('#vendor_indivisual_dob').show();
+       $('#vendor_org').hide();
+       }
+
+       });
       var page_sct_name = "<?php echo $page_section_name; ?>";
         
         if(page_sct_name == "video"){
@@ -1940,6 +2274,9 @@ $('.funmp1').css('background-image', 'url(' + imageUrl + ')');
       // $('.lernr-class').hide();
       //$('#photo1').hide();
     });
+    $('#upload_image').click(function(){
+     
+    });
     $('#upload-btn').click(function(){
       $('#myModal').modal();
     });
@@ -1947,123 +2284,23 @@ $('.funmp1').css('background-image', 'url(' + imageUrl + ')');
       $('#myModal1').modal();
     });
     jQuery("#photos").on('change ',function(){
-
-       $.ajax({
-            dataType: "html",
-            type: "POST",
-            evalScripts: true,
-            url: '<?php echo Router::url(array('controller'=>'vendor_classes','action'=>'getimagecount'));?>',
-            data: ({type:'original'}),
-            success: function (data, textStatus){
-
-             var imagecount = parseInt(data);
-              if(imagecount < 10){
-               $('#msg1').html("");
-              
-              return true; 
-             
-              }else{
-
-                $('#msg1').html("Reached max Image count Please choose  or delete Image from gallery and upload New");
-               $(this).val('');
-              return false; 
-             
-              }
-
-
-
-
-
-
-
-              
-
-            }
-        });
-
-
       var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
-      var filesize = "";
-       filesize = this.files[0].size;
-
       if(jQuery.inArray(jQuery(this).val().split('.').pop().toLowerCase(), fileExtension) == -1){
-        jQuery("#msg1").html("Invalid image please upload only jpg,jpeg,png.");
-        $(this).val('');
+        jQuery("#msg1").html("Invalid image please upload only bmp,jpg,jpeg,gif,png.");
         return false;
       }else{
-          
-
-        if(100000 < filesize && 200000 > filesize){
-
-               $('#msg1').html('');  
-               return true;
-             }else{
-
-              $('#msg1').html("File size should be 100kb to 200kb.");
-              
-              $(this).val('');
-              return false;
-             }
-
-
-
+        jQuery("#msg1").html("");
         return true;
       }
     });
     jQuery("#videos").on('change ',function(){
-
-      $.ajax({
-            type: "POST",
-            url: '<?php echo Router::url(array('controller'=>'vendor_classes','action'=>'getvideocount'))?>',
-            success: function (response){
-              var videocount = parseInt(response);
-              
-              if(videocount < 5){
-               $('#msg2').html("");
-              return true;
-              
-              }else{
-
-                $('#msg2').html("Reached max Video count Please choose  or delete Video from gallery and upload New.");
-              $(this).val('');
-              return false;
-               
-              }
-
-            
-            }
-        });
-
-
-
-
-
-
-
-
-      var fileExtension = ['avi','mp4','mpeg4'];
-
-       var filesize = "";
-       filesize = this.files[0].size;
-       
-
+      var fileExtension = ['3gp','mp4'];
       if(jQuery.inArray(jQuery(this).val().split('.').pop().toLowerCase(), fileExtension) == -1){
-        jQuery("#msg2").html("Invalid video format please upload only avi,mp4,mpeg4");
-         $(this).val('');
+        jQuery("#msg2").html("Invalid video format please upload only 3gp,mp4.");
         return false;
       }else{
-        
-
-        if(10485760 > filesize){
-        $('#msg2').html("");
-       }else{
-
-      $('#msg2').html("File size should be less than 10 Mb.");
-       $(this).val('');
-       return false;
-
-        }
-
+        jQuery("#msg2").html("");
+        return true;
       }
     });
   });
@@ -2150,7 +2387,7 @@ var last_valid_selection = null;
       });
     });
     $(document).ready(function() {
-    
+      
       $('.menu-icon').click(function() {
         $('#navbar').toggleClass('left');
       });
@@ -2193,11 +2430,570 @@ var last_valid_selection = null;
                     })
         </script>
          <!-- JQuery search box -->
+         <!-- Start Edit and Repost Model Box -->
+
+                      <div class="modal fade" id="quote_btn_click">
+                        <div class="modal-dialog">
+                          <div class="modal-content col-xs-12 col-sm-12 padd_l_r">
+                            <div class="modal-header col-xs-12 col-sm-12" style="background-color:#2bcdc1;">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title cat_mod_title" >Edit/Repost</h4>
+                            </div>
+
+                            <div class="modal-body col-xs-12 col-sm-12 padd_l_r">
+                              <div id="error_get" class="error-gift"></div>
+                              
+                              <div class="col-xs-12 col-sm-12 col-md-12">
+                              <form id="registration_form22">
+                              <input type="hidden" name="class_id" id="class_id" value="<?php echo $c_id; ?>">
+                              <input type="hidden" name="catalog_id" id="catalog_id" value="<?php echo $cl_id; ?>">
+                              <center><div id="error_get" class="error-gift"></div></center> 
+                              <div class="col-xs-12 col-sm-12 col-md-12 popup_m_top_22">
+                                <input type="hidden" name="e_class_id" id="e_class_id" value="<?php echo $result['VendorClasse']['id']; ?>">
+                                              <div class="col-xs-5 col-sm-5 col-md-5 padd_l_r">
+                                                <input type="text" name="e_start_date" placeholder="Start Date" id="e_start_date" class="form-control"></div>
+                                                <div class="col-xs-2 col-sm-2 col-md-2 padd_l_r">&nbsp;&nbsp;</div>
+
+                                                <div class="col-xs-5 col-sm-5 col-md-5 padd_l_r">
+                                                <input type="text" name="e_end_date" placeholder="End Date" id="e_end_date" class="form-control"></div>
+                                              <div class="col-xs-12 col-sm-12 col-md-12 padd_l_r " id="err_22_3">&nbsp;</div>
+                                </div>
+                                          <div class="">&nbsp;</div>
+                                  <div class="col-xs-12 col-sm-12 popup_m_top_22">
+                                            <center><button id="editrpost" class="btn btn-primary" type="button" style="background-color:#2bcdc1;">Update</button></center>
+                                  </div>
+                                 </form>
+                                <div class="">&nbsp;</div>
+                              </div>
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div> 
+<!-- End Model Box -->
+
+         <link  rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script>
+$(function(){
+$("#datepicker").datepicker({
+
+dateFormat: 'dd/mm/yy',
+
+});
+});
+</script>
+ <script>
+
+function ClickUpload() {
+$("#FileUpload").trigger('click');
+}
+function ClickUpload1() {
+$("#FileUpload1").trigger('click');
+}
+$(document).ready(function(){
+   $('#success_msg').delay(3000).fadeOut();
+
+  $('.upcoming_class').click(function(){
+    var id=$(this).attr('id');
+    window.location.href="<?php echo HTTP_ROOT;?>/Homes/classDetail/"+btoa(id);
+  });
+  $('.past_class').click(function(){
+    var id=$(this).attr('id');
+    window.location.href="<?php echo HTTP_ROOT;?>/Homes/classDetail/"+btoa(id);
+  });
+  // $('.upcoming-class-title').click(function(){
+  //   var id = $(this'.upcoming_class').attr('id');
+  //   //alert(id);
+  //   window.location.href = "<?php echo HTTP_ROOT;?>/Homes/classDetail/"+btoa(id);
+  // });
+
+    $('.uploadbox').change(function() {
+           user_id=$('.customer').val();
+           $('.loader').show();
+           var front=1;
+          //alert(user_id);
+          //e.preventDefault();
+          var formData = $(this).serializeArray();
+          var WEBURL ="<?php echo Router::url( '/', true )?>Homes/imageUpload/"+btoa(user_id)+"/"+front;
+          //alert(formData);
+          $.ajax({ 
+            type: 'POST',
+            url: WEBURL,
+            data: new FormData($('#pro_pic')[0]),
+            processData: false,
+            contentType: false,  
+            success: function(res){ 
+            var e=jQuery.parseJSON(res);
+            $('.loader').hide();
+            console.log(e);
+            $('.rth321').attr('src',"<?php echo HTTP_ROOT;?>/"+e.res_img);           
+            $('.rth654').attr('src',"<?php echo HTTP_ROOT;?>/"+e.res_img);           
+            $('.georgeimg').attr('src',"<?php echo HTTP_ROOT;?>/"+e.res_img);           
+             
+            },
+          });
+    });
+});
+$(document).ready(function(){
+
+$('.uploadbox1').change(function() {
+ user_id=$('.customer').val();
+ $('.loader').show();
+ var front1=2;
+//alert(user_id);
+//e.preventDefault();
+var formData = $(this).serializeArray();
+var WEBURL ="<?php echo Router::url( '/', true )?>Homes/imageUpload/"+btoa(user_id)+"/"+front1;
+//alert(formData);
+$.ajax({ 
+type: 'POST',
+url: WEBURL,
+data: new FormData($('#pro_pic1')[0]),
+processData: false,
+contentType: false,  
+success: function(res){ 
+var e=jQuery.parseJSON(res);
+$('.loader').hide();
+console.log(e);
+imageUrl='<?php echo HTTP_ROOT;?>/'+e.res_img;
+//alert(imageUrl);
+$('.funmp1').css('background-image', 'url(' + imageUrl + ')');           
+
+ 
+},
+});
+});
+});
+</script>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+
+    $("#editrpost").click(function() {
+  //alert('hi');
+  var  e_class_id    = $("#e_class_id").val();
+  var  e_start_date  = $("#e_start_date").val();
+  var  e_end_date    = $("#e_end_date").val();
+  
+ if(e_start_date==''){
+    $('#error_get').html('Please Choose Start Date');
+    return false;
+  }
+  else if(e_end_date==''){
+    $('#error_get').html('Please Choose End Date');
+    return false;
+  }
+  else{
+  var query = $('#registration_form22').serialize();
+        var url = '<?php echo HTTP_ROOT; ?>/Homes/Repost';
+              $.post(url, query, function (response) {
+              //alert (response);
+               if(response==1){
+                alert('Update successfully');
+                  $("#quote_btn_click").modal('hide');
+            }
+          });
+    }
+  });
+    $('#notification').on('click',function(){
+   alert('Notification Functionality Comming Soon');
+});
+     var type='<?php echo $user_view['UserMaster']['vendor_type_id'];?>';
+     if(type==1){
+      $('#vendor_indivisual_dob').hide();
+       $('#vendor_org').show();
+     }
+     if(type==2){
+        $('#vendor_indivisual_dob').show();
+        $('#vendor_org').hide();
+     }
+     $('#vendor_Type').on('change',function(){
+       var type=$(this).val();
+       if(type==1){
+        $('#vendor_indivisual_dob').hide();
+       $('#vendor_org').show();
+       }
+       else{
+       $('#vendor_indivisual_dob').show();
+       $('#vendor_org').hide();
+       }
+
+       });
+      var page_sct_name = "<?php echo $page_section_name; ?>";
+        
+        if(page_sct_name == "video"){
+
+              setTimeout(function(){ 
+              $("#video").trigger('click'); 
+          
+            }, 1);
+       
+        }
+
+        if(page_sct_name == 'pastclass'){
+
+            setTimeout(function(){ 
+              $("#sr_class").trigger('click'); 
+              $('.post-class').trigger('click');
+              
+            }, 1);
+        }
+
+        if(page_sct_name == 'Wishlist'){
+
+            setTimeout(function(){             
+               $('#buyer1').trigger('click');
+               $('.wish-seg').trigger('click'); 
+            }, 1);
+        }
+
+        if(page_sct_name == 'Booking'){
+
+            setTimeout(function(){             
+               $('#buyer1').trigger('click');
+               $('.my-clas-seg').trigger('click'); 
+            }, 1);
+        }
+
+        if(page_sct_name == 'lerner'){ 
+
+            setTimeout(function(){             
+               
+               $('#buyer1').trigger('click');
+               $('#profile1').trigger('click');
+                
+            }, 1);
+        }
+
+         if(page_sct_name == 'my_class'){ 
+
+           setTimeout(function(){ 
+              $("#sr_class").trigger('click'); 
+               
+            },1);
+        }
+
+ });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.upcomming-class').click(function(){
+      $('.upcomming-divv').show();
+      $('.past-tab').hide();
+      $('.upcomming-class').css('background-color','#00CDC6');
+      $('.upcomming-class').css('color','#fff');
+      $('.post-class').css('background','#fff');
+      $('.post-class').css('color','#00CDC6');
+    });
+    $('.post-class').click(function(){
+      $('.upcomming-divv').hide();
+      $('.past-tab').show();
+      $('.post-class').css('background','#00CDC6');
+      $('.post-class').css('color','#fff');
+      $('.upcomming-class').css('background-color','#fff');
+      $('.upcomming-class').css('color','#00CDC6');
+    });
+    $('#vndr1').click(function(){
+      $('.my-clas-seg').hide();
+      $('.wish-seg').hide();
+      $('.photo-seg').show();
+      $('.video-seg').show();
+      // $('.profile-segg').css('background-color','#00CDC6');
+      // $('.profile-segg').css('color','#fff');
+      // $('.photo-seg').css('background-color','#fff');
+      // $('.photo-seg').css('color','#00CDC6');
+      // $('.video-seg').css('background-color','#fff');
+      // $('.video-seg').css('color','#00CDC6');
+    })
+    $('#buyer1').click(function(){
+      $('.my-clas-seg').show();
+      $('.wish-seg').show();
+      $('.photo-seg').hide();
+      $('.video-seg').hide();
+      // $('.profile-segg').css('background-color','#00CDC6');
+      // $('.profile-segg').css('color','#fff');
+      // $('.my-clas-seg').css('background-color','#fff');
+      // $('.my-clas-seg').css('color','#00CDC6');
+      // $('.wish-seg').css('background-color','#fff');
+      // $('.wish-seg').css('color','#00CDC6');
+    });
+    $('.past-tad-class').click(function(){
+      $('.btn-box-div').css('margin-bottom','-5.5px');
+    });
+    $('.upclass-tab').click(function(){
+      $('.btn-box-div').css('margin-bottom','0px');
+    });
+    $('.past-to-class').click(function(){
+       $('.book-box-btn').css('margin-bottom','-16px');
+    });
+    $('.book-class').click(function(){
+      $('.book-box-btn').css('margin-bottom','0px');
+    });
+   
+    $('.profile-segg').click(function(){
+      $('.profile-segg').css('background-color','#00CDC6');
+      $('.profile-segg').css('color','#fff');
+      $('.my-clas-seg').css('background-color','#fff');
+      $('.my-clas-seg').css('color','#00CDC6');
+      $('.wish-seg').css('background-color','#fff');
+      $('.wish-seg').css('color','#00CDC6');
+      $('.past-tab').hide();
+      $('.sr_class1').hide();
+      $('#my-classs').fadeOut();
+    });
+    $('.my-clas-seg').click(function(){
+      $('.profile-segg').css('background-color','#fff');
+      $('.profile-segg').css('color','#00CDC6');
+      $('.my-clas-seg').css('background-color','#00CDC6');
+      $('.my-clas-seg').css('color','#fff');
+      $('.wish-seg').css('background-color','#fff');
+      $('.wish-seg').css('color','#00CDC6');
+      $('#profile1').hide();
+      $('#my-classs').show();
+      $('#wishlistt').hide();
+    });
+    $('.wish-seg').click(function(){
+
+
+      $('.profile-segg').css('background-color','#fff');
+      $('.profile-segg').css('color','#00CDC6');
+      $('.my-clas-seg').css('background-color','#fff');
+      $('.my-clas-seg').css('color','#00CDC6');
+      $('.wish-seg').css('background-color','#00CDC6');
+      $('.wish-seg').css('color','#fff');
+      $('#wishlistt').show();
+      $('#my-classs').fadeOut();
+      $('#profile1').hide();
+      // $('#my-classs').show();
+      // $('.photos').hide();
+      // $('.lernr-class').hide();
+      //$('#photo1').hide();
+    });
+    $('#upload_image').click(function(){
+     
+    });
+    $('#upload-btn').click(function(){
+      $('#myModal').modal();
+    });
+    $('#upload-btn1').click(function(){
+      $('#myModal1').modal();
+    });
+    jQuery("#photos").on('change ',function(){
+      var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+      if(jQuery.inArray(jQuery(this).val().split('.').pop().toLowerCase(), fileExtension) == -1){
+        jQuery("#msg1").html("Invalid image please upload only bmp,jpg,jpeg,gif,png.");
+        return false;
+      }else{
+        jQuery("#msg1").html("");
+        return true;
+      }
+    });
+    jQuery("#videos").on('change ',function(){
+      var fileExtension = ['3gp','mp4'];
+      if(jQuery.inArray(jQuery(this).val().split('.').pop().toLowerCase(), fileExtension) == -1){
+        jQuery("#msg2").html("Invalid video format please upload only 3gp,mp4.");
+        return false;
+      }else{
+        jQuery("#msg2").html("");
+        return true;
+      }
+    });
+  });
+</script> 
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+$('#buyer1').click(function(){
+
+$('#vendor_data').hide();
+$('#lerner_data').show();
+
+
+});
+$('#vndr1').click(function(){
+  
+ $('#vendor_data').show();
+ $('#lerner_data').hide();
+
+});
+$('#interest').multiselect({
+      nonSelectedText: 'Select Interest Areas',
+      
+    });
+
+ //});
+/*$("#locality_id").multiselect({
+    multiple: false,
+    header: true,
+    selectedList: 1,
+    open: function () {  
+        $("#locality_id").multiselect("close");
+    }
+}); */
+}); 
+</script>
+<script type="text/javascript">
+var last_valid_selection = null;
+      $('#interest').change(function(event) {
+        if ($(this).val().length > 2) {
+            $("input[type=checkbox]:not(:checked)").attr("disabled", "disabled")
+          alert('you can choose atmost 3');
+          $(this).val(last_valid_selection);
+        } else {
+
+            $("input[type=checkbox]:not(:checked)").attr("disabled", false)
+          last_valid_selection = $(this).val();
+        }
+      });
+</script>
+          
+      
+ <script type="text/javascript">
+ function city(){
+        var valdataget = document.getElementById('city_id');
+        var message = document.getElementById('f6');
+        if(valdataget.value==''){
+          message.innerHTML = "Please select city";
+        }else{
+           message.innerHTML = "&nbsp;";
+          }
+   }
+
+    $(window).load(function() {
+      $("#grid-contant-slider1").flexisel();
+      $("#grid-contant-slider2").flexisel();
+      $("#grid-contant-slider3").flexisel({
+        visibleItems: 4,
+        enableResponsiveBreakpoints: true,
+        responsiveBreakpoints: { 
+            portrait: { 
+                changePoint:480,
+                visibleItems: 1
+            }, 
+            landscape: { 
+                changePoint:640,
+                visibleItems: 3
+            },
+            tablet: { 
+                changePoint:768,
+                visibleItems: 2
+            }
+        }
+      });
+    });
+    $(document).ready(function() {
+      
+      $('.menu-icon').click(function() {
+        $('#navbar').toggleClass('left');
+      });
+      $('.menu-close').click(function() {
+        $('#navbar').removeClass('left');
+      });
+    });
+
+    </script>
+    
+    <script>
+    jQuery(function($) {
+       $('.chosen-select').chosen();
+       $('.chosen-select-deselect').chosen({ allow_single_deselect: true });
+     })(jQuery);
+   </script>
+<!--End 1st slide script-->
+
+        <script src="main.js"></script>
+        <script>
+                    $(document).ready(function() {
+                      var owl = $('.owl-carousel');
+                      owl.owlCarousel({
+                        rtl: true,
+                        margin: 10,
+                        nav: true,
+                        loop: true,
+                        responsive: {
+                          0: {
+                            items: 1
+                          },
+                          600: {
+                            items: 3
+                          },
+                          1000: {
+                            items: 5
+                          }
+                        }
+                      })
+                    })
+        </script>
+         <!-- JQuery search box -->
+         <!-- Start Edit and Repost Model Box -->
+
+                      <div class="modal fade" id="quote_btn_click">
+                        <div class="modal-dialog">
+                          <div class="modal-content col-xs-12 col-sm-12 padd_l_r">
+                            <div class="modal-header col-xs-12 col-sm-12" style="background-color:#2bcdc1;">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title cat_mod_title" >Edit/Repost</h4>
+                            </div>
+
+                            <div class="modal-body col-xs-12 col-sm-12 padd_l_r">
+                              <div id="error_get" class="error-gift"></div>
+                              
+                              <div class="col-xs-12 col-sm-12 col-md-12">
+                              <form id="registration_form22">
+                              <input type="hidden" name="class_id" id="class_id" value="<?php echo $c_id; ?>">
+                              <input type="hidden" name="catalog_id" id="catalog_id" value="<?php echo $cl_id; ?>">
+                              <center><div id="error_get" class="error-gift"></div></center> 
+                              <div class="col-xs-12 col-sm-12 col-md-12 popup_m_top_22">
+                                <input type="hidden" name="e_class_id" id="e_class_id" value="<?php echo $result['VendorClasse']['id']; ?>">
+                                              <div class="col-xs-5 col-sm-5 col-md-5 padd_l_r">
+                                                <input type="text" name="e_start_date" placeholder="Start Date" id="e_start_date" class="form-control"></div>
+                                                <div class="col-xs-2 col-sm-2 col-md-2 padd_l_r">&nbsp;&nbsp;</div>
+
+                                                <div class="col-xs-5 col-sm-5 col-md-5 padd_l_r">
+                                                <input type="text" name="e_end_date" placeholder="End Date" id="e_end_date" class="form-control"></div>
+                                              <div class="col-xs-12 col-sm-12 col-md-12 padd_l_r " id="err_22_3">&nbsp;</div>
+                                </div>
+                                          <div class="">&nbsp;</div>
+                                  <div class="col-xs-12 col-sm-12 popup_m_top_22">
+                                            <center><button id="editrpost" class="btn btn-primary" type="button" style="background-color:#2bcdc1;">Update</button></center>
+                                  </div>
+                                 </form>
+                                <div class="">&nbsp;</div>
+                              </div>
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div> 
+<!-- End Model Box -->
+
+         <script type="text/javascript">
+function mypopup(){ 
+
+$("#quote_btn_click").modal('show');
+
+}
+
+</script>
+
+<script type="text/javascript">
+$("#e_start_date").datepicker({yearRange:'1900:2030',minDate:0,changeYear: true, changeMonth: true });
+</script>
+<script type="text/javascript">
+$("#e_end_date").datepicker({yearRange:'1900:2030',minDate:0,changeYear: true, changeMonth: true });
+</script>
       <script type="text/javascript">
         $(document).ready(function() {
+
             $("#profile1").show();
+
             
         });
+
 
         /* sitaram 30.05.2016*/
               /* section 2nd photo & video code */
@@ -2396,19 +3192,11 @@ var last_valid_selection = null;
           // ***********2nd*************
           // **********div hide***********//
       </script>       
-      <script>
-    function initialize() {
-  var mapProp = {
-    center:new google.maps.LatLng(51.508742,-0.120850),
-    zoom:5,
-    mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-  var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
-}
-google.maps.event.addDomListener(window, 'load', initialize);
-</script>
+    
 <script>
-
+  $('.booking_repost').click(function(){
+   var id=$(this).attr('id');
+     });
   $("#file-upload_4_2").on('change',function(){
         var a = $(this).val();
       
@@ -2423,15 +3211,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <script type="text/javascript">
     function chk_frm(){
         var img = $('#photos').val(); 
-
+        // var filExtension = ['mp4','wmv','avi'];  
+        // alert(filExtension);    
         if(img == ""){
             $('#msg1').html('Please browse the image.');  
             return false;
         }else{
             return true;
-
         }
-
     }
 
     function chk_vid(){
@@ -2443,6 +3230,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
             return true;
         }
     }
-  
+ 
 </script>
 
