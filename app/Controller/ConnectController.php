@@ -26,22 +26,22 @@ class ConnectController extends AppController {
       $user=$this->Session->read('User');
       $user_id = $user['UserMaster']['id'];
       $this->set('user_view',$user);
-      if(empty($user_id)){
+    
+    if(empty($user_id)){
+
         $category_data = $this->Category->find('all',array('conditions'=>array(
                                                        'Category.status'=>1)));
         
         $segment_data = $this->ClassSegment->find('all',array('conditions'=>array(
                                                        'ClassSegment.status'=>1)));
+        
         $this->set('segment_data',$segment_data);
-
         $seg_ids_array  = array();
-         /*start loop*/
         foreach ($segment_data as $sgt_ids) {
           $seg_ids_array[]  = $sgt_ids['ClassSegment']['id'];   
         }
-      $this->set('seg_ids_array',$seg_ids_array[0]);
+        $this->set('seg_ids_array',$seg_ids_array[0]);
         // Blog Data 
-
         $blog_data = $this->Blog->find('all',array(
                       'fields' => 'Blog.*,userdata.*',
                       'conditions' => array(  
@@ -59,41 +59,32 @@ class ConnectController extends AppController {
 
                   ),
         ));
-
         $this->set('blog_data',$blog_data); 
 
-
-
-      // Blog comment data 
-
-      $like_array = array();
-      foreach ($blog_data as $datas){
-        $dataArray = $this->BlogComment->find('count',array('conditions'=>array(
-                                                            'BlogComment.blog_id'=>$datas['Blog']['id'],
-                                                            'BlogComment.status'=>1)));
-        $like_array[$datas['Blog']['id']] = $dataArray;
-      }
-
-      // Blog like data 
+        // Blog comment data 
+        $like_array = array();
+        foreach ($blog_data as $datas){
+          $dataArray = $this->BlogComment->find('count',array('conditions'=>array(
+                                                              'BlogComment.blog_id'=>$datas['Blog']['id'],
+                                                              'BlogComment.status'=>1)));
+          $like_array[$datas['Blog']['id']] = $dataArray;
+        }
+        // Blog like data 
       
-      $comment_array = array();  
-    
-      foreach ($blog_data as  $cmmtdata) {
-        $dataArray1 = $this->BlogLike->find('count',array('conditions'=>array(
-                                                            'BlogLike.blog_id'=>$cmmtdata['Blog']['id'],
-                                                            'BlogLike.status'=>1)));
-
-        $dataArray2 = $this->BlogLike->find('first',array('conditions'=>array(
-                                                            'BlogLike.blog_id'=>$cmmtdata['Blog']['id'],
-                                                            'BlogLike.status'=>1,
-                                                            'BlogLike.user_id'=>$user_id),
-                                                            'fields'=>array('BlogLike.status'))); 
-                                                                                                                  
-        $comment_array[$cmmtdata['Blog']['id']]['value'] = $dataArray1;
-        $comment_array[$cmmtdata['Blog']['id']]['status'] = $dataArray2;
-      } 
-
-      // Blog report data 
+        $comment_array = array();  
+        foreach ($blog_data as  $cmmtdata) {
+          $dataArray1 = $this->BlogLike->find('count',array('conditions'=>array(
+                                                              'BlogLike.blog_id'=>$cmmtdata['Blog']['id'],
+                                                              'BlogLike.status'=>1)));
+          $dataArray2 = $this->BlogLike->find('first',array('conditions'=>array(
+                                                              'BlogLike.blog_id'=>$cmmtdata['Blog']['id'],
+                                                              'BlogLike.status'=>1,
+                                                              'BlogLike.user_id'=>$user_id),
+                                                              'fields'=>array('BlogLike.status')));                                                                                                           
+          $comment_array[$cmmtdata['Blog']['id']]['value'] = $dataArray1;
+          $comment_array[$cmmtdata['Blog']['id']]['status'] = $dataArray2;
+        } 
+        // Blog report data 
 
       $report_array = array(); 
 
@@ -164,7 +155,7 @@ class ConnectController extends AppController {
 
       // post report data 
 
-       $post_report_array = array(); 
+        $post_report_array = array(); 
 
         foreach ($post_data as  $reportdata){
             $dataArray1 = $this->PostReport->find('count',array('conditions'=>array(
@@ -179,7 +170,8 @@ class ConnectController extends AppController {
             $post_report_array[$reportdata['Post']['id']]['status'] =  $dataArray2;
         }
 
-  
+        $this->set('post_report_array',$post_report_array);
+        
       }else{
 
           $user_data     = $this->UserMaster->find('first',array('conditions'=>array(
@@ -251,8 +243,7 @@ class ConnectController extends AppController {
           foreach ($segment_data as $sgt_ids) {
             $seg_ids_array[]  = $sgt_ids['ClassSegment']['id'];   
           }
-
-
+          
 
           $this->set('seg_array1',$seg_ids_array);
           $this->set('seg_ids_array',$seg_ids_array[0]);
@@ -291,8 +282,8 @@ class ConnectController extends AppController {
                           ),
           ));
 
-      $this->set('blog_data',$blog_data); 
-      $this->set('post_data',$post_data); 
+          $this->set('blog_data',$blog_data); 
+          $this->set('post_data',$post_data); 
      
      // comment data 
 
@@ -3691,19 +3682,82 @@ public function msgRead(){
       }
   }
 
+  public function addBlogFindSegment1() {
+
+      $this->autoRender = false;
+
+      $cat_id         = $_POST['cat_id'];
+      $category_ids   = array();
+      $category_ids   = explode(",",$cat_id); 
+      $locality = $this->ClassSegment->find('all', array(
+                                            'conditions' => array(
+                                            'ClassSegment.category_id' =>$category_ids,
+                                            )));
+
+      if(!empty($locality)){
+
+          $stateString .= '';
+          $stateString .= '<select multiple="multiple" class="form-control" name="segment_id[]" id="segment_id_model">';
+                       
+            foreach ($locality as $state) {
+                $stateString .= '<option value="'.$state['ClassSegment']['id'].'">'.$state['ClassSegment']['segment_name'].'</option>';
+            }
+
+          $stateString .='</select>';
+          print_r($stateString);die;  
+        
+      }else{
+          
+          return 1;
+     
+      }
+  }
+
+  public function addBlogFindSegment2() {
+
+      $this->autoRender = false;
+
+      $cat_id         = $_POST['cat_id'];
+      $category_ids   = array();
+      $category_ids   = explode(",",$cat_id); 
+      $locality = $this->ClassSegment->find('all', array(
+                                            'conditions' => array(
+                                            'ClassSegment.category_id' =>$category_ids,
+                                            )));
+
+      if(!empty($locality)){
+
+          $stateString .= '';
+          $stateString .= '<select multiple="multiple" class="form-control moz_hide" name="segment_id[]" id="segment_id_model_post">';
+                       
+            foreach ($locality as $state) {
+                $stateString .= '<option value="'.$state['ClassSegment']['id'].'">'.$state['ClassSegment']['segment_name'].'</option>';
+            }
+
+          $stateString .='</select>';
+          print_r($stateString);die;  
+        
+      }else{
+          
+          return 1;
+     
+      }
+  }
+  
+
   public function submitBlog(){
 
       $this->autoRender = false;
+      $user=$this->Session->read('User');
+      $user_id = $user['UserMaster']['id'];
+
       $file_size  = $_FILES['FileUpload']['size'];
 
-      if(empty($file_size)){
+        if(empty($file_size)){
 
-          if(isset($_FILES['FileUpload'])){
+              $cus_id     = $user_id;
 
-              $cus_id     = $_POST['user_id'];
-
-              $user_data  = $this->UserMaster->find('first',array( 
-                                                    
+              $user_data  = $this->UserMaster->find('first',array(                                       
                                                     'conditions'=>array('UserMaster.id'=>$cus_id,
                                                     'UserMaster.status'=>1)));
                   
@@ -3736,16 +3790,18 @@ public function msgRead(){
                 }
 
                 return 1;
-            }else{
+          
+           }else{
+
                 return 2;
             }    
-          }
-
+         
       }else{
 
         if(isset($_FILES['FileUpload'])){
 
-            $cus_id     = $_POST['user_id'];
+            $cus_id     = $user_id;
+
             $user_data  = $this->UserMaster->find('first',array( 
                                     
                                                     'conditions'=>array('UserMaster.id'=>$cus_id,
@@ -3766,21 +3822,19 @@ public function msgRead(){
             $final_img = str_replace(".","",str_replace(" ","",date("YmdHis").microtime())).".".$fileExtenstion;
 
             $upload=WWW_ROOT."img/blog_image/".$final_img;
-                           
+            
             if(!empty($cus_id)){
 
-              move_uploaded_file($file_tmp ,$upload);    
-              
+                move_uploaded_file($file_tmp ,$upload);    
                 $seg_ids        = array();
                 $seg_id         = $_POST['segment_id'];  
-                $seg_ids        = explode(",",$seg_id);
-                $count          = count($seg_ids); 
-
+                $count          = count($seg_id); 
+               
                 for($i=0; $i<$count;$i++){
 
                     $blog_data_array                      = array();
                     $blog_data_array['user_id']           = $cus_id;
-                    $blog_data_array['segment_id']        = $seg_ids[$i];
+                    $blog_data_array['segment_id']        = $seg_id[$i];
                     $blog_data_array['blog_title']        = $_POST['blog_topic'];
                     $blog_data_array['blog_description']  = $_POST['blog_summary'];
                     $blog_data_array['blog_image']        = $final_img;
@@ -3789,9 +3843,10 @@ public function msgRead(){
                     $blog_data_array['status']            = 0;
                     $blog_data_array['add_date']          = time();
                     $blog_data_array['modify_date']       = time();
-                    
+                  
                     $this->Blog->create();  
                     $blogresult =   $this->Blog->save($blog_data_array);
+
                 }
             return 1;
           }else{
@@ -3799,7 +3854,7 @@ public function msgRead(){
           }    
         }
       }
-  }
+    }
 
   public function msgInboxVendor(){ 
       $this->checkUser();
@@ -5188,12 +5243,12 @@ public function msgRead(){
   public function submitPost(){
 
       $this->autoRender = false;
+      $user=$this->Session->read('User');
+      $user_id = $user['UserMaster']['id'];
       $file_size  = $_FILES['postFileUpload']['size'];
 
         if(empty($file_size)){
               
-              if(isset($_FILES['FileUpload'])){
-
                   $cus_id     = $_POST['user_id'];
                   $user_data  = $this->UserMaster->find('first',array( 
                                                    
@@ -5225,17 +5280,20 @@ public function msgRead(){
                       }  
                   
                       return 1;
+                  
                   }else{
+                
                       return 2;
-                  }    
-              }
-
+                
+                }    
+        
         }else{
 
             if(isset($_FILES['postFileUpload'])){
+
                   $cus_id     = $_POST['user_id'];
+
                   $user_data  = $this->UserMaster->find('first',array( 
-                                          
                                                     'conditions'=>array('UserMaster.id'=>$cus_id,
                                                     'UserMaster.status'=>1)));
 
@@ -7006,7 +7064,25 @@ public function msgRead(){
                   $post_commmt_array[$datas['Post']['id']] = $dataArray;
                 }
 
-                $this->set('post_commmt_array',$post_commmt_array); 
+                $this->set('post_commmt_array',$post_commmt_array);
+
+                // post report data 
+
+                $post_report_array = array(); 
+                foreach ($post_data as  $reportdata){
+                    $dataArray1 = $this->PostReport->find('count',array('conditions'=>array(
+                                                                        'PostReport.post_id'=>$reportdata['Post']['id'],
+                                                                        'PostReport.status'=>1)));
+                    $dataArray2 = $this->PostReport->find('first',array('conditions'=>array(
+                                                                        'PostReport.post_id'=>$reportdata['Post']['id'],
+                                                                        'PostReport.status'=>1,
+                                                                        'PostReport.user_id'=>$user_id),
+                                                                        'fields'=>array('PostReport.status'))); 
+                    $post_report_array[$reportdata['Post']['id']]['value']  =  $dataArray1;
+                    $post_report_array[$reportdata['Post']['id']]['status'] =  $dataArray2;
+                }
+
+                $this->set('post_report_array',$post_report_array);
 
           }else{
 
@@ -7066,16 +7142,30 @@ public function msgRead(){
               // post commnet data 
 
               $post_commmt_array = array();
-
               foreach ($post_data as $datas){
-
                 $dataArray = $this->PostComment->find('count',array('conditions'=>array(
                                                                     'PostComment.post_id'=>$datas['Post']['id'],
                                                                     'PostComment.status'=>1)));
                 $post_commmt_array[$datas['Post']['id']] = $dataArray;
               }
-
               $this->set('post_commmt_array',$post_commmt_array); 
+
+              // post report data 
+
+              $post_report_array = array(); 
+              foreach ($post_data as  $reportdata){
+                  $dataArray1 = $this->PostReport->find('count',array('conditions'=>array(
+                                                                      'PostReport.post_id'=>$reportdata['Post']['id'],
+                                                                      'PostReport.status'=>1)));
+                  $dataArray2 = $this->PostReport->find('first',array('conditions'=>array(
+                                                                      'PostReport.post_id'=>$reportdata['Post']['id'],
+                                                                      'PostReport.status'=>1,
+                                                                      'PostReport.user_id'=>$user_id),
+                                                                      'fields'=>array('PostReport.status'))); 
+                  $post_report_array[$reportdata['Post']['id']]['value']  =  $dataArray1;
+                  $post_report_array[$reportdata['Post']['id']]['status'] =  $dataArray2;
+              }
+              $this->set('post_report_array',$post_report_array);
 
       }
 
@@ -7198,7 +7288,25 @@ public function msgRead(){
           }
 
           $this->set('post_commmt_array',$post_commmt_array); 
-  
+          
+            // post report data 
+
+            $post_report_array = array(); 
+            foreach ($post_data as  $reportdata){
+                $dataArray1 = $this->PostReport->find('count',array('conditions'=>array(
+                                                                    'PostReport.post_id'=>$reportdata['Post']['id'],
+                                                                    'PostReport.status'=>1)));
+                $dataArray2 = $this->PostReport->find('first',array('conditions'=>array(
+                                                                    'PostReport.post_id'=>$reportdata['Post']['id'],
+                                                                    'PostReport.status'=>1,
+                                                                    'PostReport.user_id'=>$user_id),
+                                                                    'fields'=>array('PostReport.status'))); 
+                $post_report_array[$reportdata['Post']['id']]['value']  =  $dataArray1;
+                $post_report_array[$reportdata['Post']['id']]['status'] =  $dataArray2;
+            }
+            $this->set('post_report_array',$post_report_array); 
+
+
   }
 
 
@@ -7313,6 +7421,31 @@ public function msgRead(){
                                          $result_string.='  COMMENTS
                                     </span>
                                 </div>
+
+                                 <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 padd_l_r" id="report_post_check_'.$value['Post']['id'].'" onclick="report_post('.$value['Post']['id'].')" style="pointer-events:none;">';
+                                        
+                                        if($post_report_array[$value['Post']['id']]['status']['PostReport']['status'] == 1){ 
+
+                                          $result_string.=' <i style="color:#2bcdc1" class="fa fa-file-text coont_box2_icon121" aria-hidden="true"></i>';
+
+                                        }else{ 
+
+                                          $result_string.='<i class="fa fa-file-text coont_box2_icon121" aria-hidden="true"></i>';
+
+                                        } 
+
+                                      $result_string.='<span class="coont_box2_icon">';
+                                          if(isset($post_report_array[$value['Post']['id']]['value'])){
+                                            $result_string.=' ' .$post_report_array[$value['Post']['id']]['value']. ' ';
+                                          }else{
+                                             $result_string.=' 0 ';
+                                          }
+                                        $result_string.='  Report
+                                      </span>
+
+                                  </div>
+
+
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 connt_flex_middle_bdr" style="display:none;" id="postcomment'.$value['Post']['id'].'">
                      
                                 </div> 
@@ -7358,6 +7491,27 @@ public function msgRead(){
                                                    $result_string.='  COMMENTS
                                             </span>
                                         </div>
+
+                                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 padd_l_r" id="report_post_check_'.$value['Post']['id'].'" onclick="report_post('.$value['Post']['id'].')">';
+                                              if($post_report_array[$value['Post']['id']]['status']['PostReport']['status'] == 1){ 
+
+                                                $result_string.=' <i style="color:#2bcdc1" class="fa fa-file-text coont_box2_icon121" aria-hidden="true"></i>';
+
+                                              }else{ 
+
+                                                $result_string.='<i class="fa fa-file-text coont_box2_icon121" aria-hidden="true"></i>';
+
+                                              } 
+                                            $result_string.='<span class="coont_box2_icon">';
+                                                if(isset($post_report_array[$value['Post']['id']]['value'])){
+                                                  $result_string.=' ' .$post_report_array[$value['Post']['id']]['value']. ' ';
+                                                }else{
+                                                   $result_string.=' 0 ';
+                                                }
+                                              $result_string.='  Report
+                                            </span>
+                                        </div>
+
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 connt_flex_middle_bdr" style="display:none;" id="postcomment'.$value['Post']['id'].'">
                      
                                         </div>  
@@ -7399,6 +7553,27 @@ public function msgRead(){
                                          $result_string.='  COMMENTS
                                     </span>
                                 </div>
+
+                                <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 padd_l_r" id="report_post_check_'.$value['Post']['id'].'" onclick="report_post('.$value['Post']['id'].')" style="pointer-events:none;">';
+                                    if($post_report_array[$value['Post']['id']]['status']['PostReport']['status'] == 1){ 
+
+                                      $result_string.=' <i style="color:#2bcdc1" class="fa fa-file-text coont_box2_icon121" aria-hidden="true"></i>';
+
+                                    }else{ 
+
+                                      $result_string.='<i class="fa fa-file-text coont_box2_icon121" aria-hidden="true"></i>';
+
+                                    } 
+                                    $result_string.='<span class="coont_box2_icon">';
+                                        if(isset($post_report_array[$value['Post']['id']]['value'])){
+                                          $result_string.=' ' .$post_report_array[$value['Post']['id']]['value']. ' ';
+                                        }else{
+                                           $result_string.=' 0 ';
+                                        }
+                                      $result_string.='  Report
+                                    </span>
+                                </div>
+
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 connt_flex_middle_bdr" style="display:none;" id="postcomment'.$value['Post']['id'].'">
                      
                                 </div> 
@@ -7415,11 +7590,12 @@ public function msgRead(){
     }else{
      
       $result_string.='';
-      $result_string.='<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-                        <center>
-                           <span class="connt_flex_middle_text" style="text-align:center;">Post does not exist!</span>
-                        </center>
-                      </div>';
+      $result_string.='<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 blog_background_design">
+               <center>
+                <span class="connet_text_hed" style="color:#2bcdc1"> No Post Exits </span>
+               </center>
+            </div>
+            <div style="background-color:white;">&nbsp;</div> ';
       print_r($result_string);die;                  
     }                                                               
   
