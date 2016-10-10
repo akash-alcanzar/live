@@ -81,7 +81,7 @@ $(document).ready(function() {
                                 foreach($view_class as $res){ ?>
                                 <tr>
                                     <td><?php echo $i; $i++;?></td>
-                                    <td><?php echo !empty($res['VendorClasse']['class_topic'])?ucfirst($res['VendorClasse']['class_topic']):"N/A";?></td>
+                                    <td><a href='<?php echo HTTP_ROOT;?>/classes/<?php echo $res['VendorClasse']['class_topic'];?>'><?php echo $res['VendorClasse']['class_topic'];?></a></td>
                                     <td><?php echo !empty($res['VendorClasse']['class_by'])?$res['VendorClasse']['class_by']:"N/A";?></td>
                                      <td><?php echo !empty($res['VendorClasse']['starting_month'])?$res['VendorClasse']['starting_month']:"N/A";?> - <?php echo !empty($res['VendorClasse']['end_month'])?$res['VendorClasse']['end_month']:"N/A";?></td>
 
@@ -105,7 +105,7 @@ $(document).ready(function() {
                                      
                                     <td><?php if($res['VendorClasse']['status']==1){
                                       echo "Active";  
-                                      }else if($res['VendorClasse']['status']==0){
+                                      }else if($res['VendorClasse']['status']==2){
                                         echo "InActive";
                                     }else if($res['VendorClasse']['status']==3){
                                         echo "Unverified";
@@ -113,10 +113,10 @@ $(document).ready(function() {
                                     ?></td>
                                     <td><?php echo $this->Html->link('View',array('controller'=>'Admins','action'=>'viewClass/'.base64_encode($res['VendorClasse']['id'])))."&nbsp|";
                                      if($res['VendorClasse']['status']==1){
-                                    echo $this->Html->link('DeActivate',array('controller'=>'Admins','action'=>'ClassSatatus/'.base64_encode($res['VendorClasse']['id'])))."&nbsp";
+                                    echo $this->Html->link('DeActivate',array('controller'=>'Admins','action'=>'ClassStatus/'.base64_encode($res['VendorClasse']['id'])))."&nbsp";
                                     }
-                                    else if($res['VendorClasse']['status']==0){
-                                      echo $this->Html->link('Activate',array('controller'=>'Admins','action'=>'ClassSatatus/'.base64_encode($res['VendorClasse']['id'])))."&nbsp";
+                                    else if($res['VendorClasse']['status']==2){
+                                      echo $this->Html->link('Activate',array('controller'=>'Admins','action'=>'ClassStatus/'.base64_encode($res['VendorClasse']['id'])))."&nbsp";
                                       }
                                     ?>
                                     </td>
