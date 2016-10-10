@@ -99,12 +99,15 @@
           <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r br_srch_act">
             <div class="col-md-7 col-sm-7 col-xs-6"></div>
             <div class="col-md-5 col-sm-5 col-xs-6 padd_l_r inpt_adon">
+              <?php echo $this->Form->create('Request');?>
               <div class="input-group srch_adon_brd">
-                <input type="text" class="form-control br_inpt_radius" placeholder="Search for short classes &  activities">
+
+                <input type="text" class="form-control br_inpt_radius" name="data[Request][search]" placeholder="Search for short classes &  activities">
                 <span class="input-group-btn">
-                  <button class="btn btn-default br_inpt_radius srch_adon" type="button">Search</button>
+                  <button class="btn btn-default br_inpt_radius srch_adon" type="submit">Search</button>
                 </span>
               </div>
+              <?php echo $this->Form->end();?>
             </div>  
           </div>  
          </div>
@@ -118,24 +121,26 @@
                     Filter
                   </div>
                 </div>
-              </div>  
+              </div> 
+              <?php echo $this->Form->create('Request');?> 
               <div class="col-md-12 col-sm-12 col-xs-12 fldv1 list_filter">
-                <div class="form-group mrg_btm">
-                  <input class="form-control crt_br" id="usr reg_input" type="text" value="Start Date">
-                  <span class="carimg_br12"><img src="<?php echo HTTP_ROOT;?>/img/cal.png"></span>
+                 <div class="form-group mrg_btm">
+                  <?php echo $this->Form->input('city_id', array('type'=>'select','label' => false,'div'=>false, 'class' => 'form-control crt_br','placeholder'=>'City Name','options'=>$city_name,'id'=>'city_ide'));?>
+                  
+                  <span class="carimg_br12"><img src="<?php echo HTTP_ROOT;?>/img/caret.png"></span>
                 </div>
                 <div class="form-group mrg_btm">
-                  <select class="form-control crt_br" id="select">
-                    <option>Category</option>
-                    <!-- <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option> -->
+                  <select class="form-control crt_br" id="region" placeholder="Select Region" name="data[Request][region]">
+               
+                  <option value="East">East</option>
+                    <option value="West">West</option>
+                    <option value="North">North</option>
+                    <option value="South">South</option>
                   </select>
                   <span class="carimg_br12"><img src="<?php echo HTTP_ROOT;?>/img/caret.png"></span>
                 </div>
                 <div class="form-group mrg_btm">
-                  <select class="form-control crt_br" id="select">
+                  <select class="form-control crt_br" id="location" placeholder="Locality" name="data[Request][locality]">
                     <option>Location</option>
                     <!-- <option>2</option>
                     <option>3</option>
@@ -144,13 +149,19 @@
                   </select>
                   <span class="carimg_br12"><img src="<?php echo HTTP_ROOT;?>/img/caret.png"></span>
                 </div>
+                <div class="form-group mrg_btm">
+                   <?php echo $this->Form->input('class_type', array('type'=>'select','label' => false,'div'=>false, 'class' => 'form-control crt_br','placeholder'=>'Class Type','options'=>$class_type));?>
+               
+                  <span class="carimg_br12"><img src="<?php echo HTTP_ROOT;?>/img/caret.png"></span>
+                </div>
                 <div class="form-group">
                   <div class="sm-12 xs-12 butt_pos">
-                    <a href="#" class="btn btn-success buutt_cancel">Cancel</a>
-                    <a href="#" class="btn btn-success buutt_ok">Ok</a>
-                  </div>
+                    <input type="reset" value="Cancel" class="btn btn-success buutt_cancel">
+                    <input type="submit" value="OK" class="btn btn-success buutt_ok">
+                    </div>
                 </div>
               </div>
+              <?php echo $this->Form->end();?>
               <div class="col-md-12 col-sm-12 col-xs-12 fldv1 padd_l_r sort_by_br786"> 
                 <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r">
                   <div class="col-md-12 col-sm-12 col-xs-12 fltrdv">
@@ -159,57 +170,35 @@
                     </div>
                   </div>
                   <div class="col-md-12 col-sm-12 col-xs-12 padd-l_r list_filter">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                      <p class="price_br">Price</p>
-                    </div>
-                    <form role="form">
-                      <div class="row">
-                        <label class="radio-inline">
-                          <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                          <span class="hghlow">Highest to Lowest</span>
-                        </label>
-                        <label class="radio-inline radpos">
-                          <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                          <span class="hghlow">Lowest to Highest</span>
-                        </label>
-                      </div>  
-                    </form>
+                    
                     <div class="col-md-12 col-sm-12 col-xs-12">
                       <p class="price_br">Class</p>
                     </div>
                     <div class="form-group b_1_radio">
-                      <form role="form">
+                      <?php echo $this->Form->create('Request');?> 
+
                         <div class="row">
                           <label class="radio-inline">
                             <!-- <input type="radio" name="gender" value="male" checked> -->
-                              <input type="radio" name="optradio">
-                              <span class="hghlow">Upcoming</span>
+                              <input type="radio" name="optradio" value="1">
+                              <span class="hghlow">Ascending</span>
                           </label>
                           <label class="radio-inline newly_add">
                             <!-- <input type="radio" name="gender" value="male" checked> -->
-                            <input type="radio" name="optradio">
-                            <span class="hghlow">Newly Added</span>
+                            <input type="radio" name="optradio" value="2">
+                            <span class="hghlow">Descending</span>
                           </label>
                         </div>  
-                      </form> 
+                    
                     </div>
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                      <p class="price_br">Location</p>
-                    </div>
-                    <div role="form">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox" value="">
-                          <span class="closest">Closest to Farthest</span>
-                        </label>
-                      </div>
-                    </div>
+                   
                     <div class="form-group tp_br786">
                       <div class="sm-12 xs-12 butt_pos">
-                        <a href="#" class="btn btn-success buutt_cancel">Cancel</a>
-                        <a href="#" class="btn btn-success buutt_ok">Ok</a>
+                        <input type="reset" value="Cancel" class="btn btn-success buutt_cancel">
+                    <input type="submit" value="OK" class="btn btn-success buutt_ok">
                       </div>
                     </div>
+                       <?php echo $this->Form->end();?>
                   </div>  
                 </div>                
               </div>  
@@ -313,7 +302,7 @@
                                                         <?php if($value_catalog['UserMaster']['vendor_type_id']=='1'){?>  
                                                         <strong> By :</strong> <?php echo ucfirst($value_catalog['UserMaster']['institute_name']);?>
                                                         <?php }else{?>
-                                                        <strong> By :</strong> <?php echo ucfirst($value_catalog['UserMaster']['first_name']);?>
+                                                        <strong> By :</strong> <?php echo ucfirst($value_catalog['UserMaster']['institute_name']);?>
                                                         <?php }?>
                                                         </div>
                                                       </div>
@@ -400,11 +389,11 @@
                 </div><!-- tab 1 / -->
                                              
             </div>
-          </div>  
+        
           <!-- images with text code / --> 
           <div class="col-md-12 col-sm-12 col-xs-12 funtr"> 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd_l_r">
-              <h4 class="feature_work">Popular Catalogue Classes In Agenda</h4>
+              <h4 class="feature_work">Papular Catalogue Classes In Agenda</h4>
             </div>
           </div>
           <div class="col-md-12 col-sm-12 col-xs-12" style="border:2px solid #00CDC6;">  </div> 
@@ -431,7 +420,7 @@
                                                     
                                                      <div class="golden">
                                                           <h4><?php echo $res['VendorClasse']['class_topic'];?></h4>
-                                                          <p>Type : <?php echo $res['classtype']['types'];?></p>
+                                                          <p>Type : <?php echo $res['ClassType']['types'];?></p>
                                                             <?php if($res['UserMaster']['vendor_type_id']=='1'){?>
                                                           <h5>BY : <?php echo $res['UserMaster']['institute_name'];?> </h5>
                                                             <?php }else{?>
@@ -483,3 +472,23 @@
           </div>         
         </div>
       </div>
+  <script type="text/javascript">
+ $(document).ready(function(){
+  $('#city_ide').on('change',function(){
+   var city_id=$(this).val();
+   if(city_id!='1'){
+    alert('Only Chennai Locality are available');
+   }
+   else{
+   $.ajax({
+    url:'<?php echo HTTP_ROOT;?>/Homes/getLocation/'+city_id,
+   
+    success:function(result){
+      $('#location').html('');
+      $('#location').append(result);
+    }
+   });
+ }
+  });
+ })
+  </script>
