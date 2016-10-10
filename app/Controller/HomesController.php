@@ -4825,7 +4825,145 @@ else{
 
       if($this->request->is('post')){
         $data=$this->data;
-      
+        $res=$this->UserVerfication->find('first',array('conditions'=>array('UserVerfication.user_id'=>$data['UserMaster']['id'])));
+                    
+        if(!empty($data['UserVerfication']['primary_attached_media1']['name'])){
+                    $img_filename = $data['UserVerfication']['primary_attached_media1']['name'];
+                    
+                    $img_tmpname  = $data['UserVerfication']['primary_attached_media1']['tmp_name'];
+                              
+             
+               
+              if(($img_filename != "") && ($img_tmpname != "")){
+
+                  
+                  $explode_file   = explode(".",$img_filename);
+                  $countExp       = count($explode_file);
+                  $fileExtenstion = $explode_file[$countExp-1];
+                   
+                  if(($fileExtenstion != 'png') && ($fileExtenstion != 'jpg') && ($fileExtenstion != 'jpeg') &&($fileExtenstion != 'gif')){
+                      
+                      $this->requestAction(array('controller'=>'validate','action'=>'generateServerResponse'),array('pass'=>array('611','0'))
+                          ); 
+                  }else{
+                      $final_img = str_replace(".","",str_replace(" ","",date("YmdHis").microtime())).".".$fileExtenstion;    
+                         
+                          $upload=WWW_ROOT."img/Vendor/Varification/".$final_img;
+                          
+                            if(move_uploaded_file($img_tmpname,$upload)){ 
+                             $dataArray['primary_attached_media1']=$final_img;
+                             }      
+                    } 
+                    }
+                  }
+                   if(!empty($data['UserVerfication']['primary_attached_media2']['name'])){
+                    $img_filename = $data['UserVerfication']['primary_attached_media2']['name'];
+                    
+                    $img_tmpname  = $data['UserVerfication']['primary_attached_media2']['tmp_name'];
+                              
+             
+               
+              if(($img_filename != "") && ($img_tmpname != "")){
+
+                  
+                  $explode_file   = explode(".",$img_filename);
+                  $countExp       = count($explode_file);
+                  $fileExtenstion = $explode_file[$countExp-1];
+                   
+                  if(($fileExtenstion != 'png') && ($fileExtenstion != 'jpg') && ($fileExtenstion != 'jpeg') &&($fileExtenstion != 'gif')){
+                      
+                      $this->requestAction(array('controller'=>'validate','action'=>'generateServerResponse'),array('pass'=>array('611','0'))
+                          ); 
+                  }else{
+                      $final_img = str_replace(".","",str_replace(" ","",date("YmdHis").microtime())).".".$fileExtenstion;    
+                         
+                          $upload=WWW_ROOT."img/Vendor/Varification/".$final_img;
+                          
+                            if(move_uploaded_file($img_tmpname,$upload)){ 
+                             $dataArray['primary_attached_media2']=$final_img;
+                             }      
+                    } 
+                    }
+                  }
+                  if(!empty($data['UserVerfication']['secoundry_attached_media1']['name'])){
+                    $img_filename = $data['UserVerfication']['secoundry_attached_media1']['name'];
+                    
+                    $img_tmpname  = $data['UserVerfication']['secoundry_attached_media1']['tmp_name'];
+                              
+             
+               
+              if(($img_filename != "") && ($img_tmpname != "")){
+
+                  
+                  $explode_file   = explode(".",$img_filename);
+                  $countExp       = count($explode_file);
+                  $fileExtenstion = $explode_file[$countExp-1];
+                   
+                  if(($fileExtenstion != 'png') && ($fileExtenstion != 'jpg') && ($fileExtenstion != 'jpeg') &&($fileExtenstion != 'gif')){
+                      
+                      $this->requestAction(array('controller'=>'validate','action'=>'generateServerResponse'),array('pass'=>array('611','0'))
+                          ); 
+                  }else{
+                      $final_img = str_replace(".","",str_replace(" ","",date("YmdHis").microtime())).".".$fileExtenstion;    
+                         
+                          $upload=WWW_ROOT."img/Vendor/Varification/".$final_img;
+                          
+                            if(move_uploaded_file($img_tmpname,$upload)){ 
+                             $dataArray['secoundry_attached_media1']=$final_img;
+                             }      
+                    } 
+                    }
+                  }
+                  if(!empty($data['UserVerfication']['secoundry_attached_media2']['name'])){
+                    $img_filename = $data['UserVerfication']['secoundry_attached_media2']['name'];
+                    
+                    $img_tmpname  = $data['UserVerfication']['secoundry_attached_media2']['tmp_name'];
+                              
+             
+               
+              if(($img_filename != "") && ($img_tmpname != "")){
+
+                  
+                  $explode_file   = explode(".",$img_filename);
+                  $countExp       = count($explode_file);
+                  $fileExtenstion = $explode_file[$countExp-1];
+                   
+                  if(($fileExtenstion != 'png') && ($fileExtenstion != 'jpg') && ($fileExtenstion != 'jpeg') &&($fileExtenstion != 'gif')){
+                      
+                      $this->requestAction(array('controller'=>'validate','action'=>'generateServerResponse'),array('pass'=>array('611','0'))
+                          ); 
+                  }else{
+                      $final_img = str_replace(".","",str_replace(" ","",date("YmdHis").microtime())).".".$fileExtenstion;    
+                         
+                          $upload=WWW_ROOT."img/Vendor/Varification/".$final_img;
+                          
+                            if(move_uploaded_file($img_tmpname,$upload)){ 
+                             $dataArray['secoundry_attached_media2']=$final_img;
+                             }      
+                    } 
+                    }
+                  }
+                     $dataArray['id']=$res['UserVerfication']['id'];
+                     if(!empty($data['UserVerfication']['identity_of_primary_verification1'])){
+                     $dataArray['identity_of_primary_verification1']=$data['UserVerfication']['identity_of_primary_verification1'];
+                     }
+                     if(!empty($data['UserVerfication']['primary_verfication_no1'])){
+                     $dataArray['primary_verfication_no1']=$data['UserVerfication']['primary_verfication_no1'];
+                     }
+                     if(!empty($data['UserVerfication']['identity_of_primary_verification2'])){
+                     $dataArray['identity_of_primary_verification2']=$data['UserVerfication']['identity_of_primary_verification2'];
+                     }
+                     if(!empty($data['UserVerfication']['primary_verfication_no2'])){
+                     $dataArray['primary_verfication_no2']=$data['UserVerfication']['primary_verfication_no2'];
+                     }
+                     if(!empty($data['UserVerfication']['identity_of_secoundry_verification1'])){
+                      $dataArray['identity_of_secoundry_verification1']=$data['UserVerfication']['identity_of_secoundry_verification1'];
+                     }
+                     if(!empty($data['UserVerfication']['identity_of_secoundry_verification2'])){
+                      $dataArray['identity_of_secoundry_verification2']=$data['UserVerfication']['identity_of_secoundry_verification2'];
+                      }
+                     
+                     $this->UserVerfication->save($dataArray);  
         //print_r($data);die;
         if(!empty($data['UserMaster']['category_id'])){
         $str='';
