@@ -1,6 +1,8 @@
 <?php 
+
     $user_id      = $user_view['UserMaster']['id'];
     $user_type    = $user_view['UserMaster']['user_type_id'];
+
 ?>
 <style>
 
@@ -106,11 +108,12 @@ input[type="checkbox"] + label::before {
         <?php echo $this->Html->image('../img/connect/banner/category_selected.jpg', array('url' => array('controller' =>'Connect','action'=>'connectpage'),'class'=>'banner_img_left image-responsive'));
         ?>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 padd_l_r cont_banner_ryt">  
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 padd_l_r ">  
         <?php echo $this->Html->image('../img/connect/banner/group.jpg', array('url' => array('controller' =>'Connect','action'=>'connectGroup'),'class'=>'banner_img_ryt image-responsive')); 
         ?>
     </div>
 </div>
+
 
 <div class="">&nbsp;</div>
 <div class="">&nbsp;</div>
@@ -246,12 +249,10 @@ input[type="checkbox"] + label::before {
                 <span class="connt_flex_middle_text" id="view_text" style="color:white;">View Vendor Article</span>    
             </div>
             <?php if(!empty($user_id) && $user_type == 1){ ?>
-                
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padd_l_r vvb top_space" style="background-color:white;border: 1px solid #ccc;cursor:pointer;" id="open_model_view_blog">
                     <i aria-hidden="true" style="color:#2bcdc1;" id="user_icon" class="fa fa-plus eye_icon1"></i>
                     <span class="connt_flex_middle_text" style="color:#2bcdc1;">Add New Article</span>   
                 </div>
-
             <?php }  ?>
         </div>
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
@@ -600,6 +601,20 @@ input[type="checkbox"] + label::before {
                                                 <?php echo (isset($post_commmt_array[$value['Post']['id']]))?$post_commmt_array[$value['Post']['id']]:0; ?> COMMENTS
                                             </span>
                                         </div>
+
+                                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 padd_l_r" id="report_post_check_<?php echo $value['Post']['id'];?>" onclick="report_post('<?php echo $value['Post']['id'];?>')" 
+                                                style="pointer-events:none;">
+                                            <?php if($post_report_array[$value['Post']['id']]['status']['PostReport']['status'] == 1){  ?>
+                                                <i style="color:#2bcdc1" class="fa fa-file-text coont_box2_icon121" aria-hidden="true"></i>
+                                            <?php }else{  ?>
+                                                <i class="fa fa-file-text coont_box2_icon121" aria-hidden="true"></i>
+                                            <?php } ?> 
+                                            <span class="coont_box2_icon">
+                                                <?php echo (isset($post_report_array[$value['Post']['id']]['value']))?$post_report_array[$value['Post']['id']]['value']:0;
+                                                ?> Report
+                                            </span>
+                                        </div>
+
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 connt_flex_middle_bdr" style="display:none;" id="postcomment<?php echo $value['Post']['id'];?>">
                          
                                         </div>  
@@ -630,6 +645,19 @@ input[type="checkbox"] + label::before {
                                                     <?php echo (isset($post_commmt_array[$value['Post']['id']]))?$post_commmt_array[$value['Post']['id']]:0; ?> COMMENTS
                                                 </span>
                                             </div>
+                                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 padd_l_r" id="report_post_check_<?php echo $value['Post']['id'];?>" onclick="report_post('<?php echo $value['Post']['id'];?>')" 
+                                                    >
+                                                <?php if($post_report_array[$value['Post']['id']]['status']['PostReport']['status'] == 1){  ?>
+                                                    <i style="color:#2bcdc1" class="fa fa-file-text coont_box2_icon121" aria-hidden="true"></i>
+                                                <?php }else{  ?>
+                                                    <i class="fa fa-file-text coont_box2_icon121" aria-hidden="true"></i>
+                                                <?php } ?> 
+                                                <span class="coont_box2_icon">
+                                                    <?php echo (isset($post_report_array[$value['Post']['id']]['value']))?$post_report_array[$value['Post']['id']]['value']:0;
+                                                    ?> Report
+                                                </span>
+                                            </div>
+
                                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 connt_flex_middle_bdr" style="display:none;" id="postcomment<?php echo $value['Post']['id'];?>">
                          
                                             </div>  
@@ -655,12 +683,27 @@ input[type="checkbox"] + label::before {
                                             <?php echo date('d M Y', $value['Post']['add_date']);?>
                                         </span>
                                     </div>
+
                                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2 padd_l_r" id="post_ajxa_attch_<?php echo $value['Post']['id'];?>" onclick="postshwdiv('<?php echo $value['Post']['id'];?>')" style="cursor:pointer">
                                         <i class="fa fa-comments coont_box2_icon121" aria-hidden="true"></i>
                                         <span class="coont_box2_icon">
                                             <?php echo (isset($post_commmt_array[$value['Post']['id']]))?$post_commmt_array[$value['Post']['id']]:0; ?> COMMENTS
                                         </span>
                                     </div>
+
+                                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 padd_l_r" id="report_post_check_<?php echo $value['Post']['id'];?>" onclick="report_post('<?php echo $value['Post']['id'];?>')" style="pointer-events:none;">
+                                        <?php if($post_report_array[$value['Post']['id']]['status']['PostReport']['status'] == 1){  ?>
+                                            <i style="color:#2bcdc1" class="fa fa-file-text coont_box2_icon121" aria-hidden="true"></i>
+                                        <?php }else{  ?>
+                                            <i class="fa fa-file-text coont_box2_icon121" aria-hidden="true"></i>
+                                        <?php } ?> 
+                                        <span class="coont_box2_icon">
+                                            <?php echo (isset($post_report_array[$value['Post']['id']]['value']))?$post_report_array[$value['Post']['id']]['value']:0;
+                                            ?> Report
+                                        </span>
+                                    </div>
+
+
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 connt_flex_middle_bdr" style="display:none;" id="postcomment<?php echo $value['Post']['id'];?>">
                          
                                     </div> 
@@ -686,6 +729,7 @@ input[type="checkbox"] + label::before {
     </div>    
     <div class="">&nbsp;</div>
 </div>
+
 <div class="">&nbsp;</div> 
 
 <div class="modal fade" id="category_id">
@@ -845,38 +889,61 @@ input[type="checkbox"] + label::before {
                 </div>
                 <div class="modal-body">
                 <div class="">&nbsp;</div>
+                
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"> 
                     <fieldset>
-                        <select multiple="multiple" name="category_model_id[]" id="category_model_id" onchange="show_subcat();">
+                        <select multiple="multiple" class="form-control" name="category_model_id[]" id="category_model_id" onchange="show_subcat();">
                             <?php foreach ($category_data as  $value) { ?>
                                 <option value="<?php echo $value['Category']['id']; ?>">
                                     <?php  echo $value['Category']['category_name']; ?>
                                 </option>
                             <?php } ?>   
                         </select>
-                        <script type="text/javascript">
-                           function show_subcat(){
-                                cat_id = $('#category_model_id').val();
-                                $.ajax({
-                                  method: "POST",
-                                  url: 'addBlogFindSegment',
-                                  data: 'cat_id='+cat_id
-                                }).done(function(res){
-                                    $('#segment_id_model').html(res); 
-                                });
-                            }
-                        </script>  
-                        <span class="err" id="err_category_model_id">&nbsp;</span> 
-                        <i class="fa fa-caret-down blog_image_icon" aria-hidden="true"></i>   
+                        <span class="err" id="err_category_model_id">&nbsp;</span>  
                     </fieldset>
                 </div>
-
+          
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <fieldset class="form-group">
-                        <select multiple="multiple" class="form-control moz_hide" name="segment_id[]" id="segment_id_model">
-                        </select>
+                    <fieldset class="form-group" id="segment_id_model_again">
+                        <div id="segment_id_model_div">
+                            <select class="form-control" placeholder="Select Segment" name="segment_id_hide" id="segment_id_hide">
+                                <option value="" selected>
+                                    Select Segment
+                                </option>
+                            </select>    
+                        </div>   
+                        <script type="text/javascript">
+
+                            function show_subcat(){
+                                
+                                $('#segment_id_hide').hide();                                
+                                cat_id = $('#category_model_id').val();
+                                $.ajax({
+                                      method: "POST",
+                                      url: 'addBlogFindSegment1',
+                                      data: 'cat_id='+cat_id
+                                    }).done(function(res){     
+
+                                    if(res == 1){
+                                    
+                                       var data = '<select class="form-control" placeholder="Select Segment" name="segment_id_hide" id="segment_id_hide"><option value="" selected>Select Segment </option></select>';
+
+                                        $('#segment_id_model_div').html(data); 
+                                       
+                                    }else{
+
+                                        $('#segment_id_model_div').html('');    
+                                        $('#segment_id_model_div').append(res);
+
+                                        var segment_id_model = $('#segment_id_model').SumoSelect({
+                                            selectAll:true, 
+                                            placeholder:'Select Segment'    
+                                        });
+                                    }    
+                                }); 
+                            }
+                        </script>  
                         <span class="err" id="err_segment_id_model">&nbsp;</span>
-                        <i class="fa fa-caret-down blog_image_icon" aria-hidden="true"></i>
                     </fieldset>
                     <div>&nbsp;</div>
                     <div>&nbsp;</div>   
@@ -918,7 +985,6 @@ input[type="checkbox"] + label::before {
                 </div>
                 <div id="hideimge">
                     <input type="file" name="FileUpload" id="FileUpload" class="uploadbox"/>
-                    <input type="text" name="user_id"  value="<?php echo $user_id; ?>"/>
                 </div>
             </div>
         </form>
@@ -937,6 +1003,7 @@ input[type="checkbox"] + label::before {
                 <div class="">&nbsp;</div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"> 
                     <fieldset class="form-group">
+                        
                         <select multiple="multiple" class="form-control moz_hide" name="category_model_id_post[]" id="category_model_id_post" onchange="show_subcat_post();">
                             <?php foreach ($category_data as  $value) { ?>
                                 <option value="<?php echo $value['Category']['id']; ?>">
@@ -944,29 +1011,53 @@ input[type="checkbox"] + label::before {
                                 </option>
                             <?php } ?>   
                         </select>
-                        <i class="fa fa-caret-down fa_caret_down_model" aria-hidden="true"></i>
+
                         <script type="text/javascript">
+                            
                             function show_subcat_post(){
+
+                                $('#segment_id_post_hide').hide();       
                                 cat_id = $('#category_model_id_post').val();
                                 $.ajax({
                                   method: "POST",
-                                  url: 'addBlogFindSegment',
+                                  url: 'addBlogFindSegment2',
                                   data: 'cat_id='+cat_id
-                                })
-                                .done(function(states){
-                                    $('#segment_id_model_post').html(states); 
+                                }).done(function(states){
+                                    if(res == 1){
+                                    
+                                       var data = '<select class="form-control" placeholder="Select Segment" name="segment_id_post_hide" id="segment_id_post_hide"><option value="" selected>Select Segment</option></select>';
+
+                                        $('#segment_id_model_post_div').html(data); 
+                                       
+                                    }else{
+
+                                        $('#segment_id_model_post_div').html('');    
+                                        $('#segment_id_model_post_div').append(res);
+
+                                        var segment_id_model_post = $('#segment_id_model_post').SumoSelect({
+                                            selectAll:true, 
+                                            placeholder:'Select Segment'    
+                                        });
+                                    }    
+
                                 });
                             }
                         </script>  
+
                         <span class="err" id="err_category_model_id_post">&nbsp;</span>
                         <div class="">&nbsp;</div>
+                    
                     </fieldset>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <fieldset class="form-group">
-                        <select multiple="multiple" class="form-control moz_hide" name="segment_id[]" id="segment_id_model_post">
-                        </select>
-                        <i class="fa fa-caret-down fa_caret_down_model" aria-hidden="true"></i>
+                        <div id="segment_id_model_post_div">
+                            <select class="form-control" placeholder="Select Segment" name="segment_id_post_hide" id="segment_id_post_hide">
+                                <option value="" selected>
+                                    Select Segment
+                                </option>
+                            </select>    
+                        </div>
                         <span class="err" id="err_segment_id_model_post">&nbsp;</span>
                     </fieldset>
                     <div class="">&nbsp;</div>   
@@ -977,7 +1068,7 @@ input[type="checkbox"] + label::before {
                         <input class="form-control" name="post_topic" placeholder="Post Topic" type="text" id="post_topic"> 
                         <span class="err" id="err_post_topic">&nbsp;</span>    
                     </fieldset>
-                    <fieldset class="form-group ">
+                    <fieldset class="form-group">
                         <input type="text" class="form-control" name="docs_upload_post" id="docs_upload_post" placeholder="Upload post image" readonly>
                         <i class="fa fa-camera blog_image_icon" onclick="postClickUpload();" aria-hidden="true"></i>
                         <span class="err" id="err_post_image">&nbsp;</span>        
@@ -995,7 +1086,6 @@ input[type="checkbox"] + label::before {
             </div>
             <div id="hideimge">
                 <input type="file" name="postFileUpload" id="postFileUpload" class="postuploadbox"/>
-                <input type="text" name="user_id"  value="<?php echo $user_id; ?>"/>
             </div>
             </div>
         </form>
@@ -1489,23 +1579,15 @@ input[type="checkbox"] + label::before {
 <script type="text/javascript">
 
     $("#open_model_view_blog").click(function(event){
-   
-        $("#category_id_part").modal('show');
-    
+        $("#category_id_part").modal('show');    
     });
 
-
-
-  /*  $("#error_msg1").click(function(event){
-        $("#err_msg1").modal('show');
-    });
-    $("#error_msg2").click(function(event){
-        $("#err_msg2").modal('show');
-    });*/
     $("#open_model_view_post").click(function(event){
         $("#post_id").modal('show');
     });
+
 </script>
+
 
 <script>
     function ClickUpload() {   
@@ -1650,6 +1732,8 @@ input[type="checkbox"] + label::before {
             return false;
     }
 
+
+
     function docsupload(){   
        
         var category_id            =   $('#category_model_id').val();
@@ -1692,7 +1776,7 @@ input[type="checkbox"] + label::before {
     
 
         var formData = $(this).serializeArray();        
-        var WEBURL   ="<?php echo Router::url( '/', true ).'Connect/submitBlog/'; ?>";
+        var WEBURL   ="<?php echo Router::url( '/', true ).'Connect/submitBlog'; ?>";
 
             $.ajax({ 
                type: 'POST',
@@ -1903,28 +1987,18 @@ input[type="checkbox"] + label::before {
     } 
 </script>
 
-
-
 <script type="text/javascript">
-
-    $("#category_model_id").select2({
-        placeholder: "Select Category",
-    });
-
-    $("#category_model_id_post").select2({
-        placeholder: "Select Category",
-    });
-
-    $("#segment_id_model").select2({
-        placeholder: "Select Segment",
-    });
-
-    $("#segment_id_model_post").select2({
-        placeholder: "Select Segment",
-    });
-
     $(document).ready(function(){
-        $(".select2-selection__arrow").hide();
-    });
+        
+        window.category_model_id = $('#category_model_id').SumoSelect({
+            selectAll:true,
+            placeholder:'Select Category'
+        });
 
+        window.category_model_id_post = $('#category_model_id_post').SumoSelect({
+            selectAll:true,
+            placeholder:'Select Category'
+        });
+    });    
 </script>
+
