@@ -1,7 +1,3 @@
-<style>
-a:hover{text-decoration: none;}
-.checkbox, .radio{margin:5px 0;}
-</style>
 <div class="col-md-10 col-sm-9 col-xs-12 ruth6542 ruth654786 cstm_md9">
         <div class="col-md-12 col-sm-12 col-xs-12 clrdash123 ruth1">
           <div class="col-md-3 col-sm-3 col-xs-4 bar321 bar786">
@@ -16,37 +12,49 @@ a:hover{text-decoration: none;}
               <span class="dashbrd1 grg">Settings</span>
               <i class="fa fa-bell dshclr1" aria-hidden="true"></i>
               <span class="dashbrd1 grg">Notification</span>
-<?php   
+              <?php 
                        $profile_img=$user_view['UserMaster']['profile_image'];
                       
                        $user_type_id=$user_view['UserMaster']['user_type_id'];
-                      $user_pic1 = substr($profile_img,0,4);
-                         if($user_pic1 == 'http'){ ?>
-                           
+                       $gmail_id = $user_view['UserMaster']['gmail_id'];
                        
+                       //echo $gmail_id;
+                       //die;
+                       if($profile_img!='' and $gmail_id==1)
+                       {
+                        
+                        ?>
                           <img src="<?php echo $profile_img; ?>" class="georgeimg prflimg"> 
+                         <?php
+                     }
+                       elseif($profile_img!='' and $user_type_id==1)
+                       {
+                        
+                        ?>
+                         <img src="<?php echo HTTP_ROOT;?>/img/Vendor/profile/<?php echo $profile_img; ?>" class="georgeimg prflimg"> 
+                         <?php
+                     }
+                     elseif($profile_img!='' and $user_type_id==2)
+                     {
+                        ?>
+                        <img src="<?php echo HTTP_ROOT;?>/img/Buyer/profile/<?php echo $profile_img; ?>" class="georgeimg prflimg"> 
+                        <?php
+                    }
+                    elseif($profile_img!='' and $user_type_id=='')
+                     {
+                        ?>
+                        <img src="<?php echo $profile_img; ?>" class="georgeimg prflimg"> 
+                        <?php
+                    }
+                   
 
-<?php } 
-   else if($profile_img!='' and $user_type_id==1) {  ?>
-<img src="<?php echo HTTP_ROOT;?>/img/Vendor/profile/<?php echo $profile_img; ?>" class="georgeimg prflimg"> 
-
-<?php }elseif($profile_img!='' and $user_type_id==2){  ?>
-
-<img src="<?php echo HTTP_ROOT;?>/img/Buyer/profile/<?php echo $profile_img; ?>" class="georgeimg prflimg"> 
-<?php }elseif($profile_img!='' and $user_type_id==''){ ?>
-
-<img src="<?php echo $profile_img; ?>" class="georgeimg prflimg"> 
-<?php
-}
-
-
-?>
+                 ?>
               <span class="dropdown1">
                 <span class="dashbrd1 grg1"><?php echo $user_view['UserMaster']['first_name'];?></span>
                 <i class="fa fa-caret-down grg1 dshclr1" aria-hidden="true" id="nti"></i>
-               <div class="dropdown-content1 logout">
-                  <p><a href="<?php echo HTTP_ROOT;?>/Homes/myProfile" class="logout_a">Profile</a></p>
-                  <p><a href="<?php echo HTTP_ROOT;?>/Homes/changepassword" class="logout_a">Change Password</a></p>
+                <div class="dropdown-content1 logout">
+                  <p><a href="#" class="logout_a">Profile</a></p>
+                  <p><a href="#" class="logout_a">Change Password</a></p>
                   <p><a href="<?php echo HTTP_ROOT;?>/Homes/logout" class="logout_a">Logout</a></p>
                 </div>
               </span><br>
@@ -55,63 +63,55 @@ a:hover{text-decoration: none;}
           </div>
         </div> 
         <!-- ************work************** -->
-<?php $user_type_id = $_SESSION['User']['UserMaster']['user_type_id']; ?>
+        <?php $user_type_id = $_SESSION['User']['UserMaster']['user_type_id']; ?>
 
-        <div class="col-md-12 col-sm-12 col-xs-12 ruth11 brdprfl" id="work2" style="<?php if($user_type_id==1){
+        <div class="col-md-12 col-sm-12 col-xs-12 ruth11 brdprfl" id="work1" style="<?php if($user_type_id==1){
          echo 'display:none'; } else { echo '' ; } ?>">
             <div class="col-md-4 col-sm-6 col-xs-12  br_pad1 prflg12 rad_br">
               <div class="col-md-12 col-sm-12 col-xs-12 prbg prfls123">
-                <center class="my_prfl">
+                <center class="my_prfl"> <a href="<?php echo HTTP_ROOT;?>/Homes/myProfile" class="side_bar_tet021">
                   <div><img src="<?php echo HTTP_ROOT;?>/img/vendoricon1.png" class="prfl123"></div>
-                  <div><a href="<?php echo HTTP_ROOT;?>/Homes/myProfile/lern_dash" class="mybg">My Profile</a></div>
+                  <div><span class="mybg">My Profile</span></div></a>
                 </center>  
               </div>  
             </div>
             <div class="col-md-4 col-sm-6 col-xs-12  br_pad1 prflg12 rad_br">
-              <div class="col-md-12 col-sm-12 col-xs-12 prbg prfls123">
-                <center class="pst">
+              <div class="col-md-12 col-sm-12 col-xs-12 prbg prfls123" class="side_bar_tet021">
+                <center class="pst"> <a href="<?php echo HTTP_ROOT;?>/Homes/#" class="side_bar_tet021">
                   <div><img src="<?php echo HTTP_ROOT;?>/img/classnearyou.png" class="prfl123"></div>
-                  <div class="mybg">Class Near You</div>
+                  <div class="mybg">Class Near You</div></a>
                 </center>  
               </div>  
             </div>
             <div class="col-md-4 col-sm-6 col-xs-12  br_pad1 prflg12 rad_br">
               <div class="col-md-12 col-sm-12 col-xs-12 prbg prfls123">
-                <center>
+                <center> <a href="<?php echo HTTP_ROOT;?>/Homes/#" class="side_bar_tet021">
                   <div><img src="<?php echo HTTP_ROOT;?>/img/cataloguefororgnizar.png" class="prfl123"></div>
-                  <div class="mybg">
-                    <a href="<?php echo HTTP_ROOT;?>/Homes/arrangeClass" class="mybg">
-                        Class Catalogue for Organization
-                    </a>
-                  </div>
+                  <div class="mybg">Class Catalogue for Organization</div></a>
                 </center>  
               </div>  
             </div>
             <div class="col-md-4 col-sm-6 col-xs-12  br_pad1 prflg12 rad_br">
               <div class="col-md-12 col-sm-12 col-xs-12 prbg prfls123">
-                <center>
+                <center> <a href="<?php echo HTTP_ROOT;?>/Homes/#" class="side_bar_tet021">
                   <div><img src="<?php echo HTTP_ROOT;?>/img/vendoricon4.png" class="prfl123"></div>
-                  <div class="mybg">Recommended Class</div>
+                  <div class="mybg">Recommended Class</div></a>
                 </center>  
               </div>  
             </div>
             <div class="col-md-4 col-sm-6 col-xs-12  br_pad1 prflg12 rad_br">
               <div class="col-md-12 col-sm-12 col-xs-12 prbg prfls123">
-                <center>
+                <center>  <a href="<?php echo HTTP_ROOT;?>/Homes/#" class="side_bar_tet021">
                   <div><img src="<?php echo HTTP_ROOT;?>/img/vendoricon5.png" class="prfl123"></div>
-                  <div>
-                    <a href="<?php echo HTTP_ROOT;?>/Homes/myProfile/Booking" class="mybg">Booking History</a>
-                  </div>
+                  <div class="mybg">Booking History</div></a>
                 </center>  
               </div>  
             </div>
             <div class="col-md-4 col-sm-6 col-xs-12  br_pad1 prflg12 rad_br">
               <div class="col-md-12 col-sm-12 col-xs-12 prbg prfls123">
-                <center>
+                <center> <a href="<?php echo HTTP_ROOT;?>/Homes/#" class="side_bar_tet021">
                   <div><img src="<?php echo HTTP_ROOT;?>/img/vendoricon6.png" class="prfl123"></div>
-                  <div>
-                    <a href="<?php echo HTTP_ROOT;?>/Homes/myProfile/Wishlist" class="mybg">Wishlist</a>
-                  </div>
+                  <div class="mybg">Wishlist</div></a>
                 </center>  
               </div>  
             </div>
@@ -119,289 +119,63 @@ a:hover{text-decoration: none;}
         <!-- ************work************** -->
         <!-- ************work1************** -->
         <hr class="dashboard-borderr">
-        <div class="col-md-12 col-sm-12 col-xs-12 ruth11" id="work1" style="<?php if($user_type_id==2){
+        <div class="col-md-12 col-sm-12 col-xs-12 ruth11" id="work" style="<?php if($user_type_id==2){
          echo 'display:none'; } else { echo '' ; } ?>">
             <div class="col-md-4 col-sm-6 col-xs-12  br_pad1 prflg12 rad_br">
               <div class="col-md-12 col-sm-12 col-xs-12 prbg prfls123">
-                <center>
+                <center><a href="<?php echo HTTP_ROOT;?>/Homes/myProfile" class="side_bar_tet021">
                   <div><img src="<?php echo HTTP_ROOT;?>/img/vendoricon1.png" class="prfl123"></div>
-                   <div>
-                    <a href="<?php echo HTTP_ROOT;?>/Homes/myProfile" class="mybg">My Profile</a>
-                  </div>
+                  <div> <span class="mybg side_bar_tet021">My Profile</span></div></a>
                 </center>  
               </div>  
             </div>
             <div class="col-md-4 col-sm-6 col-xs-12  br_pad1 prflg12 rad_br">
               <div class="col-md-12 col-sm-12 col-xs-12 prbg prfls123">
-                <center>
+                <center><a href="PostClass" class="side_bar_tet021">
                   <div><img src="<?php echo HTTP_ROOT;?>/img/vendoricon2.png" class="prfl123"></div>
-                  <div>
-                    <a href="<?php echo HTTP_ROOT;?>/vendor_classes/create" class="mybg">Post Class</a>
-                  </div>
+                  <div class="mybg side_bar_tet021"> Post Class</div></a>
                 </center>  
               </div>  
             </div>
             <div class="col-md-4 col-sm-6 col-xs-12  br_pad1 prflg12 rad_br">
               <div class="col-md-12 col-sm-12 col-xs-12 prbg prfls123">
-                <center>
+                <center><a href="<?php echo HTTP_ROOT;?>/Homes/promoteClass" class="side_bar_tet021">
                   <div><img src="<?php echo HTTP_ROOT;?>/img/vendoricon3.png" class="prfl123"></div>
-                  <div> 
-                    <a href="<?php echo HTTP_ROOT;?>/Homes/promoteClass" class="mybg">Promote <br> Your Class </a>
-                  </div>
+                  <div class="mybg side_bar_tet021">Promote<br> Your Class</div></a>
                 </center>  
               </div>  
             </div>
             <div class="col-md-4 col-sm-6 col-xs-12  br_pad1 prflg12 rad_br">
               <div class="col-md-12 col-sm-12 col-xs-12 prbg prfls123">
-                <center>
+                <center> <a href="<?php echo HTTP_ROOT;?>/Homes/addClassCatalog" class="side_bar_tet021"> 
                   <div><img src="<?php echo HTTP_ROOT;?>/img/vendoricon4.png" class="prfl123"></div>
-                   <div><a href="<?php echo HTTP_ROOT;?>/Homes/addClassCatalog" class="mybg">Add Class<br>To Catalogue</a></div>
+                  <div class="mybg side_bar_tet021">Add Class<br>To Catalogue</div></a>
                 </center>  
               </div>  
             </div>
             <div class="col-md-4 col-sm-6 col-xs-12  br_pad1 prflg12 rad_br">
               <div class="col-md-12 col-sm-12 col-xs-12 prbg prfls123">
-                <center>
+                <center><a href="<?php echo HTTP_ROOT;?>/Homes/#" class="side_bar_tet021">
                   <div><img src="<?php echo HTTP_ROOT;?>/img/vendoricon5.png" class="prfl123"></div>
-                  <div><a href="<?php echo HTTP_ROOT;?>/Homes/myProfile/pastclass" class="mybg">Class History</a></div>
+                  <div class="mybg ">Class History</div></a>
                 </center>  
               </div>  
             </div>
             <div class="col-md-4 col-sm-6 col-xs-12  br_pad1 prflg12 rad_br">
               <div class="col-md-12 col-sm-12 col-xs-12 prbg prfls123">
-                <center>
+                <center><a href="<?php echo HTTP_ROOT;?>/Homes/#" class="side_bar_tet021">
                   <div><img src="<?php echo HTTP_ROOT;?>/img/vendoricon6.png" class="prfl123"></div>
-                  <div ><a href="<?php echo HTTP_ROOT;?>/Homes/myProfile/video" class="mybg">Photo &<br> Video </a></div>
+                  <div class="mybg side_bar_tet021">Photo &<br> Video</div></a>
                 </center>  
               </div>  
             </div>
         </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="background-color:#2bcdc1;">
-
-<h4 class="modal-title cat_mod_title">Choose User Type</h4>
-</div>
-<div class="modal-body">
-<div class="">&nbsp;</div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-<center>
-<span class="connet_text_hed" style="color:#2bcdc1"> Do You Want Login as </span>
-<p class="connet11" style="color:red" style="display:none;"></p>
-</center>    
-</div>
-<div class="">&nbsp;</div>
-
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padd_l_r ">
-  <div class="col-xs-12 col-sm-4" style="padding-top: 5px;">Select User Type</div>
-<div class="col-xs-12 col-sm-4">
-<div class="radio pull-right">
-<label>
-<input type="radio" id="radio_1" value="1" name="optradio">
-<span class="connt_flex_middle_text">Vendor
-</span>
-</label>
-</div>
-</div>
-<div class="col-xs-12 col-sm-4">
-<div class="radio pull-left">
-<label>
-<input type="radio" name="optradio" value="2" id="radio_2">
-<span class="connt_flex_middle_text">Learner
-</span>
-</label>
-
-</div>
-</div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin: 5px 0px;">
-  <div class="col-xs-12 col-sm-4 padd_l_r" style="padding-top: 5px;">Enter email address</div>
-  <div class="col-xs-12 col-sm-8 padd_l_r">
-    <input type="text" placeholder="Enter Email Address" value="" name="email_id" id="pop_email" class="form-control"></div>
-</div>
-
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <div class="col-xs-12 col-sm-4 padd_l_r" style="padding-top: 5px;">Enter mobile number</div>
-  <div class="col-xs-12 col-sm-8 padd_l_r">
-    <input type="text" class="form-control" placeholder="Enter Mobile Number" id="pop_mobile" value="" name="mobile_no">
-</div></div>    
-</div>
-<div class="">&nbsp;</div>
-</div>
-<div class="modal-footer" style="border-top:none;">
-<center>
-<button style="background-color:#2bcdc1;border:none;" type="button" class="btn btn-primary" id="getcat_ids"> Submit </button>
-</center>
-</div>
-
-      </div>
-      
-    </div>
-  </div>
-
         <!-- ************work1************** -->
       </div>
     </div>
-  </div> 
-
-
-<script type="text/javascript">
-//window.onload = function() {
-  //signOut();
-
-//}
-</script>
-
-<script>
+  </div>  
+  <script>
   $(document).ready(function(){
-   
-    <?php if($user_view['UserMaster']['user_type_id']==1){?>  
-
-        $('#vndr1').css('background','#00CDC6');
-        
-        
-        $('#buyer1').css('background','#fff');
-        $('#buyer1 > p').css('color','#00cdc6');
-
-    <?php }else{ ?>
-
-      $('#work1').hide();
-      
-    
-    <?php } ?>    
-
-  });
-</script>
-
-
-
-
-<script type="text/javascript">
-   function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
-  $(document).ready(function(){
-     var user_type='<?php echo $user_view['UserMaster']['user_type_id'];?>';
-     if(user_type=='1'){
-      $('#work2').hide();
-      $('#work1').show();
-     }
-     else{
-       $('#work1').hide();
-      $('#work2').show(); 
-      }
-     var email='<?php echo $user_view['UserMaster']['email'];?>';
-     var mobile_no='<?php echo $user_view['UserMaster']['mobile'];?>'; 
-     if(email!=''){
-      $('#pop_email').val(email);
-      $('#pop_email').attr('disabled',true);
-      }
-      if((mobile_no.length)==10){
-       $('#pop_mobile').val(mobile_no);
-       $('#pop_mobile').attr('disabled',true);
-      }
-      
-      if((email=='')&&(mobile_no=='')){
-       $('#pop_mobile').attr('disabled',false);
-        $('#pop_email').attr('disabled',false);
-      }
-
-      if(user_type==0){
-      $('#myModal').modal('show');
-      }
-$('#getcat_ids').click(function(){
-var vendor_id=$('input[name="optradio"]:checked').val();
-var pop_email=$('#pop_email').val();
-var pop_mobile=$('#pop_mobile').val();
-
- 
-  if(vendor_id!='1' && vendor_id!='2'){
-   $('.connet11').html('Please Select User Type');
-  $('.connet11').show();
-  return false; 
- }
- else if(pop_email==''){
-    $('.connet11').html('Please Enter Email address');
-  $('.connet11').show();
-  return false; 
- }
-else if(pop_mobile==''){
-   $('.connet11').html('Please Enter Mobile Number');
-  $('.connet11').show();
-  return false; 
- }
-else{
-
- $('.loader').show();
- var ide='<?php echo $user_view['UserMaster']['id'];?>';
- var user_type_id='<?php echo $user_view['UserMaster']['user_type_id'];?>';
-   
-   $.ajax({  
-                                type: "POST",  
-                                url: "<?php echo HTTP_ROOT;?>/Homes/updateUser/"+ide+"/"+vendor_id+"/"+pop_email+"/"+pop_mobile,  
-                                  
-                                success: function(output){ 
-                                       
-                                      
-                                     output=output.trim();
-                                     
-                                     $('.loader').hide();
-                                     if(output=='2'){
-                                       $('.connet11').html('Email Address Already Exists');
-                                       $('.connet11').show();
-                                       $('#pop_email').attr('disabled',false);
-                                       return false; 
-                                     }
-                                     if(output=='3'){
-                                      $('.connet11').html('Mobile No Already Exists');
-                                       $('.connet11').show();
-                                       return false;
-                                     }
-                                     if(output=='1'){
-                                      
-                                       $('#myModal').modal('hide');
-                                       window.location.href = "<?php echo HTTP_ROOT;?>/Homes/dashboard";
-                                     
-                                     }
-                                  
-                                } 
-   
-                            });
-}
-});
-   
-  });
-
+    $('#vndr1').css('background','#00CDC6');
+  })
   </script>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-
-      var page_sct_name = "<?php echo $page_section_name; ?>";
-        
-        if(page_sct_name == "lern_dash"){
-
-            setTimeout(function(){ 
-              $("#vndr").hide();
-              $("#buyer").show();  
-              $('#work2').show();
-              $('#work1').hide();
-              $('#vndr1').css('background','#fff');
-              $('#vndr1 > p').css('color','#00cdc6');
-              $('#vndr1 > p').css('font-family','OS_regular');
-              $('#vndr1 > p').css('text-decoration','none');
-              $('#buyer1').css('background','#00cdc6');
-              $('#buyer1 > p').css('text-decoration','underline');
-              $('#buyer1 > p').css('color','#fff');
-
-            }, 1);
-       
-        }
- });
-</script>
