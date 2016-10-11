@@ -359,8 +359,8 @@ aaa
 							  <input type="hidden" name="phone" id="phone"  value="<?php echo $payment_quote['UserMaster']['mobile']?>"/>
 
 							  <textarea name="productinfo" id="productinfo" style="display:none;">Catalog Request</textarea>
-							  <input type="hidden" name="surl" id="surl" value="<?php echo HTTP_ROOT; ?>/Homes/buySuccess" size="64" />
-							  <input type="hidden" name="furl" id="furl" value="<?php echo HTTP_ROOT; ?>/Homes/buyFailure" size="64" />
+							  <input type="hidden" name="surl" id="surl" value="<?php echo HTTP_ROOT; ?>/Homes/quoteSuccess" size="64" />
+							  <input type="hidden" name="furl" id="furl" value="<?php echo HTTP_ROOT; ?>/Homes/quoteFailure" size="64" />
 							  <input type="hidden" name="service_provider" id="service_provider" value="payu_paisa" size="64" />
 							 
                 <div id="pay_submit" class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8 col-xs-offset-2 col-xs-8 book-proceed cust-xs-offset-2" style="display:block;">
