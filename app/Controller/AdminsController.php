@@ -3125,7 +3125,66 @@ public function upload_csv_classes(){
 }
 
   /* end */
+  // manage User Post by admin
+	
+  public function manageUserPostRequest(){
+    $this->checkUser();
+    $this->layout="admin_layout";
+    $status_id = "0,1";
     
+    $data = $this->Post->find('all',array(
+                                      'joins'  =>  array(
+                                                      array(
+                                                          'table' => 'bg_user_masters',
+                                                          'alias' => 'usermaster',
+                                                          'conditions' => array('Post.user_id = usermaster.id'),
+                                                          ),
+                                                      array(
+                                                            'table' => 'bg_class_segments',
+                                                            'alias' => 'classgmt',
+                                                            'conditions' => array('Post.segment_id = classgmt.id',
+                                                                                  'classgmt.status'=>1))
+                                                       ),
+            'conditions' => array('Post.status !=' => 2),
+            'fields'    => array('Post.*','usermaster.*','classgmt.*'),
+          )
+    );
+
+    if(!empty($data)){
+      $this->set('data',$data);
+    }
+  }
+
+
+  public function userPostRequestaccept(){
+      if(!empty($this->params['pass'][0])){
+         $dataArray['id']=base64_decode($this->params->pass[0]);
+         $dataArray['status']=1;
+         $this->Post->save($dataArray);
+          
+
+          $this->redirect(array('controller'=>'Admins','action'=>'manageUserPostRequest'));
+         }else{
+          $this->redirect(array('controller'=>'Admins','action'=>'manageUserPostRequest'));
+        } 
+  }
+
+
+  public function userPostRequestrejected(){
+       
+      if(!empty($this->params['pass'][0])){
+         $dataArray['id']=base64_decode($this->params->pass[0]);
+         $dataArray['status']=2;
+         $dataArray['modify_date']=time();
+         $this->Post->save($dataArray);
+       
+         $this->redirect(array('controller'=>'Admins','action'=>'manageUserPostRequest')); 
+      }else{
+        $this->redirect(array('controller'=>'Admins','action'=>'manageUserPostRequest'));
+      } 
+  }
+
+  
     
 
 }
