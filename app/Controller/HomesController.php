@@ -1170,6 +1170,7 @@ public function requestCatalogue(){
       $userArray['id']=$class_id;
       $userArray['catalogue_status']=0;
       $this->VendorClasse->save($userArray);
+      $this->sendMail('catalogRequest',$email,$email);
       $msg='Your Add class to catalogue request has been sent to BrainGroom Admin. You will get back from them in 24 to 48 hrs.'
       $msg = str_replace(" ","%20",$msg);
       $Url = 'http://193.105.74.159/api/v3/sendsms/plain?user=braingroom&password=3e4IG3WL&sender=BRAING&SMSText='.$msg.'&type=longsms&GSM=91'.$mobile;
@@ -8232,7 +8233,7 @@ public function signout(){
 function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
         
         switch($mailFor){
-			 case 'bookClass_status':                
+	case 'bookClass_status':                
 
                 $sendgrid = new SendGrid('madhulas','thirdeye123');
 
@@ -8334,35 +8335,29 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                 </body>
             </html>');
             $sendgrid->send($email);
+                break ;
+	case 'catalogRequest' : 
+           
+	           $sendgrid = new SendGrid('madhulas','thirdeye123');
 
-                /*$to  = $mail;
-                $subject = 'SkillGrok | Registration Verification Mail';
-                $message = '
-                <html>
-                    <head><title></title></head>
-                    <body>
-                        <div style="border-radius: 6px;background-color: rgba(255,255,255,0.3);padding: 10px;width: 81%;margin-left:20px;">
-                        <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
-                        <p>
-                            <span style="font-size:20px;font-weight:bold;color:#6397cb;line-height:110%">Hi, You are successfully registered on a SkillGrok.</span><br>
-                                <span style="font-size:14px;color:#666666;font-style:italic"></span>
-                            </p>
-                            <p>Your activation code is.</p>
-                            <p>'.$activationCode.'</p>
-                            <p></p>
-                            <hr style="border:0;border-top:1px solid #d7d7d7;min-height:0">
-                            <p>If you have any problems, or believe you have received this in error, please contact us.</p>
-                            <p></p>
-                            <p>SkillGrok</p>
-                            <span style="font-size:11px;color:#8a8a8a;line-height:100%">Copyright © 2014 braingroom.com All rights reserved.</span>
-                        </div>        
-                    </body>
-                </html>';
-                
-                $headers  = 'MIME-Version: 1.0' . "\r\n";
-                $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                $headers .= 'From: SKILLGROK Team<support@braingroom.com>' . "\r\n";
-                mail($to, $subject, $message, $headers);*/
+            $email    = new SendGrid\Email();
+            $email->addTo($mail)->addTo('')->setFrom('support@braingroom.com')->setSubject('braingroom| Request Add Class to Catalog')->setText('!')->setHtml('
+            <html>
+                <head><title></title></head>
+                <body>
+                    <div style="border-radius: 6px;background-color: rgba(255,255,255,0.3);padding: 10px;width: 81%;margin-left:20px;">
+                    <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+                     <p>
+                        Your “Add class to catalogue” request has been sent to BrainGroom Admin. You will get back from them in 24 to 48 hrs.</p>
+                        <hr style="border:0;border-top:1px solid #d7d7d7;min-height:0">
+                        <p>If you have any problems, or believe you have received this in error, please contact us.</p>
+                        <p></p>
+                        <p>braingroom</p>
+                        <span style="font-size:11px;color:#8a8a8a;line-height:100%">Copyright © 2016 braingroom.com All rights reserved.</span>
+                    </div>        
+                </body>
+            </html>');
+            $sendgrid->send($email);
                 break ;
                 
             case 'forgot_password' : 
