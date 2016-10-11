@@ -1119,6 +1119,11 @@ public function fun(){
       
     }
 public function requestCatalogue(){
+	$this->checkUser();
+      $this->layout='vendor_layout';
+      $user=$this->Session->read('User');
+      $mobile=$user['UserMaster']['mobile'];
+      $msg='';
     if(!empty($_POST)){
       $class_type=$_POST['class_type'];
       $region=$_POST['region'];
@@ -1165,6 +1170,10 @@ public function requestCatalogue(){
       $userArray['id']=$class_id;
       $userArray['catalogue_status']=0;
       $this->VendorClasse->save($userArray);
+      $msg='Your Add class to catalogue request has been sent to BrainGroom Admin. You will get back from them in 24 to 48 hrs.'
+      $msg = str_replace(" ","%20",$msg);
+      $Url = 'http://193.105.74.159/api/v3/sendsms/plain?user=braingroom&password=3e4IG3WL&sender=BRAING&SMSText='.$msg.'&type=longsms&GSM=91'.$mobile;
+      $this->openurl($Url);
      echo 1;die;
       
 
