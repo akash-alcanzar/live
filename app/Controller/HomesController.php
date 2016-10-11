@@ -8699,6 +8699,7 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
             //$profile_image_buyer=$_FILES['data']['name']['profile_image'];
             $this->request->data['profile_image']='';
             $password=$this->request->data['password'];
+	    $pass=$password;
             $password=md5($password);
             $this->request->data['password']=$password;
             $total_array=count($cat_id);
@@ -8728,7 +8729,11 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                $last_des_id=$this->UserMaster->getLastInsertId();
               // $email=$this->request->data['email'];
                $this->sendMail('signup',$email,$email);
-
+                $msg='';
+              $msg='Registration completed Successfully, Welcome to BrainGroom your Password is'.$pass;
+              $msg = str_replace(" ","%20",$msg);
+              $Url = 'http://193.105.74.159/api/v3/sendsms/plain?user=braingroom&password=3e4IG3WL&sender=BRAING&SMSText='.$msg.'&type=longsms&GSM=91'.$mobile;
+              $this->openurl($Url);
 
            ############  Start Step 3 #############
 
@@ -12060,7 +12065,21 @@ public function submitreview(){
     }
   }
 
-
+public function openurl($url) {
+   
+    $ch=curl_init();
+    curl_setopt($ch,CURLOPT_URL,$url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch,CURLOPT_POSTFIELDS,$postvars);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+    curl_setopt($ch,CURLOPT_TIMEOUT, '3');  
+    $content = trim(curl_exec($ch)); 
+    
+    $response = curl_exec($ch);
+    
+    return $response;
+    curl_close($ch); 
+  } 
 
 
 
