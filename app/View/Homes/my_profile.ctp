@@ -183,7 +183,7 @@ border-radius:30%;
                     <span class="dashbrd1 grg1"><?php echo $user_view['UserMaster']['first_name'];?></span>
                     <i class="fa fa-caret-down grg1 dshclr1" aria-hidden="true" id="nti"></i>
                     <div class="dropdown-content1 logout">
-                        <p><a href="<?php echo HTTP_ROOT."/Homes/myProfile";?>" class="logout_a">Profile</a></p>
+                        <p><a href="#" class="logout_a">Profile</a></p>
                         <p><a href="#" class="logout_a">Change Password</a></p>
                         <p><a href="<?php echo HTTP_ROOT;?>/homes/logout" class="logout_a">Logout</a></p>
                     </div>
@@ -193,36 +193,35 @@ border-radius:30%;
             </div>
         </div>
     </div> 
-           <div class="col-md-12 col-sm-12 col-xs-12 funmp1"> 
+          <div class="col-md-12 col-sm-12 col-xs-12 funmp1"> 
             <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
               <div class="row">
                 <div class="col-md-8 col-sm-8 col-xs-8 starruth">
                   <div class="elemnt">
-                  <?php   
-                       $profile_img=$user_view['UserMaster']['profile_image'];
-                      
-                       $user_type_id=$user_view['UserMaster']['user_type_id'];
-                      $user_pic1 = substr($profile_img,0,4);
-                         if($user_pic1 == 'http'){ ?>
-                           
-                       
-                          <img src="<?php echo $profile_img; ?>" class="rth321 prflimg" style="width:123px; height:132px;border-radius:50%;border:2px solid white;"> 
+                   <?php if($user_view['UserMaster']['user_type_id']=='1'){?> 
 
-                          <?php } 
-                               else if($profile_img!='' and $user_type_id==1) {  ?>
-                         <img src="<?php echo HTTP_ROOT;?>/img/Vendor/profile/<?php echo $profile_img; ?>" class="rth321 prflimg" style="width:123px; height:132px;border-radius:50%;border:2px solid white;"> 
-
-                        <?php }elseif($profile_img!='' and $user_type_id==2){  ?>
-
-                        <img src="<?php echo HTTP_ROOT;?>/img/Buyer/profile/<?php echo $profile_img; ?>" class="rth321 prflimg" style="width:123px; height:132px;border-radius:50%;border:2px solid white;"> 
-                         <?php }elseif($profile_img!='' and $user_type_id==''){ ?>
-
-                        <img src="<?php echo $profile_img; ?>" class="rth321 prflimg" style="width:123px; height:132px;border-radius:50%;border:2px solid white;"> 
-                        <?php
-                    }
+                    <span class="prf-bg">
+                    <div style="background: url('<?php echo HTTP_ROOT;?>/img/Vendor/profile/<?php echo $user_view['UserMaster']['profile_image'];?>') repeat scroll center center ;background-repeat: no-repeat; background-size:cover" class="col-xs-12 col-sm-12 rth321 prflimg padd_l_r"></div>
+                    
+                    </span>
+                    
+                    <!-- file upload -->
                    
+                    <?php }else if($user_view['UserMaster']['user_type_id']=='2'){?>
+                     <span><img src="<?php echo HTTP_ROOT;?>/img/Buyer/profile/<?php echo $user_view['UserMaster']['profile_image'];?>" class="rth321" style="width:123px;height:132px;border-radius:50%;border:2px solid white;"></span>
+                     
+                    <!-- file upload -->
+                    
+                    <?php }else if($user_view['UserMaster']['user_type_id']==''){?>
+                     <span><img src="<?php echo $user_view['UserMaster']['profile_image'];?>" class="rth321 prflimg" style="width:123px; height:132px;border-radius:50%;border:2px solid white;"></span>
+                     <!-- file upload -->
+                    
+                    <?php }else{?>
+                    <span><img src="<?php echo HTTP_ROOT;?>/img/profile_img/ruth_img.png" class="rth321 prflimg" style="width:123px; height:132px;border-radius:50%;border:2px solid white;"></span>
+                    <!-- file upload -->
+                    
 
-                 ?>
+                    <?php }?>
 
                     <span class="fa-camera-br" onclick="ClickUpload()">
                       
@@ -252,29 +251,14 @@ border-radius:30%;
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4 mntop">
                     <div class="pull-right">
-                        <img id="notification" src="<?php echo HTTP_ROOT;?>/img/profile_img/notification.png" class="note321">
-                        <?php if($user_view['UserMaster']['user_type_id']=='1'){ ?>
-<a href="<?php echo HTTP_ROOT;?>/Homes/msgInboxVendor">
-<?php if(!empty($ven_msg)){ ?>
-<span class="numberCircle12" style="font-size:15px;">&nbsp;<?php echo $ven_msg; ?>&nbsp;</span>
-<?php } ?>
-<i class="fa fa-envelope-o" style="color:white;font-size:35px;"></i>
-</a>  
-<?php }else{ ?>
-<a href="<?php echo HTTP_ROOT;?>/Homes/msgInboxLearner">
-<?php if(!empty($ven_msg)){ ?>
-<span class="numberCircle12" style="font-size:15px;">&nbsp;<?php echo $ven_msg; ?>&nbsp;</span>
-<?php } ?>
-<i class="fa fa-envelope-o" style="color:white;font-size:35px;"></i>
-</a>    
-<?php } ?>
-                       
+                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/notification.png" class="note321">
+                        <img src="<?php echo HTTP_ROOT;?>/img/profile_img/message.png" class="msg543">
                     </div>
                 </div>
               </div>  
             </div>
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div style='background-color: rgb(0, 205, 198); border-radius: 5px; float: right; padding-left: 15px; width: 85px;'>
+            <div class="col-md-12 col-sm-12 col-xs-12 ">
+              <div class="pull-right edit_with_img">
                 <span onclick="ClickUpload1()">
                   <i class="fa fa-camera edit-bg" aria-hidden="true"></i>
                   <span class="edit-photo">Edit</span>
