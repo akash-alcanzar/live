@@ -24,7 +24,7 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
      $Allsegment4=$this->requestAction(array('controller'=>'Homes', 'action'=>'getSegment'),array('pass'=>array(4)));
      $Allsegment5=$this->requestAction(array('controller'=>'Homes', 'action'=>'getSegment'),array('pass'=>array(5)));
      $Allsegment6=$this->requestAction(array('controller'=>'Homes', 'action'=>'getSegment'),array('pass'=>array(6)));
-	 $result =$this->requestAction(array('controller'=>'Homes', 'action'=>'cat_segments'));
+   $result =$this->requestAction(array('controller'=>'Homes', 'action'=>'cat_segments'));
 ?>
 
 <?php
@@ -80,11 +80,11 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
                           <?php echo $this->Element('home_comman_logout'); ?>
                         
                         <?php }else{ ?>
-						            <span>
+                        <span>
                           <?php echo $this->Html->link('Login/Sign Up', array('controller' => 'Homes','action' => 'login'), array('escape' => false,'id'=>'','class'=>'b_signup','style'=>'padding:10px 12px;'));
                           ?>
                         </span>
-						<?php
+            <?php
                       }
                       ?>
 
@@ -119,14 +119,14 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
               <!-- <div class="col-md-12 col-md-12 col-sm-12 col-xs-12 br_pad brn_pad"> -->
                  <!--  <div class="col-sm-12  col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 col-xs-12 brn_pad"> -->
                  
-                      <div class="col-md-3 col-sm-3 col-xs-12 b_logo brn_pad b_widh sr_29_07_lgo_img">
-                      <img src="<?php echo HTTP_ROOT;?>/img/beta.png" style="width: 50px;" >
+                      <div class="bdr col-md-3 col-sm-3 col-xs-12 b_logo brn_pad b_widh sr_29_07_lgo_img">
+                      <img src="<?php echo HTTP_ROOT;?>/img/beta.png" style="width: 37px;" >
                         <a href="<?php echo HTTP_ROOT;?>">
                           <img src="<?php echo HTTP_ROOT;?>/img/logo.jpg" class="blwdh">
                         </a>
                       </div>
                       <!-- ******************new alignment***************** -->
-                      <div class="col-md-6 col-sm-5 col-xs-12 padd_l_r b_fcb1 b_pad1 sr_29_07_md_screen">
+                    <div class="bdr col-md-6 col-sm-5 col-xs-12 padd_l_r b_fcb1 b_pad1 sr_29_07_md_screen">
                         <center class="bl_cntr">
                           <form action="<?php echo HTTP_ROOT;?>/vendor_classes/lists" name="s_cat" method="post">
                             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -169,8 +169,8 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
                               </div>
                             </div>    
                         </center>
-                      </div>
-                      <div class="col-md-3 col-sm-4 col-xs-12 padd_l_r b_fcb2 b_pad12 sr_15_07_connect_btn">
+                    </div>
+                      <div class="col-md-3 col-sm-4 col-xs-12 padd_l_r b_fcb2 b_pad12 sr_15_07_connect_btn bdr">
                           <div class="pull-right b_lft">
                             <button class="btn btclass1 fbttp" style="padding:5px 20px;"><img src="<?php echo HTTP_ROOT;?>/img/iconfind.png" />Find</button>  <a href="<?php echo HTTP_ROOT;?>/Connect/connectpage">
                             <button class="btn btclassnt1  fbttp" style="padding:5px 10px;">
@@ -189,32 +189,32 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
         <div id="navbar" class="navbar-collapse collapse na_bg_clr012">
         <ul id="top-menu" class="nav navbar-nav navbar-right main-nav col-xs-12 col-sm-12 padd_l_r">
 <?php 
-	foreach($result as $res){
-		?>
-		<li class="dropdown active first maiin-menu-list">
-		<?php 
-			//echo $this->Html->link($res['Category']['category_name'], array($res['Category']['slug']), array('class' => '# pad_right_5 maiin-menu-list-link', array('escape' => false)), array('escape' => false));
-	?>
+  foreach($result as $res){
+    ?>
+    <li class="dropdown active first maiin-menu-list">
+    <?php 
+      //echo $this->Html->link($res['Category']['category_name'], array($res['Category']['slug']), array('class' => '# pad_right_5 maiin-menu-list-link', array('escape' => false)), array('escape' => false));
+  ?>
      <a href="<?php echo HTTP_ROOT;?>/<?php echo $res['Category']['slug']; ?>" class="# pad_right_5 maiin-menu-list-link">
                 <?php echo $res['Category']['category_name'];?>
                 <span class="fa fa-angle-down"></span>
               </a>
-	<ul class="dropdown-menu" role="menu" style="background-color:#38B9B5; z-index:100000;">
-    	<li>
-        	<?php 
-				foreach($res['ClassSegment'] as $seg){
-						//echo $this->Html->link($seg['segment_name'], array('controller' => 'vendor_classes','action'=>'lists',$res['Category']['slug'],$seg['slug']));
-						?>
+  <ul class="dropdown-menu" role="menu" style="background-color:#38B9B5; z-index:100000;">
+      <li>
+          <?php 
+        foreach($res['ClassSegment'] as $seg){
+            //echo $this->Html->link($seg['segment_name'], array('controller' => 'vendor_classes','action'=>'lists',$res['Category']['slug'],$seg['slug']));
+            ?>
                         <a href="<?php echo HTTP_ROOT;?>/<?php echo $res['Category']['slug'];?>/<?php echo $seg['slug'];?>">
                     <?php echo $seg['segment_name'];?></a>
                         <?php
-					}
-			?>
+          }
+      ?>
         </li>
     </ul>
     </li>
     <?php
-	}
+  }
 ?>
 </ul>
         <?php /*?>  <ul id="top-menu" class="nav navbar-nav navbar-right main-nav col-xs-12 col-sm-12 padd_l_r">
