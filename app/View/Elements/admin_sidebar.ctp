@@ -123,14 +123,22 @@ php ?>
                 <?php echo $this->Html->link('<i class="fa fa-picture-o"></i>
                   <span class="listyle">Manage Class</span>', array('controller'=>'Admins','action'=>'manageClass'), array('escape'=>false));?>
               </li>
-               <li class="col-xs-12 pad" id="Manage_Activity_Request">
+              
+							<li class="col-xs-12 pad" id="Manage_Blog_Request">
+                <?php echo $this->Html->link('<center><img src="'.HTTP_ROOT.'/img/connect/blog.png" alt="img not found"></center>
+                  <span class="listyle">Manage Blog Request</span>', array('controller'=>'Admins','action'=>'manageBlogRequest'),array('escape'=>false));?>
+              </li>
+
+              <li class="col-xs-12 pad" id="Manage_User_Post_Request">
+                <?php echo $this->Html->link('<center><img src="'.HTTP_ROOT.'/img/connect/user_post.png" alt="img not found"></center> 
+                <span class="listyle">Manage User Post Request</span>', array('controller'=>'Admins','action'=>'manageUserPostRequest'),array('escape'=>false));?>
+              </li>
+							
+							<li class="col-xs-12 pad" id="Manage_Activity_Request">
                 <?php echo $this->Html->link('<i class="fa fa-picture-o"></i>
                   <span class="listyle">Manage Activity Request</span>', array('controller'=>'Admins','action'=>'manageActivityRequest'),array('escape'=>false));?>
               </li>
-              <li class="col-xs-12 pad" id="Manage_Blog_Request">
-                <?php echo $this->Html->link('<i class="fa fa-picture-o"></i>
-                  <span class="listyle">Manage Blog Request</span>', array('controller'=>'Admins','action'=>'manageBlogRequest'),array('escape'=>false));?>
-              </li>
+             
               <li class="col-xs-12 pad">
 <a class="nohover" href="">
 <i class=""></i>
