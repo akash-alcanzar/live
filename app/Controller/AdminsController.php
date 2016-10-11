@@ -2344,7 +2344,8 @@ public function addCatalogGroup(){
    
     /*===============================Add Messages When Admin Reject Catalog Request===============================*/
    $vendor_class=$this->VendorClasse->find('first',array('conditions'=>array('VendorClasse.id'=>$check['RequestCatalog']['class_id']),'fields'=>array('class_topic')));
-   
+   $mobile=$this->UserMaster->find('first',array('conditions'=>array('id'=>$vendor_class['VendorClasse']['user_id'])));
+   $mobile_no=$mobile['UserMaster']['mobile'];
    $dataArray['user_id']=$check['RequestCatalog']['vendor_id'];
    $dataArray['message']="Your Request ".$vendor_class['VendorClasse']['class_topic']." For Catalog Class is Approved By Admin In ".$str1." Group";
    $dataArray['status']=0;
@@ -2370,6 +2371,12 @@ public function addCatalogGroup(){
      $vendor_class['VendorClasse']['catalogue_status']=1;
      $this->VendorClasse->save($vendor_class);
      }
+     $msg='Congratulations,'.$dataArray['message'];
+     $this->sendMail('approveRequest',$email,$msg);
+     $msg = str_replace(" ","%20",$msg);
+     $Url = 'http://193.105.74.159/api/v3/sendsms/plain?user=braingroom&password=3e4IG3WL&sender=BRAING&SMSText='.$msg.'&type=longsms&GSM=91'.$mobile_no;
+  
+    $this->openurl($Url);
       $this->requestAction(array('controller'=>'Cpanels', 'action'=>'generateMessages'), 
                     array('pass'=>array('121','1')));
 
@@ -2382,6 +2389,21 @@ public function addCatalogGroup(){
   
   }
 }
+public function openurl($url) {
+   
+    $ch=curl_init();
+    curl_setopt($ch,CURLOPT_URL,$url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch,CURLOPT_POSTFIELDS,$postvars);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+    curl_setopt($ch,CURLOPT_TIMEOUT, '3');  
+    $content = trim(curl_exec($ch)); 
+    
+    $response = curl_exec($ch);
+    
+    return $response;
+    curl_close($ch); 
+  } 
 public function addGroup(){
   $this->checkUser();
   $this->layout="admin_layout";
@@ -2884,6 +2906,26 @@ public function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                                 <span style="font-size:14px;color:#666666;font-style:italic"></span>
                             </p>
                             <p>Class information is.</p>'.$activationCode.'<p></p>
+                            <hr style="border:0;border-top:1px solid #d7d7d7;min-height:0">
+                            <p>If you have any problems, or believe you have received this in error, please contact us.</p>
+                            <p></p>
+                            <p>BRAINGROOM</p>
+                            <span style="font-size:11px;color:#8a8a8a;line-height:100%">Copyright © 2014 braingroom.com All rights reserved.</span>
+                        </div>        
+                    </body>
+                </html>');
+                $sendgrid->send($email);
+                break ;
+                case 'approveRequest':                
+                $sendgrid = new SendGrid('madhulas','thirdeye123');
+                $email     = new SendGrid\Email();
+                $email->addTo($mail)->addTo('')->setFrom('support@braingroom.com')->setSubject('Add Catalog Request')->setText('!')->setHtml('
+                <html>
+                    <head><title></title></head>
+                    <body>
+                        <div style="border-radius: 6px;background-color: rgba(255,255,255,0.3);padding: 10px;width: 81%;margin-left:20px;">
+                        <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+                        <p>'.$activationCode.'</p>
                             <hr style="border:0;border-top:1px solid #d7d7d7;min-height:0">
                             <p>If you have any problems, or believe you have received this in error, please contact us.</p>
                             <p></p>
