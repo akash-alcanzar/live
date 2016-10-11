@@ -12084,6 +12084,12 @@ public function openurl($url) {
     return $response;
     curl_close($ch); 
   } 
+public function quoteSuccess(){
+   $this->layout='book_layout';
+}
+public function quoteFailure(){
+    $this->layout='book_layout';
+}
 
 
 
