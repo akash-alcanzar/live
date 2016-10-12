@@ -3226,8 +3226,65 @@ public function upload_csv_classes(){
       } 
   }
 
-  
+  // Group post data 
+   public function manageGroupPostRequest(){
     
+    $this->checkUser();
+    $this->layout="admin_layout";
+    $data1 = $this->GroupPost->find('all');
+    $data = $this->GroupPost->find('all',array(
+                              'joins'  =>  array(
+                                              array(
+                                                  'table' => 'bg_user_masters',
+                                                  'alias' => 'usermaster',
+                                                  'conditions' => array('GroupPost.user_id = usermaster.id',
+                                                                        'usermaster.status'=>1),
+                                                  ),
+                                               array(
+                                                  'table' => 'bg_connect_groups',
+                                                  'alias' => 'conntgrp',
+                                                  'conditions' => array('GroupPost.group_id = conntgrp.id',
+                                                                        'conntgrp.status'=>1)) 
+                                                  ),
+                            'conditions'=>array('GroupPost.status !='=>2),
+                            'fields'  => array('GroupPost.*','conntgrp.*','usermaster.*'),
+                            ));
+        
+    if(!empty($data)){
+
+      $this->set('data',$data);
+
+    }
+  }
+
+  public function groupPostRequestaccept(){
+      
+      if(!empty($this->params['pass'][0])){
+            $dataArray['id']=base64_decode($this->params->pass[0]);
+            $dataArray['status']=1;
+            $this->GroupPost->save($dataArray);
+          
+            $this->redirect(array('controller'=>'Admins','action'=>'manageGroupPostRequest'));
+         }else{
+            $this->redirect(array('controller'=>'Admins','action'=>'manageGroupPostRequest'));
+      } 
+  }
+
+  public function groupPostRequestrejected(){
+       
+      if(!empty($this->params['pass'][0])){
+         $dataArray['id']=base64_decode($this->params->pass[0]);
+         $dataArray['status']=2;
+         $dataArray['modify_date']=time();
+         $this->GroupPost->save($dataArray);
+       
+         $this->redirect(array('controller'=>'Admins','action'=>'manageGroupPostRequest')); 
+      }else{
+        $this->redirect(array('controller'=>'Admins','action'=>'manageGroupPostRequest'));
+      } 
+  }
+	
+	
 
 }
 
