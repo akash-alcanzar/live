@@ -2625,15 +2625,16 @@ public function buyFailure(){
           $this->set('text_msg',$text_msg);
           
 }
-}
+}  
 public function buySuccess(){ 
 
     //$this->autoRender = false;
     $this->layout='book_layout';
-    $status     = $_POST["status"];
-    $amount     = $_POST["amount"];
-    $txnid      = $_POST["txnid"];
-    $firstname  = $_POST["firstname"];
+    $status        = $_POST["status"];
+    $amount        = $_POST["amount"];
+    $txnid         = $_POST["txnid"];
+    $firstname     = $_POST["firstname"];
+    $send_html_sms = '';
     
     $posted_hash=$_POST["hash"];
     $key=$_POST["key"];
@@ -2674,15 +2675,17 @@ public function buySuccess(){
 
         foreach ($all_gift_cupan as $key => $value){
 
-              $gift_email_id   = $value['GiftCupan']['email'];
-              $gift_rupees     = $value['GiftCupan']['rupees'];
-              $no_of_coupons   = $value['GiftCupan']['no_of_coupons'];
-              $reciepent_name  = $value['GiftCupan']['reciepent_name'];
-              $class_id        = $value['GiftCupan']['class_id'];
-              $gift_card_id    = $value['GiftCupan']['gift_card_id'];
-              $gift_by         = $value['GiftCupan']['gift_by'];
-              $gift_type       = $value['GiftCupan']['gift_type'];
-              $ngo_id          = $value['GiftCupan']['ngo_id']; 
+              $gift_email_id          = $value['GiftCupan']['email'];
+              $gift_rupees            = $value['GiftCupan']['rupees'];
+              $no_of_coupons          = $value['GiftCupan']['no_of_coupons'];
+              $reciepent_name         = $value['GiftCupan']['reciepent_name'];
+              $class_id               = $value['GiftCupan']['class_id'];
+              $gift_card_id           = $value['GiftCupan']['gift_card_id'];
+              $gift_by                = $value['GiftCupan']['gift_by'];
+              $gift_type              = $value['GiftCupan']['gift_type'];
+              $ngo_id                 = $value['GiftCupan']['ngo_id']; 
+              $f_cat_id               = $value['GiftCupan']['cat_id'];
+              $gift_email_id_mobile   = $value_email['GiftCupan']['mobile'];
               $no_of_coupons   = trim($no_of_coupons);
 
               
@@ -2705,14 +2708,16 @@ public function buySuccess(){
               //$share_text = array('gift_rupees'=>$gift_rupees,'no_of_coupons'=>$no_of_coupons,);
               if($no_of_coupons=='555'){
                   
+                  $bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner4.jpg';
                   $send_mail_html='<div>Hi &nbsp;'.$reciepent_name.'</div><br><div>You have denoted the amount of Rs &nbsp;'.$gift_rupees.' to NGO successfully.</div></br><hr>';
-                  $this->sendMail('giftmailFailure',$ngo_email_id,$send_mail_html);
+                  $this->sendMail('giftmailFailure',$ngo_email_id,$send_mail_html,$bg_img);
                 }
                 else if($no_of_coupons=='444'){
                   $class_name     = $find_class_img[0]['VendorClasse']['class_topic'];
                   
+                  $bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner4.jpg';
                   $send_mail_html='<div>Hi &nbsp;'.$reciepent_name.'</div><br><div>This is to inform you that '.$firstname.' have been gifted a card '.$class_name.'&nbsp;</div></br><hr>';
-                  $this->sendMail('giftmailFailure',$gift_email_id,$send_mail_html);
+                  $this->sendMail('giftmailFailure',$gift_email_id,$send_mail_html,$bg_img);
                 }
                 else if($reciepent_name!=''){
                   $all_gift_cupan_email = $this->GiftCupan->find('all', array('conditions' => array('GiftCupan.term_id' =>$find_term_id,'GiftCupan.status'=>1,'GiftCupan.email'=>$gift_email_id)));
@@ -2734,16 +2739,63 @@ public function buySuccess(){
                       if(empty($all_cat_by_gift)){
                         $gift_cat_name='General';
                       }
-                          $send_mail_html.='<div>Category Name : &nbsp;&nbsp;'.$gift_cat_name.'</div></br><div>Coupon Amount &nbsp;&nbsp;'.$gift_rupees_email.'</div></br><div>Coupon Code &nbsp;&nbsp;:'.$no_of_coupons_email_r.'</div></br><hr>';
+
+                      $send_mail_html.='<div>Category Name : &nbsp;&nbsp;'.$gift_cat_name.'</div></br><div>Coupon Amount &nbsp;&nbsp;'.$gift_rupees_email.'</div></br><div>Coupon Code &nbsp;&nbsp;:'.$no_of_coupons_email_r.'</div></br><hr>';
+                      $send_html_sms.= 'Category Name :'.$gift_cat_name.',Coupon Amount :'.$gift_rupees_email.', Coupon Code :'.$no_of_coupons_email_wr;
                       }
-                      $this->sendMail('giftmailFailure',$gift_email_id_email,$send_mail_html);
-                       $send_mail_html='';
-                    
-                 }
+
+                    if($cat_id_email==1){
+                                    $bg_img = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner4.jpg';
+                                  }
+                    else if($cat_id_email==2){
+                                    $bg_img = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner6.jpg';
+                                  }
+                    else if($cat_id_email==3){
+                                    $bg_img = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner8.jpg';
+                                  }
+                    else if($cat_id_email==4){
+                                    $bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner5.jpg';
+                                  }
+                    else if($cat_id_email==5){
+                                    $bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner7.jpg';
+                                  }
+                    else if($cat_id_email==6){
+                                    $bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner9.jpg';
+                                  }
+                    else{
+                            $bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner3.jpg';
+                        }
+
+                    $this->sendMail('giftmailFailure',$gift_email_id_email,$send_mail_html,$bg_img);
+                    $send_mail_html='';
+                    //$send_html_sms = str_replace(" ","%20",$send_html_sms);
+                    //$send_html_sms = 'Test BY Rohit';
+                    //$url_sms = 'http://193.105.74.159/api/v3/sendsms/plain?user=braingroom&password=3e4IG3WL&sender=BRAING&SMSText='.$send_html_sms.'&type=longsms&GSM=91'.$gift_email_id_mobile;
+                        
+                            //$ch = curl_init();
+                            //curl_setopt($ch, CURLOPT_URL, $url_sms);
+                            //curl_setopt($ch, CURLOPT_HEADER, 0);
+                            //curl_exec($ch);
+                            //curl_close($ch); 
+                      }
                  else if($reciepent_name==''){
 
-                  $all_gift_cupan_email = $this->GiftCupan->find('all', array('conditions' => array('GiftCupan.term_id' =>$find_term_id,'GiftCupan.status'=>1)));
-                      foreach ($all_gift_cupan_email as $key => $value_email){
+                  $send_mail_html.= '<div style="font-size:20px;font-weight:bold;color:#6397cb;line-height:110%">Congratulations, You have received a BrainGroom Gift Coupon!</div><br></br>';
+
+                  $gift_cat_id  = $this->GiftCupan->find('all',array('conditions' => array('GiftCupan.term_id' =>$find_term_id,'GiftCupan.status'=>1),'fields'=>array('cat_id'),'group'=>'GiftCupan.cat_id'));
+                  //echo "<pre>";
+                  //print_r($gift_cat_id);
+                  //echo "</pre>";
+                  //rohit
+                  //die;
+                  foreach ($gift_cat_id as $key => $value_cat_id){
+
+                      $find_cat_id = $value_cat_id['GiftCupan']['cat_id'];
+                      //echo $find_cat_id;
+                      //die;
+
+                      $all_gift_cupan_email = $this->GiftCupan->find('all', array('conditions' => array('GiftCupan.term_id' =>$find_term_id,'GiftCupan.cat_id'=>$find_cat_id,'GiftCupan.status'=>1)));
+                        foreach ($all_gift_cupan_email as $key => $value_email){
 
                                 $gift_email_id_email   = $value_email['GiftCupan']['email'];
                                 $gift_rupees_email     = $value_email['GiftCupan']['rupees'];
@@ -2754,6 +2806,7 @@ public function buySuccess(){
                                 $gift_by_email         = $value_email['GiftCupan']['gift_by'];
                                 $gift_type_email       = $value_email['GiftCupan']['gift_type'];
                                 $cat_id_email          = $value_email['GiftCupan']['cat_id'];
+                                $gift_email_id_mobile   = $value_email['GiftCupan']['mobile'];
                                 $no_of_coupons_email   = trim($no_of_coupons);
 
                                 $all_cat_by_gift = $this->Category->find('all', array('conditions' => array('Category.id' =>$cat_id_email,'Category.status'=>1),'fields'=>array('Category.id','Category.category_name')));
@@ -2762,19 +2815,67 @@ public function buySuccess(){
                                 if(empty($all_cat_by_gift)){
                                   $gift_cat_name='General';
                                 }
-                                $send_mail_html.='<div>Category Name : &nbsp;&nbsp;'.$gift_cat_name.'</div></br><div>Coupon Amount &nbsp;&nbsp;'.$gift_rupees_email.'</div></br><div>Coupon Code &nbsp;&nbsp;:'.$no_of_coupons_email_wr.'</div></br><hr>';
-                              }
+                                 $cat_id_email =  trim($cat_id_email);
+                                 //echo $cat_id_email;
+                                //die;
+                                
+                                $send_mail_html.='<div>Category Name : &nbsp;&nbsp;'.$gift_cat_name.'</div></br>
+                                                  <div>Coupon Amount &nbsp;&nbsp;'.$gift_rupees_email.'</div></br>
+                                                  <div>Coupon Code &nbsp;&nbsp;:'.$no_of_coupons_email_wr.'</div></br></br>
+                                                  </br><hr></br></br>
+                                                  <div style="font-size:10px;">Now you can log on to <a href="http://www.braingroom.com">www.braingroom.com</a> and can book your favourite class with this coupon id !</div>';
+                                $send_html_sms.= 'Category Name :'.$gift_cat_name.',Coupon Amount :'.$gift_rupees_email.',Coupon Code :'.$no_of_coupons_email_wr;
+                          }
                     
-                    $this->sendMail('giftmailFailure',$gift_email_id,$send_mail_html);
-                    $send_mail_html='';
+                    //$bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner4.jpg';
+                    
+                   if($cat_id_email==1){
+                                    $bg_img = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner4.jpg';
+                                  }
+                    else if($cat_id_email==2){
+                                    $bg_img = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner6.jpg';
+                                  }
+                    else if($cat_id_email==3){
+                                    $bg_img = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner8.jpg';
+                                  }
+                    else if($cat_id_email==4){
+                                    $bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner5.jpg';
+                                  }
+                    else if($cat_id_email==5){
+                                    $bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner7.jpg';
+                                  }
+                    else if($cat_id_email==6){
+                                    $bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner9.jpg';
+                                  }
+                    else{
+                            $bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner3.jpg';
+                        }
+                                  //echo $cat_id_email;
+                                  //die;
+                    $this->sendMail('giftmailFailure',$gift_email_id,$send_mail_html,$bg_img);
+                    //$send_mail_html='';
+                    //$send_html_sms = str_replace(" ","%20",$send_html_sms);
+                    //$send_html_sms = 'Test BY Rohit';
+                    $url_sms = 'http://193.105.74.159/api/v3/sendsms/plain?user=braingroom&password=3e4IG3WL&sender=BRAING&SMSText='.$send_html_sms.'&type=longsms&GSM=91'.$gift_email_id_mobile;
+                    //echo $url_sms;
+                    //die;
+                    //$this->openurl($Url); 
+                    // create a new cURL resource
+                      //$ch = curl_init();
+                      // set URL and other appropriate options
+                      //curl_setopt($ch, CURLOPT_URL, $url_sms);
+                      //curl_setopt($ch, CURLOPT_HEADER, 0);
+                      // grab URL and pass it to the browser
+                      //curl_exec($ch);
+                      // close cURL resource, and free up system resources
+                      //curl_close($ch); 
 
                   //$send_mail_html.='<div>Category Name : &nbsp;&nbsp;'.$gift_cat_name.'</div></br><div>Coupon Amount &nbsp;&nbsp;'.$gift_rupees.'</div></br><div>Coupon Code &nbsp;&nbsp;:'.$no_of_coupons.'</div></br><hr>';
-                  
+                  }
                 }
               }
-                 
-        if(isset($_POST["additionalCharges"])) {
-         $additionalCharges=$_POST["additionalCharges"];
+
+       $additionalCharges=$_POST["additionalCharges"];
           $retHashSeq = $additionalCharges.'|'.$salt.'|'.$status.'|||||||||||'.$amount.'|'.$txnid.'|'.$key;
           
                     }
