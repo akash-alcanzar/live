@@ -2708,14 +2708,14 @@ public function buySuccess(){
               //$share_text = array('gift_rupees'=>$gift_rupees,'no_of_coupons'=>$no_of_coupons,);
               if($no_of_coupons=='555'){
                   
-                  $bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner4.jpg';
+                  $bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/2b.jpg';
                   $send_mail_html='<div>Hi &nbsp;'.$reciepent_name.'</div><br><div>You have denoted the amount of Rs &nbsp;'.$gift_rupees.' to NGO successfully.</div></br><hr>';
                   $this->sendMail('giftmailFailure',$ngo_email_id,$send_mail_html,$bg_img);
                 }
                 else if($no_of_coupons=='444'){
                   $class_name     = $find_class_img[0]['VendorClasse']['class_topic'];
                   
-                  $bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner4.jpg';
+                  $bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/2b.jpg';
                   $send_mail_html='<div>Hi &nbsp;'.$reciepent_name.'</div><br><div>This is to inform you that '.$firstname.' have been gifted a card '.$class_name.'&nbsp;</div></br><hr>';
                   $this->sendMail('giftmailFailure',$gift_email_id,$send_mail_html,$bg_img);
                 }
