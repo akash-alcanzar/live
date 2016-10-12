@@ -134,9 +134,14 @@ php ?>
                 <span class="listyle">Manage User Post Request</span>', array('controller'=>'Admins','action'=>'manageUserPostRequest'),array('escape'=>false));?>
               </li>
 							
-							<li class="col-xs-12 pad" id="Manage_Activity_Request">
-                <?php echo $this->Html->link('<i class="fa fa-picture-o"></i>
+	      <li class="col-xs-12 pad" id="Manage_Activity_Request">
+                <?php echo $this->Html->link('<center><img src="'.HTTP_ROOT.'/img/connect/group_activity_icon.png" alt="img not found"></center>
                   <span class="listyle">Manage Activity Request</span>', array('controller'=>'Admins','action'=>'manageActivityRequest'),array('escape'=>false));?>
+              </li>
+              
+              <li class="col-xs-12 pad" id="Manage_group_post_Request">
+                <?php echo $this->Html->link('<center><img src="'.HTTP_ROOT.'/img/connect/group_post_icon.png" alt="img not found"></center>
+                  <span class="listyle">Manage Group Post Request</span>', array('controller'=>'Admins','action'=>'manageGroupPostRequest'),array('escape'=>false));?>
               </li>
              
               <li class="col-xs-12 pad">
