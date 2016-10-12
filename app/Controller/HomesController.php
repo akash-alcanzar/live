@@ -1171,7 +1171,7 @@ public function requestCatalogue(){
       $userArray['catalogue_status']=0;
       $this->VendorClasse->save($userArray);
       $this->sendMail('catalogRequest',$email,$email);
-      $msg='Your Add class to catalogue request has been sent to BrainGroom Admin. You will get back from them in 24 to 48 hrs.'
+      $msg='Your Add class to catalogue request has been sent to BrainGroom Admin. You will get back from them in 24 to 48 hrs.';
       $msg = str_replace(" ","%20",$msg);
       $Url = 'http://193.105.74.159/api/v3/sendsms/plain?user=braingroom&password=3e4IG3WL&sender=BRAING&SMSText='.$msg.'&type=longsms&GSM=91'.$mobile;
       $this->openurl($Url);
