@@ -8599,10 +8599,10 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                 $headers .= 'From: SKILLGROK Team<support@braingroom.com>' . "\r\n";
                 mail($to, $subject, $message, $headers);*/
                 break ;
-                case 'giftmailFailure' : 
+               case 'giftmailFailure' : 
                       $sendgrid = new SendGrid('madhulas','thirdeye123');
                       $email     = new SendGrid\Email();
-                      $bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/bg_img.png';
+                      //$bg_img    = 'http://162.243.205.148/braingroom/app/webroot/img/gift_mail_image/banner4.jpg';
                       //echo $bg_img;
                       //die;
                       $email->addTo($mail)->addTo('')->setFrom('support@braingroom.com')->setSubject('braingroom| Gift')->setText('!')->setHtml('
@@ -8611,7 +8611,7 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                           <meta name="viewport" content="width=device-width, initial-scale=1">
                           <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
                           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-                          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+                          <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
                                          </head>
                                         <body>
                             <div class="" style="width:100%!important;height:100%!important;background-color:white!important;">
@@ -8619,9 +8619,7 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                             <center>  
                               <div class="bdr" style="background: url('.$bg_img.') no-repeat ; width: 80%; height:100%;margin-top:30px;">
                                 <div class="" style="width:80%;position:absolute">
-                                  <center>
-                                    <img src="162.243.205.148/gifting_app/logo.png" style="width:20%!important;">
-                                  </center>
+                                  <div style="height:150px;" class="col-xs-12 col-sm-12"></div>
                                 </div>
                                  <div style="margin-top: 15%; ">
                                   <div class="" style="">
@@ -8630,11 +8628,7 @@ function sendMail($mailFor, $mail= NULL, $activationCode=NULL){
                                     </span>
                                   </div>
                                   <div class="" style="background:white">
-                                    <span style="">
-                                      <center style="color:red!important; font-size:24px!important;margin-top: -4px !important;">
-                                         Gift Details
-                                      </center>
-                                      <br/>
+                                    <span style=""><br/>
                                       <center style="color:gray!important; font-size:16px!important; padding-bottom: 10px!important;">'.$activationCode.'</center>
                                     </span>
                                   </div>
