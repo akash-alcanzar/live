@@ -31,10 +31,12 @@ input[type="checkbox"] {
    line-height: 2.1ex;
 }
 
+
 input[type="checkbox"] {
     position: absolute;
     left: -999em;
 }
+
 
 input[type="checkbox"] + label {
     position: relative;
@@ -254,7 +256,7 @@ input[type="checkbox"] + label::before {
                 <?php if(empty($user_id)){ ?>
                     <span class="my_grp_tab" style="color:#2bcdc1">
                       <center>
-                        To enjoy this feature go for <a href="<?php echo HTTP_ROOT?>/Homes/login">Login</a>.
+                        To enjoy this feature go for <a href="<?php echo HTTP_ROOT?>/Homes/login" style="color:#0e1311">Login</a>.
                       </center>
                     </span>
                 <?php }else{ ?> 
@@ -303,7 +305,7 @@ input[type="checkbox"] + label::before {
                         <span class="connt_flex_middle_text" id="view_text" style="color:white;">View Activity Request</span>    
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 top_space" id="add_acty_form" style="display:none;">
-                      <?php if(!empty($user_id) && !empty($group_data)){ ?>
+                      <?php  if(!empty($user_id) && !empty($group_data)){ ?>
                         <span class="connt_flex_middle_text_part2" id="open_model" style="display:block;">
                           <i class="fa fa-plus-square-o" aria-hidden="true"></i>
                                 Add Activity Request
@@ -908,6 +910,36 @@ input[type="checkbox"] + label::before {
                         <span class="err" id="err_time">&nbsp;</span>
                     </fieldset>
                 </div>
+
+                <!-- Choose Group -->
+
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <fieldset class="form-group ">
+                    <select multiple="multiple" class="input_login form-control" name="select_group" id="select_group"/>
+                      <?php foreach($segment_data as $data) { ?>
+                          <option value="<?php echo $data['ConnectSegmentGroup']['id']; ?>">
+                            <?php echo $data['ConnectSegmentGroup']['group_name']; ?>
+                          </option>
+                      <?php } ?>
+                    </select>   
+                    <span class="err" id="err_select_group">&nbsp;</span>
+                  </fieldset>
+                </div>
+
+                <!-- Choose Activity Group  -->
+                
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <fieldset class="form-group ">
+                    <select class="input_login form-control" name="select_activity" id="select_activity"/>
+                     <option>A Activity</option>
+                     <option>B Activity</option>
+                     <option>C Activity</option>
+                     <option>D Activity</option>
+                    </select>   
+                    <span class="err" id="err_select_activity">&nbsp;</span>
+                  </fieldset>
+                </div>
+
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <fieldset class="form-group ">
                     <input type="text" name="pro_location" id="pro_location" class="form-control input_login" placeholder="Proposed Location">
@@ -917,13 +949,14 @@ input[type="checkbox"] + label::before {
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <fieldset class="form-group ">
                         <select class="input_login form-control" name="pro_type" id="pro_type"/>
-                            <option value="-1">Select Proposed type</option>     
+                            <option value="-1">Privacy</option>     
                             <option value="1">Group User</option>
                             <option value="2">All User</option>       
                         </select>    
                         <span class="err" id="err_type">&nbsp;</span>
                     </fieldset>
                 </div>
+
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <fieldset class="form-group">
                     <input type="text" name="pro_note" id="pro_note" class="form-control input_login" placeholder="Note">
@@ -950,7 +983,7 @@ input[type="checkbox"] + label::before {
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <center>
                         <span class="connet_text_hed" style="color:#2bcdc1">
-                            Your activity request has been send successfully.     
+                            Your activity request has been send successfully for admin approval.     
                         </span>
                     </center>
                 </div>
@@ -961,19 +994,19 @@ input[type="checkbox"] + label::before {
     </div>
 </div>
 
-<div class="modal fade" id="no_group_msg1">
+<div class="modal fade" id="success_msg1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="background-color:#2bcdc1;">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title cat_mod_title">Alert Message</h4>
+                <h4 class="modal-title cat_mod_title">Success Message</h4>
             </div>
             <div class="modal-body">
                 <div class="">&nbsp;</div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <center>
                         <span class="connet_text_hed" style="color:#2bcdc1">
-                            You don't have any group for add activity or add post.Please add Group first !   
+                            Your Group Post request has been send successfully for admin approval.     
                         </span>
                     </center>
                 </div>
@@ -984,7 +1017,7 @@ input[type="checkbox"] + label::before {
     </div>
 </div>
 
-<div class="modal fade" id="notice_msg" data-keyboard="false" data-backdrop="static"> 
+<div class="modal fade" id="notice_msg" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="background-color:#2bcdc1;">
@@ -1009,7 +1042,90 @@ input[type="checkbox"] + label::before {
             </div>
         </div>
     </div>
+</div> 
+
+<div class="modal fade" id="post_id">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#2bcdc1;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" >&times;</button>
+                <h4 class="modal-title cat_mod_title">Add Group Post</h4>
+            </div>
+            <div class="modal-body">
+                <div class="">&nbsp;</div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"> 
+                  <fieldset class="form-group">
+                      <select class="input_login form-control" name="group_post_city" id="group_post_city"
+                       onchange="find_state(this.value)" />
+                           <option value="-1">Select City</option>
+                           <?php foreach($cities_data as $country) { ?>
+                              <?php if($country['City']['id'] == 1){ ?>
+                                  <option value="<?php echo $country['City']['id']; ?>">
+                                      <?php  echo $country['City']['name']; ?>
+                                  </option>
+                              <?php }else{ ?>
+                                  <option value="<?php echo $country['City']['id']; ?>" disabled>
+                                      <?php  echo $country['City']['name']; ?>
+                                  </option>
+                              <?php } ?>
+                           <?php } ?>
+                      </select>
+                      <span class="err" id="err_group_post_city">&nbsp;</span>
+                  </fieldset>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <fieldset class="form-group ">
+                      <select class="input_login form-control countries1" name="locaity" id="group_post_locaity"/>
+                        <option value="-1">Select Locality</option>
+                      </select>
+                      <span class="err" id="err_group_post_locaity">&nbsp;</span>
+                  </fieldset>   
+                </div>
+
+                <script type="text/javascript">
+                  function find_state(city_id){
+                    $.ajax({
+                      method: "POST",
+                      url: 'findlocality',
+                      data: 'city_id='+city_id
+                    })
+                   .done(function(states) {
+                       $('#group_post_locaity').html(states); 
+                    });
+                  }
+                </script>
+                
+                <!-- Choose Group -->
+
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <fieldset class="form-group ">
+                    <select multiple="multiple" class="input_login form-control" name="select_group_post" id="select_group_post"/>
+                      <?php foreach($segment_data as $data) { ?>
+                          <option value="<?php echo $data['ConnectSegmentGroup']['id']; ?>">
+                            <?php echo $data['ConnectSegmentGroup']['group_name']; ?>
+                          </option>
+                      <?php } ?>
+                    </select>   
+                    <span class="err" id="err_select_group_post">&nbsp;</span>
+                  </fieldset>                
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <fieldset class="form-group">
+                      <textarea rows="3" type="text" name="add_post" id="add_post" class="form-control input_login" 
+                            placeholder="Add Your Comments..."></textarea>
+                      <span class="err" id="err_post_commt">&nbsp;</span>
+                    </fieldset>
+                </div>
+
+            </div>
+            <div class="modal-footer" style="border-top:none;">
+                <button style="background-color:#2bcdc1;border:none;" type="button" class="btn btn-primary" id="add_post_click">Send</button>
+            </div>
+        </div>
+    </div>
 </div>
+  
 
 <!-- model boxes  -->
 <script>
@@ -1022,6 +1138,7 @@ input[type="checkbox"] + label::before {
       });
     }
 </script>
+
 <script>
     function getcatid(id){
 
@@ -1181,20 +1298,22 @@ input[type="checkbox"] + label::before {
       }); 
     }
 </script>
+
 <script>
     $(document).ready(function() {
 
         $('#getcat_ids').click(function(){      
 
-            var city        = $('#city').val();
-            var group_id    = $('#group_id_input').val();
-            var locality    = $('#locaity').val();
-            var pro_purpose = $('#pro_purpose').val();
-            var pro_date    = $('#datepicker').val();
-            var pro_time    = $('#basicExample').val();
-            var pro_locat   = $('#pro_location').val();
-            var pro_type    = $('#pro_type').val();
-            var pro_note    = $('#pro_note').val();    
+            var city             = $('#city').val();
+            var group_id         = $('#select_group').val();
+            var activity_name    = $('#select_activity').val();
+            var locality         = $('#locaity').val();
+            var pro_purpose      = $('#pro_purpose').val();
+            var pro_date         = $('#datepicker').val();
+            var pro_time         = $('#basicExample').val();
+            var pro_locat        = $('#pro_location').val();
+            var pro_type         = $('#pro_type').val();
+            var pro_note         = $('#pro_note').val();    
 
             if(document.getElementById("checkbox1").checked == true){
 
@@ -1250,6 +1369,20 @@ input[type="checkbox"] + label::before {
                 $('#err_time').html('&nbsp;');             
             }
 
+
+
+            if(group_id == null){
+               
+                $('#err_select_group').html('Please Select Group.');            
+                $("#select_group").focus();    
+                    return false;
+
+            }else{
+                
+                $('#err_select_group').html('&nbsp;');             
+            }
+
+
             if(pro_locat == ""){
                
                 $('#err_location').html('Please enter Proposed location.');            
@@ -1284,7 +1417,7 @@ input[type="checkbox"] + label::before {
             }
 
             $('.loader1').show();  
-            $.post("<?php echo Router::url( '/', true ).'Connect/addactivityrequest/'; ?>", {city : city, locality : locality,  pro_purpose : pro_purpose, pro_date : pro_date , pro_time : pro_time , pro_locat : pro_locat, pro_type : pro_type , pro_note : pro_note, group_id : group_id }, function(res){
+            $.post("<?php echo Router::url( '/', true ).'Connect/addactivityrequest/'; ?>", {city : city, locality : locality,  pro_purpose : pro_purpose, pro_date : pro_date , pro_time : pro_time , pro_locat : pro_locat, pro_type : pro_type , pro_note : pro_note, group_id : group_id ,activity_name : activity_name}, function(res){
                 
                 if(res == 1){ 
                     $('.loader1').hide();  
@@ -1294,35 +1427,67 @@ input[type="checkbox"] + label::before {
             });     
         });
 
+
+
         $('#add_post_click').click(function(){      
-          var user_view_post  = $('#add_post').val();
-          var group_id        = $('#group_id_input').val();
+         
+          var city_id         = $('#group_post_city').val();
+          var locality_id     = $('#group_post_locaity').val();
+          var group_id        = $('#select_group_post').val();
 	        var userid          = "<?php echo $user_id;?>";	
+          var user_view_post  = $('#add_post').val();
 
-           if(user_view_post == ""){
-                $('#err_post_commt').html('Please enter post.');            
-                $("#add_post").focus();    
-                  return false;
-            }else{
-                $('#err_post_commt').html('&nbsp;');             
-            }
+          
+          if(city_id == -1){
+            $('#err_group_post_city').html('Please select city.');            
+            $("#group_post_city").focus();    
+              return false;
+          }else{
+            $('#err_group_post_city').html('&nbsp;');             
+          }
 
-            $('.loader1').show();  
 
-            $.post("<?php echo Router::url( '/', true ).'Connect/addviewpost/'; ?>", { user_view_post : user_view_post , group_id : group_id }, function(res){
-                if(res == 1){
-                    $('.loader1').hide();
-                    $("#post_id").modal('toggle');
-                    $("#success_msg1").modal('toggle');  
-                    $.post("<?php echo Router::url( '/', true ).'Connect/changegrouppostdata/'; ?>", {userid : userid , group_id : group_id},
-                        function(res){ 
-                        if(res != ""){
-                            $("#show_grp_post_data").html(res);
-                            $('.loader1').hide();  
-                        }                             
-                    });
-                }            
-            }); 
+          if(locality_id == 0){
+            $('#err_group_post_locaity').html('Please select locality.');            
+            $("#group_post_locaity").focus();    
+              return false;
+          }else{
+            $('#err_group_post_locaity').html('&nbsp;');             
+          }
+
+
+          if(group_id == null){
+            $('#err_select_group_post').html('Please select Group.');            
+            $("#select_group_post").focus();    
+              return false;
+          }else{
+            $('#err_select_group_post').html('&nbsp;');             
+          }  
+
+
+          if(user_view_post == ""){
+            $('#err_post_commt').html('Please enter post.');            
+            $("#add_post").focus();    
+              return false;
+          }else{
+            $('#err_post_commt').html('&nbsp;');             
+          }
+
+          $('.loader1').show();  
+          $.post("<?php echo Router::url( '/', true ).'Connect/addviewpost/'; ?>", { city_id : city_id, locality_id : locality_id, user_view_post : user_view_post , group_id : group_id }, function(res){
+              if(res == 1){
+                  $('.loader1').hide();
+                  $("#post_id").modal('toggle');
+                  $("#success_msg1").modal('toggle');  
+                  $.post("<?php echo Router::url( '/', true ).'Connect/changegrouppostdata/'; ?>", {userid : userid , group_id : group_id},
+                      function(res){ 
+                      if(res != ""){
+                          $("#show_grp_post_data").html(res);
+                          $('.loader1').hide();  
+                      }                             
+                  });
+              }            
+          }); 
         });       
     }); 
 </script>
@@ -1358,10 +1523,12 @@ input[type="checkbox"] + label::before {
        $('#view_text').css('color','white');
        $('#usr_box').hide(); 
        $('#view_box').show();
+       $('#add_acty_form').show();
       
     }
 </script> 
 <script>
+
     function viewuserpost(){
        $('#view_back').css('background-color','white');
        $('#view_icon').css('color','#2bcdc1');
@@ -1408,7 +1575,6 @@ input[type="checkbox"] + label::before {
       }); 
     }
 
-
     function commmt_data_show(id){ 
       var activity_id       = parseInt(id); 
       var user_id           = "<?php echo $user_id; ?>";
@@ -1426,7 +1592,7 @@ input[type="checkbox"] + label::before {
       var post_id           = parseInt(id); 
       var user_id           = "<?php echo $user_id; ?>";
 
-         $('.loader1').show();  
+        $('.loader1').show();  
         $.post("<?php echo Router::url( '/', true ).'Connect/commentPostData/'; ?>", { post_id : post_id , user_id : user_id }, function(res){
               $('.loader1').hide();  
               $('#show_cmmt_div_post'+post_id).html(res);
@@ -1741,6 +1907,26 @@ function post_cmt_reply_submit(id){
 
 <script type="text/javascript">
     $(document).ready(function(){
+
       $('#chnge_color').css("background-color",'#093F7B');
+    
     });
 </script>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+      window.select_group = $('#select_group').SumoSelect({
+          selectAll:true,
+          placeholder:'Select Group'
+      });
+      window.select_group_post = $('#select_group_post').SumoSelect({
+          selectAll:true,
+          placeholder:'Select Group'
+      });
+    
+    });    
+</script>
+
+
