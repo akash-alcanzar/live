@@ -119,14 +119,14 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
               <!-- <div class="col-md-12 col-md-12 col-sm-12 col-xs-12 br_pad brn_pad"> -->
                  <!--  <div class="col-sm-12  col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 col-xs-12 brn_pad"> -->
                  
-                      <div class="bdr col-md-3 col-sm-3 col-xs-12 b_logo brn_pad b_widh sr_29_07_lgo_img">
+                      <div class="col-md-3 col-sm-3 col-xs-12 b_logo brn_pad b_widh sr_29_07_lgo_img">
                       <img src="<?php echo HTTP_ROOT;?>/img/beta.png" style="width: 37px;" >
                         <a href="<?php echo HTTP_ROOT;?>">
                           <img src="<?php echo HTTP_ROOT;?>/img/logo.jpg" class="blwdh">
                         </a>
                       </div>
                       <!-- ******************new alignment***************** -->
-                    <div class="bdr col-md-6 col-sm-5 col-xs-12 padd_l_r b_fcb1 b_pad1 sr_29_07_md_screen">
+                    <div class="col-md-6 col-sm-5 col-xs-12 padd_l_r b_fcb1 b_pad1 sr_29_07_md_screen">
                         <center class="bl_cntr">
                           <form action="<?php echo HTTP_ROOT;?>/vendor_classes/lists" name="s_cat" method="post">
                             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -170,7 +170,7 @@ $Allcategory  = $this->requestAction(array('controller'=>'Homes', 'action'=>'get
                             </div>    
                         </center>
                     </div>
-                      <div class="col-md-3 col-sm-4 col-xs-12 padd_l_r b_fcb2 b_pad12 sr_15_07_connect_btn bdr">
+                      <div class="col-md-3 col-sm-4 col-xs-12 padd_l_r b_fcb2 b_pad12 sr_15_07_connect_btn">
                           <div class="pull-right b_lft">
                             <button class="btn btclass1 fbttp" style="padding:5px 20px;"><img src="<?php echo HTTP_ROOT;?>/img/iconfind.png" />Find</button>  <a href="<?php echo HTTP_ROOT;?>/Connect/connectpage">
                             <button class="btn btclassnt1  fbttp" style="padding:5px 10px;">
