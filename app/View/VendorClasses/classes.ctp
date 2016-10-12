@@ -98,6 +98,7 @@ $gift = explode('/',$this->request->url);
                         <div class="classnamedesign">
                             <div class="col-md-12 col-sm-12 col-xs-12 padd_thirty post-class-head">
                             <?php /* Modified by dinesh@braingroom.com 19/07/16*/?>
+                               <div class="col-md-1 col-sm-1 col-xs-1 padd_thirty post-class-head">
                                 <p class="provider-name class-title-heading class-user-title-heading pull-right classprofilename" 
                                 id="<?php echo $class['VendorClasse']['user_id'];?>"> <?php echo ucfirst($class['User']['first_name']);?>
                                 </p>
@@ -124,7 +125,20 @@ $gift = explode('/',$this->request->url);
                                         <img class="classimg" src="<?php echo $profile_img; ?>" id="profile-pic<?php echo $class['VendorClasse']['user_id'];?>" class="georgeimg prflimg pull-right profile-img"> 
                                         <?php
                                     }
+									  else
+                                     {
+                                        ?>
+                                       <!-- <img class="classimg" src="<?php //echo $profile_img; ?>" id="profile-pic<?php //echo $class['VendorClasse']['user_id'];?>" class="georgeimg prflimg pull-right profile-img"> -->
+                                       <img class="classimg" src="<?php echo HTTP_ROOT;?>/img/Vendor/profile/vendor_logo.png" class="georgeimg prflimg pull-right profile-img">
+                                        <?php
+                                    }
                                 ?>
+                           </div>
+                                <div class="col-md-11 col-sm-11 col-xs-11 padd_thirty post-class-head">
+                                <p class="provider-name class-title-heading class-user-title-heading classprofilename" 
+                                id="<?php echo $class['VendorClasse']['user_id'];?>"> <?php echo ucfirst($class['User']['first_name']);?>
+                                </p>
+                             </div>
                             </div>
                             <?php /* Modified by dinesh@braingroom.com 19/07/16*/?>
                             <div class="col-md-12 col-sm-12 col-xs-12 star_class post-class-head star-divv padd_thirty pull-right classstardesign">
@@ -905,7 +919,7 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
 </li><li class="listdesign">Refund is possible only in the case where tutor/academy is cancelling the class before / in between or not conducting the classes for the mentioned time period.
 </li><li class="listdesign">Class booking through BrainGroom will attract convenience charge from Payment Gateway provider 
 </li><li class="listdesign">Please go through the description of each class carefully before you book a class.
- <h5 style="color:#00cdc6;">Catalogue Class View Page </h5>
+<!--<h5 style="color:#00cdc6;">Catalogue Class View Page </h5>
 </li><li class="listdesign">Organizer or the person booking Braingroom Catalogue class should possess or should be able to arrange location to conduct class
 </li><li class="listdesign">Vendor/Tutor will visit the organizer's location on designated time & at designated date to conduct the class
 </li><li class="listdesign">"Get Quote" request is intended to finalize price for catalogue classes as per the specific requirement & volume through series of queries between tutor/academy and organizer (Braingroom user). All these discussions will be mediated by Braingroom admin. 
@@ -935,7 +949,7 @@ Payment & Class Cancellation
 Promoting Class in Featured List
 </li><li class="listdesign">Tutors/Academies can promote their Classes in featured list in home page & category page by making payments accordingly. 
 </li><li class="listdesign">Class postings, Add class to Catalogue requests and Featured promote class requests – all these come under admin verification; Admin's decision will be final in all these cases.
-</li><li class="listdesign">For vendors taking BrainGroom help to upload classes should be aware that it is their responsibility to provide the right description, details & pictures. Braingroom cannot be responsible for any such mismatch in the information provided.
+</li><li class="listdesign">For vendors taking BrainGroom help to upload classes should be aware that it is their responsibility to provide the right description, details & pictures. Braingroom cannot be responsible for any such mismatch in the information provided.-->
 
 
                                       
