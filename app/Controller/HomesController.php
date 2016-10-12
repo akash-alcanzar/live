@@ -7190,8 +7190,6 @@ if ($geo['status'] = 'OK') {
                     }
                     $find = $this->UserMaster->find('first', array('conditions'=> array('social_network_id'=>$fb_id)));
 
-                   
-
                     $id   = $find['UserMaster']['id'];
 
                     $Name = array();
@@ -10687,7 +10685,7 @@ If (isset($_POST["additionalCharges"])) {
   }
 
 
-  public function catalogDetail(){
+ /* public function catalogDetail(){
 
           
           if(isset($this->params->pass[0])){
@@ -10720,6 +10718,11 @@ If (isset($_POST["additionalCharges"])) {
                                 'alias' => 'ConnectGroup',
                                 'type'  =>  'INNER',
                                 'conditions' => array('Catalog.catalog_group_id = ConnectGroup.id','Catalog.catalog_group_id'=>$catalog_id)
+								)
+							)
+							));
+		  }
+  }*/
 public function catalogDetail(){
           if(isset($this->params->pass[0])){
             $this->layout='fun_layout';
