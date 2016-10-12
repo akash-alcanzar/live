@@ -2833,15 +2833,12 @@ public function ChangePassword(){
     $this->layout="admin_layout";
     $status_id = "0,1";
 
-   // $data1 = $this->Blog->find('all',array('conditions' => array('Blog.status !=' => 2)));
-
     $data = $this->Blog->find('all',array(
                                       'joins'  =>  array(
                                                       array(
                                                           'table' => 'bg_user_masters',
                                                           'alias' => 'usermaster',
-                                                          'conditions' => array('Blog.user_id = usermaster.id',
-                                                                                'usermaster.status'=>1),
+                                                          'conditions' => array('Blog.user_id = usermaster.id'),
                                                           ),
                                                       array(
                                                             'table' => 'bg_class_segments',
