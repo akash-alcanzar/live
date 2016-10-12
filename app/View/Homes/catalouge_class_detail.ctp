@@ -395,7 +395,7 @@ $us_id              = $value_cat_class['bg_user_masters']['id'];
                                       </video>
                                     </div>
                                      <div class="col-md-12 col-sm-12 col-xs-12 people_aricon1 people_aricon-div empty-Div .termsscroll" style="margin-top:10px;"><h4>Terms and Conditions</h4>
-                                    <h5 style="color:#00cdc6;">Fixed / Flexible Class View Page</h5>
+                                    <!--<h5 style="color:#00cdc6;">Fixed / Flexible Class View Page</h5>-->
                                     <ul>
 <li class="listdesign">Fixed classes will have fixed timing, date & place. Fixed classes once booked cannot be cancelled by the user.
 </li><li class="listdesign">For Flexible class, after booking, users can call vendors and fix class at a mutually convenient time & place; as per the policy, vendor should start a flexible class within one month of class booking date.

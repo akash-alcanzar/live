@@ -508,6 +508,18 @@ a:focus, a:hover {
                               <span class="image_price12-fun pull-right-fun" style="color:white">₹ <?php echo $class_price; ?></span><a href="<?php echo HTTP_ROOT?>/classes/<?php echo $class_topic; ?>" >
                               <img src="<?php echo HTTP_ROOT.'/img/Vendor/class_image/'.$upload_class_photo; ?>" class="imgresponsive img-thumbnail" alt="">
                             </a>
+                               <img class="img-responsive" style="display: inline; margin-top: -10px; width: 20px; margin-right: -3px;" src="<?php echo HTTP_ROOT; ?>/img/fun&refreshment/location.png"><span class="city">Madipakkam</span>
+                            </div>
+                               <div class="col-xs-12 col-sm-12 sr_2605_03_padding sr_serch_div_l_hite" style="margin-top:10px;">
+                                 
+                                                                  <img class="img-responsive" style="display: inline; width: 15px;" src="<?php echo HTTP_ROOT; ?>/img/fun&refreshment/clock.png">
+                                  <span class="city">Total Duration: <?php echo $class_class_duration; ?></span>
+                                   <span class="city"></span><br/>
+                                   <span style="margin-left:35px;">No of Sessions: <?php echo $no_of_session; ?></span>
+                                    </div>
+                                     <div class="col-xs-12 col-sm-12" style="margin-top:10px;">
+<img class="img-responsive" style="display: inline; width: 15px;" src="http://localhost/braingroom/img/fun&refreshment/age.png">
+<span style="margin-left:15px;">Age Group: Kids,Teens </span>
                             </div></div><!-- ********images************ -->
                           <!-- ********text************ -->
                           <div class="col-md-8 col-sm-8 col-xs-12 text_res sr_2605_03_padding">
@@ -524,26 +536,26 @@ a:focus, a:hover {
                                     </span>
                               </div></div>
                                 
-                                <div class="col-xs-12 col-sm-12 sr_2605_03_padding sr_serch_div_l_hite">
-                                  <img class="img-responsive" style="display: inline; margin-top: -10px;  width: 20px; margin-right: 5px;" src="<?php echo HTTP_ROOT; ?>/img/fun&refreshment/location.png"><span class="city"><?php echo $location_name; ?></span>
-                                 <!--  <span class="city">
+                                 <!--   <div class="col-xs-12 col-sm-12 sr_2605_03_padding sr_serch_div_l_hite">
+                                  <img class="img-responsive" style="display: inline; margin-top: -10px;  width: 20px; margin-right: 5px;" src="<?php echo HTTP_ROOT; ?>/img/fun&refreshment/location.png"><span class="city"><?php //echo $location_name; ?></span>
+                               <span class="city">
                                   Madipakkam                                  </span> -->
                                                                   <img src="http://www.braingroom.com/img/8.jpg" class="pull-right star" style="height: 20px;">
                                 </div>
-                                                                <div class="col-xs-12 col-sm-12 sr_2605_03_padding sr_serch_div_l_hite">
+                                                             <!--   <div class="col-xs-12 col-sm-12 sr_2605_03_padding sr_serch_div_l_hite">
                                  
                                                                   <img class="img-responsive" style="display: inline; width: 15px;" src="<?php echo HTTP_ROOT; ?>/img/fun&refreshment/clock.png">
-                                  <span class="city">Total Duration: <?php echo $class_class_duration; ?></span>
+                                  <span class="city">Total Duration: <?php//echo $class_class_duration; ?></span>
                                    <span class="city"></span>
-                                   <span>No of Sessions: <?php echo $no_of_session; ?></span>
-                                    </div>
+                                   <span>No of Sessions: <?php// echo $no_of_session; ?></span>
+                                    </div>-->
                                     <div class="col-xs-12 col-sm-12 sr_2605_03_padding sr_2605_06_textLorem sr_serch_div_l_hite">
                                   <img class="img-responsive" style="display: inline; margin-right: 5px; width: 10px; margin-top: -5px;" src="<?php echo HTTP_ROOT; ?>/img/fun&refreshment/information.png">&nbsp;&nbsp; 
                                   <p class="comment more city text-justify"><?php echo $class_class_summary; ?><!-- <a href="" class="morelink">more</a> --></p>
                                 </div>
-                                <div class="col-xs-12 col-sm-12">
-                                  <span>Age Group: <?php echo $age_group; ?></span>
-                                </div>
+                                <!--<div class="col-xs-12 col-sm-12">
+                                  <span>Age Group: <?php //echo $age_group; ?></span>
+                                </div>-->
                                 <div class="col-xs-12 col-sm-12">
                                 <span>Other Localities:<?php echo $location_name; ?></span>
                                 </div>
