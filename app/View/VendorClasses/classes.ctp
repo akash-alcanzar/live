@@ -121,12 +121,12 @@ $gift = explode('/',$this->request->url);
                                     }
                                     elseif($profile_img!='' and $user_type_id=='')
                                      {
-                                        ?>
+                                     /*   ?>
                                         <img class="classimg" src="<?php echo $profile_img; ?>" id="profile-pic<?php echo $class['VendorClasse']['user_id'];?>" class="georgeimg prflimg pull-right profile-img"> 
                                         <?php
                                     }
 									  else
-                                     {
+                                     {*/
                                         ?>
                                        <!-- <img class="classimg" src="<?php //echo $profile_img; ?>" id="profile-pic<?php //echo $class['VendorClasse']['user_id'];?>" class="georgeimg prflimg pull-right profile-img"> -->
                                        <img class="classimg" src="<?php echo HTTP_ROOT;?>/img/Vendor/profile/vendor_logo.png" class="georgeimg prflimg pull-right profile-img">
