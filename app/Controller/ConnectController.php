@@ -1,7 +1,8 @@
 <?php
 class ConnectController extends AppController {
 
-  var $uses = array('Admin','ChatMessage','UserMaster','City','Locality','Category','Community','UserVerfication','ClassType','ClassSegment','VendorClasse','ClassRegular','ClassSchedule','VendorGalleries',
+  var $uses = array('Admin','ChatMessage','UserMaster','City','Locality','Category','Community','UserVerfication','ClassType',
+    'ClassSegment','VendorClasse','ClassRegular','ClassSchedule','VendorGalleries',
     'TransactionHistorie','AccountDetail','RequestCatalog','CupanDetail','GiftCupan','GiftCard','GiftCardSegment',
     'FeaturedPrice','PromoteClassDetail','Blog','BlogComment','BlogLike','UserSegment','GetQuote',
     'VendorClasseLevelDetail','ConnectGroup','Wishlist','Ngo','Communitie','GroupActivity','GroupLike',
@@ -12,21 +13,18 @@ class ConnectController extends AppController {
 
   var $components = array('Paginator','Messages','Session');
 
-  public function checkUser(){
-    if(!$this->Session->check('User')){
-      $this->redirect(array('controller'=>'Homes','action'=>'login'));
-    }
-  }
-  
-/******************************** akash connect part functions **********************************************/
 
+/******************************** akash connect part functions **********************************************/
+  
   public function connectpage(){
 
-      $this->layout='connect_layout';
-      $user=$this->Session->read('User');
-      $user_id = $user['UserMaster']['id'];
-      $this->set('user_view',$user);
-    
+    $this->layout='connect_layout';
+    $user=$this->Session->read('User');
+    $user_id = $user['UserMaster']['id'];
+    $this->set('user_view',$user);
+      
+
+
     if(empty($user_id)){
 
         $category_data = $this->Category->find('all',array('conditions'=>array(
@@ -35,11 +33,14 @@ class ConnectController extends AppController {
         $segment_data = $this->ClassSegment->find('all',array('conditions'=>array(
                                                        'ClassSegment.status'=>1)));
         
+        
         $this->set('segment_data',$segment_data);
         $seg_ids_array  = array();
         foreach ($segment_data as $sgt_ids) {
           $seg_ids_array[]  = $sgt_ids['ClassSegment']['id'];   
         }
+
+
         $this->set('seg_ids_array',$seg_ids_array[0]);
         // Blog Data 
         $blog_data = $this->Blog->find('all',array(
@@ -219,6 +220,7 @@ class ConnectController extends AppController {
               $seg_array[]  = $data11['UserSegment']['segment_id'];    
             }
 
+
             $segment_data = $this->ClassSegment->find('all',array('conditions'=>array(
                                                            'ClassSegment.status'=>1,
                                                            'ClassSegment.id'=>$seg_array)));
@@ -233,12 +235,14 @@ class ConnectController extends AppController {
                                                                    'Category.status'=>1,
                                                                    'Category.id'=>$value)));   
           }
+
+
           $cities_data  = $this->City->find('all',array('conditions'=>array(
-                                                         'City.status'=>1)));
+                                                        'City.status'=>1)));
           $this->set('cities_data',$cities_data);  
           
+        
           $seg_ids_array  = array();
-
 
           foreach ($segment_data as $sgt_ids) {
             $seg_ids_array[]  = $sgt_ids['ClassSegment']['id'];   
@@ -1183,7 +1187,6 @@ class ConnectController extends AppController {
     }
 
 
-
    if(isset($result)){
     
       $all_page_data = array();
@@ -1227,25 +1230,25 @@ class ConnectController extends AppController {
                   
           foreach($segment_data as $data1){
 
-                $result_string2.='<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" id="'.$data1['ClassSegment']['id'].'" style="margin-top:25px;cursor:pointer;" onclick="getsemid('.$data1['ClassSegment']['id'].');" >
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padd_l_r segmt_img">
-                        <center>';
-                           if(empty($data1['ClassSegment']['segment_image'])){ 
-                                $result_string2.='<img class="image-responsive" src="'.HTTP_ROOT.'/img/connect/noimage.jpg" alt="img not found">';
-                             }else{  
-                                $result_string2.='<img class="image-responsive" style="width:100%;" src="'.HTTP_ROOT.'/img/segment_image/'.$data1['ClassSegment']['segment_image'].'" alt="img not found">';
-                             } 
-                        $result_string2.='</center>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 semgt_connt_bdr2" id="segt'.$data1['ClassSegment']['id'].'">
-                        <center>
-                            <span class="connt_flex_middle_text" id="segt_text'.$data1['ClassSegment']['id'].'">
-                                 '.$data1['ClassSegment']['segment_name'].'
-                            </span>
-                        </center>
-                    </div>           
-                  </div>';
-          }
+            $result_string2.='<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" id="'.$data1['ClassSegment']['id'].'" style="margin-top:25px;cursor:pointer;" onclick="getsemid('.$data1['ClassSegment']['id'].');" >
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padd_l_r segmt_img">
+                    <center>';
+                       if(empty($data1['ClassSegment']['segment_image'])){ 
+                            $result_string2.='<img class="image-responsive" src="'.HTTP_ROOT.'/img/connect/noimage.jpg" alt="img not found">';
+                         }else{  
+                            $result_string2.='<img class="image-responsive" style="width:100%;" src="'.HTTP_ROOT.'/img/segment_image/'.$data1['ClassSegment']['segment_image'].'" alt="img not found">';
+                         } 
+                    $result_string2.='</center>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 semgt_connt_bdr2" id="segt'.$data1['ClassSegment']['id'].'">
+                    <center>
+                        <span class="connt_flex_middle_text" id="segt_text'.$data1['ClassSegment']['id'].'">
+                             '.$data1['ClassSegment']['segment_name'].'
+                        </span>
+                    </center>
+                </div>           
+              </div>';
+            }
 
 //**************************************** Blog Data ****************************************        
 
@@ -2016,6 +2019,7 @@ class ConnectController extends AppController {
 
 
     // Get request data  
+    
     $segment_data  = $this->ClassSegment->find('all',array('conditions'=>array(
                                                            'ClassSegment.id'=>$segt_id,
                                                            'ClassSegment.status'=>1,   
@@ -2046,7 +2050,8 @@ class ConnectController extends AppController {
                             </center>
                         </div>           
                       </div>';
-          }
+              }
+
       print_r($result_string);die;  
   }
 
@@ -2159,7 +2164,7 @@ class ConnectController extends AppController {
 
   public function connectGroup(){
   
-    $this->layout='index_layout';
+    $this->layout='connect_layout';
     $user    = $this->Session->read('User');
     $user_id = $user['UserMaster']['id'];
     $this->set('user_view',$user);
@@ -2390,17 +2395,17 @@ class ConnectController extends AppController {
             
         } 
 
-
         $this->set('report_array',$report_array);
+
 
         // My Group Data 
         $tr_check_data = $this->TransactionHistory->find('all',array(
                                                                  'joins' => array(
-                                                                    array(
-                                                                        'table'      => 'bg_vendor_classes',
-                                                                        'alias'      => 'ven_class',
-                                                                        'conditions' => array('TransactionHistory.class_id = ven_class.id'))
-                                                                    ),
+                                                                      array(
+                                                                          'table'      => 'bg_vendor_classes',
+                                                                          'alias'      => 'ven_class',
+                                                                          'conditions' => array('TransactionHistory.class_id = ven_class.id'))
+                                                                      ),
                                                                      'conditions' => array(
                                                                      'TransactionHistory.user_id'=>$user_id,
                                                                      'TransactionHistory.payment_from_class'=>1,
@@ -2412,6 +2417,9 @@ class ConnectController extends AppController {
         foreach ($tr_check_data as  $value) {
           $seg_data12[] = $value['ven_class']['segment_id'];
         }  
+        
+
+
         $my_group   = $this->ConnectSegmentGroup->find('all',array('conditions'=>array(
                                                               'ConnectSegmentGroup.status'=>1,
                                                               'ConnectSegmentGroup.segment_id'=>$seg_data12)));
@@ -2514,8 +2522,15 @@ class ConnectController extends AppController {
 
         $this->set('post_report_array',$post_report_array); 
 
+        // Citties data 
+
+        $cities_data  = $this->City->find('all',array('conditions'=>array('City.status'=>1)));
+        $this->set('cities_data',$cities_data); 
+
+
     }   
   }
+  
   public function addBlog(){
 
           $this->checkUser();
@@ -2540,66 +2555,85 @@ class ConnectController extends AppController {
 
     $this->autoRender = false;
     $user=$this->Session->read('User');
+    $group_id_count = count($_POST['group_id']);
 
-    if($_POST['city'] == -1){
+    for($i=0;$i<$group_id_count;$i++){
 
-        $data_array = array();
-        $data_array['user_id']          = $user['UserMaster']['id'];
-        $data_array['group_id']         = $_POST['group_id'];
-        $data_array['request_purpose']  = $_POST['pro_purpose'];
-        $data_array['request_date']     = $_POST['pro_date'];
-        $data_array['request_time']     = $_POST['pro_time'];
-        $data_array['location']         = $_POST['pro_locat'];
-        $data_array['post_type']        = $_POST['pro_type'];
-        $data_array['note']             = $_POST['pro_note'];
-        $data_array['status']           = 0;
-        $data_array['add_date']         = time();
-        $data_array['modify_date']      = time();
-
-    }else{
+      if($_POST['city'] == -1){
 
         $data_array = array();
-        $data_array['user_id']          = $user['UserMaster']['id'];
-        $data_array['group_id']         = $_POST['group_id'];
-        $data_array['city_id']          = $_POST['city'];
-        $data_array['locality_id']      = $_POST['locality'];
-        $data_array['request_purpose']  = $_POST['pro_purpose'];
-        $data_array['request_date']     = $_POST['pro_date'];
-        $data_array['request_time']     = $_POST['pro_time'];
-        $data_array['location']         = $_POST['pro_locat'];
-        $data_array['post_type']        = $_POST['pro_type'];
-        $data_array['note']             = $_POST['pro_note'];
-        $data_array['status']           = 0;
-        $data_array['add_date']         = time();
-        $data_array['modify_date']      = time(); 
+        $data_array['user_id']                 = $user['UserMaster']['id'];
+        $data_array['group_id']                = $_POST['group_id'][$i];
+        $data_array['activity_category_name']  = $_POST['activity_name'];
+        $data_array['request_purpose']         = $_POST['pro_purpose'];
+        $data_array['request_date']            = $_POST['pro_date'];
+        $data_array['request_time']            = $_POST['pro_time'];
+        $data_array['location']                = $_POST['pro_locat'];
+        $data_array['post_type']               = $_POST['pro_type'];
+        $data_array['note']                    = $_POST['pro_note'];
+        $data_array['status']                  = 0;
+        $data_array['add_date']                = time();
+        $data_array['modify_date']             = time();
 
+      }else{
+
+        $data_array = array();
+        $data_array['user_id']                = $user['UserMaster']['id'];
+        $data_array['group_id']               = $_POST['group_id'][$i];
+        $data_array['activity_category_name'] = $_POST['activity_name'];
+        $data_array['city_id']                = $_POST['city'];
+        $data_array['locality']               = $_POST['locality'];
+        $data_array['request_purpose']        = $_POST['pro_purpose'];
+        $data_array['request_date']           = $_POST['pro_date'];
+        $data_array['request_time']           = $_POST['pro_time'];
+        $data_array['location']               = $_POST['pro_locat'];
+        $data_array['post_type']              = $_POST['pro_type'];
+        $data_array['note']                   = $_POST['pro_note'];
+        $data_array['status']                 = 0;
+        $data_array['add_date']               = time();
+        $data_array['modify_date']            = time(); 
+      }
+
+        $this->GroupActivity->create();
+        $result   =  $this->GroupActivity->save($data_array);
     }
-    $result   =  $this->GroupActivity->save($data_array);
+
     if(isset($result)){
-      return 1;
-    }else{
-      return 2;
-    }
-  }
+        return 1;
+      }else{
+        return 2;
+      }    
+
+}
+
 
   public function addviewpost(){
 
     $this->autoRender = false;
     $user=$this->Session->read('User');
+    $group_post_id_count = count($_POST['group_id']);
 
-    if(isset($_POST)){
+    for($i=0;$i<$group_post_id_count;$i++){
 
-        $post_array = array();
-        $post_array['user_id']          = $user['UserMaster']['id'];
-        $post_array['group_id']         = $_POST['group_id'];
-        $post_array['description']      = $_POST['user_view_post']; 
-        $post_array['status']           = 1;
-        $post_array['add_date']         = time();
-        $post_array['modify_date']      = time();
+        if(isset($_POST)){
 
-    }
+            $post_array = array();
+            $post_array['user_id']          = $user['UserMaster']['id'];
+            $post_array['group_id']         = $_POST['group_id'][$i];
+            $post_array['city_id']          = $_POST['city_id'];
+            $post_array['locality_id']      = $_POST['locality_id'];
+            $post_array['description']      = $_POST['user_view_post']; 
+            $post_array['status']           = 0;
+            $post_array['add_date']         = time();
+            $post_array['modify_date']      = time();
 
-    $result   =  $this->GroupPost->save($post_array);
+        }
+
+      $this->GroupPost->create();     
+      $result   =  $this->GroupPost->save($post_array);
+   
+    }  
+
     if(isset($result)){
       return 1;
     }else{
@@ -3762,7 +3796,7 @@ public function msgRead(){
                                                     'UserMaster.status'=>1)));
                   
               $city_id      = $user_data['UserMaster']['city_id'];
-              $locality_id  = $user_data['UserMaster']['locality_id'];
+              $locality_idfindlocality  = $user_data['UserMaster']['locality_id'];
        
               if(!empty($cus_id)){
 
@@ -5270,7 +5304,7 @@ public function msgRead(){
                         $post_data_array['post_description']  = $_POST['post_summary'];
                         $post_data_array['city_id']           = $user_data['UserMaster']['city_id'];
                         $post_data_array['locality_id']       = $user_data['UserMaster']['locality_id'];
-                        $post_data_array['status']            = 1;
+                        $post_data_array['status']            = 0;
                         $post_data_array['add_date']          = time();
                         $post_data_array['modify_date']       = time();
                         
@@ -5291,7 +5325,7 @@ public function msgRead(){
 
             if(isset($_FILES['postFileUpload'])){
 
-                  $cus_id     = $_POST['user_id'];
+                  $cus_id     = $user_id; 
 
                   $user_data  = $this->UserMaster->find('first',array( 
                                                     'conditions'=>array('UserMaster.id'=>$cus_id,
@@ -5328,7 +5362,7 @@ public function msgRead(){
                         $post_data_array['post_image']        = $final_img;
                         $post_data_array['city_id']           = $user_data['UserMaster']['city_id'];
                         $post_data_array['locality_id']       = $user_data['UserMaster']['locality_id'];
-                        $post_data_array['status']            = 1;
+                        $post_data_array['status']            = 0;
                         $post_data_array['add_date']          = time();
                         $post_data_array['modify_date']       = time();
                         
@@ -10354,8 +10388,6 @@ public function msgRead(){
   }
 
      
-
-
 
 
 }
