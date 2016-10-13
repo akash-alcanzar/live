@@ -130,9 +130,6 @@ hr {
     margin-top: 19px;
 }
 .classcolon20{float: right;}
-.mou_ponit{
-    cursor: pointer;
-}
 </style>
 <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r">
   <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r">
@@ -146,7 +143,7 @@ hr {
     
     <div class="col-md-12 col-sm-12 col-xs-12 funtr"> 
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd_l_r">
-      <h4 class="feature_work">Glft a Classes</h4>
+      <h4 class="feature_work">Gift a Class</h4>
      <!--  <button onclick="goBack()" style="float:left">Back</button> -->
     </div>
   </div>
@@ -184,9 +181,10 @@ hr {
           <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r">
             <span class="gift_back_text"><a href="gift" style="color: rgb(255, 255, 255); font-size:13px;"><i class="fa fa-angle-double-left" aria-hidden="true"></i>
  Back</a></span>
-
+Class Coupons For Friends & Love Ones
           </div>
           <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r add_top" id="class_show1">
+          
             <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12 gift-ad-tp" id="gift_class_segment">
              
             </div> 
@@ -282,8 +280,8 @@ hr {
                           <div class="input_fields_wrap_remove_card"></div>
                           <div class="col-md-12 col-sm-12 col-xs-12 add-more-divv" style="float:right;">
                                     <span style="float: right;  margin-top: 10px;">
-                                      <span class="sr_02_08_plus add-more-tab_card mou_ponit">+</span>
-                                      <span class="sr_02_08_plus_CONTENT add-more-tab_card mou_ponit">Add More Recipient</span>
+                                      <span class="sr_02_08_plus add-more-tab_card">+</span>
+                                      <span class="sr_02_08_plus_CONTENT add-more-tab_card">Add More Recipient</span>
                                     </span>
                                   </div>
 
@@ -319,32 +317,32 @@ hr {
               <p class="frnd_lve">Class Coupons For Friends & Love Ones</p>
             </center>
           </div>
-
-
-          <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12 padd_2000" id="ifive">
-            <div class="col-md-4 col-sm-4 col-xs-4 pay-money-img">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <?php echo $this->Html->image('gift_class/price1.png', array('alt' => 'CakePHP','class'=>'img-responsive img_100 pay-triangle-image'));?>
-                <?php echo $this->Html->image('gift_class/selectedprice1.png', array('alt' => 'selectedpriceimage','class' => 'selectedpriceimage selectedpriceimagefirst'));?>
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-4 pay-money-img">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <?php echo $this->Html->image('gift_class/price2.png', array('alt' => 'CakePHP','class'=>'img-responsive img_100 pay-triangle-image'));?>
-                <?php echo $this->Html->image('gift_class/selectedprice2.png', array('alt' => 'selectedpriceimage','class' => 'selectedpriceimage selectedpriceimagesecond'));?>
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-4 pay-money-img">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <?php echo $this->Html->image('gift_class/price3.png', array('alt' => 'CakePHP','class'=>'img-responsive img_100 pay-triangle-image'));?>
-                <?php echo $this->Html->image('gift_class/selectedprice3.png', array('alt' => 'selectedpriceimage','class' => 'selectedpriceimage selectedpriceimagethird'));?>
-              </div>
-            </div>
+           <div class="">&nbsp;</div> 
+         <div class="row">
+              <img class="img-full" src="<?php echo HTTP_ROOT;?>/img/gift_image/gift coupon.jpg">
           </div>
-
-
+          <!--<div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12 padd_2000" id="ifive">
+            <div class="col-md-4 col-sm-4 col-xs-4 pay-money-img">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <?php //echo $this->Html->image('gift_class/price1.png', array('alt' => 'CakePHP','class'=>'img-responsive img_100 pay-triangle-image'));?>
+                <?php //echo $this->Html->image('gift_class/selectedprice1.png', array('alt' => 'selectedpriceimage','class' => 'selectedpriceimage selectedpriceimagefirst'));?>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4 pay-money-img">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <?php //echo $this->Html->image('gift_class/price2.png', array('alt' => 'CakePHP','class'=>'img-responsive img_100 pay-triangle-image'));?>
+                <?php //echo $this->Html->image('gift_class/selectedprice2.png', array('alt' => 'selectedpriceimage','class' => 'selectedpriceimage selectedpriceimagesecond'));?>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4 pay-money-img">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <?php //echo $this->Html->image('gift_class/price3.png', array('alt' => 'CakePHP','class'=>'img-responsive img_100 pay-triangle-image'));?>
+                <?php //echo $this->Html->image('gift_class/selectedprice3.png', array('alt' => 'selectedpriceimage','class' => 'selectedpriceimage selectedpriceimagethird'));?>
+              </div>
+            </div>
+          </div>-->
           <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12 ">
-            <div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8 col-xs-12">
+            <div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8 col-xs-12 denomination">
                <div id="next1" class="error-gift">&nbsp;</div>
               <?php echo $this->Form->create('PayIndividual',array('class' =>'','name'=>'payindividual','method'=>'post'));?>
               <div class="input-group srch_adon_brd don"><input class="form-control gift-txt payindividualinput" id="payindividual" name="payindividual" placeholder="Enter Denomination" type="text" onKeyUp="amount_chk1();">
@@ -357,6 +355,9 @@ hr {
               <span class="success" style="display:none"> Form Submitted Success</span>
             </div>
           </div>
+
+          
+
           <div class="col-md-12 col-sm-12 col-xs-12">
             <center>
               <?php echo $this->Html->image('gift_class/gift-header.png', array('alt' => 'CakePHP','class'=>'gift_head'));?>
@@ -368,7 +369,12 @@ hr {
               <p class="frnd_lve">Class in Greeting Cards For Friends & Love Ones</p>
             </center>
           </div>
-          <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r add_top">
+          <div class="">&nbsp;</div>
+          <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="col-md-6 col-sm-6 col-xs-6"  style="float: right;width: 60%;position: inherit;right: -45px;">
+          
+          
+          			<div class="col-md-12 col-sm-12 col-xs-12 padd_l_r add_top">
              <section>
 
               <!-- Start loop section -->
@@ -393,11 +399,11 @@ hr {
 
                             <input type="hidden" name="gift_cat_id" id="gift_cat_id_<?php echo $id; ?>" value="<?php echo $id; ?>">
                             <div class="col-xs-12 col-sm-12 padd_l_r">
-                                <?php echo $this->Html->image('gift_class/'.$gift_image, array('alt' => 'CakePHP','class'=>'img-responsive sr_12_08_gift_img01','onclick'=>'show_detail('.$id.','.$type_by.');'));?>
+                                <?php echo $this->Html->image('gift_class/'.$gift_image, array('alt' => 'Individual','class'=>'img-responsive sr_12_08_gift_img01','onclick'=>'show_detail('.$id.','.$type_by.');'));?>
                             </div>
                             <div class="col-xs-12 col-sm-12 GIFT_hub_text_g_ablove">
                               <center class="gift-center">
-                                <?php echo $this->Html->image('gift_class/gift_tag.png', array('alt' => 'CakePHP','class'=>'img-responsive img_post_head'));?>
+                                <?php echo $this->Html->image('gift_class/gift_tag.png', array('alt' => 'Corporate','class'=>'img-responsive img_post_head'));?>
                               </center>
                             </div>
                             <div class="col-xs-12 col-sm-12 GIFT_hub_text">
@@ -406,11 +412,29 @@ hr {
                         </div>
                 </div>
                 <?php
+  
               }
               ?>
               <!-- End loop section -->
             </section>
           </div>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          </div>
+          	<div class="col-md-6 col-sm-6 col-xs-6 ">
+                <div class="row" style="width: 90%;margin: -245px 0px 0px -25px;" >
+                    <img class="img-full" src="<?php echo HTTP_ROOT;?>/img/gift_image/gift card.png">
+                </div>
+                </div>
+          </div>
+          <div class="">&nbsp;</div>
         </div>  
         <!-- jouery1 -->
         <!-- jouery2 -->
@@ -426,28 +450,33 @@ hr {
               <p class="frnd_lve">Class Coupons For Friends & Love Ones</p>
             </center>
           </div>
-          <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12 padd_2000">
-            <div class="col-md-4 col-sm-4 col-xs-4 pay-money-img">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <?php echo $this->Html->image('gift_class/price1.png', array('alt' => 'CakePHP','class'=>'img-responsive img_100 pay-triangle-image'));?>
-                <?php echo $this->Html->image('gift_class/selectedprice1.png', array('alt' => 'selectedpriceimage','class' => 'selectedpriceimage selectedpriceimagecopfirst'));?>
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-4 pay-money-img">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <?php echo $this->Html->image('gift_class/price2.png', array('alt' => 'CakePHP','class'=>'img-responsive img_100 pay-triangle-image'));?>
-                <?php echo $this->Html->image('gift_class/selectedprice2.png', array('alt' => 'selectedpriceimage','class' => 'selectedpriceimage selectedpriceimagecopsecond'));?>
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-4 pay-money-img">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <?php echo $this->Html->image('gift_class/price3.png', array('alt' => 'CakePHP','class'=>'img-responsive img_100 pay-triangle-image'));?>
-                <?php echo $this->Html->image('gift_class/selectedprice3.png', array('alt' => 'selectedpriceimage','class' => 'selectedpriceimage selectedpriceimagecopthird'));?>
-              </div>
-            </div>
+            <div class="">&nbsp;</div>
+           <div class="row">          
+              <img class="img-full" src="<?php echo HTTP_ROOT;?>/img/gift_image/gift coupon.jpg">
           </div>
+          
+          <!--<div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12 padd_2000">
+            <div class="col-md-4 col-sm-4 col-xs-4 pay-money-img">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <?php //echo $this->Html->image('gift_class/price1.png', array('alt' => 'CakePHP','class'=>'img-responsive img_100 pay-triangle-image'));?>
+                <?php //echo $this->Html->image('gift_class/selectedprice1.png', array('alt' => 'selectedpriceimage','class' => 'selectedpriceimage selectedpriceimagecopfirst'));?>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4 pay-money-img">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <?php //echo $this->Html->image('gift_class/price2.png', array('alt' => 'CakePHP','class'=>'img-responsive img_100 pay-triangle-image'));?>
+                <?php //echo $this->Html->image('gift_class/selectedprice2.png', array('alt' => 'selectedpriceimage','class' => 'selectedpriceimage selectedpriceimagecopsecond'));?>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4 pay-money-img">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <?php //echo $this->Html->image('gift_class/price3.png', array('alt' => 'CakePHP','class'=>'img-responsive img_100 pay-triangle-image'));?>
+                <?php //echo $this->Html->image('gift_class/selectedprice3.png', array('alt' => 'selectedpriceimage','class' => 'selectedpriceimage selectedpriceimagecopthird'));?>
+              </div>
+            </div>
+          </div>-->
           <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
-            <div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8 col-xs-12">
+            <div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8 col-xs-12 denomination">
               <div id="next2" class="error-gift">&nbsp;</div>
               <?php echo $this->Form->create('PayCorporate',array('class' => '', 'enctype' => 'multipart/form-data'));?>
               <div class="input-group srch_adon_brd">
@@ -459,6 +488,7 @@ hr {
               <?php echo $this->Form->end();?>
             </div>
           </div>
+          
           <div class="col-md-12 col-sm-12 col-xs-12">
               <center>
                 <?php echo $this->Html->image('gift_class/gift-header.png', array('alt' => 'CakePHP','class'=>'gift_head'));?>
@@ -470,45 +500,72 @@ hr {
               <p class="frnd_lve">Class in Greeting Cards For Friends & Love Ones</p>
             </center>
           </div>
-          <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r add_top">
+             <div class="">&nbsp;</div>
+          <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="col-md-6 col-sm-6 col-xs-6"  style="float: right;width: 60%;position: inherit;right: -45px;">
+          
+          
+          			<div class="col-md-12 col-sm-12 col-xs-12 padd_l_r add_top">
              <section>
-                 <!-- Start loop section -->
+
+              <!-- Start loop section -->
               <?php 
                  /* echo "<pre>";
                   print_r($individual);
                   echo "</pre>";
                   die;*/
-                  $type_by = 2;
-                  foreach ($corporate as $key => $value_corporate) {
+                   $type_by = 1;
+                  foreach ($individual as $key => $value_in) {
                           # code...GiftCard
-                          $id_co                = $value_corporate['GiftCard']['id'];
-                          $title_co             = $value_corporate['GiftCard']['title'];
-                          $description_co       = $value_corporate['GiftCard']['description'];
-                          $card_type_status_co  = $value_corporate['GiftCard']['card_type_status'];
-                          $gift_image_co        = $value_corporate['GiftCard']['gift_image'];
-                          $status_co            = $value_corporate['GiftCard']['status'];
+                          $id                = $value_in['GiftCard']['id'];
+                          $title             = $value_in['GiftCard']['title'];
+                          $description       = $value_in['GiftCard']['description'];
+                          $card_type_status  = $value_in['GiftCard']['card_type_status'];
+                          $gift_image        = $value_in['GiftCard']['gift_image'];
+                          $status            = $value_in['GiftCard']['status'];
                   ?>
                 <div class="col-md-4 col-sm-4 col-xs-12 add_top1" id="icare1">
-                        <div class="img_post col-xs-12 col-sm-12 padd_l_r">
-                          <input type="hidden" name="gift_cat_id" id="gift_cat_id_<?php echo $id_co; ?>" value="<?php echo $id_co; ?>">
-                          <div class="col-xs-12 col-sm-12 padd_l_r">
-                           <?php echo $this->Html->image('gift_class/'.$gift_image_co, array('alt' => 'CakePHP','class'=>'img-responsive sr_12_08_gift_img01','onclick'=>'show_detail('.$id_co.','.$type_by.');'));?>
-                          </div>
-                           <div class="col-xs-12 col-sm-12 padd_l_r GIFT_hub_text_g_ablove">
-                            <center class="gift-center">
-                              <?php echo $this->Html->image('gift_class/gift_tag.png', array('alt' => 'CakePHP','class'=>'img-responsive img_post_head'));?>
-                            </center>
-                          </div>
-                           <div class="col-xs-12 col-sm-12 padd_l_r GIFT_hub_text">
-                              <p class="img_ipsum"><?php echo $title_co; ?></p>  
+
+                        <div class="img_post col-xs-12 col-sm-12 padd_l_r" style="cursor:pointer;">
+
+                            <input type="hidden" name="gift_cat_id" id="gift_cat_id_<?php echo $id; ?>" value="<?php echo $id; ?>">
+                            <div class="col-xs-12 col-sm-12 padd_l_r">
+                                <?php echo $this->Html->image('gift_class/'.$gift_image, array('alt' => 'Individual','class'=>'img-responsive sr_12_08_gift_img01','onclick'=>'show_detail('.$id.','.$type_by.');'));?>
                             </div>
+                            <div class="col-xs-12 col-sm-12 GIFT_hub_text_g_ablove">
+                              <center class="gift-center">
+                                <?php echo $this->Html->image('gift_class/gift_tag.png', array('alt' => 'Corporate','class'=>'img-responsive img_post_head'));?>
+                              </center>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 GIFT_hub_text">
+                              <p class="img_ipsum"><?php echo $title; ?></p>
+                            </div>  
                         </div>
                 </div>
                 <?php
+  
               }
               ?>
               <!-- End loop section -->
-             </section>
+            </section>
+          </div>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          </div>
+          	<div class="col-md-6 col-sm-6 col-xs-6 ">
+                <div class="row"  style="width: 90%;margin: -245px 0px 0px -25px;" >
+                    <img class="img-full" src="<?php echo HTTP_ROOT;?>/img/gift_image/gift card.png">
+                </div>
+                </div>
+          </div>
+          <div class="">&nbsp;</div>
           </div>
 
           <div class="col-md-12 col-sm-12 col-xs-12">
@@ -630,17 +687,16 @@ hr {
                           </div>
                       </div>
             <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r gift-choose">
-                         <?php if(!empty($ngo_segment1)){ ?>
                         <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r gift-topic">
                           Choose A Class Topic
                         </div>
-                        <?php
-                      }
-                      ?>
-                       <?php if(!empty($ngo_segment1)){ ?>
                         <div class="col-md-12 col-sm-12 col-xs-12 gift-topic">
-                          <?php
-                          foreach($ngo_segment1 as $key => $value_ngo1){
+                          
+
+                             <?php
+                     //print_r($ngo_segment1);
+                  //die;
+                  foreach($ngo_segment1 as $key => $value_ngo1){
 
                    $bg_gift_card_segment_id1   = $value_ngo1['bg_gift_card_segments']['id'];
                                 $ngo_seg_id1   = $value_ngo1['bg_class_segments']['id'];
@@ -659,16 +715,14 @@ hr {
               ?>
                          
                         </div>
-                        <?php
-                      }
-                      ?>
 
                        
                         <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r gift-add">
                          
                          <!-- Start Ngo Form 1 -->
                 <div id="s4" style="">
-                  <form  name="gift4" id="gift4">
+                    <?php //echo $this->Form->create('PayFormOne',array('class'=> 'pay-form-class pay-form-class-second','style'=>'display:none;'));?>
+                    <form  name="gift4" id="gift4">
                         <!-- *************** Start hidden feils ******************** -->
                          <input class="" name="form_4" id="form_4" type="hidden" value="f4">
                         <input  name="gift_type" id="" type="hidden" value="1">
@@ -678,31 +732,37 @@ hr {
                         <input  name="get_ngo_na" id="get_ngo_na_1" type="hidden" value="">
                         <input  name="card_id" id="card_id_1" type="hidden" value="7">
                        <!-- *************** Start hidden feils ******************** -->
-                       <div class="col-xs-12 col-sm-12 padd_l_r col-md-12" style="margin-top: 25px;">
+
+
+
+
+
+                      <div class="col-xs-12 col-sm-12 padd_l_r col-md-12" style="margin-top: 25px;">
                           <div class="col-xs-12 col-sm-12 col-md-12" style="margin-bottom: 0px;">
                             <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r">                               
 
                                 <div class="col-md-6 col-sm-12 col-xs-12 ">
                                    <div class="form-group">
-                                       <input class="form-control ngo_secrtion_input rec_name_in" name="reciepent_name1" id="ngo_reciepent_name1" placeholder="Sender`s Name" type="text" value="<?php echo $user_view['UserMaster']['first_name'];?>">
+                                       <input class="form-control ngo_secrtion_input rec_name_in" name="reciepent_name1" id="ngo_reciepent_name1"  placeholder="Sender`s Name" type="text">
+                                        
                                      </div>
                                 </div>
 
                                  <div class="col-md-6 col-sm-12 col-xs-12 ">
                                     <div class="form-group"> 
-                                       <input class="form-control ngo_secrtion_input email_in" name="email_id1" id="ngo_email_id1" placeholder="Sender`s Email Id" type="email" value="<?php echo $user_view['UserMaster']['email'];?>">                                     
+                                       <input class="form-control ngo_secrtion_input email_in" name="email_id1" id="ngo_email_id1" placeholder="Sender`s Email Id" type="email">                                     
                                     </div>
                                   </div>
 
                                    <div class="col-md-6 col-sm-12 col-xs-12 ">
                                         <div class="form-group">
-                                           <input type="text" class="form-control ngo_secrtion_input" name="mobile" id="mobile1" maxlength="10" placeholder="Sender`s Mobile No" value="<?php echo $user_view['UserMaster']['mobile'];?>">
+                                           <input type="text" class="form-control ngo_secrtion_input" name="mobile" id="mobile1" maxlength="10" placeholder="Sender`s Mobile No">
                                         </div>
                                   </div>
 
                                    <div class="col-md-6 col-sm-12 col-xs-12 ">
                                       <div class="form-group">
-                                         <input class="form-control ngo_secrtion_input denomination1 don" name="denomination1" id="ngo_denomination1"  placeholder="Denomination" type="text" value="">
+                                         <input class="form-control ngo_secrtion_input denomination1 don" name="denomination1" id="ngo_denomination1"  placeholder="Denomination" type="text">
                                             
                                        </div>
                                     </div>
@@ -778,14 +838,9 @@ hr {
                           </div>
                       </div>
             <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r gift-choose">
-                        <?php if(!empty($ngo_segment2)){ ?>
                         <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r gift-topic">
                           Choose A Class Topic
                         </div>
-                        <?php
-                      }
-                      ?>
-                        <?php if(!empty($ngo_segment)){ ?>
                         <div class="col-md-12 col-sm-12 col-xs-12 gift-topic">
                          
               
@@ -814,15 +869,6 @@ hr {
               ?>
                           
                         </div>
-                        <?php
-                      }
-                      else
-                      {
-                        ?>
-                        <input type="checkbox" name="segment_2" id="segment1" value="1" onclick="find_seg_id2(this.value);" style="display:none;" checked>
-                        <?php
-                      }
-                      ?>
 
                      
 
@@ -934,14 +980,9 @@ hr {
                           </div>
                       </div>
                       <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r gift-choose">
-                         <?php if(!empty($ngo_segment3)){ ?>
                         <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r gift-topic">
                           Choose A Class Topic
                         </div>
-                        <?php
-                      }
-                      ?>
-                       <?php if(!empty($ngo_segment3)){ ?>
                         <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r gift-topic">
                           
               
@@ -968,9 +1009,6 @@ hr {
               ?>
                          
                         </div>
-                        <?php
-                      }
-                      ?>
 
                             
 
@@ -1152,7 +1190,7 @@ hr {
                               <textarea name="productinfo" id="productinfo" style="display:none;">Yoga class</textarea>
                               <input type="hidden" name="surl" id="surl" value="<?php echo HTTP_ROOT; ?>/Homes/buySuccess" size="64" />
                               <!-- <input type="hidden" name="furl" id="furl" value="<?php echo HTTP_ROOT; ?>/Homes/buySuccess" size="64" /> -->
-                              <input type="hidden" name="furl" id="furl" value="<?php echo HTTP_ROOT; ?>/Homes/buySuccess" size="64" />
+                              <input type="hidden" name="furl" id="furl" value="<?php echo HTTP_ROOT; ?>/Homes/buyFailure" size="64" />
                               <input type="hidden" name="service_provider" id="service_provider" value="payu_paisa" size="64" />
                             <div class="input_fields_wrap_price">
                               <CENTER>
@@ -1208,8 +1246,8 @@ hr {
                             <div class="col-xs-12 col-sm-12 padd_l_r" style="">
                                     <div class="col-md-12 col-sm-12 col-xs-12 add-more-divv padd_l_r" style="float:right;">
                                           <span style="float: right;  margin-top: 10px;">
-                                            <span class="sr_02_08_plus add-more-tab_in_1 mou_ponit">+</span>
-                                            <span class="sr_02_08_plus_CONTENT add-more-tab_in_1 mou_ponit">Add More Recipient / Buy More Coupons</span>
+                                            <span class="sr_02_08_plus add-more-tab_in_1">+</span>
+                                            <span class="sr_02_08_plus_CONTENT add-more-tab_in_1">Add More Recipient / Buy More Coupons</span>
                                           </span>
                                         </div>
                                   </div> 
@@ -1257,8 +1295,8 @@ hr {
                               <div class="col-xs-12 col-sm-12 padd_l_r">
                                     <div class="col-md-12 col-sm-12 col-xs-12 add-more-divv padd_l_r" style="float:right;">
                                       <span style="float: right;  margin-top: 10px;">
-                                        <span class="sr_02_08_plus add-more-tab_c1 mou_ponit">+</span>
-                                        <span class="sr_02_08_plus_CONTENT add-more-tab_c1 mou_ponit">Add More Recipient / Buy More Coupons</span>
+                                        <span class="sr_02_08_plus add-more-tab_c1">+</span>
+                                        <span class="sr_02_08_plus_CONTENT add-more-tab_c1">Add More Recipient / Buy More Coupons</span>
                                       </span>
                                     </div>
                                   </div>
@@ -1315,8 +1353,8 @@ hr {
                           <div class="col-xs-12 col-sm-12 padd_l_r">
                               <div class="col-md-12 col-sm-12 col-xs-12 add-more-divv_multi padd_l_r" style="float:right;">
                                     <span style="float: right;  margin-top: 10px;">
-                                      <span class="sr_02_08_plus add-more-second-tab_in_1 mou_ponit">+</span>
-                                      <span class="sr_02_08_plus_CONTENT add-more-second-tab_in_1 mou_ponit">Add More Recipient / Buy More Coupons</span>
+                                      <span class="sr_02_08_plus add-more-second-tab_in_1">+</span>
+                                      <span class="sr_02_08_plus_CONTENT add-more-second-tab_in_2">Add More Recipient / Buy More Coupons</span>
                                     </span>
                                   </div>
                             </div>
@@ -1372,8 +1410,8 @@ hr {
                           <div class="col-xs-12 col-sm-12 padd_l_r">
                               <div class="col-md-12 col-sm-12 col-xs-12 add-more-divv_multi" style="float:right;">
                                     <span style="float: right;  margin-top: 10px;">
-                                      <span class="sr_02_08_plus add-more-second-tab_c2 mou_ponit">+</span>
-                                      <span class="sr_02_08_plus_CONTENT add-more-second-tab_c2 mou_ponit">Add More Recipient / Buy More Coupons</span>
+                                      <span class="sr_02_08_plus add-more-second-tab_c2">+</span>
+                                      <span class="sr_02_08_plus_CONTENT add-more-second-tab_c2">Add More Recipient / Buy More Coupons</span>
                                     </span>
                                   </div>
                                 </div>
@@ -1406,17 +1444,14 @@ hr {
           </div>
         </div>
 
-   <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header" style="background-color:#2bcdc1;">
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
 
 <h4 class="modal-title cat_mod_title">Please Enter Your Details</h4>
 </div>
@@ -2194,7 +2229,7 @@ function isEmail(email) {
           $('#myModal').modal({
                                 show: true,
                                 backdrop: 'static',
-                                keyboard: true
+                                keyboard: false
                             }
                         );
                var gf_no       = $("#form_c1").val();
@@ -2268,7 +2303,7 @@ function isEmail(email) {
           $('#myModal').modal({
                                 show: true,
                                 backdrop: 'static',
-                                keyboard: true
+                                keyboard: false
                             }
                         );
                var gf_no       = $("#form_2").val();
@@ -2387,7 +2422,7 @@ function isEmail(email) {
               $('#myModal').modal({
                                     show: true,
                                     backdrop: 'static',
-                                    keyboard: true
+                                    keyboard: false
                                 }
                             );
 
@@ -2511,7 +2546,7 @@ function isEmail(email) {
               $('#myModal').modal({
                                     show: true,
                                     backdrop: 'static',
-                                    keyboard: true
+                                    keyboard: false
                                 }
                             );
 
@@ -2834,7 +2869,7 @@ else{
           $('#myModal').modal({
                                 show: true,
                                 backdrop: 'static',
-                                keyboard: true
+                                keyboard: false
                             }
                         );
 
@@ -3127,265 +3162,412 @@ function show_gift_form(c_id){
 <script type="text/javascript" >
   $(function() {
   $("#gift_coupon4").click(function() {
-      
-      $('#radio_btn_c').hide();
-      
-      var ngo_name_1    = $('#get_ngo_na_1').val();
-      var s_name        = $('#ngo_reciepent_name1').val();
-      var s_email       = $('#ngo_email_id1').val();
-      var s_mob         = $('#mobile1').val();
+
+        var id='<?php echo $user_view['UserMaster']['id'];?>';
+            //alert(id);
+        var first_name=$('#firstname').val();
+        var email=$('#email').val();
+        var phone=$('#phone').val();
+              if((first_name=='') || (email=='') || (phone=='')){
+                
+              $('#myModal').modal({
+                                    show: true,
+                                    backdrop: 'static',
+                                    keyboard: false
+                                }
+                            );
+
+               var gf_no       = $("#form_4").val();
+               $("#gift_f_type").val(gf_no);
+               $("#guest_btn").hide();
+               $("#login_btn").hide();
+               $("#guest_login_btn").hide();
+               $("#guest").hide();
+               $("#as_login").hide();
+              return false;
+            }
+        $('#radio_btn_c').hide();
+          var is_any_don_empty = false;
+            console.log('don length: '+$('#gift4 .don').length);
+            $.each($('#gift4 .don'),function(i,v){
+              // console.log(i);
+             /* console.log(v);
+              console.log('cheack');*/
+              if($(v).val() == ''){
+                is_any_don_empty = true;
+              }
+            });
+            if(is_any_don_empty){
+              alert('please enter denomination value in digits');
+              return false;
+        }
+
       var ngo_amount_1  = $("#ngo_denomination1").val();
-      var regemail      =  /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-      var chk_val       =  10000;
-      var na1           =    ngo_amount_1.toString().length;
-      var com_var       =    chk_val.toString().length;
-      var checkedCount1  = $("input[type=checkbox][name^=segment_1]:checked").length;
-      if(ngo_name_1==''){
-
-        alert('Please chose ngo');
-        $("#ngo_name_1").focus();
+    /*  var chk_val       =10000;*/
+      /*var chk_val       =1;
+       var na1          = ngo_amount_1.toString().length;
+       var com_var      = chk_val.toString().length;
+       if(com_var>na1){
+        alert('please enter min price 10,000');
         return false;
-        }else if(checkedCount1==0){
+       }
+       else if(chk_val>ngo_amount_1){
+         alert('please enter min price 10,000');
+         return false;
+       }*/
+        var is_any_no_of_coupon_empty = false;
+            console.log('no_of_coupon length: '+$('#gift4 .no_of_coupon').length);
+            $.each($('#gift4 .no_of_coupon'),function(i,v){
+              // console.log(i);
+              // console.log(v);
+              if($(v).val() == ''){
+                is_any_no_of_coupon_empty = true;
+              }
+            });
+            if(is_any_no_of_coupon_empty){
+              alert('please enter number of coupon value in digits');
+              return false;
+      }
 
-          alert('please choose class topic');
-          $("#segment_1").focus();
-          return false;
-        }else if(s_name==''){
+      var is_any_rec_name_in_empty = false;
+            console.log('rec_name_in length: '+$('#gift4 .rec_name_in').length);
+            $.each($('#gift4 .rec_name_in'),function(i,v){
+              // console.log(i);
+              // console.log(v);
+              if($(v).val() == ''){
+                is_any_rec_name_in_empty = true;
+              }
+            });
+            if(is_any_rec_name_in_empty){
+              alert('please enter Recipient Name');
+              return false;
+      }
 
-        alert('Please enter sender name');
-        $("#ngo_reciepent_name1").focus();
-        return false;
+     /* var is_any_email_in_in_empty = false;
+            console.log('email_in length: '+$('#gift4 .email_in').length);
+             var regemail = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            $.each($('#gift4 .email_in'),function(i,v){
+              
+              var email_id_in = $(v).val();
+              //alert(email_id_in);
+              if($(v).val() == ''){
+                is_any_email_in_in_empty = true;
+              }
 
-      }else if(s_email==''){
-
-          alert('Please enter sender email Id');
-          $("#ngo_email_id1").focus();
-          return false;
-
-      }else if(regemail.test(s_email) == false){
-
-            alert('Please enter valid email Id!');
-                $("#ngo_email_id1").focus();
+              if(regemail.test(email_id_in) == false)
+            {
+                
+                //is_any_email_in_in_empty = true;
+                alert('Please enter valid e-mail address!');
                return false;
             }
-        else if(s_mob==''){
+            });
+            if(is_any_email_in_in_empty){
+              alert('please enter e-mail address');
+              return false;
+          }   
+      */
+       var regemail = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+       var email_id__ngo1 = $('#ngo_email_id1').val();
+       if(email_id__ngo1==''){
+          alert('Please enter e-mail address!');
+       }
+       if(regemail.test(email_id__ngo1) == false)
+            {
+                
+                //is_any_email_in_in_empty = true;
+                alert('Please enter valid e-mail address!');
+                return false;
+            }
+            var mobile1 = $('#mobile1').val();
+            if(mobile1==''){
+               alert('Please enter mobile');
+                return false;
+            }
 
-          alert('Please enter sender mobile number');
-          $("#mobile1").focus();
-          return false;
-        }
-        else if(ngo_amount_1==''){
-
-             alert('Please enter denomination value in digits');
-             $("#ngo_denomination1").focus();
-             return false;
-        }
-        else if(com_var>na1){
-            alert('Please enter min price 10,000');
-            $("#ngo_denomination1").focus();
-            return false;
-       }else{
-       
-             $('#next_img_price').hide();
-             var query4 = $('#gift4').serialize();
-              var url   = '<?php echo HTTP_ROOT; ?>/Homes/saveNgo';
-              $.post(url, query4, function (response) {
-               //alert (response);
-               if(response!=''){
-                $("#ngo1").fadeOut();
-                 $("#ipay").fadeIn();
-                 var a = response.trim();
-                 $('#amount').val(a);
-                 var mob            = $('#mobile1').val();
-                 var reciepent_name = $('#ngo_reciepent_name1').val();
-                 var email_id       = $('#ngo_email_id1').val();
-                 
-                 var mob            = mob.trim();
-                 var reciepent_name = reciepent_name.trim();
-                 var email_id       = email_id.trim();
-                 $('#phone').val(mob);
-                 $('#firstname').val(reciepent_name);
-                 $('#email').val(email_id);
-                 $('#paymoney_1').show();
-                 $('#s3').hide();
-                 $('#s1').hide();
-                 $('#ss1').hide();
-                 $('#iform').hide();
-                 $('#radio_btn').hide();
-                 $(".gift-fun-bt-top1").css('padding-bottom','8%');
-                 $(".gift-fun-bt-top1").css('padding-top','1%');
-                //$("#individual1").fadeOut();
-                $('#total_price').html('Total Price: Rs.'+response+'.00/');
-                    pay_page();
-                  }
-              });
-        }
-
-     });
-  });   
+       var query4 = $('#gift4').serialize();
+        var url = '<?php echo HTTP_ROOT; ?>/Homes/saveNgo';
+        $.post(url, query4, function (response) {
+         //alert (response);
+         if(response!=''){
+      $("#ngo1").fadeOut();
+           $("#ipay").fadeIn();
+           var a = response.trim();
+           $('#amount').val(a);
+           var mob            = $('#mobile1').val();
+           var reciepent_name = $('#ngo_reciepent_name1').val();
+           var email_id       = $('#ngo_email_id1').val();
+           
+           var mob            = mob.trim();
+           var reciepent_name = reciepent_name.trim();
+           var email_id       = email_id.trim();
+           $('#phone').val(mob);
+           $('#firstname').val(reciepent_name);
+           $('#email').val(email_id);
+           $('#paymoney_1').show();
+           $('#s3').hide();
+           $('#s1').hide();
+           $('#ss1').hide();
+           $('#iform').hide();
+           $('#radio_btn').hide();
+           $(".gift-fun-bt-top1").css('padding-bottom','8%');
+           $(".gift-fun-bt-top1").css('padding-top','1%');
+          //$("#individual1").fadeOut();
+          $('#total_price').html('Total Price: Rs.'+response+'.00/');
+              pay_page();
+            }
+        });
+      });
+        });
 </script>
 <script type="text/javascript" >
   $(function() {
   $("#gift_coupon5").click(function() {
-      //alert('hi');
-      $('#radio_btn_c').hide();
-      var ngo_name_2     = $('#get_ngo_na_2').val();
-      var s_name2        = $('#ngo_reciepent_name2').val();
-      var s_email2       = $('#ngo_email_id2').val();
-      var s_mob2         = $('#mobile2').val();
-      var ngo_amount_2   = $("#ngo_denomination2").val();
-      var regemail2      = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-      var chk_val2       =  10000;
-      var na2            =  ngo_amount_2.toString().length;
-      var com_var2       =  chk_val2.toString().length;
-      var checkedCount2  = $("input[type=checkbox][name^=segment_2]:checked").length;
-      if(ngo_name_2==''){
 
-        alert('Please chose ngo');
-        $("#ngo_name_2").focus();
-        return false;
-        }else if(checkedCount2==0){
+     var id='<?php echo $user_view['UserMaster']['id'];?>';
+            //alert(id);
+        var first_name=$('#firstname').val();
+        var email=$('#email').val();
+        var phone=$('#phone').val();
+              if((first_name=='') || (email=='') || (phone=='')){
+                
+              $('#myModal').modal({
+                                    show: true,
+                                    backdrop: 'static',
+                                    keyboard: false
+                                }
+                            );
 
-          alert('please choose class topic');
-          $("#segment_1").focus();
-          return false;
-        }else if(s_name2==''){
-
-        alert('Please enter sender name');
-        $("#ngo_reciepent_name2").focus();
-        return false;
-
-      }else if(s_email2==''){
-
-          alert('Please enter sender email Id');
-          $("#ngo_email_id2").focus();
-          return false;
-
-      }else if(regemail2.test(s_email2) == false){
-
-            alert('Please enter valid email Id!');
-                $("#ngo_email_id2").focus();
-               return false;
+               var gf_no       = $("#form_5").val();
+               $("#gift_f_type").val(gf_no);
+               $("#guest_btn").hide();
+               $("#login_btn").hide();
+               $("#guest_login_btn").hide();
+               $("#guest").hide();
+               $("#as_login").hide();
+              return false;
             }
-        else if(s_mob2==''){
-
-          alert('Please enter sender mobile number');
-          $("#mobile2").focus();
-          return false;
-        }
-        else if(ngo_amount_2==''){
-
-             alert('Please enter denomination value in digits');
-             $("#ngo_denomination2").focus();
-             return false;
-        }
-        else if(com_var2>na2){
-            alert('Please enter min price 10,000');
-            $("#ngo_denomination2").focus();
-            return false;
-       }else{
-
-            var query4 = $('#gift5').serialize();
-            var url = '<?php echo HTTP_ROOT; ?>/Homes/saveNgo';
-            $.post(url, query4, function (response) {
-             //alert (response);
-             if(response!=''){
-              $("#ngo1").fadeOut();
-               $("#ipay").fadeIn();
-               var a = response.trim();
-               $('#amount').val(a);
-               var mob            = $('#mobile2').val();
-               var reciepent_name = $('#ngo_reciepent_name2').val();
-               var email_id       = $('#ngo_email_id2').val();
-               
-               var mob            = mob.trim();
-               var reciepent_name = reciepent_name.trim();
-               var email_id       = email_id.trim();
-               $('#phone').val(mob);
-               $('#firstname').val(reciepent_name);
-               $('#email').val(email_id);
-               $('#paymoney_1').show();
-               $('#s3').hide();
-               $('#s1').hide();
-               $('#iform').hide();
-               $('#radio_btn').hide();
-               $('#radio_btn_c').hide();
-
-               $(".gift-fun-bt-top1").css('padding-bottom','8%');
-               $(".gift-fun-bt-top1").css('padding-top','1%');
-              //$("#individual1").fadeOut();
-              $('#total_price').html('Total Price: Rs.'+response+'.00/');
-                  pay_page();
-             }
+     $('#radio_btn_c').hide();
+     var regemail = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+          var is_any_don_empty = false;
+            console.log('don length: '+$('#gift5 .don').length);
+            $.each($('#gift5 .don'),function(i,v){
+              // console.log(i);
+             /* console.log(v);
+              console.log('cheack');*/
+              if($(v).val() == ''){
+                is_any_don_empty = true;
+              }
             });
+
+      var ngo_amount_1  = $("#ngo_denomination2").val();
+      /*var chk_val       =10000;
+       var na1          = ngo_amount_1.toString().length;
+       var com_var      = chk_val.toString().length;
+       if(com_var>na1){
+        alert('please enter min price 10,000');
+        return false;
+       }
+       else if(chk_val>ngo_amount_1){
+         alert('please enter min price 10,000');
+         return false;
+       }*/
+
+            if(is_any_don_empty){
+              alert('please enter denomination value in digits');
+              return false;
+        }
+
+        var is_any_no_of_coupon_empty = false;
+            console.log('no_of_coupon length: '+$('#gift5 .no_of_coupon').length);
+            $.each($('#gift5 .no_of_coupon'),function(i,v){
+              // console.log(i);
+              // console.log(v);
+              if($(v).val() == ''){
+                is_any_no_of_coupon_empty = true;
+              }
+            });
+            if(is_any_no_of_coupon_empty){
+              alert('please enter number of coupon value in digits');
+              return false;
       }
 
+      var is_any_rec_name_in_empty = false;
+            console.log('rec_name_in length: '+$('#gift5 .rec_name_in').length);
+            $.each($('#gift5 .rec_name_in'),function(i,v){
+              // console.log(i);
+              // console.log(v);
+              if($(v).val() == ''){
+                is_any_rec_name_in_empty = true;
+              }
+            });
+            if(is_any_rec_name_in_empty){
+              alert('please enter Recipient Name');
+              return false;
+      }
+
+      var regemail = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+       var email_id__ngo2 = $('#ngo_email_id2').val();
+       if(email_id__ngo2==''){
+          alert('Please enter e-mail address!');
+       }
+       if(regemail.test(email_id__ngo2) == false)
+            {
+                
+                //is_any_email_in_in_empty = true;
+                alert('Please enter valid e-mail address!');
+                return false;
+            }
+            var mobile2 = $('#mobile2').val();
+            if(mobile2==''){
+               alert('Please enter mobile');
+                return false;
+            }
+      
+
+       var query4 = $('#gift5').serialize();
+        var url = '<?php echo HTTP_ROOT; ?>/Homes/saveNgo';
+        $.post(url, query4, function (response) {
+         //alert (response);
+         if(response!=''){
+      $("#ngo1").fadeOut();
+           $("#ipay").fadeIn();
+           var a = response.trim();
+           $('#amount').val(a);
+           var mob            = $('#mobile2').val();
+           var reciepent_name = $('#ngo_reciepent_name2').val();
+           var email_id       = $('#ngo_email_id2').val();
+           
+           var mob            = mob.trim();
+           var reciepent_name = reciepent_name.trim();
+           var email_id       = email_id.trim();
+           $('#phone').val(mob);
+           $('#firstname').val(reciepent_name);
+           $('#email').val(email_id);
+           $('#paymoney_1').show();
+           $('#s3').hide();
+           $('#s1').hide();
+           $('#iform').hide();
+           $('#radio_btn').hide();
+           $('#radio_btn_c').hide();
+
+           $(".gift-fun-bt-top1").css('padding-bottom','8%');
+           $(".gift-fun-bt-top1").css('padding-top','1%');
+          //$("#individual1").fadeOut();
+          $('#total_price').html('Total Price: Rs.'+response+'.00/');
+              pay_page();
+         }
+        });
       });
         });
 </script>
 <script type="text/javascript" >
 $(function() {
-  $("#gift_coupon6").click(function(){
+  $("#gift_coupon6").click(function() {
      
-       //alert('hi');
-      $('#radio_btn_c').hide();
-      var ngo_name_3     = $('#get_ngo_na_3').val();
-      var s_name3        = $('#ngo_reciepent_name3').val();
-      var s_email3       = $('#ngo_email_id3').val();
-      var s_mob3         = $('#mobile3').val();
-      var ngo_amount_3   = $("#ngo_denomination3").val();
-      var regemail3      = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-      var chk_val3       =  10000;
-      var na3            =  ngo_amount_3.toString().length;
-      var com_var3       =  chk_val3.toString().length;
-      var checkedCount3  = $("input[type=checkbox][name^=segment_3]:checked").length;
-      if(ngo_name_3==''){
+     var id='<?php echo $user_view['UserMaster']['id'];?>';
+            //alert(id);
+        var first_name=$('#firstname').val();
+        var email=$('#email').val();
+        var phone=$('#phone').val();
+              if((first_name=='') || (email=='') || (phone=='')){
+                
+              $('#myModal').modal({
+                                    show: true,
+                                    backdrop: 'static',
+                                    keyboard: false
+                                }
+                            );
 
-        alert('Please chose ngo');
-        $("#ngo_name_3").focus();
-        return false;
-        }else if(checkedCount3==0){
-
-          alert('please choose class topic');
-          $("#segment_3").focus();
-          return false;
-        }else if(s_name3==''){
-
-        alert('Please enter sender name');
-        $("#ngo_reciepent_name3").focus();
-        return false;
-
-      }else if(s_email3==''){
-
-          alert('Please enter sender email Id');
-          $("#ngo_email_id3").focus();
-          return false;
-
-      }else if(regemail3.test(s_email3) == false){
-
-            alert('Please enter valid email Id!');
-                $("#ngo_email_id3").focus();
-               return false;
+               var gf_no       = $("#form_6").val();
+               $("#gift_f_type").val(gf_no);
+               $("#guest_btn").hide();
+               $("#login_btn").hide();
+               $("#guest_login_btn").hide();
+               $("#guest").hide();
+               $("#as_login").hide();
+              return false;
             }
-        else if(s_mob3==''){
+     $('#radio_btn_c').hide();
+    var regemail = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+          var is_any_don_empty = false;
+            console.log('don length: '+$('#gift6 .don').length);
+            $.each($('#gift6 .don'),function(i,v){
+              // console.log(i);
+             /* console.log(v);
+              console.log('cheack');*/
+              if($(v).val() == ''){
+                is_any_don_empty = true;
+              }
+            });
 
-          alert('Please enter sender mobile number');
-          $("#mobile3").focus();
-          return false;
-        }
-        else if(ngo_amount_3==''){
-
-             alert('Please enter denomination value in digits');
-             $("#ngo_denomination3").focus();
-             return false;
-        }
-        else if(com_var3>na3){
-            alert('Please enter min price 10,000');
-            $("#ngo_denomination3").focus();
+           var ngo_amount_1  = $("#ngo_denomination3").val();
+           /*var chk_val       =10000;
+           var na1          = ngo_amount_1.toString().length;
+           var com_var      = chk_val.toString().length;
+           if(com_var>na1){
+            alert('please enter min price 10,000');
             return false;
-       }else{
+           }
+           else if(chk_val>ngo_amount_1){
+             alert('please enter min price 10,000');
+             return false;
+           }*/
 
-     var query6 = $('#gift6').serialize();
+            if(is_any_don_empty){
+              alert('please enter denomination value in digits');
+              return false;
+        }
+
+        var is_any_no_of_coupon_empty = false;
+            console.log('no_of_coupon length: '+$('#gift6 .no_of_coupon').length);
+            $.each($('#gift6 .no_of_coupon'),function(i,v){
+              // console.log(i);
+              // console.log(v);
+              if($(v).val() == ''){
+                is_any_no_of_coupon_empty = true;
+              }
+            });
+            if(is_any_no_of_coupon_empty){
+              alert('please enter number of coupon value in digits');
+              return false;
+      }
+
+      var is_any_rec_name_in_empty = false;
+            console.log('rec_name_in length: '+$('#gift6 .rec_name_in').length);
+            $.each($('#gift6 .rec_name_in'),function(i,v){
+              // console.log(i);
+              // console.log(v);
+              if($(v).val() == ''){
+                is_any_rec_name_in_empty = true;
+              }
+            });
+            if(is_any_rec_name_in_empty){
+              alert('please enter Recipient Name');
+              return false;
+      }
+      
+      var regemail = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+       var email_id__ngo3 = $('#ngo_email_id3').val();
+       if(email_id__ngo3==''){
+          alert('Please enter e-mail address!');
+       }
+       if(regemail.test(email_id__ngo3) == false)
+            {
+                
+                //is_any_email_in_in_empty = true;
+                alert('Please enter valid e-mail address!');
+                return false;
+            }
+
+            var mobile3 = $('#mobile3').val();
+            if(mobile3==''){
+               alert('Please enter mobile');
+                return false;
+            }
+       
+
+       var query6 = $('#gift6').serialize();
         var url = '<?php echo HTTP_ROOT; ?>/Homes/saveNgo';
         $.post(url, query6, function (response) {
          //alert (response);
@@ -3416,7 +3598,6 @@ $(function() {
               pay_page();
          }
         });
-    }
       });
         });
 </script>
@@ -3537,8 +3718,7 @@ $(document).on("keypress",".no_of_coupon",function(e){
   }  
 </script>
 <script type="text/javascript">
-function amount_chk1(){
-
+function amount_chk1(){  
   var next_val = $("#payindividual").val();
     if(next_val==''){
        $('#next1').html('Please enter amount in digits');
@@ -3547,7 +3727,13 @@ function amount_chk1(){
 
     }
     else{
-
+        var remainder = next_val % 100;
+          if (remainder == 0){
+             $('#next1').html('');
+          } else {
+            $('#next1').html('Please enter amount in multiples of Hundreds');
+            return false;
+          }
       $("#denomination_1").val(next_val);
      
       $('#next1').html('');
@@ -3566,6 +3752,13 @@ function amount_chk2(){
 
     }
     else{
+      var remainder = next_val % 100;
+          if (remainder == 0){
+             $('#next2').html('');
+          } else {
+            $('#next2').html('Please enter amount in multiples of Hundreds');
+            return false;
+          }
       $('#next2').html('');
     }
 }
