@@ -5,7 +5,7 @@ class AdminsController extends AppController {
 	var $uses = array('Admin','UserMaster','City','Locality','Category','Community','UserVerfication','ClassType',
     'ClassSegment','VendorClasse','ClassRegular','ClassSchedule','VendorGalleries','TransactionHistorie',
     'ConnectGroup','RequestCatalog','CatalogAddGroup','AddCatalog','VendorMessage','FeaturedPrice',
-    'PromoteClassDetail','Ngo','GroupActivity','GroupActivityMessge','Blog');
+    'PromoteClassDetail','Ngo','GroupActivity','GroupActivityMessge','Blog','Post','GroupPost');
    var $components = array('Paginator');
 /*================== @ Developed By Rahul Pathak  for check Session=======================================*/
     public function checkUser(){
