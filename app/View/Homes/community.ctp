@@ -536,7 +536,7 @@ a:focus, a:hover {
                                     </span>
                               </div></div>
                                 
-                                 <!--   <div class="col-xs-12 col-sm-12 sr_2605_03_padding sr_serch_div_l_hite">
+                                 <div class="col-xs-12 col-sm-12 sr_2605_03_padding sr_serch_div_l_hite">
                                   <img class="img-responsive" style="display: inline; margin-top: -10px;  width: 20px; margin-right: 5px;" src="<?php echo HTTP_ROOT; ?>/img/fun&refreshment/location.png"><span class="city"><?php //echo $location_name; ?></span>
                                <span class="city">
                                   Madipakkam                                  </span> -->
@@ -550,14 +550,14 @@ a:focus, a:hover {
                                    <span>No of Sessions: <?php// echo $no_of_session; ?></span>
                                     </div>-->
                                     <div class="col-xs-12 col-sm-12 sr_2605_03_padding sr_2605_06_textLorem sr_serch_div_l_hite">
-                                  <img class="img-responsive" style="display: inline; margin-right: 5px; width: 10px; margin-top: -5px;" src="<?php echo HTTP_ROOT; ?>/img/fun&refreshment/information.png">&nbsp;&nbsp; 
+                                 <!-- <img class="img-responsive" style="display: inline; margin-right: 5px; width: 10px; margin-top: -5px;" src="<?php echo HTTP_ROOT; ?>/img/fun&refreshment/information.png">-->
                                   <p class="comment more city text-justify"><?php echo $class_class_summary; ?><!-- <a href="" class="morelink">more</a> --></p>
                                 </div>
                                 <!--<div class="col-xs-12 col-sm-12">
                                   <span>Age Group: <?php //echo $age_group; ?></span>
                                 </div>-->
                                 <div class="col-xs-12 col-sm-12">
-                                <span>Other Localities:<?php echo $location_name; ?></span>
+                                &nbsp;&nbsp; <span>Other Localities:<?php echo $location_name; ?></span>
                                 </div>
                                 
                           </div>        

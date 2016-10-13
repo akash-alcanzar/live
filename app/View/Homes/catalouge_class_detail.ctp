@@ -394,7 +394,7 @@ $us_id              = $value_cat_class['bg_user_masters']['id'];
                                               Your browser does not support HTML5 video.
                                       </video>
                                     </div>
-                                     <div class="col-md-12 col-sm-12 col-xs-12 people_aricon1 people_aricon-div empty-Div .termsscroll" style="margin-top:10px;"><h4>Terms and Conditions</h4>
+                                     <div class="col-md-12 col-sm-12 col-xs-12 people_aricon1 people_aricon-div empty-Div termsscroll ts1" style="margin-top:10px;"><h4>Terms and Conditions</h4>
                                     <!--<h5 style="color:#00cdc6;">Fixed / Flexible Class View Page</h5>-->
                                     <ul>
 <li class="listdesign">Fixed classes will have fixed timing, date & place. Fixed classes once booked cannot be cancelled by the user.
