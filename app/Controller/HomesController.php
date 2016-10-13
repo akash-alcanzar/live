@@ -2923,7 +2923,7 @@ public function buySuccess(){
           $this->set('text_msg',$text_msg);
           
 }
-}
+
 public function coupanDetail(){
 
   //$this->autoRender = false;
