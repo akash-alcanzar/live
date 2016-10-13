@@ -131,8 +131,9 @@ echo $this->Html->script('front/target');
        $('#cooking').trigger('click');
     });   
 
-$(window).load(function() {
-		  $("#grid-contant-slider1").flexisel({
+$(document).ready(function(){
+
+	$("#grid-contant-slider1").flexisel({
     visibleItems: 4,
     itemsToScroll: 3,
     animationSpeed: 400,
