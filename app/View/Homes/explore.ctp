@@ -522,7 +522,7 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
         icon: pinImage,
         scale: 20,
         shadow: pinShadow,
-        url:'<?php echo HTTP_ROOT;?>/classes/'+btoa(locations[i][4]),
+        url:'<?php echo HTTP_ROOT;?>/classes/'+(locations[i][4]),
         title:locations[i][0]
         
       });
@@ -672,7 +672,7 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
         icon: pinImage,
         scale: 20,
         shadow: pinShadow,
-        url:'<?php echo HTTP_ROOT;?>/classes/'+btoa(locations[i][4]),
+        url:'<?php echo HTTP_ROOT;?>/classes/'+(locations[i][4]),
         title:locations[i][0]
         
       });
@@ -781,7 +781,7 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
         icon: pinImage,
         scale: 20,
         shadow: pinShadow,
-        url:'<?php echo HTTP_ROOT;?>/classes/'+btoa(locations[i][4]),
+        url:'<?php echo HTTP_ROOT;?>/classes/'+(locations[i][4]),
         title:locations[i][0]
         
       });
@@ -926,7 +926,7 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
         icon: pinImage,
         scale: 20,
         shadow: pinShadow,
-        url:'<?php echo HTTP_ROOT;?>/classes/'+btoa(locations[i][4]),
+       url:'<?php echo HTTP_ROOT;?>/classes/'+(locations[i][4]),
         title:locations[i][0]
         
       });
@@ -1138,7 +1138,7 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
         icon: pinImage,
         scale: 20,
         shadow: pinShadow,
-        url:'<?php echo HTTP_ROOT;?>/classes/'+btoa(locations[i][4]),
+        url:'<?php echo HTTP_ROOT;?>/classes/'+(locations[i][4]),
         title:locations[i][0]
         
       });
@@ -1389,7 +1389,7 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
         icon: pinImage,
         scale: 20,
         shadow: pinShadow,
-        url:'<?php echo HTTP_ROOT;?>/classes/'+btoa(locations[i][4]),
+        url:'<?php echo HTTP_ROOT;?>/classes/'+(locations[i][4]),
         title:locations[i][0]
         
       });
