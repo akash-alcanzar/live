@@ -522,7 +522,7 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
         icon: pinImage,
         scale: 20,
         shadow: pinShadow,
-        url:'<?php echo HTTP_ROOT;?>/Homes/viewclassDetail/'+btoa(locations[i][4]),
+        url:'<?php echo HTTP_ROOT;?>/classes/'+btoa(locations[i][4]),
         title:locations[i][0]
         
       });
@@ -672,7 +672,7 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
         icon: pinImage,
         scale: 20,
         shadow: pinShadow,
-        url:'<?php echo HTTP_ROOT;?>/Homes/viewclassDetail/'+btoa(locations[i][4]),
+        url:'<?php echo HTTP_ROOT;?>/classes/'+btoa(locations[i][4]),
         title:locations[i][0]
         
       });
@@ -781,7 +781,7 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
         icon: pinImage,
         scale: 20,
         shadow: pinShadow,
-        url:'<?php echo HTTP_ROOT;?>/Homes/viewclassDetail/'+btoa(locations[i][4]),
+        url:'<?php echo HTTP_ROOT;?>/classes/'+btoa(locations[i][4]),
         title:locations[i][0]
         
       });
@@ -926,7 +926,7 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
         icon: pinImage,
         scale: 20,
         shadow: pinShadow,
-        url:'<?php echo HTTP_ROOT;?>/Homes/viewclassDetail/'+btoa(locations[i][4]),
+        url:'<?php echo HTTP_ROOT;?>/classes/'+btoa(locations[i][4]),
         title:locations[i][0]
         
       });
@@ -1138,7 +1138,7 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
         icon: pinImage,
         scale: 20,
         shadow: pinShadow,
-        url:'<?php echo HTTP_ROOT;?>/Homes/viewclassDetail/'+btoa(locations[i][4]),
+        url:'<?php echo HTTP_ROOT;?>/classes/'+btoa(locations[i][4]),
         title:locations[i][0]
         
       });
@@ -1318,7 +1318,7 @@ $('#group').click(function(){
    $(this).css('color', '#00cdc6');
     $(this).css('background','#000873');
   $(this).css('border-radius','5px');
-  window.location.href='<?php echo HTTP_ROOT;?>/Homes/connectpage';
+  window.location.href='<?php echo HTTP_ROOT;?>/Connect/connectpage';
 })
 $('#ran').change(function(){
   $('#dist').text($(this).val()+" KM");
@@ -1389,7 +1389,7 @@ var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?
         icon: pinImage,
         scale: 20,
         shadow: pinShadow,
-        url:'<?php echo HTTP_ROOT;?>/Homes/viewclassDetail/'+btoa(locations[i][4]),
+        url:'<?php echo HTTP_ROOT;?>/classes/'+btoa(locations[i][4]),
         title:locations[i][0]
         
       });
