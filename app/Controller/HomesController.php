@@ -12190,5 +12190,32 @@ public function quoteFailure(){
 }
 
 
+ public function addwishlist(){
+
+      $this->autoRender=false;
+
+      if(isset($_POST)){
+        
+        $check_data = $this->Wishlist->find('first',array('conditions'=>array(
+                                                          'Wishlist.user_id'=>$_POST['userid'],
+                                                          'Wishlist.class_id'=>$_POST['classid'])));
+        if(empty($check_data)){
+          $data_array = array();
+          $data_array['user_id']  = $_POST['userid'];
+          $data_array['class_id'] = $_POST['classid'];
+          $data_array['status']   = 1;
+          $data_array['add_date'] = time();
+          $data_array['modify_date'] = time();
+          $result = $this->Wishlist->save($data_array);
+          return 1;
+        }else{
+          return 2;
+        }
+      } 
+  }
+
+/* ============================ akash add wishlist =====================*/		
+
+	
 
 }?>
