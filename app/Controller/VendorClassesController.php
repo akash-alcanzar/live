@@ -104,7 +104,9 @@ class VendorClassesController extends AppController {
 
 			//echo '<pre>'; print_r($class); die;
 
-				
+				$check_data = $this->Wishlist->find('first',array('conditions'=>array('Wishlist.class_id'=>$class_id,
+                                                                  'Wishlist.user_id'=> $user['UserMaster']['id'])));
+				$this->set('check_data',$check_data);
 
 				$this->loadModel('ClassSegment');
 
