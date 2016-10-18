@@ -1,5 +1,6 @@
 <?php
 $gift = explode('/',$this->request->url);
+$user_id = $user_view['UserMaster']['id'];
 ?>
 <style type="text/css">
 .nbs-flexisel-nav-left{
@@ -759,7 +760,22 @@ echo $this->Html->link($this->Html->image('Vendor/'.$result['VendorClasse']['cat
                                 <i class="fa fa-gift gift_fa" aria-hidden="true"></i>
                                 <span class="padd_gft">Gift This Class</span>
                             </button>
-                        </a>   
+                        </a> 
+			  
+			  <?php if(!empty($user_id)){ ?>
+                          <?php if(empty($check_data)) { ?>
+                              <div id="add_wish_list" class="btn butt_gft vc_c_gift_btn_20" 
+                                    onclick="addwishlist(<?php echo $class['VendorClasse']['id'];?>);">
+                                <i class="fa fa-heart gift_fa" aria-hidden="true"></i>
+                                <span class="padd_gft">Add To Wishlist</span>
+                              </div>
+                          <?php }else{ ?>
+                            <div class="btn butt_gft vc_c_gift_btn_20" style="Background-color:#00487b;pointer-events:none;">
+                              <i class="fa fa-heart gift_fa" aria-hidden="true"></i>
+                              <span class="padd_gft">Added To Wishlist</span>
+                            </div>
+                          <?php } } ?>
+			    
         	         </div>
                 </div>
                                 <?php /*?><div class="col-md-12 col-sm-12 col-xs-12 padisplay">
@@ -1604,4 +1620,34 @@ $(document).ready(function(){
 			});
 	});
 });
+	
+// add wishlist java script function 
+	
+function addwishlist(classid){
+
+   var userid = "<?php echo $user_id; ?>";
+
+    $.ajax({  
+
+          type: "POST",  
+          url:  "<?php echo HTTP_ROOT; ?>/Homes/addwishlist",  
+          data: 'classid='+classid+'&userid='+userid,  
+       
+          success: function(res){  
+          
+            if(res == 2){
+             
+              $('#add_wish_list > span').text('Added To Wishlist');
+            }
+            if(res == 1){
+
+              $('#add_wish_list').css({'background-color':'#00487b','pointer-events':'none'});
+              $('#add_wish_list > span').text('Added To Wishlist');
+            
+            }
+         }
+    });
+}
+
+	
 </script>
